@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Click N' Swet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+    }
+    .navbar-brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+    }
+    h2 {
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      margin: 2rem 0 1rem;
+    }
+    .footer {
+      background-color: #f8d7da;
+      padding: 2rem 0;
+    }
+    .social-icons i {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .category-circle {
+      width: 120px;
+      height: 120px;
+      background-color: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      font-weight: 600;
+    }
+    .navbar-nav .nav-link {
+      font-weight: 500;
+    }
+
+    .btn-pink {
+    background-color: #f9c2d1;
+    border-radius: 12px;
+    color: #000;
+    font-weight: 500;
+  }
+  .btn-pink:hover {
+    background-color: #f7a8be;
+    color: #000;
+  }
+  .btn-register {
+    background-color: #b3f5ef;
+    border-radius: 12px;
+    color: #000;
+    font-weight: 500;
+  }
+  .btn-register:hover {
+    background-color: #9cf0e7;
+    color: #000;
+  }
+
+  .team-card {
+  background-color: #f9c2d1;
+  border: none;
+}
+
+.flip-card {
+  perspective: 1000px;
+  width: 100%;
+  height: 300px; /* ajusta según necesidad */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background-color: #f9c2d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flip-active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(90deg, #89f0ff, #e9ffff);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+      <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Swet</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Categorías</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Quiénes somos</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">🛒 Carrito</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Sign in</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-register mx-1" href="#">Register</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section class="container text-center my-5 pb-5">
+  <h2 style="color: #87b9f7; font-family: 'Pacifico', cursive;">¿Quiénes Somos?</h2>
+  <p>
+    Somos un equipo de trabajo comprometidos con el desarrollo de soluciones digitales de alta calidad. Nuestra formación en tecnologías web nos permite abordar proyectos de manera colaborativa, aplicando buenas prácticas de diseño y programación.
+  </p>
+  <p>
+    Click N' Swet es un proyecto académico enfocado en la creación de una tienda en línea con identidad propia, que mezcla el diseño retro con la funcionalidad moderna para brindar una experiencia atractiva al usuario.
+  </p>
+
+  <h3 style="color: #f7a8be; font-family: 'Pacifico', cursive;">Nuestro equipo</h3>
+
+  <div class="row justify-content-center">
+    <!-- Card -->
+    <div class="col-md-3 mb-4">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front card team-card">
+            <img src="ruta-img-1.jpg" class="card-img-top" alt="Gissella">
+            <div class="card-body">
+              <h5 class="card-title">Gissella</h5>
+              <p class="card-text">description</p>
+            </div>
+          </div>
+          <div class="flip-card-back card team-card">
+            <div class="card-body">
+              <h5 class="card-title">Gissella</h5>
+              <p class="card-text">¡Hola! Me encanta crear experiencias dulces para todos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-md-3 mb-4">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front card team-card">
+            <img src="ruta-img-2.jpg" class="card-img-top" alt="Luisa">
+            <div class="card-body">
+              <h5 class="card-title">Luisa</h5>
+              <p class="card-text">description</p>
+            </div>
+          </div>
+          <div class="flip-card-back card team-card">
+            <div class="card-body">
+              <h5 class="card-title">Luisa</h5>
+              <p class="card-text">Apasionada por el chocolate y el diseño creativo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-md-3 mb-4">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front card team-card">
+            <img src="ruta-img-3.jpg" class="card-img-top" alt="Alexis">
+            <div class="card-body">
+              <h5 class="card-title">Alexis</h5>
+              <p class="card-text">description</p>
+            </div>
+          </div>
+          <div class="flip-card-back card team-card">
+            <div class="card-body">
+              <h5 class="card-title">Alexis</h5>
+              <p class="card-text">Especialista en caramelos y tecnología web.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agrega más cards aquí -->
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Sobre nosotros</h5>
+          <ul class="list-unstyled">
+            <li>Conoce nuestra historia</li>
+            <li>Quiénes somos</li>
+            <li>Productos</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Soporte a clientes</h5>
+          <ul class="list-unstyled">
+            <li>Contacto</li>
+            <li>Localiza tu envío</li>
+            <li>FAQ</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Síguenos en nuestras redes</h5>
+          <div class="social-icons">
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-whatsapp"></i>
+            <i class="bi bi-twitter-x"></i>
+            <i class="bi bi-youtube"></i>
+          </div>
+          <button class="btn btn-info mt-2">¡No te pierdas de la dulzura!</button>
+        </div>
+      </div>
+      <p class="mt-4">© 2025 Click N' Sweet. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', function() {
+    this.classList.toggle('flip-active');
+  });
+});
+</script>
+</body>
+</html>
