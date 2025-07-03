@@ -1,0 +1,268 @@
+ body {
+     font-family: 'Quicksand', sans-serif;
+ }
+
+ .navbar-brand {
+     font-family: 'Pacifico', cursive;
+     font-size: 1.8rem;
+ }
+
+ h2 {
+     font-family: 'Pacifico', cursive;
+     text-align: center;
+     margin: 2rem 0 1rem;
+ }
+
+ .title {
+     font-family: 'Pacifico', cursive;
+ }
+
+ .footer {
+     background-color: #f8d7da;
+     padding: 2rem 0;
+ }
+
+ .social-icons i {
+     font-size: 1.5rem;
+     margin-right: 10px;
+     cursor: pointer;
+ }
+
+ .category-circle {
+     width: 120px;
+     height: 120px;
+     background-color: #e0e0e0;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 1rem auto;
+     font-weight: 600;
+ }
+
+ .navbar-nav .nav-link {
+     font-weight: 500;
+ }
+
+ .btn-pink {
+     background-color: #f9c2d1;
+     border-radius: 12px;
+     color: #000;
+     font-weight: 500;
+ }
+
+ .btn-pink:hover {
+     background-color: #f7a8be;
+     color: #000;
+ }
+
+ .btn-register {
+     background-color: #b3f5ef;
+     border-radius: 12px;
+     color: #000;
+     font-weight: 500;
+ }
+
+ .btn-register:hover {
+     background-color: #9cf0e7;
+     color: #000;
+ }
+
+ body {
+     font-family: 'Quicksand', sans-serif;
+ }
+
+ .navbar-brand {
+     font-family: 'Pacifico', cursive;
+     font-size: 1.8rem;
+ }
+
+ h2 {
+     font-family: 'Pacifico', cursive;
+     text-align: center;
+     margin: 2rem 0 1rem;
+ }
+
+ .title {
+     font-family: 'Pacifico', cursive;
+ }
+
+ .footer {
+     background-color: #f8d7da;
+     padding: 2rem 0;
+ }
+
+ .social-icons i {
+     font-size: 1.5rem;
+     margin-right: 10px;
+     cursor: pointer;
+ }
+
+ .category-circle {
+     width: 120px;
+     height: 120px;
+     background-color: #e0e0e0;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 1rem auto;
+     font-weight: 600;
+ }
+
+ .navbar-nav .nav-link {
+     font-weight: 500;
+ }
+
+ .btn-pink {
+     background-color: #f9c2d1;
+     border-radius: 12px;
+     color: #000;
+     font-weight: 500;
+ }
+
+ .btn-pink:hover {
+     background-color: #f7a8be;
+     color: #000;
+ }
+
+ .btn-register {
+     background-color: #b3f5ef;
+     border-radius: 12px;
+     color: #000;
+     font-weight: 500;
+ }
+
+ .btn-register:hover {
+     background-color: #9cf0e7;
+     color: #000;
+ }
+
+
+
+ /*carrusel de categorias*/
+ .categories {
+     text-align: center;
+     font-family: 'Pacifico', cursive;
+     padding: 2rem;
+ }
+
+ .title {
+     font-size: 2rem;
+     margin-bottom: 1rem;
+ }
+
+ .circle {
+     width: 20rem;
+     height: 20rem;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     font-family: 'Quicksand', sans-serif;
+     font-weight: 600;
+     font-size: 1rem;
+     margin: auto;
+     text-align: center;
+     overflow: hidden;
+ }
+
+
+
+ .circle>div {
+     width: 75%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .circle>div>p {
+     z-index: 99;
+ }
+
+ .circle>div>img {
+     width: 70%;
+     margin: -1rem;
+ }
+
+ .swiper {
+     width: 100%;
+     padding: 2rem 0;
+ }
+
+ .swiper-button-next,
+ .swiper-button-prev {
+     color: #333;
+ }
+
+ .swiper-pagination-bullet-active {
+     background: #333;
+ }
+
+ .mySwiper {
+     height: 22rem;
+     width: 100%;
+     gap: 0.5rem;
+ }
+
+ /* FONDOS*/
+ .pastel-fruity {
+     background-color: #FADADD;
+     /* Pastel Pink */
+ }
+
+ .pastel-sour {
+     background-color: #FFFACD;
+     /* Lemon Chiffon */
+ }
+
+ .pastel-spicy {
+     background-color: #F9C2C2;
+     /* Light Coral */
+ }
+
+ .pastel-caramel {
+     background-color: #F5E1A4;
+     /* Light Caramel */
+ }
+
+ .pastel-minty {
+     background-color: #D0F0C0;
+     /* Mint Green */
+ }
+
+ .pastel-salty {
+     background-color: #E6CFC1;
+     /* Light Brown */
+ }
+
+ .pastel-creamy {
+     background-color: #FFF1D6;
+     /* Vanilla Cream */
+ }
+
+ .pastel-chocolate {
+     background-color: #D7BFAE;
+     /* Light Chocolate */
+ }
+
+ .pastel-spiced {
+     background-color: #EBC4A1;
+     /* Soft Cinnamon */
+ }
+
+
+ .bg-glass {
+     padding: 1rem;
+     background-color: rgba(99, 54, 54, 0.2);
+     /* fondo blanco semitransparente */
+     backdrop-filter: blur(10px);
+     /* desenfoque del fondo detrás */
+     -webkit-backdrop-filter: blur(10px);
+     /* para compatibilidad con Safari */
+     color: black;
+     padding: 20px;
+     border-radius: 10px;
+     border: 1px solid rgba(255, 255, 255, 0.3);
+
+ }
