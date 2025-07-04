@@ -29,7 +29,7 @@
   <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(90deg, #89f0ff, #e9ffff);">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+        <img src="assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
         <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Swet</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -52,44 +52,64 @@
 
 
   <!-- Banner -->
-  <section class="vh-100 d-flex align-items-center justify-content-center bg-secondary text-white">
-    <h1>Banner Principal</h1>
-  </section>
+<section class="vh-100 position-relative overflow-hidden bg-secondary text-white">
+  <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+    <source src="assets/Dulces.mp4" type="video/mp4">
+    Tu navegador no admite la reproducción de video.
+  </video>
+  <div class="d-flex align-items-center justify-content-center h-100 position-relative">
+    <h1></h1>
+  </div>
+</section>
 
-  <!-- Productos más vendidos -->
-  <h2>Nuestros productos más vendidos</h2>
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <div class="card-body bg-light" style="height: 200px;"></div>
-          <p>Producto 1</p>
-          <p>$0</p>
+
+  
+<!-- Productos más vendidos -->
+<h2 class="text-center my-5">Nuestros productos más vendidos</h2>
+<div class="container">
+  <div class="row text-center">
+    <!-- Producto 1 -->
+    <div class="col-md-3 mb-4">
+      <div class="card shadow">
+        <img src="assets/Charamuscas.jpg" class="card-img-top" style="height: 200px; object-fit: contain;" alt="Producto 1">
+        <div class="card-body bg-light">
+          <h5 class="card-title">Charamuscas</h5>
+          <p class="card-text">$199</p>
         </div>
       </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <div class="card-body bg-light" style="height: 200px;"></div>
-          <p>Producto 2</p>
-          <p>$0</p>
+    </div>
+    <!-- Producto 2 -->
+    <div class="col-md-3 mb-4">
+      <div class="card shadow">
+        <img src="assets/dulcenopal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;" alt="Producto 2">
+        <div class="card-body bg-light">
+          <h5 class="card-title">Dulce de nopal</h5>
+          <p class="card-text">$249</p>
         </div>
       </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <div class="card-body bg-light" style="height: 200px;"></div>
-          <p>Producto 3</p>
-          <p>$0</p>
+    </div>
+    <!-- Producto 3 -->
+    <div class="col-md-3 mb-4">
+      <div class="card shadow">
+        <img src="assets/paleta-animal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;" alt="Producto 3">
+        <div class="card-body bg-light">
+          <h5 class="card-title">Dulce de tequila</h5>
+          <p class="card-text">$299</p>
         </div>
       </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <div class="card-body bg-light" style="height: 200px;"></div>
-          <p>Producto 4</p>
-          <p>$0</p>
+    </div>
+    <!-- Producto 4 -->
+    <div class="col-md-3 mb-4">
+      <div class="card shadow">
+        <img src="assets/Dulces-Enchilados.jpg" class="card-img-top" style="height: 200px; object-fit: contain;" alt="Producto 4">
+        <div class="card-body bg-light">
+          <h5 class="card-title">Dulces con chile</h5>
+          <p class="card-text">$159</p>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Categorías -->
   <section class="categories">
@@ -170,7 +190,7 @@
           <div class="circle pastel-spiced">
             <p class="title">Dulces Especiados</p>
             <div>
-              <img src="./assets/spiced_icon.png" alt="">
+              <img src="assets/spiced_icon.png" alt="">
             </div>
           </div>
         </div>
