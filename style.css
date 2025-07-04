@@ -40,6 +40,10 @@
      font-weight: 600;
  }
 
+ .navbar {
+    background: linear-gradient(90deg, #89f0ff, #e9ffff);
+ }
+
  .navbar-nav .nav-link {
      font-weight: 500;
  }
@@ -67,6 +71,30 @@
      background-color: #9cf0e7;
      color: #000;
  }
+
+ /* Menú desplegable */
+.dropdown-menu {
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem;
+  background-color: #89f0ff;
+  transition: all 30ms ease;
+}
+
+.dropdown-item {
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem 0;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f9c2d1;
+  transform: translateX(5px);
+  color: black;
+}
+
+/* Fin Menú desplegable */
 
  body {
      font-family: 'Quicksand', sans-serif;
