@@ -148,10 +148,12 @@ h2 {
   text-align: center;
   font-family: "Pacifico", cursive;
   padding: 2rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.title {
-  font-size: 2rem;
+.title-category {
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -165,9 +167,12 @@ h2 {
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
   font-size: 1rem;
-  margin: auto;
   text-align: center;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0rem;
+  margin: 0 auto;
 }
 
 .circle > div {
@@ -183,12 +188,24 @@ h2 {
 
 .circle > div > img {
   width: 70%;
-  margin: -1rem;
+  margin: -1.5rem;
 }
 
 .swiper {
   width: 100%;
-  padding: 2rem 0;
+  padding: 20px 0;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: transparent;
+
+  /* Centrar contenido en cada slide */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .swiper-button-next,
@@ -205,6 +222,8 @@ h2 {
   width: 100%;
   gap: 0.5rem;
 }
+
+/*Fin de carrusel de categorias*/
 
 /* FONDOS*/
 .pastel-fruity {
@@ -265,3 +284,5 @@ h2 {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+/* Fin de fondos*/
