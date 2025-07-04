@@ -1,0 +1,192 @@
+   body {
+        font-family: "Quicksand", sans-serif;
+      }
+      .navbar-brand {
+        font-family: "Pacifico", cursive;
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-family: "Pacifico", cursive;
+        text-align: center;
+        margin: 2rem 0 1rem;
+      }
+      .footer {
+        background-color: #f8d7da;
+        padding: 2rem 0;
+      }
+      .social-icons i {
+        font-size: 1.5rem;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .category-circle {
+        width: 120px;
+        height: 120px;
+        background-color: #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+        font-weight: 600;
+      }
+      .navbar-nav .nav-link {
+        font-weight: 500;
+      }
+
+      .btn-pink {
+        background-color: #f9c2d1;
+        border-radius: 12px;
+        color: #000;
+        font-weight: 500;
+      }
+      .btn-pink:hover {
+        background-color: #f7a8be;
+        color: #000;
+      }
+      .btn-register {
+        background-color: #b3f5ef;
+        border-radius: 12px;
+        color: #000;
+        font-weight: 500;
+      }
+      .btn-register:hover {
+        background-color: #9cf0e7;
+        color: #000;
+      }
+
+/* Tarjetas del equipo */
+.team-section {
+  text-align: center;
+    margin-bottom: 80px;
+
+}
+
+.team-section h2 {
+  color: #DE8CA2;
+  margin-bottom: 20px;
+}
+
+.team-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 20px;
+  margin-bottom: 80px;
+
+.team-card {
+  background-color: #ffffff;
+  border: 2px solid #F5D1DD;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  width: 350px;
+  text-align: center;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.02);
+}
+.team-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.team-card h3 {
+  margin: 0.5rem 0;
+  color: #EA9696;
+}
+
+.team-card p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+
+  .about-section,
+  .team-section {
+    padding: 0 10px;
+  }
+  .content{
+    margin: 0px 0%;
+  padding: 10px;
+  }
+}
+/* Contenedor de flip */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+  padding: 0;
+  height: 320px;
+  position: relative;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+
+/* Caras */
+.flip-front,
+.flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #fff;
+  border: 2px solid #F5D1DD;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Imagen */
+.flip-front img,
+.flip-back img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Texto */
+.flip-front h3,
+.flip-back h3 {
+  margin: 0.5rem 0;
+  color: #EA9696;
+}
+.flip-front p,
+.flip-back p {
+  font-size: 0.95rem;
+  color: #444;
+}
+}
