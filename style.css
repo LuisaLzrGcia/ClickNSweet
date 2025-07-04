@@ -41,7 +41,7 @@
  }
 
  .navbar {
-    background: linear-gradient(90deg, #89f0ff, #e9ffff);
+     background: linear-gradient(90deg, #89f0ff, #e9ffff);
  }
 
  .navbar-nav .nav-link {
@@ -49,7 +49,7 @@
  }
 
  .navbar-nav .nav-link:active {
-    background-color: #f7a8be;
+     background-color: #f7a8be;
  }
 
  .btn-pink {
@@ -59,8 +59,8 @@
  }
 
  .btn-pink:hover {
-    background-color: #f9c2d1;
-    color: #000;
+     background-color: #f9c2d1;
+     color: #000;
  }
 
  .btn-register {
@@ -71,7 +71,7 @@
  }
 
  #botonRegistro:active {
-    background-color: #9cf0e7;
+     background-color: #9cf0e7;
  }
 
  .btn-register:hover {
@@ -80,39 +80,41 @@
  }
 
  /* Menú desplegable */
-.dropdown-menu {
-  border: none;
-  border-radius: 12px;
-  padding: 0.5rem;
-  background-color: #89f0ff;
-  transition: all 30ms ease;
-}
+ .dropdown-menu {
+     border: none;
+     border-radius: 12px;
+     padding: 0.5rem;
+     background-color: #89f0ff;
+     transition: all 30ms ease;
+ }
 
-.dropdown-item {
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  margin: 0.2rem 0;
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
+ .dropdown-item {
+     border-radius: 8px;
+     padding: 0.5rem 1rem;
+     margin: 0.2rem 0;
+     transition: all 0.2s ease;
+     font-weight: 500;
+ }
 
-.dropdown-item:hover {
-  background-color: #f9c2d1;
-  transform: translateX(5px);
-  color: black;
-}
+ .dropdown-item:hover {
+     background-color: #f9c2d1;
+     transform: translateX(5px);
+     color: black;
+ }
 
-/* Fin Menú desplegable */
+ /* Fin Menú desplegable */
 
  /*carrusel de categorias*/
  .categories {
      text-align: center;
      font-family: 'Pacifico', cursive;
      padding: 2rem;
+     width: 100%;
+     margin: 0 auto;
  }
 
- .title {
-     font-size: 2rem;
+ .title-category {
+     font-size: 2.5rem;
      margin-bottom: 1rem;
  }
 
@@ -126,12 +128,13 @@
      font-family: 'Quicksand', sans-serif;
      font-weight: 600;
      font-size: 1rem;
-     margin: auto;
      text-align: center;
      overflow: hidden;
+     width: 100%;
+     aspect-ratio: 1 / 1;
+     padding: 0rem;
+     margin: 0 auto;
  }
-
-
 
  .circle>div {
      width: 75%;
@@ -146,12 +149,24 @@
 
  .circle>div>img {
      width: 70%;
-     margin: -1rem;
+     margin: -1.5rem;
  }
 
  .swiper {
      width: 100%;
-     padding: 2rem 0;
+     padding: 20px 0;
+ }
+
+ .swiper-slide {
+     text-align: center;
+     font-size: 18px;
+     background: transparent;
+
+     /* Centrar contenido en cada slide */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
  }
 
  .swiper-button-next,
@@ -168,6 +183,8 @@
      width: 100%;
      gap: 0.5rem;
  }
+
+ /*Fin de carrusel de categorias*/
 
  /* FONDOS*/
  .pastel-fruity {
@@ -228,5 +245,6 @@
      padding: 20px;
      border-radius: 10px;
      border: 1px solid rgba(255, 255, 255, 0.3);
-
  }
+
+ /* Fin de fondos*/
