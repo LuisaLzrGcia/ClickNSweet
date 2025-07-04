@@ -40,20 +40,27 @@
      font-weight: 600;
  }
 
+ .navbar {
+    background: linear-gradient(90deg, #89f0ff, #e9ffff);
+ }
+
  .navbar-nav .nav-link {
      font-weight: 500;
  }
 
+ .navbar-nav .nav-link:active {
+    background-color: #f7a8be;
+ }
+
  .btn-pink {
-     background-color: #f9c2d1;
      border-radius: 12px;
      color: #000;
      font-weight: 500;
  }
 
  .btn-pink:hover {
-     background-color: #f7a8be;
-     color: #000;
+    background-color: #f9c2d1;
+    color: #000;
  }
 
  .btn-register {
@@ -63,74 +70,8 @@
      font-weight: 500;
  }
 
- .btn-register:hover {
-     background-color: #9cf0e7;
-     color: #000;
- }
-
- body {
-     font-family: 'Quicksand', sans-serif;
- }
-
- .navbar-brand {
-     font-family: 'Pacifico', cursive;
-     font-size: 1.8rem;
- }
-
- h2 {
-     font-family: 'Pacifico', cursive;
-     text-align: center;
-     margin: 2rem 0 1rem;
- }
-
- .title {
-     font-family: 'Pacifico', cursive;
- }
-
- .footer {
-     background-color: #f8d7da;
-     padding: 2rem 0;
- }
-
- .social-icons i {
-     font-size: 1.5rem;
-     margin-right: 10px;
-     cursor: pointer;
- }
-
- .category-circle {
-     width: 120px;
-     height: 120px;
-     background-color: #e0e0e0;
-     border-radius: 50%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin: 1rem auto;
-     font-weight: 600;
- }
-
- .navbar-nav .nav-link {
-     font-weight: 500;
- }
-
- .btn-pink {
-     background-color: #f9c2d1;
-     border-radius: 12px;
-     color: #000;
-     font-weight: 500;
- }
-
- .btn-pink:hover {
-     background-color: #f7a8be;
-     color: #000;
- }
-
- .btn-register {
-     background-color: #b3f5ef;
-     border-radius: 12px;
-     color: #000;
-     font-weight: 500;
+ #botonRegistro:active {
+    background-color: #9cf0e7;
  }
 
  .btn-register:hover {
@@ -138,7 +79,30 @@
      color: #000;
  }
 
+ /* Menú desplegable */
+.dropdown-menu {
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem;
+  background-color: #89f0ff;
+  transition: all 30ms ease;
+}
 
+.dropdown-item {
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem 0;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  background-color: #f9c2d1;
+  transform: translateX(5px);
+  color: black;
+}
+
+/* Fin Menú desplegable */
 
  /*carrusel de categorias*/
  .categories {
