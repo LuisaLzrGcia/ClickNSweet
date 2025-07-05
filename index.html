@@ -2,6 +2,23 @@
 <html lang="es">
 
 <head>
+  <meta charset="UTF-8">
+  <title>Click N' Swet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<head>
     <meta charset="UTF-8">
     <title>Click N' Swet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,10 +145,18 @@
         <div class="card-body bg-light">
           <h5 class="card-title">Dulces con chile</h5>
           <p class="card-text">$100</p>
+
         </div>
       </div>
     </div>
   </div>
+
+  <script src="script.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </div>
 
     <!-- Categorías -->
@@ -275,41 +300,74 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer text-center">
+<!-- Footer -->
+    <footer class="footer pt-1">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Sobre nosotros</h5>
-                    <ul class="list-unstyled">
-                        <li>Conoce nuestra historia</li>
-                        <li>Quiénes somos</li>
-                        <li>Productos</li>
-                    </ul>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h3 class="footer-title">¡Conoce nuestras novedades!</h3>
+                    <p class="mb-4">Suscríbete a nuestro boletín para recibir actualizaciones, novedades y ofertas exclusivas.</p>
                 </div>
-                <div class="col-md-4">
-                    <h5>Soporte a clientes</h5>
-                    <ul class="list-unstyled">
-                        <li>Contacto</li>
-                        <li>Localiza tu envío</li>
-                        <li>FAQ</li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Síguenos en nuestras redes</h5>
-                    <div class="social-icons">
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-instagram"></i>
-                        <i class="bi bi-whatsapp"></i>
-                        <i class="bi bi-twitter-x"></i>
-                        <i class="bi bi-youtube"></i>
-                    </div>
-                    <button class="btn btn-info mt-2">¡No te pierdas de la dulzura!</button>
+                <div class="col-lg-4 col-md-6 ms-auto text-end">
+                    <form class="mb-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Ingresa tu email">
+                            <button class="btn btn-subscribe text-white" type="submit">Suscribete</button>
+                        </div>
+                    </form>
+                    <p class="small">Al suscribirse, acepta nuestra Política de privacidad y da su consentimiento para recibir actualizaciones.</p>
                 </div>
             </div>
-            <p class="mt-4">© 2025 Click N' Sweet. Todos los derechos reservados.</p>
+            <div class="footer-separator"></div>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-5 col-md-6">
+                        <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
+                        <div class="social-links mb-4">
+                            <a href="#"><img src="assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
+                            <a href="#"><img src="assets/icons8-x-192.png" alt="Twitter" width="32"></a>
+                            <a href="#"><img src="assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
+                            <a href="#"><img src="assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
+                            <a href="#"><img src="assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
+                        </div>
+                        <ul class="footer-links"></ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="footer-title">Sobre nosotros</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Nuestra dulce historia</a></li>
+                            <li><a href="#">Quiénes somos</a></li>
+                            <li><a href="#">Nuetros productos</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h3 class="footer-title">Soporte</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">¡Contactanos!</a></li>
+                            <li><a href="#">Localiza tu envio</a></li>
+                            <li><a href="#">FAQ</a></li>                            
+                            <li><a href="#">Centro de ayuda</a></li>
+                            <li><a href="#">Política de privacidad</a></li>
+                            <li><a href="#">Terminos de servicios</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+            <div class="footer-bottom mt-5">
+                <div class="container-fluid">
+                    <div class="row py-1">
+                        <div class="col-md-6 text-center">
+                            <p class="mb-0">&copy; 2025 ClickN'Sweet. Todos los derechos reservados.</p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <p class="mb-0">Designed by <a href="#">ClickN'Sweet</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="main.js"></script>
 
