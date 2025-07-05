@@ -1,4 +1,4 @@
-
+/* 
     body {
       font-family: 'Quicksand', sans-serif;
     }
@@ -10,12 +10,12 @@
       font-family: 'Pacifico', cursive;
       text-align: center;
       margin: 2rem 0 1rem;
-    }
-    .footer {
+    } */
+    /* .footer {
       background-color: #f8d7da;
       padding: 2rem 0;
-    }
-    .social-icons i {
+    } */
+    /* .social-icons i {
       font-size: 1.5rem;
       margin-right: 10px;
       cursor: pointer;
@@ -54,7 +54,7 @@
   .btn-register:hover {
     background-color: #9cf0e7;
     color: #000;
-  }
+  } */
 
 /* ------------------ Footer ----------------*/
 .footer {
