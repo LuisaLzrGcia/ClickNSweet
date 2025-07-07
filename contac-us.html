@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="contact-us/style.css" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
   <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="contact-container text-center">
@@ -16,14 +18,14 @@
       <p><i class="fas fa-envelope"></i> JavoWorks@blog.com</p>
       <p><i class="fas fa-phone"></i> +52 55 1234 5678</p>
       <h2>Formulario de contacto</h2>
-      <form>
+      <form onsubmit="formContactUs(event)">
         <div class="form-group">
           <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control" id="nombre"  />
+          <input type="text" class="form-control" id="nombre" />
         </div>
         <div class="form-group">
           <label for="correo">Correo:</label>
-          <input type="email" class="form-control" id="correo"  />
+          <input type="email" class="form-control" id="correo" />
         </div>
         <div class="form-group">
           <label for="telefono">Teléfono:</label>
@@ -37,5 +39,7 @@
       </form>
     </div>
   </div>
+  <script type="module" src="./contact-us/main.js"></script>
+</body>
 
- 
+</html>
