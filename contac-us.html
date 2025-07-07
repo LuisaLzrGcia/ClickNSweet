@@ -7,63 +7,71 @@
   <title>Contáctanos</title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css" />  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-   <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="./assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
-                <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="./assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+        <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">
+              Categorías
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Picantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces de caramelo</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Refrescantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Salados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Cremosos</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Especiados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="quienes-somos.html">Quiénes somos</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center"
-                            href="#">
-                            <span class="cart-icon position-relative me-1">
-                                🛒
-                                <div id="cart-indicator" class="cart-badge">0</div>
-                            </span>
-                            Carrito
-                        </a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1"
-                            href="#">Registro</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Picantes</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces de caramelo</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Refrescantes</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Salados</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Cremosos</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Especiados</a></li>
+              <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="quienes-somos.html">Quiénes somos</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center"
+              href="#">
+              <span class="cart-icon position-relative me-1">
+                🛒
+                <div id="cart-indicator" class="cart-badge">0</div>
+              </span>
+              Carrito
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Iniciar Sesión</a></li>
+          <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <!-- Formulario -->
   <main class="container my-5">
@@ -77,7 +85,7 @@
       <form onsubmit="formContactUs(event)">
         <div class="form-group">
           <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control"  />
+          <input type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label for="correo">Correo:</label>
@@ -85,7 +93,7 @@
         </div>
         <div class="form-group">
           <label for="telefono">Teléfono:</label>
-          <input type="tel" class="form-control" id="telefono"  />
+          <input type="tel" class="form-control" id="telefono" />
         </div>
         <div class="form-group">
           <label for="mensaje">Mensaje:</label>
@@ -111,7 +119,8 @@
               <button class="btn btn-subscribe text-white" type="submit">Suscribete</button>
             </div>
           </form>
-          <p class="small">Al suscribirse, acepta nuestra Política de privacidad y da su consentimiento para recibir actualizaciones.</p>
+          <p class="small">Al suscribirse, acepta nuestra Política de privacidad y da su consentimiento para recibir
+            actualizaciones.</p>
         </div>
       </div>
       <div class="footer-separator"></div>
@@ -163,7 +172,8 @@
   </footer>
 
   <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
