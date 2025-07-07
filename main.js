@@ -1,5 +1,9 @@
-import { loadCategoryCassurel } from "./functions/loadCategoryCassurel.js";
+import { mostrarPaginaActiva } from "./functions/displayActiveLink.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  loadCategoryCassurel()
+  mostrarPaginaActiva()
+  window.addEventListener('hashchange', () => mostrarPaginaActiva());
 });
+
+
 
