@@ -44,6 +44,17 @@ export const contactFormValidation = (name, email, phone, message) => {
         };
     }
 
+    const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+    if (!nameRegex.test(name)) {
+        return {
+            isValid: false,
+            field: 'Nombre',
+            title: 'Nombre inválido',
+            message: 'El nombre solo puede contener letras y espacios.',
+            type: 'formato_invalido'
+        };
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         return {
