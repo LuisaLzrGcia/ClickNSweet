@@ -462,3 +462,48 @@ h2 {
 }
 
 /* Fin de fondos*/
+
+
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.contact-container {
+  background: #ffffff;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h1 {
+  color: #3498db;
+}
+
+.contact-container h2 {
+  margin-top: 30px;
+  font-size: 1.3rem;
+  color: #333333;
+}
+
+.btn-enviar {
+  background-color: #e91e63;
+  color: white;
+  font-weight: bold;
+}
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-weight: bold;
+
+
+}
+
