@@ -1,0 +1,102 @@
+/* ---------- Inicio de pagina de pago ---------- */
+
+.payment-page {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fdfdfd;
+}
+
+.payment-page .payment-title {
+  font-family: "Quicksand";
+  font-weight: bold;
+}
+
+.payment-page .section-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-page .card-producto {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.payment-page .card-producto:last-child {
+  border-bottom: none;
+}
+
+.payment-page .card-producto img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.payment-page .section-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.payment-page .resumen-precios {
+  font-size: 1rem;
+}
+
+.payment-page .resumen-precios .total {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.payment-page .btn-pago {
+  background-color: #f88ad4;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.payment-page .btn-pago:hover {
+  background-color: #f66bc1;
+}
+
+.payment-page .text-sm {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.payment-page .form-check-input:checked {
+  background-color: #f88ad4;
+  border-color: #f88ad4;
+}
+
+.payment-page .btn-alt {
+  background-color: #e0b3ff;
+  border: none;
+  font-weight: bold;
+  color: black;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.payment-page.limite-ancho {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 576px) {
+  .payment-page {
+    padding: 1rem;
+  }
+
+  .payment-page .card-producto {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

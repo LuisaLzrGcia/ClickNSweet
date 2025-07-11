@@ -17,7 +17,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="payment/style.css"/>
+    <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
@@ -26,17 +28,19 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="./assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+                <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
                 <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
-                    <li class="nav-item dropdown">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
+                            href="index.html">Inicio</a></li>
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
+                            href="products.html">Productos</a></li>
+                    <li class="nav-item nav-item-user dropdown">
                         <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Categorías
@@ -53,12 +57,19 @@
                             <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes
                             somos</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center"
-                            href="#">
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
+                            href="contac-us.html">Contacto</a></li>
+                    <li class="nav-item nav-item-admin d-none">
+                        <a class="nav-link btn btn-pink mx-1" href="new-product.html">Crear producto</a>
+                    </li>
+                    <li class="nav-item nav-item-admin d-none">
+                        <a class="nav-link btn btn-pink mx-1" href="edit-product.html">Actualizar producto</a>
+                    </li>
+                    <li class="nav-item nav-item-user">
+                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
+                            href="cart.html">
                             <span class="cart-icon position-relative me-1">
                                 🛒
                                 <div id="cart-indicator" class="cart-badge">0</div>
@@ -66,92 +77,119 @@
                             Carrito
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1"
-                            href="#">Registro</a></li>
+
+                    <li class="nav-item autenticacion">
+                        <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item autenticacion">
+                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
+                    </li>
+                    <li class="nav-item dropdown user-menu d-none">
+                        <a id="user-icon"
+                            class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Pedidos</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-<br><div class="limite-ancho">
-  <!-- Carrito de compras -->
-    <h1 class="payment-title text-start">Llega el "fecha"</h1>   
-  <div class="section-box">
-    <p><strong>Enviar a “nombre de cliente”</strong><br />
-      <span class="text-muted">Dirección proporcionada por el cliente</span>
-    </p>
-  </div>
+<br>
+<!--------  Pagina de pago -------->
+<main class="payment-page limite-ancho">
+        <!-- Carrito de compras -->
+        <h1 class="payment-title text-start">Llega el "fecha"</h1>
+        <div class="section-box">
+            <p><strong>Enviar a “nombre de cliente”</strong><br />
+                <span class="text-muted">Dirección proporcionada por el cliente</span>
+            </p>
+        </div>
 
-  <!-- Productos -->
-  <h1 class="payment-title text-start">Carrito de compras</h1>
-  <div class="section-box">
-    <div class="card-producto">
-      <img src="assets/Dulces-Enchilados.jpg" alt="Dulces Enchilados" />
-      <div>
-        <strong>Dulces Enchilados</strong><br />
-        <span class="text-muted">Descripción completa del producto</span>
-      </div>
-    </div>
+        <!-- Productos -->
+        <h1 class="payment-title text-start">Carrito de compras</h1>
+        <div class="section-box">
+            <div class="card-producto">
+                <img src="assets/Dulces-Enchilados.jpg" alt="Dulces Enchilados" />
+                <div>
+                    <strong>Dulces Enchilados</strong><br />
+                    <span class="text-muted">Descripción completa del producto</span>
+                </div>
+            </div>
 
-    <div class="card-producto">
-      <img src="assets/paleta-animal.jpg" alt="Paletas exóticas" />
-      <div>
-        <strong>Paletas exóticas</strong><br />
-        <span class="text-muted">Descripción completa del producto</span>
-      </div>
-    </div>
-  </div>
+            <div class="card-producto">
+                <img src="assets/paleta-animal.jpg" alt="Paletas exóticas" />
+                <div>
+                    <strong>Paletas exóticas</strong><br />
+                    <span class="text-muted">Descripción completa del producto</span>
+                </div>
+            </div>
+        </div>
 
-  <!-- Método de pago -->
-       <h1 class="payment-title text-start">Método de pago</h1>
-  <div class="section-box">
-    <p class="section-title">Mis tarjetas</p>
+        <!-- Método de pago -->
+        <h1 class="payment-title text-start">Método de pago</h1>
+        <div class="section-box">
+            <p class="section-title">Mis tarjetas</p>
 
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
-      <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
-        <span>Tarjeta banco que termina en XXXX</span>
-        <span>Nombre</span>
-        <span>Fecha</span>
-      </label>
-    </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
+                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
+                    <span>Tarjeta banco que termina en XXXX</span>
+                    <span>Nombre</span>
+                    <span>Fecha</span>
+                </label>
+            </div>
 
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
-      <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
-        <span>Tarjeta banco que termina en XXXX</span>
-        <span>Nombre</span>
-        <span>Fecha</span>
-      </label>
-    </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
+                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
+                    <span>Tarjeta banco que termina en XXXX</span>
+                    <span>Nombre</span>
+                    <span>Fecha</span>
+                </label>
+            </div>
 
-    <button class="btn btn-alt">Elegir otro método de pago</button>
-  </div>
+            <button class="btn btn-alt">Elegir otro método de pago</button>
+        </div>
 
-  <!-- Resumen de pago -->
-  <div class="section-box resumen-precios">
-    <div class="d-flex justify-content-between mb-2">
-      <span>Productos:</span>
-      <span>$$$$$$</span>
-    </div>
-    <div class="d-flex justify-content-between mb-2">
-      <span>Envío:</span>
-      <span>$$$$$$</span>
-    </div>
-    <div class="d-flex justify-content-between total mb-3">
-      <span>Total</span>
-      <span>$$$$$$</span>
-    </div>
+        <!-- Resumen de pago -->
+        <div class="section-box resumen-precios">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Productos:</span>
+                <span>$$$$$$</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Envío:</span>
+                <span>$$$$$$</span>
+            </div>
+            <div class="d-flex justify-content-between total mb-3">
+                <span>Total</span>
+                <span>$$$$$$</span>
+            </div>
+            <button class="btn btn-pago">Realiza tu pedido y paga</button>
 
-    <button class="btn btn-pago">Realiza tu pedido y paga</button>
+            <p class="text-sm mt-3 text-center">
+                Al realizar tu pedido, aceptas el aviso de privacidad y las condiciones de uso de ClickNSweet
+            </p>
+        </div>
+        <br>
+    </main>
 
-    <p class="text-sm mt-3 text-center">
-      Al realizar tu pedido, aceptas el aviso de privacidad y las condiciones de uso de ClickNSweet
-    </p>
-  </div>
-  <br>
-</div>
     <!-- Footer -->
     <footer class="footer pt-1">
         <div class="container">
@@ -190,14 +228,14 @@
                         <h3 class="footer-title">Sobre nosotros</h3>
                         <ul class="footer-links">
                             <li><a href="#">Nuestra dulce historia</a></li>
-                            <li><a href="#">Quiénes somos</a></li>
-                            <li><a href="#">Nuetros productos</a></li>
+                            <li><a href="about.html">Quiénes somos</a></li>
+                            <li><a href="products.html">Nuetros productos</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h3 class="footer-title">Soporte</h3>
                         <ul class="footer-links">
-                            <li><a href="#">¡Contactanos!</a></li>
+                            <li><a href="contac-us.html">¡Contactanos!</a></li>
                             <li><a href="#">Localiza tu envio</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Centro de ayuda</a></li>
