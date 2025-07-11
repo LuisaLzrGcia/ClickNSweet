@@ -19,3 +19,12 @@
     background-color: #d13dac;
     color: white;
 }
+
+.category .badge{
+    font-size: 1rem !important;
+}
+
+.bg-pastel-green {
+  background-color: #A8E6CF;
+  opacity: 0.9;
+}

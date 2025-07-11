@@ -80,17 +80,112 @@
 
     <!-- Main -->
     <main class="container my-5 container-new-product">
+        <section class="container">
+            <h2>Vista previa del detalles del producto</h2>
+            <div class="row g-4 align-items-start  p-4">
+                <!-- Imagen del producto -->
+                <div class="col-md-6">
+                    <img src="./assets/bombon.jpeg" alt="Imagen del producto"
+                        class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover;">
+                </div>
+
+                <!-- Detalles del producto -->
+                <div class="col-md-6">
+                    <h2 class="mb-3 text-fuchsia">Bombón de Fresa</h2>
+
+                    <!-- Calificación -->
+                    <div class="star-rating mb-2 text-warning fs-5">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+
+                    <!-- Precios y descuento -->
+                    <div class="mb-3">
+                        <p class="text-muted fs-6 mb-1"><del>$99.99 MXN</del></p>
+                        <p class="fs-3 fw-bold text-fuchsia mb-1">Oferta: $79.99 MXN</p>
+                        <span class="badge bg-sky-light text-dark mb-0"><strong>¡Ahorras $20.00 (20%)!</strong></span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- Presentación -->
+                        <div class="col-12 col-md-6 mb-3 mb-md-0">
+                            <p class="fw-semibold text-muted mb-1">Presentación:</p>
+                            <p class="text-dark mb-0">1 Bolsa de 1 kg</p>
+                        </div>
+
+                        <!-- Cantidad -->
+                        <div class="col-12 col-md-6">
+                            <label for="cantidad" class="form-label fw-semibold text-muted">Cantidad:</label>
+                            <select id="cantidad" class="form-select w-100">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
+                    <p class="text-muted">Delicioso bombón artesanal cubierto con chocolate blanco y un toque de fresa
+                        natural. Ideal para regalar o disfrutar en cualquier momento.</p>
+
+                    <!-- Información adicional -->
+                    <div class="mt-4 text-muted small d-flex flex-column gap-1 category">
+                        <p class="mb-1">
+                            <strong>Categoría:</strong>
+                            <span class="badge pastel-creamy text-dark fs-6">Dulces Cremosos</span>
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Origen:</strong>
+                            <span class="badge bg-pastel-green text-dark">
+                                México
+                                <img src="https://flagcdn.com/w20/mx.png" alt="MX" class="me-1"
+                                    style="width: 16px; height: 12px; object-fit: cover;">
+                            </span>
+                        </p>
+
+                        <p class="mb-0">
+                            <strong>Disponibilidad:</strong>
+                            <span class="badge bg-mint-light text-dark">En stock</span>
+                        </p>
+                    </div>
+
+
+                    <!-- Botón de añadir al carrito -->
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-pink text-white py-2 px-4" type="button">
+                            <i class="bi bi-cart-plus me-2"></i>Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
         <form class="py-3">
-            <h1 class="text-start">Nuevo producto</h1>
+            <h2 class="text-start">Nuevo producto</h2>
             <!-- Nombre del producto -->
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="Bombón de Fresa">
             </div>
             <!-- Descripción del producto -->
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Descripción del producto</label>
-                <textarea row="3" id="" class="form-control"></textarea>
+                <textarea row="3" id="" class="form-control">
+                    Delicioso bombón artesanal cubierto con chocolate blanco y un toque de fresa natural. Ideal para regalar o disfrutar en cualquier momento.
+                </textarea>
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 mb-3">
@@ -98,7 +193,7 @@
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon3">$</span>
                         <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
+                            aria-describedby="basic-addon3 basic-addon4" value="99.99">
                     </div>
                     <div class="form-text" id="basic-addon4">Precio en MXN.</div>
                 </div>
@@ -112,7 +207,7 @@
                     <label for="producto1" class="form-label">Descuento del producto</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
+                            aria-describedby="basic-addon3 basic-addon4" value="20">
                         <span class="input-group-text" id="basic-addon3">%</span>
                     </div>
                     <div class="form-text" id="basic-addon4">Porcentaje de descuento si el producto tiene alguna oferta.
@@ -123,7 +218,7 @@
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon3">$</span>
                         <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
+                            aria-describedby="basic-addon3 basic-addon4" value="79.99">
                     </div>
                     <div class="form-text" id="basic-addon4">Precio generado si tiene descuento o precio de oferta.
                     </div>
@@ -131,10 +226,10 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Categoria por sabor</label>
+                    <label for="producto1" class="form-label">Categoria</label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
-                        <option value="1">One</option>
+                        <option selected value="Dulces Cremosos">Dulces Cremosos</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
@@ -142,14 +237,14 @@
                 <div class="col-12 col-md-4 mb-3">
                     <label for="producto1" class="form-label">País de origen</label>
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
+                        <option>Open this select menu</option>
+                        <option selected value="1">México</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
                 </div>
                 <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Uso o función</label>
+                    <label for="producto1" class="form-label">Tipo de dulce</label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -159,8 +254,52 @@
                 </div>
             </div>
             <hr>
-            <h1 class="text-start">Inventario</h1>
-            <button type="submit" class="btn btn-pink">Submit</button>
+            <h2 class="text-start">Inventario</h2>
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="exampleInputPassword1" class="form-label">SKU</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="cantidad-inventario" class="form-label">Cantidad en inventario</label>
+                    <input type="number" min="0" class="form-control" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="exampleInputPassword1" class="form-label">¿Permitir reservas?</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="cantidad-inventario" class="form-label">Umbral de pocas existencias</label>
+                    <input type="number" min="0" class="form-control" value="10">
+                </div>
+            </div>
+            <h2 class="text-start">Envío</h2>
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Peso</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" min="0" value="0.00">
+                        <span class="input-group-text" id="basic-addon3">Kg</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="cantidad-inventario" class="form-label">Dimensiones</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" min="0" value="0.00">
+                        <span class="input-group-text" id="basic-addon3">cm x</span>
+                        <input type="number" class="form-control" min="0" value="0.00">
+                        <span class="input-group-text" id="basic-addon3">cm x</span>
+                        <input type="number" class="form-control" min="0" value="0.00">
+                        <span class="input-group-text" id="basic-addon3">cm</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-pink w-100 p-2">Crear producto</button>
         </form>
     </main>
 
