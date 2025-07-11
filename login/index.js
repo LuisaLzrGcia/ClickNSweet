@@ -4,6 +4,7 @@ import { login } from "../functions/auth.js";
 const loginForm = document.getElementById('login');
 const usernameInput = document.getElementById('inputEmail');
 const passwordInput = document.getElementById('inputPassword');
+const areaAutenticacion = document.querySelectorAll('.autenticacion');
 // const errorMessageDiv = document.getElementById('errorMessage');
 
 // Función para mostrar mensajes de error
@@ -33,10 +34,15 @@ loginForm.addEventListener('submit', async (event) => {
 
     try {
         // Llamar al servicio de autenticación
-        const user = login(username, password);
+        const user = await login(username, password);
         console.log('¡Inicio de sesión exitoso!', user);
-        hideErrorMessage();
+        // hideErrorMessage();
         // Redirigir al usuario a la página principal o dashboard
+        console.log(areaAutenticacion)
+        areaAutenticacion.forEach(elemento => {
+            console.log(elemento)
+            elemento.display = "hiden"
+        })
         alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
         // window.location.href = '/dashboard.html'; // Ejemplo de redirección
     } catch (error) {

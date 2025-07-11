@@ -2,6 +2,7 @@
 export async function login(username, password) {
     return new Promise((resolve, reject) => {
         // Usuarios para pruebas
+        console.log('logeo')
         const validUser = { username: 'usuario@example.com', password: 'contraseña123' };
         const validAdmin = { username: 'admin@example.com', password: 'admin123' };
 
@@ -15,6 +16,7 @@ export async function login(username, password) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             resolve(user);
         } else {
+            alert("Logeo fallido")
             reject(new Error('Nombre de usuario o contraseña incorrectos.'));
         }
     });
