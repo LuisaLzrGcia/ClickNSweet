@@ -1,0 +1,62 @@
+#login {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+#login h2, .brand-name {
+    font-family: 'Pacifico', cursive;
+    color: #87b9f7;
+  }
+
+#login.form-section {
+    max-width: 450px;
+    margin: 4rem auto;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+  }
+
+#login .form-control:focus{ 
+    border-color: #E452C0;
+    box-shadow: 0 0 0 0.2rem rgba(228, 82, 192, 0.25);
+}
+
+#login .btn-pink {
+    background-color: #E452C0;
+    color: white;
+  }
+
+#login .btn-pink:hover {
+    background-color: #d13dac;
+  }
+
+#login .form-check-input:checked {
+  background-color: #d13dac;
+  border-color: #E452C0;;
+}
+
+#login .form-check-input:focus {
+  border-color: #E452C0;
+  box-shadow: 0 0 0 0.2rem rgba(228, 82, 192, 0.25);
+}
+
+#login .form-check-label,
+.form-text,
+label {
+    font-size: 0.95rem;
+}
+
+#login .form-control {
+    border-radius: 0.5rem;
+  }
+
+#login .forgot-link {
+    font-size: 0.85rem;
+    color: #4e93e8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+#login .forgot-link:hover {
+    text-decoration: underline;
+  }

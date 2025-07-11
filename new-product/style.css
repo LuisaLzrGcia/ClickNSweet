@@ -1,0 +1,21 @@
+.container-new-product {
+    background-color: white !important;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+.container-new-product input{
+    border: 2px solid #e4e6e9;
+}
+
+.btn-pink {
+    background-color: #E452C0;
+    color: white;
+}
+
+.btn-pink:hover {
+    background-color: #d13dac;
+    color: white;
+}
