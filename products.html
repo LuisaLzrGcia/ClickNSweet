@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Click N' Swet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./products/products.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="./assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px" />
+        <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem">Click N' Sweet</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1" href="#">Productos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">
+              Categorías
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Chocolates</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Frutales</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Picantes</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces de caramelo</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Refrescantes</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Salados</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Cremosos</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Especiados</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html#categories">Dulces Ácidos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1" href="quienes-somos.html">Quiénes somos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
+              href="#">
+              <span class="cart-icon position-relative me-1">
+                🛒
+                <div id="cart-indicator" class="cart-badge">0</div>
+              </span>
+              Carrito
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+   <!-- Contenido principal -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <h5>Tipo de Dulce</h5>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Caramelo</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Chocolate</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Gomitas</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Bombones</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Exóticos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Picosos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Ácidos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Con relleno</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Con chile</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Agridulces</label></div>
+
+          <h6 class="filter-title">Sabor</h6>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Dulce</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Salado</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Picante</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Ácido</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Frutal</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Explosivo</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Cremoso</label></div>
+
+          <h6 class="filter-title">País</h6>
+          <select class="form-select">
+            <option>Todos</option>
+            <option>México</option>
+            <option>USA</option>
+            <option>Japón</option>
+            <option>España</option>
+          </select>
+
+          <h6 class="filter-title">Precio</h6>
+          <div class="price-range-label">
+            <span>$0</span>
+            <span>$100</span>
+          </div>
+          <input type="range" class="form-range" min="0" max="100">
+        </div>
+      </div>
+
+      <!-- Productos -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between mb-3 flex-wrap">
+          <input type="text" class="form-control w-50 mb-2 mb-lg-0" placeholder="Buscar...">
+          <div class="btn-group">
+            <button class="btn btn-dark btn-sm">New</button>
+            <button class="btn btn-outline-secondary btn-sm">Precio ↑</button>
+            <button class="btn btn-outline-secondary btn-sm">Precio ↓</button>
+            <button class="btn btn-outline-secondary btn-sm">Rating</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Producto con oferta -->
+          <div class="col-md-4 mb-4">
+            <div class="product-card p-2 text-center">
+              <div class="bg-light" style="height: 180px;"></div>
+              <p class="mt-2">Gomitas de frutas</p>
+              <div class="star-rating mb-1">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <i class="bi bi-star"></i>
+              </div>
+              <p>
+                <span class="product-price-old">$50</span> 
+                <span class="product-price-offer">$35</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Producto normal -->
+          <div class="col-md-4 mb-4">
+            <div class="product-card p-2 text-center">
+              <div class="bg-light" style="height: 180px;"></div>
+              <p class="mt-2">Caramelo suave</p>
+              <div class="star-rating mb-1">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+              </div>
+              <p><strong>$25</strong></p>
+            </div>
+          </div>
+
+          <!-- Otro producto -->
+          <div class="col-md-4 mb-4">
+            <div class="product-card p-2 text-center">
+              <div class="bg-light" style="height: 180px;"></div>
+              <p class="mt-2">Bombón relleno</p>
+              <div class="star-rating mb-1">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </div>
+              <p><strong>$30</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paginación -->
+        <nav>
+          <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer pt-1">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <h3 class="footer-title">¡Conoce nuestras novedades!</h3>
+          <p class="mb-4">
+            Suscríbete a nuestro boletín para recibir actualizaciones,
+            novedades y ofertas exclusivas.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-6 ms-auto text-end">
+          <form class="mb-4">
+            <div class="input-group">
+              <input type="email" class="form-control newsletter-input" placeholder="Ingresa tu email" />
+              <button class="btn btn-subscribe text-white" type="submit">
+                Suscribete
+              </button>
+            </div>
+          </form>
+          <p class="small">
+            Al suscribirse, acepta nuestra Política de privacidad y da su
+            consentimiento para recibir actualizaciones.
+          </p>
+        </div>
+      </div>
+      <div class="footer-separator"></div>
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5 col-md-6">
+            <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
+            <div class="social-links mb-4">
+              <a href="#"><img src="assets/icons8-facebook-192.png" alt="Facebook" width="32" /></a>
+              <a href="#"><img src="assets/icons8-x-192.png" alt="Twitter" width="32" /></a>
+              <a href="#"><img src="assets/icons8-instagram-192.png" alt="Instagram" width="32" /></a>
+              <a href="#"><img src="assets/icons8-youtube-96.png" alt="YouTube" width="32" /></a>
+              <a href="#"><img src="assets/icons8-tiktok-192.png" alt="YouTube" width="32" /></a>
+            </div>
+            <ul class="footer-links"></ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h3 class="footer-title">Sobre nosotros</h3>
+            <ul class="footer-links">
+              <li><a href="#">Nuestra dulce historia</a></li>
+              <li><a href="#">Quiénes somos</a></li>
+              <li><a href="#">Nuetros productos</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-title">Soporte</h3>
+            <ul class="footer-links">
+              <li><a href="#">¡Contactanos!</a></li>
+              <li><a href="#">Localiza tu envio</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Política de privacidad</a></li>
+              <li><a href="#">Terminos de servicios</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom mt-5">
+      <div class="container-fluid">
+        <div class="row py-1">
+          <div class="col-md-6 text-center">
+            <p class="mb-0">
+              &copy; 2025 ClickN'Sweet. Todos los derechos reservados.
+            </p>
+          </div>
+          <div class="col-md-6 text-center">
+            <p class="mb-0">Designed by <a href="#">ClickN'Sweet</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="module" src="main.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
