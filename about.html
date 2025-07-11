@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="./about/style.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
@@ -32,9 +33,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center">
           <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">
               Categorías
@@ -63,8 +64,32 @@
               Carrito
             </a>
           </li>
-          <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a></li>
-          <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a></li>
+          <li class="nav-item autenticacion">
+            <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+          </li>
+          <li class="nav-item autenticacion">
+            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
+          </li>
+          <li class="nav-item dropdown user-menu d-none">
+            <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">Mi perfil</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Pedidos</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -275,14 +300,14 @@
             <h3 class="footer-title">Sobre nosotros</h3>
             <ul class="footer-links">
               <li><a href="#">Nuestra dulce historia</a></li>
-              <li><a href="#">Quiénes somos</a></li>
-              <li><a href="#">Nuetros productos</a></li>
+              <li><a href="about.html">Quiénes somos</a></li>
+              <li><a href="products.html">Nuetros productos</a></li>
             </ul>
           </div>
           <div class="col-lg-4 col-md-6">
             <h3 class="footer-title">Soporte</h3>
             <ul class="footer-links">
-              <li><a href="#">¡Contactanos!</a></li>
+              <li><a href="contac-us.html">¡Contactanos!</a></li>
               <li><a href="#">Localiza tu envio</a></li>
               <li><a href="#">FAQ</a></li>
               <li><a href="#">Centro de ayuda</a></li>

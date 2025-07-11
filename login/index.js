@@ -1,6 +1,5 @@
-import { login } from "../functions/auth.js";
+import { login } from "./auth.js";
 
-// Obtener elementos del DOM
 const loginForm = document.getElementById('login');
 const usernameInput = document.getElementById('inputEmail');
 const passwordInput = document.getElementById('inputPassword');
@@ -19,7 +18,6 @@ function hideErrorMessage() {
     errorMessageDiv.style.display = 'none';
 }
 
-// Manejador de envío del formulario
 loginForm.addEventListener('submit', async (event) => {
     event.preventDefault(); 
 
@@ -33,20 +31,15 @@ loginForm.addEventListener('submit', async (event) => {
     }
 
     try {
-        // Llamar al servicio de autenticación
         const user = await login(username, password);
         console.log('¡Inicio de sesión exitoso!', user);
         // hideErrorMessage();
         // Redirigir al usuario a la página principal o dashboard
         console.log(areaAutenticacion)
-        areaAutenticacion.forEach(elemento => {
-            console.log(elemento)
-            elemento.display = "hiden"
-        })
-        alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
-        // window.location.href = '/dashboard.html'; // Ejemplo de redirección
+        // alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
+        window.location.href = "/"
     } catch (error) {
         console.error('Error durante el inicio de sesión:', error.message);
-        showErrorMessage(error.message);
+        // showErrorMessage(error.message);
     }
 });

@@ -18,10 +18,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="./login/login.css" />
+  <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
-  <!-- Navbar -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center">
           <li class="nav-item">
             <a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a>
           </li>
@@ -75,7 +75,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-pink mx-1" href="quienes-somos.html">Quiénes somos</a>
+            <a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes somos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a>
@@ -96,15 +96,10 @@
           <li class="nav-item autenticacion">
             <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
           </li>
-          <!-- <li class="nav-item user-menu d-none">
-            <a class="nav-link d-flex align-items-center" href="#">
-              <img src="assets/user-icon.svg" alt="Usuario" width="32" height="32" class="rounded-circle" />
-            </a>
-          </li> -->
           <li class="nav-item dropdown user-menu d-none">
-            <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+            <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/user-icon.svg" alt="Usuario" width="24" height="24" />
+              <i class="bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
@@ -117,7 +112,7 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" href="#" id="cerrarSesion">Cerrar sesión</a>
+                <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
               </li>
             </ul>
           </li>
@@ -125,7 +120,7 @@
       </div>
     </div>
   </nav>
-
+  <!-- Navbar -->
   <main>
     <section id="login" class="form-section">
       <h2 class="text-center mb-2 brand-name">Click N' Sweet</h2>
