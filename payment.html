@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Editar producto</title>
+    <title>Click N' Sweet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -17,10 +17,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./new-product/style.css" />
 </head>
 
 <body>
@@ -29,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+                <img src="./assets/logo-1.png" alt="Logo" style="height: 40px; margin-right: 8px;">
                 <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -38,7 +35,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="#">Productos</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -77,95 +74,84 @@
         </div>
     </nav>
 
+<br><div class="limite-ancho">
+  <!-- Carrito de compras -->
+    <h1 class="payment-title text-start">Llega el "fecha"</h1>   
+  <div class="section-box">
+    <p><strong>Enviar a “nombre de cliente”</strong><br />
+      <span class="text-muted">Dirección proporcionada por el cliente</span>
+    </p>
+  </div>
 
-    <!-- Main -->
-    <main class="container my-5 container-new-product">
-        <form class="py-3">
-            <h1 class="text-start">Nuevo producto</h1>
-            <!-- Nombre del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control">
-            </div>
-            <!-- Descripción del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Descripción del producto</label>
-                <textarea row="3" id="" class="form-control"></textarea>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio del producto</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio en MXN.</div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="formFileMultiple" class="form-label">Imágenes del producto</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Descuento del producto</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                        <span class="input-group-text" id="basic-addon3">%</span>
-                    </div>
-                    <div class="form-text" id="basic-addon4">Porcentaje de descuento si el producto tiene alguna oferta.
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio de oferta</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio generado si tiene descuento o precio de oferta.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Categoria por sabor</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">País de origen</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Uso o función</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-            <h1 class="text-start">Inventario</h1>
-            <button type="submit" class="btn btn-pink">Submit</button>
-        </form>
-    </main>
+  <!-- Productos -->
+  <h1 class="payment-title text-start">Carrito de compras</h1>
+  <div class="section-box">
+    <div class="card-producto">
+      <img src="assets/Dulces-Enchilados.jpg" alt="Dulces Enchilados" />
+      <div>
+        <strong>Dulces Enchilados</strong><br />
+        <span class="text-muted">Descripción completa del producto</span>
+      </div>
+    </div>
 
+    <div class="card-producto">
+      <img src="assets/paleta-animal.jpg" alt="Paletas exóticas" />
+      <div>
+        <strong>Paletas exóticas</strong><br />
+        <span class="text-muted">Descripción completa del producto</span>
+      </div>
+    </div>
+  </div>
 
+  <!-- Método de pago -->
+       <h1 class="payment-title text-start">Método de pago</h1>
+  <div class="section-box">
+    <p class="section-title">Mis tarjetas</p>
 
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
+      <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
+        <span>Tarjeta banco que termina en XXXX</span>
+        <span>Nombre</span>
+        <span>Fecha</span>
+      </label>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
+      <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
+        <span>Tarjeta banco que termina en XXXX</span>
+        <span>Nombre</span>
+        <span>Fecha</span>
+      </label>
+    </div>
+
+    <button class="btn btn-alt">Elegir otro método de pago</button>
+  </div>
+
+  <!-- Resumen de pago -->
+  <div class="section-box resumen-precios">
+    <div class="d-flex justify-content-between mb-2">
+      <span>Productos:</span>
+      <span>$$$$$$</span>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <span>Envío:</span>
+      <span>$$$$$$</span>
+    </div>
+    <div class="d-flex justify-content-between total mb-3">
+      <span>Total</span>
+      <span>$$$$$$</span>
+    </div>
+
+    <button class="btn btn-pago">Realiza tu pedido y paga</button>
+
+    <p class="text-sm mt-3 text-center">
+      Al realizar tu pedido, aceptas el aviso de privacidad y las condiciones de uso de ClickNSweet
+    </p>
+  </div>
+  <br>
+</div>
     <!-- Footer -->
     <footer class="footer pt-1">
         <div class="container">
@@ -204,14 +190,14 @@
                         <h3 class="footer-title">Sobre nosotros</h3>
                         <ul class="footer-links">
                             <li><a href="#">Nuestra dulce historia</a></li>
-                            <li><a href="about.html">Quiénes somos</a></li>
-                            <li><a href="products.html">Nuetros productos</a></li>
+                            <li><a href="#">Quiénes somos</a></li>
+                            <li><a href="#">Nuetros productos</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h3 class="footer-title">Soporte</h3>
                         <ul class="footer-links">
-                            <li><a href="contac-us.html">¡Contactanos!</a></li>
+                            <li><a href="#">¡Contactanos!</a></li>
                             <li><a href="#">Localiza tu envio</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Centro de ayuda</a></li>
@@ -241,6 +227,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+</body>
 </html>

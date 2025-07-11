@@ -1,4 +1,4 @@
-export function mostrarPaginaActiva() {
+export function displayActiveLink() {
   const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
   const dropdownItems = document.querySelectorAll(
     ".dropdown-menu .dropdown-item"
