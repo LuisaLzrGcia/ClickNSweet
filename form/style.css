@@ -1,0 +1,103 @@
+/* 💫 Estilo general del cuerpo */
+body {
+  background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.title {
+  font-family: "Pacifico", cursive;
+}
+
+.footer {
+  background-color: #f8d7da;
+  padding: 2rem 0;
+}
+h1 {
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-weight: bold;
+
+
+}
+p {
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-weight: normal;
+  
+
+}
+
+/* 🧁 Tarjeta principal */
+.card {
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+  overflow: hidden;
+}
+
+.image-section,
+.food-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  min-height: 450px;
+  padding: 2rem 1rem;
+}
+
+/* Asegura que la imagen no se achique ni se desborde */
+.food-image img {
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.image-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+/* ✍️ Título de marca */
+.brand-title {
+  font-size: 2rem;
+  color: #d63384;
+  font-weight: bold;
+}
+
+/* 💬 Subtítulo de marca */
+.brand-subtitle {
+  color:  black;
+  margin-bottom: 1.5rem;
+}
+
+/* 🎯 Botón de registro */
+.btn-register {
+  display: block;
+  margin: 2rem auto 0 auto; /* Centrado horizontal y bajado */
+  background-color: #d63384;
+  color: white;
+  border-radius: 12px;
+  padding: 0.6rem 1.5rem;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-register:hover {
+  background-color: #c2185b;
+}
+
+/* 📋 Sección del formulario */
+.form-section {
+  padding: 3rem;
+}
+
+/* 📱 Estilo responsivo */
+@media (max-width: 768px) {
+  .form-section {
+    padding: 1.5rem;
+  }
+  .food-image img {
+    max-width: 80%;
+  }
+}
