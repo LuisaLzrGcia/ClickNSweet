@@ -33,6 +33,13 @@
       justify-content: space-between;
       font-size: 0.9rem;
     }
+    .d-flex.gap-2::-webkit-scrollbar {
+      display: none;
+    }
+    .d-flex.gap-2 {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
 .bg-light {
     --bs-bg-opacity: 1;
     background-color: rgb(224 239 254) !important;
