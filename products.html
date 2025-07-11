@@ -26,61 +26,44 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px" />
-        <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem">Click N' Sweet</span>
+        <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
+        <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a>
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a>
-          </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item nav-item-user dropdown">
             <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">
               Categorías
             </a>
             <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Chocolates</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Frutales</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Picantes</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces de caramelo</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Refrescantes</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Salados</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Cremosos</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Especiados</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="index.html#categories">Dulces Ácidos</a>
-              </li>
+              <li><a class="dropdown-item" href="index.html#categories">Chocolates</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Frutales</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Picantes</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces de caramelo</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Refrescantes</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Salados</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Cremosos</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Especiados</a></li>
+              <li><a class="dropdown-item" href="index.html#categories">Dulces Ácidos</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-pink mx-1" href="quienes-somos.html">Quiénes somos</a>
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes
+              somos</a></li>
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a>
+          <li class="nav-item nav-item-admin d-none">
+            <a class="nav-link btn btn-pink mx-1" href="new-product.html">Crear producto</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item nav-item-admin d-none">
+            <a class="nav-link btn btn-pink mx-1" href="edit-product.html">Actualizar producto</a>
+          </li>
+          <li class="nav-item nav-item-user">
             <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
               href="#">
               <span class="cart-icon position-relative me-1">
@@ -90,38 +73,71 @@
               Carrito
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item autenticacion">
             <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item autenticacion">
             <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
+          </li>
+          <li class="nav-item dropdown user-menu d-none">
+            <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">Mi perfil</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Pedidos</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-   <!-- Contenido principal -->
+  <!-- Contenido principal -->
   <div class="container my-5">
     <div class="row">
       <!-- Sidebar Desktop -->
       <div class="col-lg-3 d-none d-lg-block">
         <div class="sidebar">
           <h5>Tipo de Dulce</h5>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Caramelo</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Chocolate</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Gomitas</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Bombones</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Exóticos</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Picosos</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Ácidos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Caramelo</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Chocolate</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Gomitas</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Bombones</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Exóticos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Picosos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Ácidos</label></div>
 
           <h6 class="filter-title">Sabor</h6>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Dulce</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Salado</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Picante</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Ácido</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Frutal</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Dulce</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Salado</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Picante</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Ácido</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+              class="form-check-label">Frutal</label></div>
 
           <h6 class="filter-title">País</h6>
           <select class="form-select">
@@ -149,11 +165,26 @@
             Tipo de Dulce
           </button>
           <ul class="dropdown-menu p-2" style="min-width: 200px;">
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Caramelo</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Chocolate</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Gomitas</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Bombones</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Exóticos</label></div></li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Caramelo</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Chocolate</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Gomitas</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Bombones</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Exóticos</label></div>
+            </li>
           </ul>
         </div>
 
@@ -163,11 +194,26 @@
             Sabor
           </button>
           <ul class="dropdown-menu p-2" style="min-width: 180px;">
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Dulce</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Salado</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Picante</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Ácido</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Frutal</label></div></li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Dulce</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Salado</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Picante</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Ácido</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Frutal</label></div>
+            </li>
           </ul>
         </div>
 
@@ -177,10 +223,22 @@
             País
           </button>
           <ul class="dropdown-menu p-2" style="min-width: 150px;">
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">México</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">USA</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">Japón</label></div></li>
-            <li><div class="form-check"><input class="form-check-input" type="checkbox"> <label class="form-check-label">España</label></div></li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">México</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">USA</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">Japón</label></div>
+            </li>
+            <li>
+              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
+                  class="form-check-label">España</label></div>
+            </li>
           </ul>
         </div>
 
@@ -223,14 +281,14 @@
                 <i class="bi bi-star"></i>
               </div>
               <p>
-                <span class="product-price-old">$50</span> 
+                <span class="product-price-old">$50</span>
                 <span class="product-price-offer">$35</span>
               </p>
             </div>
           </div>
           <!-- Agregar más productos aquí... -->
-          
-            <!-- Producto normal -->
+
+          <!-- Producto normal -->
           <div class="col-md-4 mb-4">
             <div class="product-card p-2 text-center">
               <div class="bg-light" style="height: 180px;"></div>
@@ -262,20 +320,20 @@
             </div>
           </div>
         </div>
-        </div>
-
-        <!-- Paginación -->
-        <nav>
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
-          </ul>
-        </nav>
       </div>
+
+      <!-- Paginación -->
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+        </ul>
+      </nav>
     </div>
+  </div>
   </div>
 
   <!-- Footer -->
