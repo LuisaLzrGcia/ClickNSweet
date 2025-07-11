@@ -1,5 +1,5 @@
 .sidebar {
-      background-color: #f8f9fa;
+      background-color: #e7edf3;
       padding: 1rem;
       border-radius: 10px;
       margin-bottom: 2rem;
@@ -33,3 +33,7 @@
       justify-content: space-between;
       font-size: 0.9rem;
     }
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgb(224 239 254) !important;
+}
