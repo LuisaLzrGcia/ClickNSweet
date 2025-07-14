@@ -37,7 +37,13 @@ loginForm.addEventListener("submit", async (event) => {
     // alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
     window.location.href = "index.html";
   } catch (error) {
-    console.error("Error durante el inicio de sesión:", error.message);
-    // showErrorMessage(error.message);
+    Swal.fire({
+      title: "No se pudo iniciar sesión",
+      text: "Verifica tu correo y contraseña e intenta nuevamente.",
+      icon: "error",
+      confirmButtonText: "Intentar de nuevo",
+    });
+    // console.error("Error durante el inicio de sesión:", error.message);
+    showErrorMessage(error.message);
   }
 });
