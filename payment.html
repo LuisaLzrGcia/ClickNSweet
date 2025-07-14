@@ -17,11 +17,13 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="payment/style.css"/>
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
+    <!-- Navbar -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -33,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center invisible">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
                             href="index.html">Inicio</a></li>
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
@@ -108,210 +110,85 @@
         </div>
     </nav>
 
-
-    <!-- Banner -->
-    <section class="vh-100 position-relative overflow-hidden bg-secondary text-white">
-        <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-            <source src="assets/Dulces.mp4" type="video/mp4">
-            Tu navegador no admite la reproducción de video.
-        </video>
-        <div class="d-flex align-items-center justify-content-center h-100 position-relative">
-            <h1></h1>
+<br>
+<!--------  Pagina de pago -------->
+<main class="payment-page limite-ancho">
+        <!-- Carrito de compras -->
+        <h1 class="payment-title text-start">Llega el "fecha"</h1>
+        <div class="section-box">
+            <p><strong>Enviar a “nombre de cliente”</strong><br />
+                <span class="text-muted">Dirección proporcionada por el cliente</span>
+            </p>
         </div>
-    </section>
 
+        <!-- Productos -->
+        <h1 class="payment-title text-start">Carrito de compras</h1>
+        <div class="section-box">
+            <div class="card-producto">
+                <img src="assets/Dulces-Enchilados.jpg" alt="Dulces Enchilados" />
+                <div>
+                    <strong>Dulces Enchilados</strong><br />
+                    <span class="text-muted">Descripción completa del producto</span>
+                </div>
+            </div>
 
-    <!-- Productos más vendidos -->
-    <h2 class="text-center my-5">Nuestros productos más vendidos</h2>
-    <div class="container">
-        <div class="row text-center">
-            <!-- Producto 1 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Charamuscas.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 1">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Charamuscas</h5>
-                        <p class="card-text">$100</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 2 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/dulcenopal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 2">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de nopal</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/paleta-animal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 3">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de tequila</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 4 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Dulces-Enchilados.jpg" class="card-img-top"
-                        style="height: 200px; object-fit: contain;" alt="Producto 4">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulces con chile</h5>
-                        <p class="card-text">$100</p>
-                    </div>
+            <div class="card-producto">
+                <img src="assets/paleta-animal.jpg" alt="Paletas exóticas" />
+                <div>
+                    <strong>Paletas exóticas</strong><br />
+                    <span class="text-muted">Descripción completa del producto</span>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Categorías -->
-    <section id="categories" class="categories">
-        <h2 class="title">Categories</h2>
+        <!-- Método de pago -->
+        <h1 class="payment-title text-start">Método de pago</h1>
+        <div class="section-box">
+            <p class="section-title">Mis tarjetas</p>
 
-        <!-- Swiper wrapper -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-chocolate">
-                        <p class="title title-category ">Chocolates</p>
-                        <div>
-                            <img src="./assets/chocolate_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-fruity">
-                        <p class="title title-category ">Dulces Frutales</p>
-                        <div>
-                            <img src="./assets/fruity_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-sour">
-                        <p class="title title-category ">Dulces Ácidos</p>
-                        <div>
-                            <img src="./assets/sour_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-spicy">
-                        <p class="title title-category ">Dulces Picantes</p>
-                        <div>
-                            <img src="./assets/spicy_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-caramel">
-                        <p class="title title-category ">Dulces de Caramelo</p>
-                        <div>
-                            <img src="./assets/caramel_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-minty">
-                        <p class="title title-category ">Dulces Refrescantes</p>
-                        <div>
-                            <img src="./assets/minty_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-salty">
-                        <p class="title title-category ">Dulces Salados</p>
-                        <div>
-                            <img src="./assets/salty_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-creamy">
-                        <p class="title title-category ">Dulces Cremosos</p>
-                        <div>
-                            <img src="./assets/creamy_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-spiced">
-                        <p class="title title-category ">Dulces Especiados</p>
-                        <div>
-                            <img src="./assets/spiced_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
+                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
+                    <span>Tarjeta banco que termina en XXXX</span>
+                    <span>Nombre</span>
+                    <span>Fecha</span>
+                </label>
             </div>
 
-            <!-- Flechas -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
+                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
+                    <span>Tarjeta banco que termina en XXXX</span>
+                    <span>Nombre</span>
+                    <span>Fecha</span>
+                </label>
+            </div>
 
-            <!-- Paginación opcional -->
-            <div class="mt-3 swiper-pagination"></div>
+            <button class="btn btn-alt">Elegir otro método de pago</button>
         </div>
-    </section>
 
-
-
-    <!-- Noticias -->
-    <h2 class="text-center my-4">Noticias</h2>
-    <div class="container container-news">
-        <div class="row text-center">
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/gomitas_piña_colada.jpeg'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">¡Nuevo sabor disponible!</strong>
-                    </div>
-                    <p class="mt-2 px-3">Lanzamos nuestras gomitas sabor <em>piña colada</em>. Perfectas para el verano,
-                        ya
-                        disponibles en tienda.</p>
-                </div>
+        <!-- Resumen de pago -->
+        <div class="section-box resumen-precios">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Productos:</span>
+                <span>$$$$$$</span>
             </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/caramelos_suaves.png'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">Promoción de julio</strong>
-                    </div>
-                    <p class="mt-2 px-3">Aprovecha nuestro <strong>2x1 en caramelos suaves</strong> hasta el 15 de
-                        julio. ¡No te
-                        lo pierdas!</p>
-                </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Envío:</span>
+                <span>$$$$$$</span>
             </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/envio\ gratis.png'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">¡Envío gratis!</strong>
-                    </div>
-                    <p class="mt-2 px-3">Durante todo el mes, disfruta de <strong>envío gratuito</strong> en compras
-                        mayores a
-                        $500.</p>
-                </div>
+            <div class="d-flex justify-content-between total mb-3">
+                <span>Total</span>
+                <span>$$$$$$</span>
             </div>
+            <button class="btn btn-pago">Realiza tu pedido y paga</button>
 
+            <p class="text-sm mt-3 text-center">
+                Al realizar tu pedido, aceptas el aviso de privacidad y las condiciones de uso de ClickNSweet
+            </p>
         </div>
-    </div>
+        <br>
+    </main>
 
     <!-- Footer -->
     <footer class="footer pt-1">
@@ -388,6 +265,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+</body>
 </html>

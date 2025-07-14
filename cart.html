@@ -17,11 +17,13 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="cart/style.css"/>
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
+    <!-- Navbar -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -33,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center invisible">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
                             href="index.html">Inicio</a></li>
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
@@ -108,210 +110,114 @@
         </div>
     </nav>
 
+<!------- Carrito de compra ------>
+    <main class="cart-page">
+        <div class="container py-5">
+            <h1 class="cart-title-blue mb-5">Carrito de compras</h1>
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Cart Items -->
+                    <div class="card mb-4 cart-items-container">
+                        <div class="card-body">
+                            <div class="row cart-item mb-3">
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <img src="assets/paleta-animal.jpg" alt="Product 1" class="img-fluid rounded">
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <h5 class="card-title">Producto 1</h5>
+                                    <p class="text-muted">Categoría: Dulces exóticos</p>
+                                    <p class="text-muted">Precio unitario: $99.99</p>
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                                        <input style="max-width:35px" type="text"
+                                            class="form-control  form-control-sm text-center quantity-input" value="1">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-end">
+                                    <p class="fw-bold">$99.99</p>
+                                    <button class="btn btn-sm eliminar-item">
+                                        <img src="assets/icons8-basura-128.png" alt="Eliminar" class="trash-img">
+                                    </button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row cart-item">
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <img src="assets/Dulces-Enchilados.jpg" alt="Product 2" class="img-fluid rounded">
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <h5 class="card-title">Producto 2</h5>
+                                    <p class="text-muted">Categoría: Dulces picosos</p>
+                                    <p class="text-muted">Precio unitario: $49.99</p>
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                                        <input style="max-width:35px" type="text"
+                                            class="form-control form-control-sm text-center quantity-input" value="2">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 mb-2 text-center text-md-end">
+                                    <p class="fw-bold">$49.99</p>
+                                    <button class="btn btn-sm eliminar-item">
+                                        <img src="assets/icons8-basura-128.png" alt="Eliminar" class="trash-img">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Continue Shopping Button -->
+                    <div class="text-start mb-4">
+                        <a href="index.html" class="btn custom-btn-contShop">
+                            <i class="bi bi-arrow-left me-2"></i>Continuar comprando
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- Promo Code -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="cart-title mb-3">Aplicar cupón</h4>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Ingresa tu cupón">
+                                <button class="btn custom-btn-aplicar" type="button">Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Banner -->
-    <section class="vh-100 position-relative overflow-hidden bg-secondary text-white">
-        <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-            <source src="assets/Dulces.mp4" type="video/mp4">
-            Tu navegador no admite la reproducción de video.
-        </video>
-        <div class="d-flex align-items-center justify-content-center h-100 position-relative">
-            <h1></h1>
+                    <!-- Cart Summary -->
+                    <div class="card cart-summary">
+                        <div class="card-body">
+                            <h4 class="cart-title mb-3">Resumen de compra</h4>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Subtotal</span>
+                                <span>$199.97</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Costo de envío</span>
+                                <span>$10.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>IVA</span>
+                                <span>$20.00</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-4">
+                                <strong>Total</strong>
+                                <strong>$229.97</strong>
+                            </div>
+                            <a href="payment.html" class="btn custom-btn-pagar w-100">Proceder a pago</a>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
         </div>
-    </section>
-
-
-    <!-- Productos más vendidos -->
-    <h2 class="text-center my-5">Nuestros productos más vendidos</h2>
-    <div class="container">
-        <div class="row text-center">
-            <!-- Producto 1 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Charamuscas.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 1">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Charamuscas</h5>
-                        <p class="card-text">$100</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 2 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/dulcenopal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 2">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de nopal</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/paleta-animal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 3">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de tequila</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 4 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Dulces-Enchilados.jpg" class="card-img-top"
-                        style="height: 200px; object-fit: contain;" alt="Producto 4">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulces con chile</h5>
-                        <p class="card-text">$100</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Categorías -->
-    <section id="categories" class="categories">
-        <h2 class="title">Categories</h2>
-
-        <!-- Swiper wrapper -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-chocolate">
-                        <p class="title title-category ">Chocolates</p>
-                        <div>
-                            <img src="./assets/chocolate_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-fruity">
-                        <p class="title title-category ">Dulces Frutales</p>
-                        <div>
-                            <img src="./assets/fruity_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-sour">
-                        <p class="title title-category ">Dulces Ácidos</p>
-                        <div>
-                            <img src="./assets/sour_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-spicy">
-                        <p class="title title-category ">Dulces Picantes</p>
-                        <div>
-                            <img src="./assets/spicy_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-caramel">
-                        <p class="title title-category ">Dulces de Caramelo</p>
-                        <div>
-                            <img src="./assets/caramel_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-minty">
-                        <p class="title title-category ">Dulces Refrescantes</p>
-                        <div>
-                            <img src="./assets/minty_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-salty">
-                        <p class="title title-category ">Dulces Salados</p>
-                        <div>
-                            <img src="./assets/salty_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-creamy">
-                        <p class="title title-category ">Dulces Cremosos</p>
-                        <div>
-                            <img src="./assets/creamy_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="circle pastel-spiced">
-                        <p class="title title-category ">Dulces Especiados</p>
-                        <div>
-                            <img src="./assets/spiced_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Flechas -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-            <!-- Paginación opcional -->
-            <div class="mt-3 swiper-pagination"></div>
-        </div>
-    </section>
-
-
-
-    <!-- Noticias -->
-    <h2 class="text-center my-4">Noticias</h2>
-    <div class="container container-news">
-        <div class="row text-center">
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/gomitas_piña_colada.jpeg'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">¡Nuevo sabor disponible!</strong>
-                    </div>
-                    <p class="mt-2 px-3">Lanzamos nuestras gomitas sabor <em>piña colada</em>. Perfectas para el verano,
-                        ya
-                        disponibles en tienda.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/caramelos_suaves.png'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">Promoción de julio</strong>
-                    </div>
-                    <p class="mt-2 px-3">Aprovecha nuestro <strong>2x1 en caramelos suaves</strong> hasta el 15 de
-                        julio. ¡No te
-                        lo pierdas!</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-white d-flex align-items-center justify-content-center"
-                        style="height: 150px; background-image: url('./assets/envio\ gratis.png'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">¡Envío gratis!</strong>
-                    </div>
-                    <p class="mt-2 px-3">Durante todo el mes, disfruta de <strong>envío gratuito</strong> en compras
-                        mayores a
-                        $500.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer pt-1">
@@ -382,12 +288,14 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="main.js"></script>
     <script type="module" src="./index/index.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+    </main>
+  </body>
 </html>
