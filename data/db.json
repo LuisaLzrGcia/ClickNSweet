@@ -9,9 +9,9 @@
       "origen": "China",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/pastel-de-luna-china-1.jpg",
       "sales_format": "paquete",
-      "discount": "15",
+      "discount": 15,
       "price_discount": 153.00,
-      "rating": 4.8,
+      "rating": 4,
       "country": "China"
     },
     {
@@ -23,9 +23,9 @@
       "origen": "Puebla, México",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/jamoncillos-de-dulce-de-leche-1.jpg",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 35.00,
-      "rating": 4.5,
+      "rating": 4,
       "country": "México"
     },
     {
@@ -37,7 +37,7 @@
       "origen": "Turquía",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/delicias-turcas-1.jpeg",
       "sales_format": "paquete",
-      "discount": "40",
+      "discount": 40,
       "price_discount": 132.00,
       "rating": 5.0,
       "country": "Turquía"
@@ -51,9 +51,9 @@
       "origen": "Centro de México",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/turron-rosa-1.jpg",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 25.00,
-      "rating": 3.8,
+      "rating": 3,
       "country": "México"
     },
     {
@@ -65,9 +65,9 @@
       "origen": "Japón",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/mochis-japones-1.jpg",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 50.00,
-      "rating": 4.7,
+      "rating": 4,
       "country": "Japón"
     },
     {
@@ -79,9 +79,9 @@
       "origen": "Sinaloa, México",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/coricos-sinaloa-1.jpg",
       "sales_format": "paquete",
-      "discount": "15",
+      "discount": 15,
       "price_discount": 55.25,
-      "rating": 4.2,
+      "rating": 4,
       "country": "México"
     },
     {
@@ -93,9 +93,9 @@
       "origen": "Portugal",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/pastel-de-nata-portugal-1.png",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 45.00,
-      "rating": 4.9,
+      "rating": 4,
       "country": "Portugal"
     },
     {
@@ -107,9 +107,9 @@
       "origen": "Michoacán, México",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/mestiza-michoacan.png",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 40.00,
-      "rating": 4.0,
+      "rating": 4,
       "country": "México"
     },
     {
@@ -121,9 +121,9 @@
       "origen": "Puebla, México",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/camote-poblano-1.jpg",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 25.00,
-      "rating": 3.5,
+      "rating": 3,
       "country": "México"
     },
     {
@@ -135,9 +135,9 @@
       "origen": "Uruguay / Argentina",
       "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/alfajores-maicena-urugay-1.jpg",
       "sales_format": "paquete",
-      "discount": "0",
+      "discount": 0,
       "price_discount": 35.00,
-      "rating": 4.6,
+      "rating": 4,
       "country": "Uruguay / Argentina"
     }
   ]
