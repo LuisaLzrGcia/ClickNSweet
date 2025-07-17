@@ -26,7 +26,7 @@
 <body>
     <!-- Navbar -->
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
@@ -36,7 +36,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-xl-center">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
                             href="index.html">Inicio</a></li>
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
@@ -115,7 +115,6 @@
     <!-- Main -->
     <main class="container my-5 container-new-product">
         <section class="container">
-            <h2>Vista previa del detalles del producto</h2>
             <div class="row g-4 align-items-start  p-4">
                 <!-- Imagen del producto -->
                 <div class="col-md-6">
@@ -205,136 +204,6 @@
             </div>
 
         </section>
-
-
-        <form class="py-3">
-            <h2 class="text-start">Nuevo producto</h2>
-            <!-- Nombre del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control" value="Bombón de Fresa">
-            </div>
-            <!-- Descripción del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Descripción del producto</label>
-                <textarea row="3" id="" class="form-control">
-                    Delicioso bombón artesanal cubierto con chocolate blanco y un toque de fresa natural. Ideal para regalar o disfrutar en cualquier momento.
-                </textarea>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio del producto</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4" value="99.99">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio en MXN.</div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="formFileMultiple" class="form-label">Imágenes del producto</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Descuento del producto</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4" value="20">
-                        <span class="input-group-text" id="basic-addon3">%</span>
-                    </div>
-                    <div class="form-text" id="basic-addon4">Porcentaje de descuento si el producto tiene alguna oferta.
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio de oferta</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4" value="79.99">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio generado si tiene descuento o precio de oferta.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Categoria</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option selected value="Dulces Cremosos">Dulces Cremosos</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">País de origen</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option>Open this select menu</option>
-                        <option selected value="1">México</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Tipo de dulce</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-            <h2 class="text-start">Inventario</h2>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="exampleInputPassword1" class="form-label">SKU</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="cantidad-inventario" class="form-label">Cantidad en inventario</label>
-                    <input type="number" min="0" class="form-control" value="0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="exampleInputPassword1" class="form-label">¿Permitir reservas?</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected value="Si">Si</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="cantidad-inventario" class="form-label">Umbral de pocas existencias</label>
-                    <input type="number" min="0" class="form-control" value="10">
-                </div>
-            </div>
-            <h2 class="text-start">Envío</h2>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Peso</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" min="0" value="0.00">
-                        <span class="input-group-text" id="basic-addon3">Kg</span>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="cantidad-inventario" class="form-label">Dimensiones</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" min="0" value="0.00">
-                        <span class="input-group-text" id="basic-addon3">cm x</span>
-                        <input type="number" class="form-control" min="0" value="0.00">
-                        <span class="input-group-text" id="basic-addon3">cm x</span>
-                        <input type="number" class="form-control" min="0" value="0.00">
-                        <span class="input-group-text" id="basic-addon3">cm</span>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-pink w-100 p-2">Crear producto</button>
-        </form>
     </main>
 
 

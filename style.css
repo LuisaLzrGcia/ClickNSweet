@@ -518,4 +518,7 @@ h1 {
 
 }
 
+.swal2-title, .swal2-content {
+  font-family: 'Quicksand', sans-serif !important;
+}
 
