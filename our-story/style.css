@@ -1,0 +1,10 @@
+
+    main { 
+      padding: 7rem; 
+      max-width: 800px; 
+      margin: auto; 
+    }    
+    
+    @media (max-width: 600px) {
+      main { padding: 1rem; }
+    }

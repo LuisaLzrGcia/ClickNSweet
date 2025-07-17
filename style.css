@@ -138,7 +138,6 @@ h2 {
   background: rgba(255, 255, 255, 0.705);
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000000;
-  /* Asegura que el texto del input sea legible */
 }
 
 .newsletter-input:focus {
