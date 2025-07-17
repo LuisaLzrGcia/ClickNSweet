@@ -1,0 +1,18 @@
+    main { 
+        padding: 5rem; 
+        max-width: 800px; 
+        margin: auto; 
+    }
+
+    ol { 
+        padding-left: 1.5rem; 
+    }
+
+    li { 
+        margin-bottom: 1rem; 
+    }
+    @media (max-width: 600px) {
+    main { 
+        padding: 1rem; 
+    }
+    }

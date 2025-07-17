@@ -1,0 +1,16 @@
+
+    main { 
+        padding: 5rem; 
+        max-width: 800px; 
+        margin: auto; 
+    }
+
+    p { 
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+    main { 
+        padding: 1rem; 
+    }
+    }
