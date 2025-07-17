@@ -1,0 +1,7 @@
+.container-product {
+    background-color: white !important;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
