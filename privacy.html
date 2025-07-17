@@ -18,14 +18,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="cart/style.css"/>
+    <link rel="stylesheet" href="privacy/style.css"/>
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
+</head>
 <body>
     <!-- Navbar -->
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
@@ -35,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-xl-center">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
                             href="index.html">Inicio</a></li>
                     <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
@@ -109,116 +109,22 @@
             </div>
         </div>
     </nav>
-
-<!------- Carrito de compra ------>
-    <main class="cart-page">
-        <div class="container py-5">
-            <h1 class="cart-title-blue mb-5">Carrito de compras</h1>
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Cart Items -->
-                    <div class="card mb-4 cart-items-container">
-                        <div class="card-body">
-                            <div class="row cart-item mb-3">
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <img src="assets/paleta-animal.jpg" alt="Product 1" class="img-fluid rounded">
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <h5 class="card-title">Producto 1</h5>
-                                    <p class="text-muted">Categoría: Dulces exóticos</p>
-                                    <p class="text-muted">Precio unitario: $99.99</p>
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <div class="input-group">
-                                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                                        <input style="max-width:35px" type="text"
-                                            class="form-control  form-control-sm text-center quantity-input" value="1">
-                                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-end">
-                                    <p class="fw-bold">$99.99</p>
-                                    <button class="btn btn-sm eliminar-item">
-                                        <img src="assets/icons8-basura-128.png" alt="Eliminar" class="trash-img">
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row cart-item">
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <img src="assets/Dulces-Enchilados.jpg" alt="Product 2" class="img-fluid rounded">
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <h5 class="card-title">Producto 2</h5>
-                                    <p class="text-muted">Categoría: Dulces picosos</p>
-                                    <p class="text-muted">Precio unitario: $49.99</p>
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-start">
-                                    <div class="input-group">
-                                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                                        <input style="max-width:35px" type="text"
-                                            class="form-control form-control-sm text-center quantity-input" value="2">
-                                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3 mb-2 text-center text-md-end">
-                                    <p class="fw-bold">$49.99</p>
-                                    <button class="btn btn-sm eliminar-item">
-                                        <img src="assets/icons8-basura-128.png" alt="Eliminar" class="trash-img">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Continue Shopping Button -->
-                    <div class="text-start mb-4">
-                        <a href="index.html" class="btn custom-btn-contShop">
-                            <i class="bi bi-arrow-left me-2"></i>Continuar comprando
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <!-- Promo Code -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h4 class="cart-title mb-3">Aplicar cupón</h4>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Ingresa tu cupón">
-                                <button class="btn custom-btn-aplicar" type="button">Aplicar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cart Summary -->
-                    <div class="card cart-summary">
-                        <div class="card-body">
-                            <h4 class="cart-title mb-3">Resumen de compra</h4>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Subtotal</span>
-                                <span>$199.97</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Costo de envío</span>
-                                <span>$10.00</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>IVA</span>
-                                <span>$20.00</span>
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-between mb-4">
-                                <strong>Total</strong>
-                                <strong>$229.97</strong>
-                            </div>
-                            <a href="payment.html" class="btn custom-btn-pagar w-100">Proceder a pago</a>
-                        </div>
-                    </div>
-                    <br><br>
-                </div>
-            </div>
-        </div>
-    </main>
-
+  <main>
+    <h2>Protección de tus datos</h2>
+    <p>
+      En ClickNSweet valoramos tu privacidad. Recopilamos tu nombre, correo y dirección únicamente para procesar pedidos y ofrecerte una mejor experiencia.
+    </p>
+    <p>
+      No compartimos tu información con terceros. Todos los datos son almacenados y transmitidos de forma segura usando cifrado.
+    </p>
+    <p>
+      Puedes solicitar el acceso, corrección o eliminación de tus datos escribiendo a:
+      <strong>privacidad@clicknsweet.com</strong>
+    </p>
+    <p>
+      Al usar nuestro sitio, aceptas esta política. La misma puede actualizarse sin previo aviso, por lo que te recomendamos revisarla periódicamente.
+    </p>
+  </main>
     <!-- Footer -->
     <footer class="footer pt-1">
         <div class="container">
@@ -288,14 +194,8 @@
             </div>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="main.js"></script>
     <script type="module" src="./index/index.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    </main>
-  </body>
+</body>
 </html>
