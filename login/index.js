@@ -22,24 +22,6 @@ inputs.forEach((input) => {
 });
 });
 
-// Función para mostrar mensajes de error
-// function showErrorMessage(message) {
-//   errorMessageDiv.forEach(div => {
-//     div.textContent = message;
-//     div.style.display = "block";
-//     usernameInput.classList.add("input-error");
-//     passwordInput.classList.add("input-error");
-//   })
-// }
-
-// Función para ocultar mensajes de error
-// function hideErrorMessage() {
-//   errorMessageDiv.textContent = "";
-//   errorMessageDiv.style.display = "none";
-//   usernameInput.classList.remove("input-error");
-//   passwordInput.classList.remove("input-error");
-// }
-
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
