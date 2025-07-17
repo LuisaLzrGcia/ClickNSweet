@@ -13,12 +13,69 @@ h2 {
   margin: 2rem 0 1rem;
 }
 
+/* Colores de fondo */
+.bg-sky-light {
+  background-color: #7BDFF2;
+}
+
+.bg-mint-light {
+  background-color: #B2F7EF;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.bg-pink-light {
+  background-color: #F7D6E0;
+}
+
+.bg-pink-soft {
+  background-color: #F2B5D4;
+}
+
+.bg-fuchsia {
+  background-color: #E452C0;
+}
+
+.bg-fuchsia-opacity {
+  background-color: rgba(228, 82, 192, 0.8);
+}
+
+/* Colores de texto */
+.text-sky-light {
+  color: #87b9f7;
+}
+
+.text-mint-light {
+  color: #B2F7EF;
+}
+
+.text-white {
+  color: #FFFFFF;
+}
+
+.text-pink-light {
+  color: #F7D6E0;
+}
+
+.text-pink-soft {
+  color: #F2B5D4;
+}
+
+.text-fuchsia {
+  color: #E452C0;
+}
+
+.text-fuchsia-opacity {
+  color: rgba(228, 82, 192, 0.8);
+}
+
 /* ------------------ Footer ----------------*/
 .footer {
   background: linear-gradient(145deg, #f7d6e0, #f2b5d4);
   color: #000000;
   padding-top: 20px !important;
-  /* Reduce espacio superior */
   padding-bottom: 0 !important;
 }
 
@@ -419,8 +476,6 @@ h2 {
 
 /* Fin de fondos*/
 
-
-
 body {
   background-color: #f8f9fa;
   font-family: 'Segoe UI', sans-serif;
@@ -461,5 +516,9 @@ h1 {
   font-family: "Pacifico", cursive;
   font-weight: bold;
 
-
 }
+
+.swal2-title, .swal2-content {
+  font-family: 'Quicksand', sans-serif !important;
+}
+

@@ -35,7 +35,7 @@ loginForm.addEventListener("submit", async (event) => {
     console.log("¡Inicio de sesión exitoso!", user);
     // hideErrorMessage();
     // alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
-    window.location.href = "/index.html";
+    window.location.href = "index.html";
   } catch (error) {
     console.error("Error durante el inicio de sesión:", error.message);
     // showErrorMessage(error.message);
