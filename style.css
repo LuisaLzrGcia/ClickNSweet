@@ -520,4 +520,38 @@ h1 {
 .swal2-title, .swal2-content {
   font-family: 'Quicksand', sans-serif !important;
 }
+}
 
+
+
+.food-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* que ocupe toda la altura de la columna */
+  max-height: 450px; /* máximo alto para no crecer mucho */
+  padding: 2rem 1rem;
+  overflow: hidden; /* que no se desborde */
+  background: white;
+}
+
+.food-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.brand-title {
+  font-weight: normal;
+}
+.brand-subtitle {
+  text-align: center;
+}
+.btn-register {
+  background-color: #e91e63; 
+  color: white;             
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
