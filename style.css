@@ -306,6 +306,11 @@ h2 {
   animation: pulse 1.5s infinite;
 }
 
+.cart-badge.cart-badge-big-count {
+  padding: 0.7rem;
+  right: -75px;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);

@@ -50,6 +50,17 @@ label {
     border-radius: 0.5rem;
   }
 
+.errorMessage {
+  display: none;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.input-error {
+  border-color: #e63946 !important; 
+  box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.4) !important;
+}
+
 #login .forgot-link {
     font-size: 0.85rem;
     color: #4e93e8;
