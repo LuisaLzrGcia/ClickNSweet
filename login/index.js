@@ -1,22 +1,44 @@
+import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
 import { login } from "./auth.js";
 
 const loginForm = document.getElementById("login");
 const usernameInput = document.getElementById("inputEmail");
 const passwordInput = document.getElementById("inputPassword");
-const areaAutenticacion = document.querySelectorAll(".autenticacion");
-// const errorMessageDiv = document.getElementById('errorMessage');
+const errorMessageDiv = document.querySelectorAll(".errorMessage");
+
+
+
+const inputs = document.querySelectorAll("#login input");
+
+inputs.forEach((input) => {
+  input.addEventListener("input", () => {
+  input.classList.remove("input-error");
+
+  const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
+  if (errorMessageDiv) {
+    errorMessageDiv.style.display = "none";
+    errorMessageDiv.textContent = "";
+  }
+});
+});
 
 // Función para mostrar mensajes de error
-function showErrorMessage(message) {
-  errorMessageDiv.textContent = message;
-  errorMessageDiv.style.display = "block";
-}
+// function showErrorMessage(message) {
+//   errorMessageDiv.forEach(div => {
+//     div.textContent = message;
+//     div.style.display = "block";
+//     usernameInput.classList.add("input-error");
+//     passwordInput.classList.add("input-error");
+//   })
+// }
 
 // Función para ocultar mensajes de error
-function hideErrorMessage() {
-  errorMessageDiv.textContent = "";
-  errorMessageDiv.style.display = "none";
-}
+// function hideErrorMessage() {
+//   errorMessageDiv.textContent = "";
+//   errorMessageDiv.style.display = "none";
+//   usernameInput.classList.remove("input-error");
+//   passwordInput.classList.remove("input-error");
+// }
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -25,16 +47,16 @@ loginForm.addEventListener("submit", async (event) => {
   const password = passwordInput.value.trim();
 
   if (!username || !password) {
-    // showErrorMessage('Por favor, ingresa tu nombre de usuario y contraseña.');
-    alert("Por favor, ingresa tu nombre de usuario y contraseña");
+    showErrorMessages(usernameInput ,"Por favor, ingresa tu nombre de usuario");
+    showErrorMessages(passwordInput , "Por favor, ingresa tu contraseña");
     return;
   }
 
   try {
     const user = await login(username, password);
     console.log("¡Inicio de sesión exitoso!", user);
-    // hideErrorMessage();
-    // alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
+    hideErrorMessages(usernameInput);
+    hideErrorMessages(passwordInput);
     window.location.href = "index.html";
   } catch (error) {
     Swal.fire({
@@ -43,7 +65,7 @@ loginForm.addEventListener("submit", async (event) => {
       icon: "error",
       confirmButtonText: "Intentar de nuevo",
     });
-    // console.error("Error durante el inicio de sesión:", error.message);
-    showErrorMessage(error.message);
+    showErrorMessages(usernameInput, error.message);
+    showErrorMessages(passwordInput, error.message);
   }
 });
