@@ -9,13 +9,11 @@ export function showErrorMessages(input, message) {
   
 }
 
-export function hideErrorMessages(inputs) {
-  inputs.forEach(input => {
-    const errorDiv = input.parentElement.querySelector(".errorMessage");
-    if (errorDiv) {
-      errorDiv.textContent = "";
-      errorDiv.style.display = "none";
-    }
-    input.classList.remove("input-error");
-  });
+export function hideErrorMessages(input) {
+  const errorDiv = input.parentElement.querySelector(".errorMessage");
+  if (errorDiv) {
+    errorDiv.textContent = "";
+    errorDiv.style.display = "none";
+  }
+  input.classList.remove("input-error");
 }
