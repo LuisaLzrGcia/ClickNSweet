@@ -43,7 +43,6 @@ window.addCart = function (element) {
         cart.push(newProduct);
     }
     cartCountStorage++;
-
     localStorage.setItem("cart", JSON.stringify(cart));
     localStorage.setItem("cartCount", JSON.stringify(cartCountStorage));
 

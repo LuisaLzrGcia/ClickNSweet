@@ -1,13 +1,10 @@
+import { loginFormValidation } from "../functions/login/loginFormValidation.js";
 import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
 import { login } from "./auth.js";
 
 const loginForm = document.getElementById("login");
 const usernameInput = document.getElementById("inputEmail");
 const passwordInput = document.getElementById("inputPassword");
-const errorMessageDiv = document.querySelectorAll(".errorMessage");
-
-
-
 const inputs = document.querySelectorAll("#login input");
 
 inputs.forEach((input) => {
@@ -25,13 +22,19 @@ inputs.forEach((input) => {
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value.trim();
+  const username = usernameInput.value;
+  const password = passwordInput.value;
 
-  if (!username || !password) {
-    showErrorMessages(usernameInput ,"Por favor, ingresa tu nombre de usuario");
-    showErrorMessages(passwordInput , "Por favor, ingresa tu contraseña");
-    return;
+  const dataIsValid = loginFormValidation(username, password);
+  if (!dataIsValid.isValid) {
+    if (dataIsValid.field === "Email"){
+      showErrorMessages(usernameInput, dataIsValid.message);
+      return
+    } 
+    if (dataIsValid.field === "Password"){
+      showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
+      return
+    }
   }
 
   try {
