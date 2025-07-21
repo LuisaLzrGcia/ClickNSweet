@@ -3,6 +3,7 @@ import { preventLoginIfAuthenticated } from "./functions/preventLoginIfAuthentic
 import { loadCartCount } from "./functions/loadCartCount.js";
 import { updateNavbarAuthState } from "./functions/updateNavbarAuthState.js";
 import { logout } from "./login/auth.js";
+import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
 
 const navbarLinks = document.querySelector(".navbar-nav");
 const logoutButton = document.getElementById("logout");
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayActiveLink();
   updateNavbarAuthState();
   preventLoginIfAuthenticated();
+  handleNavbarScroll();
   window.addEventListener("hashchange", () => displayActiveLink());
   navbarLinks.classList.remove("invisible");
   logoutButton.addEventListener("click", () => logout());

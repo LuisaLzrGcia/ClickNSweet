@@ -1,38 +1,40 @@
 #login {
-    font-family: 'Quicksand', sans-serif;
-  }
+  font-family: 'Quicksand', sans-serif;
+}
 
-#login h2, .brand-name {
-    font-family: 'Pacifico', cursive;
-    color: #87b9f7;
-  }
+#login h2,
+.brand-name {
+  font-family: 'Pacifico', cursive;
+  color: #87b9f7;
+}
 
 #login.form-section {
-    max-width: 450px;
-    margin: 4rem auto;
-    background-color: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-  }
+  max-width: 450px;
+  margin: 4rem auto;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+}
 
-#login .form-control:focus{ 
-    border-color: #E452C0;
-    box-shadow: 0 0 0 0.2rem rgba(228, 82, 192, 0.25);
+#login .form-control:focus {
+  border-color: #E452C0;
+  box-shadow: 0 0 0 0.2rem rgba(228, 82, 192, 0.25);
 }
 
 #login .btn-pink {
-    background-color: #E452C0;
-    color: white;
-  }
+  background-color: #E452C0;
+  color: white;
+}
 
 #login .btn-pink:hover {
-    background-color: #d13dac;
-  }
+  background-color: #d13dac;
+}
 
 #login .form-check-input:checked {
   background-color: #d13dac;
-  border-color: #E452C0;;
+  border-color: #E452C0;
+  ;
 }
 
 #login .form-check-input:focus {
@@ -43,12 +45,29 @@
 #login .form-check-label,
 .form-text,
 label {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
 #login .form-control {
-    border-radius: 0.5rem;
-  }
+  border-radius: 0.5rem;
+}
+
+#togglePassword {
+  z-index: 5;
+  transition: color 0.2s ease;
+  top: 50%; 
+  right: 1rem; 
+  cursor: pointer;
+}
+
+#togglePassword i {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+#togglePassword i:hover {
+  color: #E452C0;
+}
 
 .errorMessage {
   display: none;
@@ -57,17 +76,17 @@ label {
 }
 
 .input-error {
-  border-color: #e63946 !important; 
+  border-color: #e63946 !important;
   box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.4) !important;
 }
 
 #login .forgot-link {
-    font-size: 0.85rem;
-    color: #4e93e8;
-    text-decoration: none;
-    font-weight: 600;
-  }
+  font-size: 0.85rem;
+  color: #4e93e8;
+  text-decoration: none;
+  font-weight: 600;
+}
 
 #login .forgot-link:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
