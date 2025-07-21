@@ -219,6 +219,14 @@ h2 {
   font-weight: 500;
 }
 
+.navbar {
+  transition: top 0.3s;
+}
+
+.navbar.navbar-hidden {
+  top: -100px; /* Oculta fuera de la pantalla */
+}
+
 .navbar-nav .nav-link:active {
   background-color: #f7a8be;
 }
@@ -307,6 +315,7 @@ h2 {
 }
 
 .cart-badge.cart-badge-big-count {
+  font-size: 0.7rem;
   padding: 0.7rem;
   right: -75px;
 }
