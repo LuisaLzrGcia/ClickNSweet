@@ -14,10 +14,15 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  justify-content: space-between;
   height: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
+}
+
+
+.card>div {
+  /* background-color: #000; */
 }
 
 
@@ -27,7 +32,7 @@
 }
 
 .img-wrapper {
-  height: 50%;
+  height: 55% !important;
   width: 100%;
   overflow: hidden;
 }
@@ -133,24 +138,45 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 100%;
+  height: fit-content;
+  margin: 0 !important;
+}
+
+.btn-container>button {
+  margin: 0.0rem 0.5rem 0.5rem 0.5rem !important;
 }
 
 .card-product {
-  width: 25%;
-  padding: 0.5rem;
+  width: 100%;
+  padding: 0.0rem 0rem 0rem 0rem;
+  height: 100%;
 }
 
-
-@media (max-width: 1024px) {
-  .card-product {
-    width: 50% !important;
-    height: auto;
-  }
+.card-body {
+  padding: 0.5rem 0.5rem 0rem 0.5rem !important;
+  height: fit-content;
 }
+
+@media (max-width: 1024px) {}
 
 @media (max-width: 640px) {
-  .card-product {
-    width: 100% !important;
+  .img-wrapper {
+    height: 50% !important;
   }
+
+  .card {
+    height: fit-content;
+  }
+}
+
+.status-product {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(209, 61, 17, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }

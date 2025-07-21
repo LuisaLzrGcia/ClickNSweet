@@ -34,7 +34,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-xl-center invisible">
+        <ul class="navbar-nav align-items-center">
           <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
           <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a>
           </li>
@@ -261,10 +261,11 @@
         <div class="d-flex justify-content-between mb-3 flex-wrap">
           <input type="text" class="form-control w-50 mb-2 mb-lg-0" placeholder="Buscar...">
           <div class="btn-group">
-            <button class="btn btn-dark btn-sm">New</button>
-            <button class="btn btn-outline-secondary btn-sm">Precio ↑</button>
-            <button class="btn btn-outline-secondary btn-sm">Precio ↓</button>
-            <button class="btn btn-outline-secondary btn-sm">Rating</button>
+            <button class="btn btn-dark btn-sm" id="sort-popular">Populares</button>
+            <button class="btn btn-outline-secondary btn-sm" id="sort-new">New</button>
+            <button class="btn btn-outline-secondary btn-sm" id="sort-price-asc">Precio ↑</button>
+            <button class="btn btn-outline-secondary btn-sm" id="sort-price-desc">Precio ↓</button>
+            <button class="btn btn-outline-secondary btn-sm" id="sort-rating">Rating</button>
           </div>
         </div>
 
@@ -273,20 +274,20 @@
 
 
         </div>
-      </div>
-    </div>
 
-    <!-- Paginación -->
-    <nav>
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
-      </ul>
-    </nav>
-  </div>
+      </div>
+
+      <!-- Paginación -->
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
   </div>
 
@@ -333,7 +334,7 @@
           <div class="col-lg-3 col-md-6">
             <h3 class="footer-title">Sobre nosotros</h3>
             <ul class="footer-links">
-              <li><a href="our-story.html">Nuestra dulce historia</a></li>
+              <li><a href="#">Nuestra dulce historia</a></li>
               <li><a href="about.html">Quiénes somos</a></li>
               <li><a href="products.html">Nuetros productos</a></li>
             </ul>
@@ -341,12 +342,12 @@
           <div class="col-lg-4 col-md-6">
             <h3 class="footer-title">Soporte</h3>
             <ul class="footer-links">
-              <li><a href="contac-us.html">¡Contactanos!</a></li>
-              <li><a href="https://www.fedex.com/es-mx/home.html">Localiza tu envio</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="help-center.html">Centro de ayuda</a></li>
-              <li><a href="privacy.html">Política de privacidad</a></li>
-              <li><a href="terms-conditions.html">Terminos de servicios</a></li>
+              <li><a href="#">¡Contactanos!</a></li>
+              <li><a href="#">Localiza tu envio</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Política de privacidad</a></li>
+              <li><a href="#">Terminos de servicios</a></li>
             </ul>
           </div>
         </div>
