@@ -1,43 +1,59 @@
+import { loginFormValidation } from "../functions/login/loginFormValidation.js";
+import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
 import { login } from "./auth.js";
+import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
 const loginForm = document.getElementById("login");
 const usernameInput = document.getElementById("inputEmail");
 const passwordInput = document.getElementById("inputPassword");
-const areaAutenticacion = document.querySelectorAll(".autenticacion");
-// const errorMessageDiv = document.getElementById('errorMessage');
+const inputs = document.querySelectorAll("#login input");
 
-// Función para mostrar mensajes de error
-function showErrorMessage(message) {
-  errorMessageDiv.textContent = message;
-  errorMessageDiv.style.display = "block";
-}
+initializePasswordToggle("inputPassword", "togglePassword");
 
-// Función para ocultar mensajes de error
-function hideErrorMessage() {
-  errorMessageDiv.textContent = "";
-  errorMessageDiv.style.display = "none";
-}
+inputs.forEach((input) => {
+  input.addEventListener("input", () => {
+  input.classList.remove("input-error");
+
+  const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
+  if (errorMessageDiv) {
+    errorMessageDiv.style.display = "none";
+    errorMessageDiv.textContent = "";
+  }
+});
+});
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value.trim();
+  const username = usernameInput.value;
+  const password = passwordInput.value;
 
-  if (!username || !password) {
-    // showErrorMessage('Por favor, ingresa tu nombre de usuario y contraseña.');
-    alert("Por favor, ingresa tu nombre de usuario y contraseña");
-    return;
+  const dataIsValid = loginFormValidation(username, password);
+  if (!dataIsValid.isValid) {
+    if (dataIsValid.field === "Email"){
+      showErrorMessages(usernameInput, dataIsValid.message);
+      return
+    } 
+    if (dataIsValid.field === "Password"){
+      showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
+      return
+    }
   }
 
   try {
     const user = await login(username, password);
     console.log("¡Inicio de sesión exitoso!", user);
-    // hideErrorMessage();
-    // alert(`¡Bienvenido, ${user.username}! Redirigiendo...`);
+    hideErrorMessages(usernameInput);
+    hideErrorMessages(passwordInput);
     window.location.href = "index.html";
   } catch (error) {
-    console.error("Error durante el inicio de sesión:", error.message);
-    // showErrorMessage(error.message);
+    Swal.fire({
+      title: "No se pudo iniciar sesión",
+      text: "Verifica tu correo y contraseña e intenta nuevamente.",
+      icon: "error",
+      confirmButtonText: "Intentar de nuevo",
+    });
+    showErrorMessages(usernameInput, error.message);
+    showErrorMessages(passwordInput, error.message);
   }
 });

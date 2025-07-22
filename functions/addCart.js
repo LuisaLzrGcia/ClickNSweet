@@ -1,3 +1,5 @@
+import { loadCartCount } from "./loadCartCount.js";
+
 window.addCart = function (element) {
     const id = Number(element.dataset.id);
     const name = element.dataset.name;
@@ -31,6 +33,7 @@ window.addCart = function (element) {
     };
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartCountStorage = JSON.parse(localStorage.getItem("cartCount")) || 0;
 
     const existingProductIndex = cart.findIndex(item => item.id === newProduct.id);
 
@@ -39,11 +42,12 @@ window.addCart = function (element) {
     } else {
         cart.push(newProduct);
     }
-
+    cartCountStorage++;
     localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cartCount", JSON.stringify(cartCountStorage));
 
-
-
+    loadCartCount();
+    
     Swal.fire({
         toast: true,
         position: 'top-end',
