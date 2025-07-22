@@ -10,12 +10,12 @@
     border: 2px solid #e4e6e9;
 }
 
-.btn-pink {
+form .btn-pink {
     background-color: #E452C0;
     color: white;
 }
 
-.btn-pink:hover {
+form .btn-pink:hover {
     background-color: #d13dac;
     color: white;
 }
