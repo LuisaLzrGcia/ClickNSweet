@@ -1,11 +1,13 @@
 export function showErrorMessages(input, message) {
   
-    const errorDiv = input.parentElement.querySelector(".errorMessage");
-    if (errorDiv) {
-      errorDiv.textContent = message;
-      errorDiv.style.display = "block";
+    const errorDivEmail = input.parentElement.querySelector(".errorMessage");
+    const errorDivPassword = input.parentElement.parentElement.querySelector(".errorMessage");
+    const goalDiv = errorDivEmail ? errorDivEmail : errorDivPassword;
+    if (goalDiv) {
+      goalDiv.textContent = message;
+      goalDiv.style.display = "block";
       input.classList.add("input-error");
-    }
+    } 
   
 }
 
