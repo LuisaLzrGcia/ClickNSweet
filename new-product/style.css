@@ -29,6 +29,11 @@ form .btn-pink:hover {
   opacity: 0.9;
 }
 
+.offerBadge{
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
 .price-container {
   margin: 0 !important;
   padding: 0 !important;
@@ -40,7 +45,7 @@ form .btn-pink:hover {
 }
 
 .normal-price {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #E452C0;
   margin-right: 8px;
@@ -49,11 +54,12 @@ form .btn-pink:hover {
 .old-price {
   text-decoration: line-through;
   color: #888;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 }
 
 .new-price {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #E452C0;
   margin-right: 8px;
@@ -71,4 +77,13 @@ form .btn-pink:hover {
 
 .text-discount{
     font-size: 1.5rem;
+}
+
+.formatSaleBadge{
+  font-size: 1rem;
+  background-color: #f7d6e0;
+  width: fit-content;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+
 }

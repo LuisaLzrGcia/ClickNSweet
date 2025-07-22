@@ -111,7 +111,6 @@ export const products = [
     "rating": 4,
     "country": "Portugal",
     "stock": true,
-
     "status": null
   },
   {
