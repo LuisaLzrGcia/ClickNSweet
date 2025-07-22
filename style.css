@@ -224,7 +224,8 @@ h2 {
 }
 
 .navbar.navbar-hidden {
-  top: -100px; /* Oculta fuera de la pantalla */
+  top: -100px;
+  /* Oculta fuera de la pantalla */
 }
 
 .navbar-nav .nav-link:active {
@@ -239,6 +240,18 @@ h2 {
 
 .btn-pink:hover {
   background-color: #f9c2d1;
+  color: #000;
+}
+
+.btn-blue {
+  border-radius: 12px;
+  background-color: #7bdff2;
+  color: #000;
+  font-weight: 500;
+}
+
+.btn-blue:hover {
+  background-color: #b2f7ef;
   color: #000;
 }
 
@@ -531,7 +544,8 @@ h1 {
 
 }
 
-.swal2-title, .swal2-content {
+.swal2-title,
+.swal2-content {
   font-family: 'Quicksand', sans-serif !important;
 }
 
@@ -542,10 +556,13 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%; /* que ocupe toda la altura de la columna */
-  max-height: 450px; /* máximo alto para no crecer mucho */
+  height: 100%;
+  /* que ocupe toda la altura de la columna */
+  max-height: 450px;
+  /* máximo alto para no crecer mucho */
   padding: 2rem 1rem;
-  overflow: hidden; /* que no se desborde */
+  overflow: hidden;
+  /* que no se desborde */
   background: white;
 }
 
@@ -555,15 +572,18 @@ h1 {
   object-fit: contain;
   display: block;
 }
+
 .brand-title {
   font-weight: normal;
 }
+
 .brand-subtitle {
   text-align: center;
 }
+
 .btn-register {
-  background-color: #e91e63; 
-  color: white;             
+  background-color: #e91e63;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
