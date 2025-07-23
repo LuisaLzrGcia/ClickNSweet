@@ -131,15 +131,15 @@
     <section id="login" class="form-section">
       <h2 class="text-center mb-2 brand-name">Click N' Sweet</h2>
       <p class="text-center mb-4 fw-semibold">¡Bienvenido de vuelta!</p>
-      <form>
+      <form id="loginForm">
         <div class="mb-3">
           <label for="inputEmail" class="form-label">Correo electrónico</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="correo@email.com" required />
+          <input type="email" class="form-control" id="inputEmail" name="email" placeholder="correo@email.com" required />
           <div class="errorMessage text-danger small mt-1"></div>
         </div>
         <div class="mb-3">
           <label for="inputPassword" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="********" required />
+          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="********" required />
           <div class="errorMessage text-danger small mt-1"></div>
         </div>
         <div class="mb-3 d-flex justify-content-between align-items-center">

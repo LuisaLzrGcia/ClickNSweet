@@ -1,53 +1,68 @@
-import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
-import { login } from "./auth.js";
+import { login } from './auth.js';
 
-const loginForm = document.getElementById("login");
-const usernameInput = document.getElementById("inputEmail");
-const passwordInput = document.getElementById("inputPassword");
-const errorMessageDiv = document.querySelectorAll(".errorMessage");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
 
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
+    const inputs = document.querySelectorAll("#loginForm input");
+    let valid = true;
 
-const inputs = document.querySelectorAll("#login input");
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+      const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
 
-inputs.forEach((input) => {
-  input.addEventListener("input", () => {
-  input.classList.remove("input-error");
+      // Si está vacío, marcamos error
+      if (input.value.trim() === "") {
+        valid = false;
+        input.classList.add("input-error");
+        if (errorMessageDiv) {
+          errorMessageDiv.textContent = "Este campo es obligatorio";
+          errorMessageDiv.style.display = "block";
+        }
+      } else {
+        input.classList.remove("input-error");
+        if (errorMessageDiv) {
+          errorMessageDiv.style.display = "none";
+          errorMessageDiv.textContent = "";
+        }
+      }
+    }
 
-  const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
-  if (errorMessageDiv) {
-    errorMessageDiv.style.display = "none";
-    errorMessageDiv.textContent = "";
-  }
-});
-});
+    if (!valid) return;
 
-loginForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+    const email = form.querySelector('input[name="email"]').value;
+    const password = form.querySelector('input[name="password"]').value;
 
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value.trim();
+    try {
+      login(email, password)
+        .then(usuario => {
+          console.log("¡Inicio de sesión exitoso!", usuario);
+          alert("Inicio de sesión exitoso");
+        })
+        .catch(error => {
+          console.error("Error en login:", error.message);
+          alert("No se pudo iniciar sesión: " + error.message);
+        });
+    } catch (error) {
+      console.error("Error inesperado:", error.message);
+      alert("Ocurrió un error inesperado");
+    }
+  });
 
-  if (!username || !password) {
-    showErrorMessages(usernameInput ,"Por favor, ingresa tu nombre de usuario");
-    showErrorMessages(passwordInput , "Por favor, ingresa tu contraseña");
-    return;
-  }
+  // Validación en tiempo real (opcional)
+  const inputs = document.querySelectorAll("#loginForm input");
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener("input", () => {
+      inputs[i].classList.remove("input-error");
 
-  try {
-    const user = await login(username, password);
-    console.log("¡Inicio de sesión exitoso!", user);
-    hideErrorMessages(usernameInput);
-    hideErrorMessages(passwordInput);
-    window.location.href = "index.html";
-  } catch (error) {
-    Swal.fire({
-      title: "No se pudo iniciar sesión",
-      text: "Verifica tu correo y contraseña e intenta nuevamente.",
-      icon: "error",
-      confirmButtonText: "Intentar de nuevo",
+      const errorMessageDiv = inputs[i].parentElement.querySelector(".errorMessage");
+      if (errorMessageDiv) {
+        errorMessageDiv.style.display = "none";
+        errorMessageDiv.textContent = "";
+      }
     });
-    showErrorMessages(usernameInput, error.message);
-    showErrorMessages(passwordInput, error.message);
   }
 });
+
