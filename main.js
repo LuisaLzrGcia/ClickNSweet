@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutButton.addEventListener("click", () => logout());
 
   // 1) Renderiza el footer
-  renderFooter();
+  // renderFooter();
 
   // 2) Conecta el formulario de newsletter tras haberlo insertado
   const form = document.getElementById("newsletter-form");
