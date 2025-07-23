@@ -12,7 +12,8 @@ export const products = [
     "price_discount": 153.00,
     "rating": 4,
     "country": "China",
-    "stock": true
+    "stock": true,
+    "status": null
   },
   {
     "id": 2,
@@ -27,7 +28,8 @@ export const products = [
     "price_discount": 35.00,
     "rating": 4,
     "country": "México",
-    "stock": true
+    "stock": true,
+    "status": "Temporada"
   },
   {
     "id": 3,
@@ -42,7 +44,9 @@ export const products = [
     "price_discount": 132.00,
     "rating": 5.0,
     "country": "Turquía",
-    "stock": false
+    "stock": false,
+
+    "status": "Nuevo"
   },
   {
     "id": 4,
@@ -57,7 +61,8 @@ export const products = [
     "price_discount": 25.00,
     "rating": 3,
     "country": "México",
-    "stock": true
+    "stock": true,
+    "status": "Nuevo"
   },
   {
     "id": 5,
@@ -72,7 +77,8 @@ export const products = [
     "price_discount": 50.00,
     "rating": 4,
     "country": "Japón",
-    "stock": true
+    "stock": true,
+    "status": null
   },
   {
     "id": 6,
@@ -87,7 +93,9 @@ export const products = [
     "price_discount": 55.25,
     "rating": 4,
     "country": "México",
-    "stock": true
+    "stock": true,
+
+    "status": null
   },
   {
     "id": 7,
@@ -98,11 +106,12 @@ export const products = [
     "origen": "Portugal",
     "picture": "https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/pastel-de-nata-portugal-1.png",
     "sales_format": "paquete",
-    "discount": 0,
-    "price_discount": 45.00,
+    "discount": 10,
+    "price_discount": 40.50,
     "rating": 4,
     "country": "Portugal",
-    "stock": true
+    "stock": true,
+    "status": null
   },
   {
     "id": 8,
@@ -117,7 +126,8 @@ export const products = [
     "price_discount": 40.00,
     "rating": 4,
     "country": "México",
-    "stock": true
+    "stock": true,
+    "status": null
   },
   {
     "id": 9,
@@ -132,7 +142,8 @@ export const products = [
     "price_discount": 25.00,
     "rating": 3,
     "country": "México",
-    "stock": true
+    "stock": true,
+    "status": null
   },
   {
     "id": 10,
@@ -147,7 +158,8 @@ export const products = [
     "price_discount": 35.00,
     "rating": 4,
     "country": "Uruguay / Argentina",
-    "stock": true
+    "stock": true,
+    "status": "Nuevo"
   }
 ]
 

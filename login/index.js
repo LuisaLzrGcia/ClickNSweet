@@ -1,40 +1,47 @@
-import { login } from './auth.js';
+import { loginFormValidation } from "../functions/login/loginFormValidation.js";
+import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
+import { login } from "./auth.js";
+import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
+  const usernameInput = document.getElementById("inputEmail");
+  const passwordInput = document.getElementById("inputPassword");
+  const inputs = document.querySelectorAll("#loginForm input");
 
+  
+  initializePasswordToggle("inputPassword", "togglePassword");
+
+  
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.classList.remove("input-error");
+      hideErrorMessages(input);
+    });
+  });
+
+  
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const inputs = document.querySelectorAll("#loginForm input");
-    let valid = true;
+    const email = usernameInput.value;
+    const password = passwordInput.value;
 
-    for (let i = 0; i < inputs.length; i++) {
-      const input = inputs[i];
-      const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
-
-      // Si está vacío, marcamos error
-      if (input.value.trim() === "") {
-        valid = false;
-        input.classList.add("input-error");
-        if (errorMessageDiv) {
-          errorMessageDiv.textContent = "Este campo es obligatorio";
-          errorMessageDiv.style.display = "block";
-        }
-      } else {
-        input.classList.remove("input-error");
-        if (errorMessageDiv) {
-          errorMessageDiv.style.display = "none";
-          errorMessageDiv.textContent = "";
-        }
+    
+    const dataIsValid = loginFormValidation(email, password);
+    
+    if (!dataIsValid.isValid) {
+      if (dataIsValid.field === "Email") {
+        showErrorMessages(usernameInput, dataIsValid.message);
+        return;
+      } 
+      if (dataIsValid.field === "Password") {
+        showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
+        return;
       }
     }
 
-    if (!valid) return;
-
-    const email = form.querySelector('input[name="email"]').value;
-    const password = form.querySelector('input[name="password"]').value;
-
+    
     try {
       login(email, password)
         .then(usuario => {
@@ -50,19 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Ocurrió un error inesperado");
     }
   });
-
-  // Validación en tiempo real (opcional)
-  const inputs = document.querySelectorAll("#loginForm input");
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener("input", () => {
-      inputs[i].classList.remove("input-error");
-
-      const errorMessageDiv = inputs[i].parentElement.querySelector(".errorMessage");
-      if (errorMessageDiv) {
-        errorMessageDiv.style.display = "none";
-        errorMessageDiv.textContent = "";
-      }
-    });
-  }
 });
-
