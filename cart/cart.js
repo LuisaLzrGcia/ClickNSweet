@@ -172,6 +172,8 @@ document.getElementById('apply-coupon-btn').addEventListener('click', () => {
 
   messageEl.textContent = 'Cupón aplicado correctamente!';
 
+  document.getElementById('discount-coupon').textContent = `$${descuentoFijo > 0 ? descuentoFijo.toFixed(2) : (descuentoPorcentaje > 0 ? `${descuentoPorcentaje}%` : '0.00')}`;
+
   // Guarda globalmente para que actualizar resumen use este descuento
   descuentoFijoGlobal = descuentoFijo;
   descuentoPorcentajeGlobal = descuentoPorcentaje;
