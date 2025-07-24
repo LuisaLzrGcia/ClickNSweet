@@ -3,57 +3,58 @@ import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDi
 import { login } from "./auth1.js";
 import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
-const loginForm = document.getElementById("login");
-const usernameInput = document.getElementById("inputEmail");
-const passwordInput = document.getElementById("inputPassword");
-const inputs = document.querySelectorAll("#login input");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  const usernameInput = document.getElementById("inputEmail");
+  const passwordInput = document.getElementById("inputPassword");
+  const inputs = document.querySelectorAll("#loginForm input");
 
-initializePasswordToggle("inputPassword", "togglePassword");
+  
+  initializePasswordToggle("inputPassword", "togglePassword");
 
-inputs.forEach((input) => {
-  input.addEventListener("input", () => {
-  input.classList.remove("input-error");
-
-  const errorMessageDiv = input.parentElement.querySelector(".errorMessage");
-  if (errorMessageDiv) {
-    errorMessageDiv.style.display = "none";
-    errorMessageDiv.textContent = "";
-  }
-});
-});
-
-loginForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-
-  const dataIsValid = loginFormValidation(username, password);
-  if (!dataIsValid.isValid) {
-    if (dataIsValid.field === "Email"){
-      showErrorMessages(usernameInput, dataIsValid.message);
-      return
-    } 
-    if (dataIsValid.field === "Password"){
-      showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
-      return
-    }
-  }
-
-  try {
-    const user = await login(username, password);
-    console.log("¡Inicio de sesión exitoso!", user);
-    hideErrorMessages(usernameInput);
-    hideErrorMessages(passwordInput);
-    window.location.href = "index.html";
-  } catch (error) {
-    Swal.fire({
-      title: "No se pudo iniciar sesión",
-      text: "Verifica tu correo y contraseña e intenta nuevamente.",
-      icon: "error",
-      confirmButtonText: "Intentar de nuevo",
+  
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.classList.remove("input-error");
+      hideErrorMessages(input);
     });
-    showErrorMessages(usernameInput, error.message);
-    showErrorMessages(passwordInput, error.message);
-  }
+  });
+
+  
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = usernameInput.value;
+    const password = passwordInput.value;
+
+    
+    const dataIsValid = loginFormValidation(email, password);
+    
+    if (!dataIsValid.isValid) {
+      if (dataIsValid.field === "Email") {
+        showErrorMessages(usernameInput, dataIsValid.message);
+        return;
+      } 
+      if (dataIsValid.field === "Password") {
+        showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
+        return;
+      }
+    }
+
+    
+    try {
+      login(email, password)
+        .then(usuario => {
+          console.log("¡Inicio de sesión exitoso!", usuario);
+          alert("Inicio de sesión exitoso");
+        })
+        .catch(error => {
+          console.error("Error en login:", error.message);
+          alert("No se pudo iniciar sesión: " + error.message);
+        });
+    } catch (error) {
+      console.error("Error inesperado:", error.message);
+      alert("Ocurrió un error inesperado");
+    }
+  });
 });
