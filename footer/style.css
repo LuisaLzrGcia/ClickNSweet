@@ -1,0 +1,137 @@
+/* ------------------ Footer ----------------*/
+.footer {
+  background: linear-gradient(145deg, #f7d6e0, #f2b5d4);
+  color: #000000;
+  padding-top: 20px !important;
+  padding-bottom: 0 !important;
+}
+
+.footer-title {
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 30px;
+  height: 2px;
+  background: #E452C0;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #E452C0;
+  padding-left: 5px;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #E452C0;
+  transform: translateY(-3px);
+}
+
+.newsletter-input {
+  background: rgba(255, 255, 255, 0.705);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.newsletter-input:focus {
+  background: #7bdff2;
+  border-color: #ffffff;
+  color: #000000;
+  box-shadow: none;
+}
+
+.btn-subscribe {
+  background: #E452C0;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+  background: #E452C0;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  padding: 10px 0 !important;
+  margin-top: 20px !important;
+}
+
+.footer-bottom a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #E452C0;
+}
+
+.footer-separator {
+  height: 2px;
+  background: linear-gradient(to right, #E452C0, #f2b5d4);
+  margin: 15px 0;
+  border-radius: 1px;
+}
+
+.title {
+  font-family: "Pacifico", cursive;
+}
+
+.footer {
+  background-color: #f8d7da;
+  padding: 2rem 0;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.category-circle {
+  width: 120px;
+  height: 120px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  font-weight: 600;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Click N' Sweet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="cart/style.css" />
+    <link rel="stylesheet" href="footer/style.css">
+    <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
+
+    <!-- Scripts del carrito -->
+    <script src="cart/script.js" defer></script> 
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo Click N' Sweet" style="height: 40px; margin-right: 8px;">
+                <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-xl-center">
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Picantes</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces de Caramelo</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Refrescantes</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Salados</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Cremosos</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Especiados</a></li>
+                            <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes somos</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
+                    <li class="nav-item d-none"><a class="nav-link btn btn-pink mx-1" href="new-product.html">Crear producto</a></li>
+                    <li class="nav-item d-none"><a class="nav-link btn btn-pink mx-1" href="edit-product.html">Actualizar producto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3" href="cart.html">
+                            <span class="cart-icon position-relative me-1">🛒<div id="cart-indicator" class="cart-badge">0</div></span>
+                            Carrito
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a></li>
+                    <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a></li>
+                    <li class="nav-item dropdown user-menu d-none">
+                        <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Pedidos</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!------- Carrito de compra ------>
+    <main class="cart-page">
+        <div class="container py-5">
+            <h1 class="cart-title-blue mb-5">Carrito de compras</h1>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card mb-4 cart-items-container">
+                        <div class="card-body" id="cart-container">
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="text-start mb-4">
+                        <a href="products.html" class="btn custom-btn-contShop" onclick="history.back()">
+                            <i class="bi bi-arrow-left me-2"></i>Continuar comprando
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="cart-title mb-3">Aplicar cupón</h4>
+                            <div class="input-group mb-3">
+                                <input type="text" id="coupon-input" class="form-control"
+                                    placeholder="Ingresa tu cupón">
+                                <button id="apply-coupon-btn" class="btn custom-btn-aplicar"
+                                    type="button">Aplicar</button>
+                            </div>
+                            <p id="coupon-message" class="text-danger"></p>
+                        </div>
+                    </div>
+
+
+                    <!-- Cart Summary -->
+                    <!-- Cart Summary -->
+                    <div class="card cart-summary">
+                        <div class="card-body">
+                            <h4 class="cart-title mb-3">Resumen de compra</h4>
+
+                            <!-- Precio original (si hay descuentos) -->
+                            <div id="original-price-container" class="d-flex justify-content-between mb-2"
+                                style="display: none;">
+                                <span>Precio original</span>
+                                <span id="original-price" class="text-decoration-line-through text-muted"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal</span>
+                                <span id="subtotal-price"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Costo de envío</span>
+                                <span id="shipping-cost"></span>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between mb-4">
+                                <strong>Total</strong>
+                                <strong id="total-price"></strong>
+                            </div>
+
+                            <a href="payment.html" class="btn custom-btn-pagar w-100">Proceder a pago</a>
+                        </div>
+                    </div>
+
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="./index/index.js"></script>
+    <script type="module" src="./cart/cart.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    </main>
+</body>
+
+</html>

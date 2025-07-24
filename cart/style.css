@@ -1,157 +1,20 @@
-/* ----- Cart ------- 
-.cart-item img {
-     max-width: 100px;
-     height: auto;
- }
-
- .quantity-input {
-     width: 50px;
- }
-
- .cart-summary {
-     background-color: #f7d6e0;
-     border-radius: 10px;
- }
-
- .cart-items-container {
-    max-height: 500px;
-    overflow-y: auto;
+.cart-page>.cart-item>img {
+  width: 100%;
+  height: auto;
 }
-
-/* Inicio de todo el carrito de compras ----------- 
-
-/* --- Botón Aplicar --- 
-.custom-btn-aplicar {
-  background-color: rgb(228, 83, 192, 0.8); 
-  color: white;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.custom-btn-aplicar:hover {
-  background-color: rgb(228, 83, 192, 0.8); 
-  color: black;
-}
-
-/* --- Botón Proceder a pago --- 
-.custom-btn-pagar {
-  background-color: rgb(228, 82, 192, 0.8);
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.custom-btn-pagar:hover {
-  background-color: rgb(228, 82, 192, 0.8);
-  color: black;
-}
-
-/* --- Botón Continuar comprando --- 
-
-.custom-btn-contShop {
-  background-color: rgb(228, 82, 192, 0.8);
-  color: white;
-  font-weight: bold;
-}
-
-.custom-btn-contShop:hover {
-  background-color: rgb(228, 82, 192, 0.8);
-  color: black;
-}
-
-/* --- Borrar de carrito --- 
-.trash-img {
-  width: 30px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.cart-item {
-  position: relative; 
-}
-
-.eliminar-item {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-.trash-img {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.trash-img:hover {
-  transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-  .cart-item {
-    padding-bottom: 2rem;
-  }
-
-  .quantity-input {
-    max-width: 100%;
-  }
-
-  .input-group {
-    justify-content: center;
-  }
-
-  .eliminar-item {
-    position: static;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .trash-img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .custom-btn-aplicar,
-  .custom-btn-contShop,
-  .custom-btn-pagar {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-.cart-title {
-  font-family: "Pacifico";
-}
-
-.cart-title-blue {
-  color: #7bdff2;
-}
-/*
-/* -------------------------------------------------------------------------------------------------- */
-
-.cart-page .cart-item img {
-     max-width: 100px;
-     height: auto;
- }
 
 .cart-page .quantity-input {
-     width: 50px;
- }
+  width: 50px;
+}
 
 .cart-page .cart-summary {
-     background-color: #f7d6e0;
-     border-radius: 10px;
- }
+  background-color: #f7d6e0;
+  border-radius: 10px;
+}
 
 .cart-page .cart-items-container {
-    max-height: 500px;
-    overflow-y: auto;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 /* --- Botón Aplicar --- */
@@ -238,12 +101,7 @@
     justify-content: center;
   }
 
-  .cart-page .eliminar-item {
-    position: static;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
+
 
   .cart-page .trash-img {
     width: 28px;
