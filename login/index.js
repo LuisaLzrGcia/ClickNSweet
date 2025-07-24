@@ -1,6 +1,6 @@
 import { loginFormValidation } from "../functions/login/loginFormValidation.js";
 import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
-import { login } from "./auth.js";
+import { login } from "./auth1.js";
 import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
