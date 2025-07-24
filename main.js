@@ -3,8 +3,8 @@ import { preventLoginIfAuthenticated } from "./functions/preventLoginIfAuthentic
 import { loadCartCount } from "./functions/loadCartCount.js";
 import { updateNavbarAuthState } from "./functions/updateNavbarAuthState.js";
 import { logout } from "./login/auth.js";
-// import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
-// import { renderFooter } from "./footer/script.js";
+import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
+import { renderFooter } from "./footer/script.js";
 import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
 
 const navbarLinks = document.querySelector(".navbar-nav");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutButton.addEventListener("click", () => logout());
 
   // 1) Renderiza el footer
-  // renderFooter();
+  renderFooter();
 
   // 2) Conecta el formulario de newsletter tras haberlo insertado
   const form = document.getElementById("newsletter-form");
