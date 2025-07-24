@@ -1,0 +1,75 @@
+.buttons-admin-dashboard .btn-pink {
+  background-color: #d13dac;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.buttons-admin-dashboard .btn-pink:hover {
+  background-color: #d13dac;
+  color: #fff;
+}
+
+.buttons-admin-dashboard .object-fit-cover {
+  object-fit: cover;
+}
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.product-image {
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.edit-btn:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.delete-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
+  background-color: #b2f7ef;
+}
+
+.precio {
+  background-color: #e7edf3;
+}
+
+.buttons-admin-dashboard .btn-eliminar {
+  background-color: rgb(255, 42, 42);
+  color: #fff;
+  border-radius: 8px;
+}
+
+.buttons-admin-dashboard .btn-eliminar:hover,
+.buttons-admin-dashboard .btn-eliminar:active {
+  background-color: rgb(255, 42, 42);
+  color: #fff;
+}
