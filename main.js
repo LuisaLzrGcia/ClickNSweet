@@ -3,50 +3,52 @@ import { preventLoginIfAuthenticated } from "./functions/preventLoginIfAuthentic
 import { loadCartCount } from "./functions/loadCartCount.js";
 import { updateNavbarAuthState } from "./functions/updateNavbarAuthState.js";
 import { logout } from "./login/auth.js";
-import { showSubscribeAlert } from './functions/showSubscribeAlert.js';
-import { renderFooter } from './footer/script.js';
-
+import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
+import { renderFooter } from "./footer/script.js";
+import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
 
 const navbarLinks = document.querySelector(".navbar-nav");
 const logoutButton = document.getElementById("logout");
 
 document.addEventListener("DOMContentLoaded", () => {
-  displayActiveLink()
-  updateNavbarAuthState()
-  preventLoginIfAuthenticated()
-  window.addEventListener('hashchange', () => displayActiveLink());
+  loadCartCount();
+  displayActiveLink();
+  updateNavbarAuthState();
+  preventLoginIfAuthenticated();
+  handleNavbarScroll();
+  window.addEventListener("hashchange", () => displayActiveLink());
+  navbarLinks.classList.remove("invisible");
+  logoutButton.addEventListener("click", () => logout());
 
-// 1) Renderiza el footer
-renderFooter();
+  // 1) Renderiza el footer
+  renderFooter();
 
-// 2) Conecta el formulario de newsletter tras haberlo insertado
-const form = document.getElementById('newsletter-form');
-if (form) {
-  const emailInput = form.querySelector('input[type="email"]');
+  // 2) Conecta el formulario de newsletter tras haberlo insertado
+  const form = document.getElementById("newsletter-form");
+  if (form) {
+    const emailInput = form.querySelector('input[type="email"]');
 
-  // Limpia cualquier customValidity en cuanto el usuario escribe
-  emailInput.addEventListener('input', () => {
-    emailInput.setCustomValidity('');
-  });
+    // Limpia cualquier customValidity en cuanto el usuario escribe
+    emailInput.addEventListener("input", () => {
+      emailInput.setCustomValidity("");
+    });
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const email = emailInput.value.trim();
+      const email = emailInput.value.trim();
 
-    // Regex básico: algo@dominio.ext (al menos un punto + algo)
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regex.test(email)) {
-      emailInput.setCustomValidity(
-        'Por favor ingresa un correo completo con dominio, por ejemplo usuario@dominio.com'
-      );
-      emailInput.reportValidity();
-      return;
-    }
+      // Regex básico: algo@dominio.ext (al menos un punto + algo)
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(email)) {
+        emailInput.setCustomValidity("Por favor ingresa un correo completo con dominio, por ejemplo usuario@dominio.com");
+        emailInput.reportValidity();
+        return;
+      }
 
-    // Si pasa la validación, muestra SweetAlert y resetea el formulario
-    showSubscribeAlert();
-    form.reset();
+      // Si pasa la validación, muestra SweetAlert y resetea el formulario
+      showSubscribeAlert();
+      form.reset();
     });
   }
 });

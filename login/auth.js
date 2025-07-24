@@ -27,3 +27,6 @@ export function getCurrentUser() {
 export function logout() {
     localStorage.removeItem('currentUser');
 }
+
+
+
