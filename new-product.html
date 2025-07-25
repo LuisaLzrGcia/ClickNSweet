@@ -21,6 +21,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./new-product/style.css" />
+    <link rel="stylesheet" href="./product-detail/style.css" />
 </head>
 
 <body>
@@ -113,13 +114,13 @@
 
 
     <!-- Main -->
-    <main class="container my-5 container-new-product">
-        <section class="container" id="preview-new-product">
+    <main class="container my-5">
+        <section class="container container-new-product mb-5 d-none" id="preview-new-product">
 
         </section>
 
 
-        <form class="py-3" id="form-nuevo-producto">
+        <form class="pb-3 container-new-product" id="form-nuevo-producto">
             <h2 class="text-start">Nuevo producto</h2>
             <!-- Nombre del producto -->
             <div class="mb-3">
@@ -132,7 +133,7 @@
                 <textarea rows="3" class="form-control" id="description-new-product"></textarea>
             </div>
             <div class="row">
-                <div class="col-12 col-md-4 mb-3">
+                <div class="col-12 col-lg-3 mb-3">
                     <label for="price-new-product" class="form-label">Precio del producto</label>
                     <div class="input-group">
                         <span class="input-group-text">$</span>
@@ -141,7 +142,7 @@
                     <div class="form-text">Precio en MXN.</div>
                 </div>
                 <!-- Formato de venta -->
-                <div class="col-12 col-md-4 mb-3">
+                <div class="col-12 col-lg-3 mb-3">
                     <label for="price-format" class="form-label">Formato de venta</label>
                     <select class="form-select" id="price-format-new-product">
                         <option selected disabled value="">Selecciona un formato</option>
@@ -154,10 +155,28 @@
                     </select>
                 </div>
 
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="image-new-product" class="form-label">Imágenes del producto</label>
-                    <input class="form-control" type="file" multiple id="image-new-product" />
+                <div class="col-12 col-lg-6 mb-3">
+                    <!-- Primera fila: título -->
+                    <div>
+                        <label for="image-new-product" class="form-label">Imagen del producto</label>
+                    </div>
+
+                    <!-- Segunda fila: input + botón -->
+                    <div class="d-flex align-items-center gap-3" id="image-new-product-container">
+                        <input class="form-control" type="file" id="image-new-product" />
+
+                        <button type="button" class="btn btn-outline-danger d-none" id="remove-image-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
+
+
+
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 mb-3">

@@ -1,6 +1,7 @@
 import { countries } from "../data/countries.js";
 import { statesMexico } from "../data/statesMexico.js";
 import { renderStars } from "../functions/renderStars.js";
+import { productDetailView } from "../product-detail/productDetailView.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     createListCountries();
@@ -43,126 +44,43 @@ window.isMexico = (e) => {
 
 
 window.generatePreview = () => {
-
     validateFormFields({ showAlert: false });
 
     const data = getFormData();
-
-    const tieneImagen = data.imagenes && data.imagenes.length > 0;
-    const imagenHTML = tieneImagen
-        ? `<img src="./assets/${data.imagenes[0]}" alt="Imagen del producto"
-      class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover;">`
-        : `<div class="bg-light d-flex align-items-center justify-content-center rounded-3 shadow-sm w-100" style="height: 300px;">
-        <span class="text-muted">Sin imagen</span>
-     </div>`;
-
-    const descuento = parseFloat(data.descuento) || 0;
-    const precio = parseFloat(data.precio) || 0;
-    const precioOferta = parseFloat(data.precioOferta) || 0;
-
-    const formatoMoneda = new Intl.NumberFormat("es-MX", {
-        style: "currency",
-        currency: "MXN",
-        minimumFractionDigits: 2
-    });
-
-    let priceData = "";
-    if (descuento > 0) {
-        priceData = `
-    <p class="text-fuchsia">
-      <span class="discount">${descuento}% OFF</span> 
-      <strong class="offerBadge">Promoción</strong>
-    </p>
-    <span class="new-price">${formatoMoneda.format(precioOferta)}</span> 
-    <span class="old-price">${formatoMoneda.format(precio)}</span>`;
-    } else {
-        priceData = `<span class="normal-price">${formatoMoneda.format(precio)}</span>`;
-    }
-
-
-    const html = `
-    <h2>Vista previa del detalles del producto</h2>
-    <div class="row g-4 align-items-start p-4">
-      <!-- Imagen del producto -->
-      <div class="col-md-6">
-        ${imagenHTML}
-      </div>
-
-      <!-- Detalles del producto -->
-      <div class="col-md-6">
-        <h2 class="mb-3 text-fuchsia">${data.nombre || "Nombre del producto"}</h2>
-
-        <!-- Calificación (fija por ahora) -->
-        <div class="star-rating mb-2 text-warning fs-5">
-          ${renderStars(5)}
-        </div>
-
-        <!-- Precios y descuento -->
-        <div class="mb-3">
-          ${priceData}
-        </div>
-
-        <div class="row mb-3">
-          <!-- Presentación -->
-          <div class="col-12 col-md-6 mb-3 mb-md-0">
-            <p class="fw-semibold text-muted mb-1">Presentación:</p>
-            <p class="text-dark mb-0 formatSaleBadge">${data.formatoVenta || "N/A"}</p>
-          </div>
-
-          <!-- Cantidad -->
-          <div class="col-12 col-md-6">
-            <label for="cantidad" class="form-label fw-semibold text-muted">Cantidad:</label>
-            <select id="cantidad" class="form-select w-100">
-              ${[...Array(10)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
-            </select>
-          </div>
-        </div>
-
-        <!-- Descripción -->
-        <p class="text-muted">
-          ${data.descripcion || "Sin descripción del producto."}
-        </p>
-
-        <!-- Información adicional -->
-        <div class="mt-4 text-muted small d-flex flex-column gap-1 category">
-          <p class="mb-1">
-            <strong>Categoría:</strong>
-            <span class="badge pastel-creamy text-dark fs-6">${data.categoria || "No definida"}</span>
-          </p>
-
-          <p class="mb-1">
-            <strong>Origen:</strong>
-            <span class="badge bg-pastel-green text-dark">
-              ${data.pais || "Desconocido"}${data.pais === "México" && data.estado ? ` - ${data.estado}` : ""}
-            </span>
-          </p>
-
-          <p class="mb-0">
-            <strong>Disponibilidad:</strong>
-            <span class="badge bg-mint-light text-dark">
-              ${parseInt(data.stock) > 0 ? "En stock" : "Agotado"}
-            </span>
-          </p>
-        </div>
-
-        <!-- Botón de añadir al carrito -->
-        <div class="d-grid gap-2 mt-4">
-          <button class="btn btn-pink text-white py-2 px-4" type="button">
-            <i class="bi bi-cart-plus me-2"></i>Añadir al carrito
-          </button>
-        </div>
-      </div>
-    </div>`;
-
-    // Insertar en contenedor
-    document.getElementById("preview-new-product").innerHTML = html;
-
+    const inputImagenes = document.getElementById("image-new-product");
     const preview = document.getElementById("preview-new-product");
 
-    if (preview) {
+    if (inputImagenes && inputImagenes.files.length > 0) {
+        const file = inputImagenes.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            data.picture = e.target.result;
+
+            preview.innerHTML = `
+                <h2 style="text-align: center; margin-bottom: 1rem;">Información del producto</h2>
+                ${productDetailView(data)}
+            `;
+
+            preview.classList.remove("d-none");
+            preview.style.display = "block";
+            preview.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        // Si no hay imagen, solo muestra el resto
+        preview.innerHTML = `
+            <h2 style="text-align: center; margin-bottom: 1rem;">Información del producto</h2>
+            ${productDetailView(data)}
+        `;
+
+        preview.classList.remove("d-none");
+        preview.style.display = "block";
         preview.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 };
+
 
 
 window.saveProduct = () => {
@@ -198,32 +116,32 @@ window.saveProduct = () => {
 function getFormData() {
     const dimensionesInputs = document.querySelectorAll("#dimensions-new-product input");
 
+    let picture = "";
+    const inputImagenes = document.getElementById("image-new-product");
+    if (inputImagenes && inputImagenes.files.length > 0) {
+        picture = inputImagenes.files[0].name;
+    }
+
     return {
-        nombre: document.getElementById("name-new-product").value.trim(),
-        descripcion: document.getElementById("description-new-product").value.trim(),
-        precio: document.getElementById("price-new-product").value,
-        descuento: document.getElementById("discount-new-product").value,
-        precioOferta: document.getElementById("price-discount-new-product").value,
-        formatoVenta: document.getElementById("price-format-new-product").value,
-        categoria: document.getElementById("category-new-product").value,
-        pais: document.getElementById("country-new-product").value,
-        estado: document.getElementById("state-new-product").value,
+        name: document.getElementById("name-new-product").value.trim(),
+        description: document.getElementById("description-new-product").value.trim(),
+        pricing: document.getElementById("price-new-product").value,
+        discount: document.getElementById("discount-new-product").value,
+        price_discount: document.getElementById("price-discount-new-product").value,
+        sales_format: document.getElementById("price-format-new-product").value,
+        category: document.getElementById("category-new-product").value,
+        country: document.getElementById("country-new-product").value,
+        state: document.getElementById("state-new-product").value,
         sku: document.getElementById("sku-new-product").value,
-        stock: document.getElementById("stock-new-product").value,
+        stock: Number(document.getElementById("stock-new-product").value) > 0,
         permitirReservas: document.getElementById("allow-reserve") ? document.getElementById("allow-reserve").value : null,
         umbral: document.getElementById("stock-threshold") ? document.getElementById("stock-threshold").value : null,
         peso: document.getElementById("weight-new-product") ? document.getElementById("weight-new-product").value : null,
         dimensiones: dimensionesInputs.length > 0 ? Array.from(dimensionesInputs).map(input => input.value) : [],
-        imagenes: (() => {
-            const inputImagenes = document.getElementById("image-new-product");
-            if (inputImagenes && inputImagenes.files.length > 0) {
-                // Extraer nombres de archivos o puedes manejar URLs base64 si quieres
-                return Array.from(inputImagenes.files).map(file => file.name);
-            }
-            return [];
-        })()
+        picture: picture
     };
 }
+
 
 
 const precioNormalInput = document.getElementById("price-new-product");
@@ -363,3 +281,19 @@ function validateFormFields({ showAlert = false } = {}) {
 
     return valido;
 }
+
+const inputImagen = document.getElementById("image-new-product");
+const btnEliminarImagen = document.getElementById("remove-image-btn");
+
+inputImagen.addEventListener("change", () => {
+    if (inputImagen.files.length > 0) {
+        btnEliminarImagen.classList.remove("d-none");
+    } else {
+        btnEliminarImagen.classList.add("d-none");
+    }
+});
+
+btnEliminarImagen.addEventListener("click", () => {
+    inputImagen.value = ""; // limpia el input
+    btnEliminarImagen.classList.add("d-none"); // oculta el botón
+});
