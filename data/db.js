@@ -13,7 +13,7 @@ export const products = [
     "rating": 4,
     "country": "China",
     "stock": true,
-    "status": null
+    "status": "inactive"
   },
   {
     "id": 2,

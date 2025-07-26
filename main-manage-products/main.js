@@ -1,8 +1,10 @@
 import { products } from "../data/db.js";
 import { renderDashboardProducts } from "./renderDashboardProducts.js";
+import { switchControl } from "./switchControl.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   getProducts();
+  switchControl();
 });
 
 const getProducts = async () => {
@@ -11,7 +13,7 @@ const getProducts = async () => {
 };
 
 document.getElementById("sort-new").addEventListener("click", () => {
-  renderDashboardProducts([...products].reverse()); // Si los nuevos están al final
+  renderDashboardProducts([...products].reverse());
 });
 
 document.getElementById("sort-price-asc").addEventListener("click", () => {
