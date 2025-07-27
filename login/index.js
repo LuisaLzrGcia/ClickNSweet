@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(usuario => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
+          window.document.location.href = "/index.html"; // Redirige al inicio
         })
         .catch(error => {
           console.error("Error en login:", error.message);
