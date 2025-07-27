@@ -23,14 +23,6 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* .product-image {
-  transition: opacity 0.3s ease;
-} */
-
-/* .product-image:hover {
-  opacity: 0.9;
-} */
-
 .status-indicator {
   display: inline-block;
   width: 10px;
@@ -114,7 +106,7 @@ input.custom-switch:checked + label.switch-state-text::before {
 }
 
 /* Atenúa solo el contenido principal */
-.product-card .inactive {
+.product-card.inactive .inactive {
   filter: grayscale(80%) opacity(0.5);
 }
 
@@ -122,3 +114,101 @@ input.custom-switch:checked + label.switch-state-text::before {
 
 
 
+/* Estilos para SweetAlert personalizados */
+.swal2-popup {
+    border-radius: 12px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.swal2-confirm.btn-pink {
+    background-color: #d13dac !important;
+    border-color: #d13dac !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+
+.swal2-confirm.btn-pink:hover {
+    background-color: #b83296 !important;
+    border-color: #b83296 !important;
+}
+
+.swal2-cancel.btn-secondary {
+    border-radius: 8px !important;
+}
+
+/* Efecto de carga para simular petición */
+@keyframes loadingPulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.loading-state {
+    animation: loadingPulse 1.5s infinite;
+}
+
+
+
+
+/* Añade esto a tu CSS existente */
+.product-card.loading-state {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card.loading-state::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 20;
+    border-radius: 15px;
+    animation: pulse 1.5s infinite;
+}
+
+.product-card.loading-state::before {
+    content: "Actualizando...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    font-weight: bold;
+    color: #d13dac;
+    font-size: 1.2rem;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.7; }
+}
+
+
+
+
+.toast {
+  background-color: white;
+  border: 1px solid #B2F7EF;
+  border-left: 4px solid #28a745;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+}
+
+
+
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+.deleting {
+  animation: fadeOut 0.5s ease forwards;
+  pointer-events: none;
+}
+        

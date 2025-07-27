@@ -1,10 +1,13 @@
 import { products } from "../data/db.js";
 import { renderDashboardProducts } from "./renderDashboardProducts.js";
+import { setupDeleteButtons } from "./setupDeleteButton.js";
 import { switchControl } from "./switchControl.js";
+
 
 document.addEventListener("DOMContentLoaded", function () {
   getProducts();
   switchControl();
+  setupDeleteButtons();
 });
 
 const getProducts = async () => {
