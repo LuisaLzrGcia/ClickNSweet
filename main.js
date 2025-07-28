@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCartCount();
   displayActiveLink();
   updateNavbarAuthState();
-  preventLoginIfAuthenticated();
+  // preventLoginIfAuthenticated();
   handleNavbarScroll();
   window.addEventListener("hashchange", () => displayActiveLink());
   navbarLinks.classList.remove("invisible");
