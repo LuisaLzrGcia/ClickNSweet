@@ -10,7 +10,7 @@ export function protectRoutesByRole() {
     user: [
       "about.html",
       "cart.html",
-      "contact-us.html",
+      "contac-us.html",
       "faq.html",
       "form.html",
       "help-center.html",
