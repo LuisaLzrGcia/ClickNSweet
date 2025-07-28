@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartContainer = document.getElementById("cart-container");
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
+  
+  cargarCuponesGuardados();
+
   let cartHTML = "";
   cartItems.forEach(item => {
       cartHTML += cartItem(item);
@@ -15,6 +18,54 @@ document.addEventListener("DOMContentLoaded", function () {
   setupCartInteractivity();
   actualizarResumenCompra(cartItems);
 });
+
+
+function cargarCuponesGuardados() {
+  const cuponesGuardados = JSON.parse(localStorage.getItem('appliedCoupons') || '{}');
+  
+  if (cuponesGuardados.descuentoFijo) {
+    descuentoFijoGlobal = cuponesGuardados.descuentoFijo;
+  }
+  
+  if (cuponesGuardados.descuentoPorcentaje) {
+    descuentoPorcentajeGlobal = cuponesGuardados.descuentoPorcentaje;
+  }
+  
+
+  if (cuponesGuardados.codigoCupon) {
+    document.getElementById('coupon-input').value = cuponesGuardados.codigoCupon;
+    document.getElementById('coupon-message').textContent = 'Cupón aplicado correctamente!';
+  }
+  
+  console.log('🎫 Cupones cargados:', cuponesGuardados);
+}
+
+
+function guardarCupones(codigo, descuentoFijo, descuentoPorcentaje) {
+  const cuponesData = {
+    codigoCupon: codigo,
+    descuentoFijo: descuentoFijo,
+    descuentoPorcentaje: descuentoPorcentaje,
+    fechaAplicacion: new Date().toISOString()
+  };
+  
+  localStorage.setItem('appliedCoupons', JSON.stringify(cuponesData));
+  console.log('💾 Cupones guardados:', cuponesData);
+}
+
+
+function limpiarCupones() {
+  localStorage.removeItem('appliedCoupons');
+  descuentoFijoGlobal = 0;
+  descuentoPorcentajeGlobal = 0;
+  document.getElementById('coupon-input').value = '';
+  document.getElementById('coupon-message').textContent = '';
+  
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  actualizarResumenCompra(cartItems);
+  
+  console.log('🗑️ Cupones limpiados');
+}
 
 function cartItem(item) {
   const hasDiscount = item.discount && item.discount > 0;
@@ -119,11 +170,16 @@ function actualizarResumenCompra(cartItems) {
 
   // Aplica descuentos del cupón
   let subtotalConDescuento = subtotal;
+  let descuentoAplicado = 0; // NUEVO: Para mostrar el descuento aplicado
+  
   if (descuentoPorcentajeGlobal > 0) {
+    descuentoAplicado = subtotalConDescuento * (descuentoPorcentajeGlobal / 100);
     subtotalConDescuento = subtotalConDescuento * (1 - descuentoPorcentajeGlobal / 100);
   } else if (descuentoFijoGlobal > 0) {
+    descuentoAplicado = Math.min(descuentoFijoGlobal, subtotalConDescuento);
     subtotalConDescuento = subtotalConDescuento - descuentoFijoGlobal;
   }
+  
   if (subtotalConDescuento < 0) subtotalConDescuento = 0;
 
   // Mostrar precio original si hay descuento
@@ -146,9 +202,11 @@ function actualizarResumenCompra(cartItems) {
   // Total final
   const totalFinal = subtotalConDescuento + envio;
   document.getElementById('total-price').textContent = `$${totalFinal.toFixed(2)}`;
+  
+  console.log('💰 Resumen actualizado - Descuento aplicado:', descuentoAplicado);
 }
 
-// Cupones
+
 document.getElementById('apply-coupon-btn').addEventListener('click', () => {
   const input = document.getElementById('coupon-input');
   const code = input.value.trim().toUpperCase();
@@ -167,18 +225,49 @@ document.getElementById('apply-coupon-btn').addEventListener('click', () => {
     descuentoPorcentaje = 20;
   } else {
     messageEl.textContent = 'Cupón inválido';
+    messageEl.className = 'text-danger mt-2';
     return;
   }
 
   messageEl.textContent = 'Cupón aplicado correctamente!';
+  messageEl.className = 'text-success mt-2';
 
-  document.getElementById('discount-coupon').textContent = `$${descuentoFijo > 0 ? descuentoFijo.toFixed(2) : (descuentoPorcentaje > 0 ? `${descuentoPorcentaje}%` : '0.00')}`;
-
-  // Guarda globalmente para que actualizar resumen use este descuento
+  
   descuentoFijoGlobal = descuentoFijo;
   descuentoPorcentajeGlobal = descuentoPorcentaje;
+  
+ 
+  guardarCupones(code, descuentoFijo, descuentoPorcentaje);
 
-  // Actualiza el resumen con descuento aplicado
+  
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   actualizarResumenCompra(cartItems);
+  
+  console.log('🎫 Cupón aplicado:', code, {descuentoFijo, descuentoPorcentaje});
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const couponContainer = document.getElementById('apply-coupon-btn').parentElement;
+  if (!document.getElementById('remove-coupon-btn')) {
+    const removeBtn = document.createElement('button');
+    removeBtn.id = 'remove-coupon-btn';
+    removeBtn.className = 'btn btn-outline-danger btn-sm ms-2';
+    removeBtn.textContent = 'Quitar cupón';
+    removeBtn.style.display = 'none';
+    
+    removeBtn.addEventListener('click', () => {
+      limpiarCupones();
+      removeBtn.style.display = 'none';
+    });
+    
+    couponContainer.appendChild(removeBtn);
+  }
+  
+  
+  const cuponesGuardados = JSON.parse(localStorage.getItem('appliedCoupons') || '{}');
+  if (cuponesGuardados.codigoCupon) {
+    document.getElementById('remove-coupon-btn').style.display = 'inline-block';
+  }
 });
