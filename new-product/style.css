@@ -1,27 +1,28 @@
 .container-new-product {
-    background-color: white !important;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  background-color: white !important;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
-.container-new-product input{
-    border: 2px solid #e4e6e9;
+
+.container-new-product input {
+  border: 2px solid #e4e6e9;
 }
 
 form .btn-pink {
-    background-color: #E452C0;
-    color: white;
+  background-color: #E452C0;
+  color: white;
 }
 
 form .btn-pink:hover {
-    background-color: #d13dac;
-    color: white;
+  background-color: #d13dac;
+  color: white;
 }
 
-.category .badge{
-    font-size: 1rem !important;
+.category .badge {
+  font-size: 1rem !important;
 }
 
 .bg-pastel-green {
@@ -29,7 +30,7 @@ form .btn-pink:hover {
   opacity: 0.9;
 }
 
-.offerBadge{
+.offerBadge {
   font-size: 1.5rem;
   font-weight: bolder;
 }
@@ -75,15 +76,20 @@ form .btn-pink:hover {
   font-weight: bolder;
 }
 
-.text-discount{
-    font-size: 1.5rem;
+.text-discount {
+  font-size: 1.5rem;
 }
 
-.formatSaleBadge{
+.formatSaleBadge {
   font-size: 1rem;
   background-color: #f7d6e0;
   width: fit-content;
   padding: 0.3rem 1rem;
   border-radius: 20px;
 
+}
+
+
+#image-new-product-container>div>button>svg {
+  fill: #d13dac !important;
 }

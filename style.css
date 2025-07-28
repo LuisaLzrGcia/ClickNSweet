@@ -1,5 +1,5 @@
 body {
-  font-family: 'Quicksand', sans-serif;
+  
 }
 
 .navbar-brand {
@@ -504,7 +504,7 @@ h2 {
 
 body {
   background-color: #f8f9fa;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   margin: 0;
 }
 
@@ -588,4 +588,19 @@ h1 {
   padding: 10px 20px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+}
+
+
+/* Productos */
+
+.status-product {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(209, 61, 17, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
