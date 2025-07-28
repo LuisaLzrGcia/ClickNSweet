@@ -6,11 +6,13 @@ import { logout } from "./login/auth.js";
 import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
 import { renderFooter } from "./footer/script.js";
 import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
+import { protectRoutesByRole } from "./functions/protectRoutesByRole.js";
 
 const navbarLinks = document.querySelector(".navbar-nav");
 const logoutButton = document.getElementById("logout");
 
 document.addEventListener("DOMContentLoaded", () => {
+  protectRoutesByRole();
   loadCartCount();
   displayActiveLink();
   updateNavbarAuthState();

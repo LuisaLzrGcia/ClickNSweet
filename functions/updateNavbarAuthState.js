@@ -14,7 +14,6 @@ export function updateNavbarAuthState() {
       });
       navLinkUser.forEach((navLink) => {
         navLink.classList.add("d-none");
-        console.log(navLink);
       });
     }
     autenticacionLinks.forEach((el) => el.classList.add("d-none"));
