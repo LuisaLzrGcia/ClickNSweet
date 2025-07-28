@@ -1,0 +1,219 @@
+.buttons-admin-dashboard .btn-pink {
+  background-color: #d13dac;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.buttons-admin-dashboard .btn-pink:hover {
+  background-color: #d13dac;
+  color: #fff;
+}
+
+.buttons-admin-dashboard .object-fit-cover {
+  object-fit: cover;
+}
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.edit-btn:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.delete-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
+  background-color: #b2f7ef;
+}
+
+.precio {
+  background-color: #e7edf3;
+}
+
+.buttons-admin-dashboard .btn-eliminar {
+  background-color: rgb(255, 42, 42);
+  color: #fff;
+  border-radius: 8px;
+}
+
+.buttons-admin-dashboard .btn-eliminar:hover,
+.buttons-admin-dashboard .btn-eliminar:active {
+  background-color: rgb(255, 42, 42);
+  color: #fff;
+}
+
+.text-pink {
+  color: #d13dac;
+}
+
+.buttons-admin-dashboard .custom-switch {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23F2B5D4'/%3e%3c/svg%3e") !important;
+  background-color: #fcfcfc;
+  border-color: #f2b5d4;
+
+  transition: background-color 0.3s ease, border-color 0.3s ease, background-position 0.3s ease;
+}
+
+/* Activo */
+.buttons-admin-dashboard .custom-switch:checked {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+  background-color: #d13dac;
+  border-color: #f2b5d4;
+}
+
+.buttons-admin-dashboard .custom-switch:hover,
+.buttons-admin-dashboard .custom-switch:focus {
+  box-shadow: 0 0 0 0.2rem rgba(228, 82, 192, 0.25);
+}
+
+/* 1) Texto por defecto (puedes omitirlo si siempre vas a cubrir ambos estados) */
+label.switch-state-text::before {
+  content: "Activo";
+}
+
+/* 2) Cuando el switch está APAGADO */
+input.custom-switch:not(:checked) + label.switch-state-text::before {
+  content: "Inactivo";
+}
+
+/* 3) Cuando el switch está ENCENDIDO */
+input.custom-switch:checked + label.switch-state-text::before {
+  content: "Activo";
+  color: #000;
+}
+
+/* Atenúa solo el contenido principal */
+.product-card.inactive .inactive {
+  filter: grayscale(80%) opacity(0.5);
+}
+
+/* Estilos para SweetAlert personalizados */
+.swal2-popup {
+  border-radius: 12px !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.swal2-confirm.btn-pink {
+  background-color: #d13dac !important;
+  border-color: #d13dac !important;
+  color: white !important;
+  border-radius: 8px !important;
+}
+
+.swal2-confirm.btn-pink:hover {
+  background-color: #b83296 !important;
+  border-color: #b83296 !important;
+}
+
+.swal2-cancel.btn-secondary {
+  border-radius: 8px !important;
+}
+
+/* Efecto de carga para simular petición */
+@keyframes loadingPulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.loading-state {
+  animation: loadingPulse 1.5s infinite;
+}
+
+/* Añade esto a tu CSS existente */
+.product-card.loading-state {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card.loading-state::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 20;
+  border-radius: 15px;
+  animation: pulse 1.5s infinite;
+}
+
+.product-card.loading-state::before {
+  content: "Actualizando...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  font-weight: bold;
+  color: #d13dac;
+  font-size: 1.2rem;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.toast {
+  background-color: white;
+  border: 1px solid #b2f7ef;
+  border-left: 4px solid #28a745;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.deleting {
+  animation: fadeOut 0.5s ease forwards;
+  pointer-events: none;
+}

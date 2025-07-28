@@ -39,11 +39,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-xl-center">
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                <ul class="navbar-nav align-items-xl-center invisible">
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
+                            href="index.html">Inicio</a></li>
+                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
+                            href="products.html">Productos</a></li>
+                    <li class="nav-item nav-item-user dropdown">
+                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Categorías
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
                             <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
@@ -66,8 +71,12 @@
                             Carrito
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a></li>
+                    <li class="nav-item autenticacion">
+                        <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item autenticacion">
+                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
+                    </li>
                     <li class="nav-item dropdown user-menu d-none">
                         <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
@@ -116,11 +125,10 @@
                                     type="button">Aplicar</button>
                             </div>
                             <p id="coupon-message" class="text-danger"></p>
+                            <div id="discount-coupon-btn"></div>
                         </div>
                     </div>
 
-
-                    <!-- Cart Summary -->
                     <!-- Cart Summary -->
                     <div class="card cart-summary">
                         <div class="card-body">
@@ -145,12 +153,17 @@
 
                             <hr>
 
+                            <div class="d-flex justify-content-between mb-2">
+                                <span id="code-coupon">Cupón</span>
+                                <span id="discount-coupon">$0.00</span>
+                            </div>
+
                             <div class="d-flex justify-content-between mb-4">
                                 <strong>Total</strong>
                                 <strong id="total-price"></strong>
                             </div>
 
-                            <a href="payment.html" class="btn custom-btn-pagar w-100">Proceder a pago</a>
+                            <a href="payment.html" class="btn custom-btn-pagar w-100" id="button-to-pay">Proceder a pago</a>
                         </div>
                     </div>
 

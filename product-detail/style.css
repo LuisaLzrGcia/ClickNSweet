@@ -5,3 +5,16 @@
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
+
+.btn-pink-cart {
+  margin-top: 0.5rem;
+  background-color: #E452C0;
+  color: white;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+.btn-pink-cart:hover {
+  background-color: #d13dac;
+  color: white;
+}
