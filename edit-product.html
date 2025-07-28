@@ -118,88 +118,102 @@
 
     <!-- Main -->
     <main class="container my-5 container-new-product">
-        <form class="py-3">
-            <h1 class="text-start">Nuevo producto</h1>
-            <!-- Nombre del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control">
-            </div>
-            <!-- Descripción del producto -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Descripción del producto</label>
-                <textarea row="3" id="" class="form-control"></textarea>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio del producto</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio en MXN.</div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="formFileMultiple" class="form-label">Imágenes del producto</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Descuento del producto</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                        <span class="input-group-text" id="basic-addon3">%</span>
-                    </div>
-                    <div class="form-text" id="basic-addon4">Porcentaje de descuento si el producto tiene alguna oferta.
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="producto1" class="form-label">Precio de oferta</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3">$</span>
-                        <input type="text" class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3 basic-addon4">
-                    </div>
-                    <div class="form-text" id="basic-addon4">Precio generado si tiene descuento o precio de oferta.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Categoria por sabor</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">País de origen</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="producto1" class="form-label">Uso o función</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-            <h1 class="text-start">Inventario</h1>
-            <button type="submit" class="btn btn-pink">Submit</button>
-        </form>
+        <form id="edit-product-form" class="py-3"> <!-- ID para referencia JS -->
+  <h1 class="text-start">Editar producto</h1> <!-- Cambiar título -->
+
+  <!-- Campo oculto para ID (opcional) -->
+  <input type="hidden" id="product-db-id" name="id">
+
+  <!-- Nombre (agregado id/name) -->
+  <div class="mb-3">
+    <label for="product-name" class="form-label">Nombre del producto</label> <!-- for vinculado -->
+    <input type="text" class="form-control" id="product-name" name="name">
+  </div>
+
+  <!-- Descripción (agregado id/name/rows) -->
+  <div class="mb-3">
+    <label for="product-description" class="form-label">Descripción</label>
+    <textarea rows="3" class="form-control" id="product-description" name="description"></textarea>
+  </div>
+
+  <div class="row">
+    <!-- Precio (corregido tipo/atributos) -->
+    <div class="col-12 col-md-6 mb-3">
+      <label for="product-price" class="form-label">Precio</label>
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <input type="number" step="0.01" min="0" class="form-control" id="product-price" name="price">
+      </div>
+      <div class="form-text">Precio en MXN</div>
+    </div>
+    
+    <!-- Imágenes (mantenido) -->
+    <div class="col-12 col-md-6 mb-3">
+      <label for="product-images" class="form-label">Imágenes</label>
+      <input class="form-control" type="file" id="product-images" name="images" multiple>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Descuento (agregado id/name) -->
+    <div class="col-12 col-md-6 mb-3">
+      <label for="product-discount" class="form-label">Descuento</label>
+      <div class="input-group">
+        <input type="number" step="1" min="0" max="100" class="form-control" id="product-discount" name="discount">
+        <span class="input-group-text">%</span>
+      </div>
+      <div class="form-text">Porcentaje de descuento</div>
+    </div>
+    
+    <!-- Precio oferta (agregado id/name) -->
+    <div class="col-12 col-md-6 mb-3">
+      <label for="product-sale-price" class="form-label">Precio de oferta</label>
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <input type="number" step="0.01" min="0" class="form-control" id="product-sale-price" name="sale_price" disabled> <!-- Deshabilitado inicialmente -->
+      </div>
+      <div class="form-text">Se calcula automáticamente</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Selectores (agregados id/name/opción vacía) -->
+    <div class="col-12 col-md-4 mb-3">
+      <label for="product-flavor" class="form-label">Sabor</label>
+      <select class="form-select" id="product-flavor" name="flavor_category">
+        <option value="">Selecciona sabor</option> <!-- Opción vacía -->
+        <!-- Opciones dinámicas desde JS -->
+      </select>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-3">
+      <label for="product-country" class="form-label">País</label>
+      <select class="form-select" id="product-country" name="country">
+        <option value="">Selecciona país</option>
+        <!-- Opciones dinámicas -->
+      </select>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-3">
+      <label for="product-usage" class="form-label">Función</label>
+      <select class="form-select" id="product-usage" name="usage">
+        <option value="">Selecciona función</option>
+        <!-- Opciones dinámicas -->
+      </select>
+    </div>
+  </div>
+
+  <hr>
+  <h1 class="text-start">Inventario</h1>
+  
+  <!-- Stock (agregado) -->
+  <div class="mb-3 col-12 col-md-4">
+    <label for="product-stock" class="form-label">Stock disponible</label>
+    <input type="number" min="0" class="form-control" id="product-stock" name="stock">
+  </div>
+
+  <button type="submit" class="btn btn-pink">Guardar cambios</button>
+</form>
     </main>
 
 
