@@ -1,6 +1,6 @@
 import { loginFormValidation } from "../functions/login/loginFormValidation.js";
 import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
-import { login } from "./auth.js";
+import { login } from "./auth1.js";
 import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(usuario => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
-          window.document.location.href = "/index.html"; // Redirige al inicio
+          const homePage = usuario.role === 'admin' ? "/index.html" : "/main-manage-products.html";
+          window.document.location.href = homePage;
         })
         .catch(error => {
           console.error("Error en login:", error.message);
