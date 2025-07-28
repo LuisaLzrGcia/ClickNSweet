@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartContainer = document.getElementById("cart-container");
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
+  
+  cargarCuponesGuardados();
+
   let cartHTML = "";
   cartItems.forEach(item => {
       cartHTML += cartItem(item);
@@ -15,6 +18,53 @@ document.addEventListener("DOMContentLoaded", function () {
   setupCartInteractivity();
   actualizarResumenCompra(cartItems);
 });
+
+
+function cargarCuponesGuardados() {
+  const cuponesGuardados = JSON.parse(localStorage.getItem('appliedCoupons') || '{}');
+  
+  if (cuponesGuardados.descuentoFijo) {
+    descuentoFijoGlobal = cuponesGuardados.descuentoFijo;
+  }
+  
+  if (cuponesGuardados.descuentoPorcentaje) {
+    descuentoPorcentajeGlobal = cuponesGuardados.descuentoPorcentaje;
+  }
+  
+  
+  if (cuponesGuardados.codigoCupon) {
+    document.getElementById('coupon-input').value = cuponesGuardados.codigoCupon;
+    document.getElementById('coupon-message').textContent = 'Cupón aplicado correctamente!';
+  }
+  
+  console.log('🎫 Cupones cargados:', cuponesGuardados);
+}
+
+function guardarCupones(codigo, descuentoFijo, descuentoPorcentaje) {
+  const cuponesData = {
+    codigoCupon: codigo,
+    descuentoFijo: descuentoFijo,
+    descuentoPorcentaje: descuentoPorcentaje,
+    fechaAplicacion: new Date().toISOString()
+  };
+  
+  localStorage.setItem('appliedCoupons', JSON.stringify(cuponesData));
+  console.log('💾 Cupones guardados:', cuponesData);
+}
+
+
+function limpiarCupones() {
+  localStorage.removeItem('appliedCoupons');
+  descuentoFijoGlobal = 0;
+  descuentoPorcentajeGlobal = 0;
+  document.getElementById('coupon-input').value = '';
+  document.getElementById('coupon-message').textContent = '';
+  
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  actualizarResumenCompra(cartItems);
+  
+  console.log('🗑️ Cupones limpiados');
+}
 
 function cartItem(item) {
   const hasDiscount = item.discount && item.discount > 0;
@@ -91,7 +141,7 @@ function setupCartInteractivity() {
           }
       });
 
-      updatePrecio(); // Inicializa
+      updatePrecio(); 
   });
 }
 
@@ -117,16 +167,21 @@ function actualizarResumenCompra(cartItems) {
       if (item.discount && item.discount > 0) hayDescuento = true;
   });
 
-  // Aplica descuentos del cupón
+  
   let subtotalConDescuento = subtotal;
+  let descuentoAplicado = 0; 
+  
   if (descuentoPorcentajeGlobal > 0) {
+    descuentoAplicado = subtotalConDescuento * (descuentoPorcentajeGlobal / 100);
     subtotalConDescuento = subtotalConDescuento * (1 - descuentoPorcentajeGlobal / 100);
   } else if (descuentoFijoGlobal > 0) {
+    descuentoAplicado = Math.min(descuentoFijoGlobal, subtotalConDescuento);
     subtotalConDescuento = subtotalConDescuento - descuentoFijoGlobal;
   }
+  
   if (subtotalConDescuento < 0) subtotalConDescuento = 0;
 
-  // Mostrar precio original si hay descuento
+  
   const originalContainer = document.getElementById('original-price-container');
   const originalPriceEl = document.getElementById('original-price');
   if (hayDescuento || descuentoFijoGlobal > 0 || descuentoPorcentajeGlobal > 0) {
@@ -136,19 +191,21 @@ function actualizarResumenCompra(cartItems) {
       originalContainer.style.display = 'none';
   }
 
-  // Mostrar subtotal con descuento
+  
   document.getElementById('subtotal-price').textContent = `$${subtotalConDescuento.toFixed(2)}`;
 
-  // Calcular costo de envío
+  
   const envio = subtotalConDescuento < 500 && subtotalConDescuento > 0 ? 299.00 : 0.00;
   document.getElementById('shipping-cost').textContent = envio === 0 ? 'Gratis' : `$${envio.toFixed(2)}`;
 
-  // Total final
+
   const totalFinal = subtotalConDescuento + envio;
   document.getElementById('total-price').textContent = `$${totalFinal.toFixed(2)}`;
+  
+  console.log('💰 Resumen actualizado - Descuento aplicado:', descuentoAplicado);
 }
 
-// Cupones
+
 document.getElementById('apply-coupon-btn').addEventListener('click', () => {
   const input = document.getElementById('coupon-input');
   const code = input.value.trim().toUpperCase();
@@ -167,16 +224,48 @@ document.getElementById('apply-coupon-btn').addEventListener('click', () => {
     descuentoPorcentaje = 20;
   } else {
     messageEl.textContent = 'Cupón inválido';
+    messageEl.className = 'text-danger mt-2';
     return;
   }
 
   messageEl.textContent = 'Cupón aplicado correctamente!';
+  messageEl.className = 'text-success mt-2';
 
-  // Guarda globalmente para que actualizar resumen use este descuento
+
   descuentoFijoGlobal = descuentoFijo;
   descuentoPorcentajeGlobal = descuentoPorcentaje;
+  
+  
+  guardarCupones(code, descuentoFijo, descuentoPorcentaje);
 
-  // Actualiza el resumen con descuento aplicado
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   actualizarResumenCompra(cartItems);
+  
+  console.log('🎫 Cupón aplicado:', code, {descuentoFijo, descuentoPorcentaje});
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  const couponContainer = document.getElementById('apply-coupon-btn').parentElement;
+  if (!document.getElementById('remove-coupon-btn')) {
+    const removeBtn = document.createElement('button');
+    removeBtn.id = 'remove-coupon-btn';
+    removeBtn.className = 'btn btn-outline-danger btn-sm ms-2';
+    removeBtn.textContent = 'Quitar cupón';
+    removeBtn.style.display = 'none';
+    
+    removeBtn.addEventListener('click', () => {
+      limpiarCupones();
+      removeBtn.style.display = 'none';
+    });
+    
+    couponContainer.appendChild(removeBtn);
+  }
+  
+
+  const cuponesGuardados = JSON.parse(localStorage.getItem('appliedCoupons') || '{}');
+  if (cuponesGuardados.codigoCupon) {
+    document.getElementById('remove-coupon-btn').style.display = 'inline-block';
+  }
 });
