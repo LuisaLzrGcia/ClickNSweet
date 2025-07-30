@@ -1,13 +1,15 @@
 import { products } from "../data/db.js";
 import { renderDashboardProducts } from "./renderDashboardProducts.js";
 import { setupDeleteButtons } from "./setupDeleteButton.js";
+import { setupEditButtons } from "./setupEditButtons.js";
 import { switchControl } from "./switchControl.js";
-
 
 document.addEventListener("DOMContentLoaded", function () {
   getProducts();
   switchControl();
+  setupEditButtons();
   setupDeleteButtons();
+  console.log(products)
 });
 
 const getProducts = async () => {
