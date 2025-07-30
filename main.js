@@ -6,7 +6,10 @@ import { logout } from "./login/auth.js";
 import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
 import { renderFooter } from "./footer/script.js";
 import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
+
+import { initPaymentPage } from "./payment1/payment.js";
 import { protectRoutesByRole } from "./functions/protectRoutesByRole.js";
+
 
 const navbarLinks = document.querySelector(".navbar-nav");
 const logoutButton = document.getElementById("logout");
@@ -21,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", () => displayActiveLink());
   navbarLinks.classList.remove("invisible");
   logoutButton?.addEventListener("click", () => logout());
+
+  // Inicializar funcionalidad específica de página de pago
+  if (window.location.pathname.includes('payment.html') || 
+      document.querySelector('.payment-page')) {
+    initPaymentPage();
+  }
 
   // 1) Renderiza el footer
   renderFooter();
