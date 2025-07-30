@@ -115,107 +115,258 @@
         </div>
     </nav>
 
+    <!-- Modal de vista previa -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content container-product">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vista Previa del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-start p-4">
+                    <!-- Imagen + estado -->
+                    <div class="col-md-6 position-relative" id="preview-image-container">
+                        <img id="preview-image" src="" class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover;">
+                        <!-- .status-product se inyecta por JS -->
+                    </div>
+
+                    <!-- Detalles -->
+                    <div class="col-md-6">
+                        <h2 class="mb-3 text-fuchsia" id="preview-name">Nombre</h2>
+
+                        <!-- Rating estático -->
+                        <div class="star-rating mb-2 text-warning fs-5" id="preview-rating">
+                        <!-- renderStars(4) -->
+                        </div>
+
+                        <!-- Precios y descuento -->
+                        <div class="mb-3" id="preview-price-wrapper">
+                        <!-- priceData inyectado por JS -->
+                        </div>
+
+                        <!-- Presentación/Formato de venta -->
+                        <div class="mb-3">
+                        <p class="fw-semibold text-muted mb-1">Presentación:</p>
+                        <p class="text-dark mb-0 formatSaleBadge" id="preview-sales-format"></p>
+                        </div>
+
+                        <!-- Descripción -->
+                        <p class="text-muted" id="preview-description">Descripción</p>
+
+                        <!-- Información adicional -->
+                        <div class="mt-4 text-muted small d-flex flex-column gap-1">
+                        <p class="mb-1">
+                            <strong>Categoría:</strong>
+                            <span class="badge pastel-creamy text-dark fs-6" id="preview-category"></span>
+                        </p>
+                        <p class="mb-1">
+                            <strong>Origen:</strong>
+                            <span class="badge bg-pastel-green text-dark fs-6" id="preview-origin"></span>
+                        </p>
+                        <p class="mb-0">
+                            <strong>Disponibilidad:</strong>
+                            <span id="preview-availability"></span>
+                        </p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" id="confirm-edit-btn">Confirmar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Main -->
     <main class="container my-5 container-new-product">
-        <form id="edit-product-form" class="py-3"> <!-- ID para referencia JS -->
-            <h1 class="text-start">Editar producto</h1> <!-- Cambiar título -->
-
-            <!-- Campo oculto para ID (opcional) -->
-            <!-- <input id="product-db-id" name="id" disabled> -->
-
-            <!-- Nombre (agregado id/name) -->
-            <div class="mb-3">
-                <label for="product-name" class="form-label">Nombre del producto</label> <!-- for vinculado -->
-                <input type="text" class="form-control" id="product-name" name="name">
+        <form class="pb-3 container-edit-product" id="form-editar-producto">
+    <!-- Campo oculto para ID del producto -->
+    <input type="hidden" id="product-id" name="id">
+    
+    <h2 class="text-start">Editar producto</h2>
+    
+    <!-- Nombre del producto -->
+    <div class="mb-3">
+        <label for="name-edit-product" class="form-label">Nombre del producto</label>
+        <input type="text" class="form-control" id="name-edit-product" name="name" required>
+    </div>
+    
+    <!-- Descripción del producto -->
+    <div class="mb-3">
+        <label for="description-edit-product" class="form-label">Descripción del producto</label>
+        <textarea rows="3" class="form-control" id="description-edit-product" name="description" required></textarea>
+    </div>
+    
+    <div class="row">
+        <!-- Precio -->
+        <div class="col-12 col-lg-3 mb-3">
+            <label for="price-edit-product" class="form-label">Precio</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" step="0.01" class="form-control" 
+                       placeholder="0.00" id="price-edit-product" name="price" required>
             </div>
+            <div class="form-text">Precio en MXN.</div>
+        </div>
+        
+        <!-- Formato de venta -->
+        <div class="col-12 col-lg-3 mb-3">
+            <label for="price-format-edit-product" class="form-label">Formato de venta</label>
+            <select class="form-select" id="price-format-edit-product" name="sale_format" required>
+                <option selected disabled value="">Selecciona formato</option>
+                <option value="por unidad">Por unidad</option>
+                <option value="por pieza">Por pieza</option>
+                <option value="por kilo">Por kilo</option>
+                <option value="paquete">Por paquete</option>
+                <option value="por docena">Por docena</option>
+                <option value="granel">Granel</option>
+            </select>
+        </div>
 
-            <!-- Descripción (agregado id/name/rows) -->
-            <div class="mb-3">
-                <label for="product-description" class="form-label">Descripción</label>
-                <textarea rows="3" class="form-control" id="product-description" name="description"></textarea>
+        <!-- Imagen -->
+        <div class="col-12 col-lg-6 mb-3">
+            <label for="image-edit-product" class="form-label">Imagen del producto</label>
+            <div class="d-flex align-items-center gap-3">
+                <input class="form-control" type="file" id="image-edit-product" name="image" accept="image/*">
+                <button type="button" class="btn btn-outline-danger d-none" id="remove-image-btn-edit">
+                    <!-- Ícono de basura -->
+                </button>
             </div>
-
-            <div class="row">
-                <!-- Precio (corregido tipo/atributos) -->
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="product-price" class="form-label">Precio</label>
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="number" step="0.01" min="0" class="form-control" id="product-price" name="price">
-                    </div>
-                    <div class="form-text">Precio en MXN</div>
-                </div>
-
-                <!-- Imágenes (mantenido) -->
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="product-images" class="form-label">Imágenes</label>
-                    <input class="form-control" type="file" id="product-images" name="images" multiple>
-                </div>
+            <!-- Previsualización de imagen existente -->
+            <div id="current-image-preview" class="mt-2"></div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Descuento -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="discount-edit-product" class="form-label">Descuento</label>
+            <div class="input-group">
+                <input type="number" min="0" max="100" step="1" class="form-control" 
+                       placeholder="0" id="discount-edit-product" name="discount">
+                <span class="input-group-text">%</span>
             </div>
-
-            <div class="row">
-                <!-- Descuento (agregado id/name) -->
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="product-discount" class="form-label">Descuento</label>
-                    <div class="input-group">
-                        <input type="number" step="1" min="0" max="100" class="form-control" id="product-discount"
-                            name="discount">
-                        <span class="input-group-text">%</span>
-                    </div>
-                    <div class="form-text">Porcentaje de descuento</div>
-                </div>
-
-                <!-- Precio oferta (agregado id/name) -->
-                <div class="col-12 col-md-6 mb-3">
-                    <label for="product-sale-price" class="form-label">Precio de oferta</label>
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="number" step="0.01" min="0" class="form-control" id="product-sale-price"
-                            name="sale_price" disabled> <!-- Deshabilitado inicialmente -->
-                    </div>
-                    <div class="form-text">Se calcula automáticamente</div>
-                </div>
+            <div class="form-text">Porcentaje de descuento</div>
+        </div>
+        
+        <!-- Precio oferta (calculado) -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="price-discount-edit-product" class="form-label">Precio de oferta</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" placeholder="0.00" 
+                       id="price-discount-edit-product" name="sale_price" readonly>
             </div>
+            <div class="form-text">Calculado automáticamente</div>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+        <!-- Categoría -->
+        <div class="col">
+            <label for="category-edit-product" class="form-label">Categoría</label>
+            <select class="form-select" id="category-edit-product" name="category" required>
+                <option value="Chocolates">Chocolates</option>
+                <option value="Dulces Frutales">Dulces Frutales</option>
+                <option value="Dulces Picantes">Dulces Picantes</option>
+                <option value="Dulces de caramelo">Dulces de caramelo</option>
+                <option value="Dulces Refrescantes">Dulces Refrescantes</option>
+                <option value="Dulces Salados">Dulces Salados</option>
+                <option value="Dulces Cremosos">Dulces Cremosos</option>
+                <option value="Dulces Especiados">Dulces Especiados</option>
+                <option value="Dulces Ácidos">Dulces Ácidos</option>
+            </select>
+        </div>
 
-            <div class="row">
-                <!-- Selectores (agregados id/name/opción vacía) -->
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="product-flavor" class="form-label">Sabor</label>
-                    <select class="form-select" id="product-flavor" name="flavor_category">
-                        <option value="">Selecciona sabor</option> <!-- Opción vacía -->
-                        <!-- Opciones dinámicas desde JS -->
-                    </select>
-                </div>
+        <!-- País de origen -->
+        <div class="col">
+            <label for="country-edit-product" class="form-label">País de origen</label>
+            <select class="form-select" id="country-edit-product" name="country" required>
+                <!-- Opciones dinámicas -->
+            </select>
+        </div>
 
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="product-country" class="form-label">País</label>
-                    <select class="form-select" id="product-country" name="country">
-                        <option value="">Selecciona país</option>
-                        <!-- Opciones dinámicas -->
-                    </select>
-                </div>
+        <!-- Estado (solo para México) -->
+        <div class="col" id="state-mexico-edit-product">
+            <label for="state-edit-product" class="form-label">Estado</label>
+            <select class="form-select" id="state-edit-product" name="state" disabled>
+                <!-- Opciones dinámicas -->
+            </select>
+        </div>
+    </div>
 
-                <div class="col-12 col-md-4 mb-3">
-                    <label for="product-usage" class="form-label">Función</label>
-                    <select class="form-select" id="product-usage" name="usage">
-                        <option value="">Selecciona función</option>
-                        <!-- Opciones dinámicas -->
-                    </select>
-                </div>
+    <hr />
+    <h2 class="text-start">Inventario</h2>
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+            <label for="sku-edit-product" class="form-label">SKU</label>
+            <input type="text" class="form-control" id="sku-edit-product" name="sku" required>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <label for="stock-edit-product" class="form-label">Cantidad en inventario</label>
+            <input type="number" min="0" step="1" class="form-control" placeholder="0" 
+                   id="stock-edit-product" name="stock" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+            <label for="allow-reserve-edit" class="form-label">¿Permitir reservas?</label>
+            <select class="form-select" id="allow-reserve-edit" name="allow_reservations" required>
+                <option value="Si">Sí</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <label for="stock-threshold-edit" class="form-label">Umbral de pocas existencias</label>
+            <input type="number" min="0" class="form-control" value="10" 
+                   id="stock-threshold-edit" name="low_stock_threshold" required>
+        </div>
+    </div>
+    
+    <h2 class="text-start">Envío</h2>
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+            <label for="weight-edit-product" class="form-label">Peso</label>
+            <div class="input-group">
+                <input type="number" class="form-control" min="0" step="0.01" 
+                       id="weight-edit-product" name="weight" required>
+                <span class="input-group-text">Kg</span>
             </div>
-
-            <hr>
-            <h1 class="text-start">Inventario</h1>
-
-            <!-- Stock (agregado) -->
-            <div class="mb-3 col-12 col-md-4">
-                <label for="product-stock" class="form-label">Stock disponible</label>
-                <input type="number" min="0" class="form-control" id="product-stock" name="stock">
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <label class="form-label">Dimensiones (Largo × Ancho × Alto)</label>
+            <div class="input-group">
+                <input type="number" class="form-control" min="0" step="0.01" 
+                       placeholder="Largo" name="length" required>
+                <span class="input-group-text">cm ×</span>
+                <input type="number" class="form-control" min="0" step="0.01" 
+                       placeholder="Ancho" name="width" required>
+                <span class="input-group-text">cm ×</span>
+                <input type="number" class="form-control" min="0" step="0.01" 
+                       placeholder="Alto" name="height" required>
+                <span class="input-group-text">cm</span>
             </div>
+        </div>
+    </div>
 
-            <button type="submit" class="btn btn-pink">Guardar cambios</button>
-        </form>
+    <!-- Botones actualizados para edición -->
+    <div class="row g-2">
+        <div class="col-12 col-md-6">
+            <button type="button" class="btn btn-blue w-100 p-2" id="preview-btn">
+                Vista previa
+            </button>
+        </div>
+        <div class="col-12 col-md-6">
+            <button type="submit" class="btn btn-pink w-100 p-2">
+                Actualizar producto
+            </button>
+        </div>
+    </div>
+</form>
     </main>
 
 
@@ -290,6 +441,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="edit-product/main.js"></script>
     <script type="module" src="main.js"></script>
     <!-- <script type="module" src="./index/index.js"></script> -->
 

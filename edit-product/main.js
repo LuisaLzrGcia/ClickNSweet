@@ -1,31 +1,32 @@
-import { loadProductData } from "./loadProductData";
-import { populateForm } from "./populateForm";
+import { disableForm, fetchProduct, getProductIdFromURL, loadReferenceData, populateForm, setupEventListeners, toggleMexicanState } from "./utility_functions.js";
 
-// Event listeners para cálculos en tiempo real
+document.addEventListener('DOMContentLoaded', async () => {
 
-document.addEventListener("DOMContentLoaded", async () => {
-  document.getElementById("product-price").addEventListener("input", updateSalePrice);
-  document.getElementById("product-discount").addEventListener("input", updateSalePrice);
-  const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get("product-id");
+    const countrySelect = document.getElementById('country-edit-product');
+    countrySelect.addEventListener('change', (e) => toggleMexicanState(e.target))
+    const productId = getProductIdFromURL();
+    if (!productId) {
+        alert('ID de producto no especificado');
+        return;
+    }
 
-  //   if (!productId) {
-  //     showError('Producto no especificado');
-  //     return;
-  //   }
+    disableForm(true);
+    // showLoader();
+    try {
+        const productData = fetchProduct(productId);
 
-  disableForm(true);
-  //   showLoader();
 
-  try {
-    const productData = loadProductData();
-    populateForm(productData);
+        await loadReferenceData();
 
-    // await loadSelectOptions();
-  } catch (error) {
-    showError(`Error: ${error.message}`);
-  } finally {
-    disableForm(false);
-    // hideLoader();
-  }
+        populateForm(productData);
+
+        setupEventListeners();
+
+    } catch (error) {
+        // showError(`Error cargando producto: ${error.message}`);
+        console.log(`Error cargando producto: ${error.message}`)
+    } finally {
+        disableForm(false);
+        // hideLoader();
+    }
 });

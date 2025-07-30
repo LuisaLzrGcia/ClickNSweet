@@ -7,8 +7,9 @@ import { switchControl } from "./switchControl.js";
 document.addEventListener("DOMContentLoaded", function () {
   getProducts();
   switchControl();
-  setupDeleteButtons();
   setupEditButtons();
+  setupDeleteButtons();
+  console.log(products)
 });
 
 const getProducts = async () => {
