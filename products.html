@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="./products/products.css" />
-  <link rel="stylesheet" href="footer/style.css"/>
+  <link rel="stylesheet" href="footer/style.css" />
   <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
@@ -259,16 +259,33 @@
 
       <!-- Productos -->
       <div class="col-lg-9">
-        <div class="d-flex justify-content-between mb-3 flex-wrap">
-          <input type="text" class="form-control w-50 mb-2 mb-lg-0" placeholder="Buscar...">
-          <div class="btn-group">
-            <button class="btn btn-dark btn-sm" id="sort-popular">Populares</button>
-            <button class="btn btn-outline-secondary btn-sm" id="sort-new">New</button>
-            <button class="btn btn-outline-secondary btn-sm" id="sort-price-asc">Precio ↑</button>
-            <button class="btn btn-outline-secondary btn-sm" id="sort-price-desc">Precio ↓</button>
-            <button class="btn btn-outline-secondary btn-sm" id="sort-rating">Rating</button>
+        <div class="container-fluid">
+          <div class="row align-items-center mb-3" id="filter-bar">
+
+            <!-- Input de búsqueda -->
+            <div class="col-md me-md-3 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="Buscar...">
+            </div>
+
+
+
+            <!-- Botones de ordenamiento -->
+            <div class="col-12 col-md-auto">
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-dark" id="sort-popular">Populares</button>
+                <button class="btn btn-outline-secondary" id="sort-new">New</button>
+                <button class="btn btn-outline-secondary" id="sort-price-asc">Precio ↑</button>
+                <button class="btn btn-outline-secondary" id="sort-price-desc">Precio ↓</button>
+                <button class="btn btn-outline-secondary" id="sort-rating">Rating</button>
+              </div>
+            </div>
+
           </div>
         </div>
+
+
+
+
 
         <div class="d-flex flex-wrap w-100" id="container-products">
           <!-- Productos -->

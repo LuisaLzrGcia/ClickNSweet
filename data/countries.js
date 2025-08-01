@@ -8,5 +8,10 @@ export const countries = [
   "España",
   "Francia",
   "Alemania",
-  "Italia"
+  "Italia",
+  "China",
+  "Turquía",
+  "Japón",
+  "Portugal",
+  "Uruguay"
 ];
