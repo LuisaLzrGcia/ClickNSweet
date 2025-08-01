@@ -7,13 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let cartHTML = "";
   cartItems.forEach(item => {
-      cartHTML += cartItem(item);
+    cartHTML += cartItem(item);
   });
 
   cartContainer.innerHTML = cartHTML;
 
   setupCartInteractivity();
   actualizarResumenCompra(cartItems);
+  setupDeleteButtons();
 });
 
 function cartItem(item) {
@@ -51,8 +52,8 @@ function cartItem(item) {
                   <span class="text-danger fw-semibold ms-1">-${item.discount}%</span>` : `$${priceUnit.toFixed(2)}`}
               </p>
               <p class="precio-final fw-bold mb-1">$${priceFinal.toFixed(2)}</p>
-              <button class="btn btn-sm eliminar-item">
-                  <img src="assets/remove.webp" alt="Eliminar" class="trash-img" style="width: 20px;">
+              <button class="btn btn-sm eliminar-item" data-id="${item.id}">
+                <img src="assets/remove.webp" alt="Eliminar" class="trash-img" style="width: 20px;">
               </button>
           </div>
       </div>
@@ -64,34 +65,34 @@ function setupCartInteractivity() {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
   document.querySelectorAll(".cart-item").forEach((itemEl, index) => {
-      const input = itemEl.querySelector(".quantity-input");
-      const plus = itemEl.querySelector(".btn-plus");
-      const minus = itemEl.querySelector(".btn-minus");
-      const precioFinal = itemEl.querySelector(".precio-final");
-      const precioUnitario = parseFloat(itemEl.querySelector(".precio-unitario").textContent);
+    const input = itemEl.querySelector(".quantity-input");
+    const plus = itemEl.querySelector(".btn-plus");
+    const minus = itemEl.querySelector(".btn-minus");
+    const precioFinal = itemEl.querySelector(".precio-final");
+    const precioUnitario = parseFloat(itemEl.querySelector(".precio-unitario").textContent);
 
-      const updatePrecio = () => {
-          const cantidad = parseInt(input.value);
-          const total = (precioUnitario * cantidad).toFixed(2);
-          precioFinal.textContent = `$${total}`;
-          cartItems[index].quantity = cantidad;
-          localStorage.setItem("cart", JSON.stringify(cartItems));
-          actualizarResumenCompra(cartItems);
-      };
+    const updatePrecio = () => {
+      const cantidad = parseInt(input.value);
+      const total = (precioUnitario * cantidad).toFixed(2);
+      precioFinal.textContent = `$${total}`;
+      cartItems[index].quantity = cantidad;
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      actualizarResumenCompra(cartItems);
+    };
 
-      plus.addEventListener("click", () => {
-          input.value = parseInt(input.value) + 1;
-          updatePrecio();
-      });
+    plus.addEventListener("click", () => {
+      input.value = parseInt(input.value) + 1;
+      updatePrecio();
+    });
 
-      minus.addEventListener("click", () => {
-          if (parseInt(input.value) > 1) {
-              input.value = parseInt(input.value) - 1;
-              updatePrecio();
-          }
-      });
+    minus.addEventListener("click", () => {
+      if (parseInt(input.value) > 1) {
+        input.value = parseInt(input.value) - 1;
+        updatePrecio();
+      }
+    });
 
-      updatePrecio(); // Inicializa
+    updatePrecio(); // Inicializa
   });
 }
 
@@ -113,8 +114,8 @@ function actualizarResumenCompra(cartItems) {
   let hayDescuento = false;
 
   cartItems.forEach(item => {
-      precioOriginalTotal += item.pricing * item.quantity;
-      if (item.discount && item.discount > 0) hayDescuento = true;
+    precioOriginalTotal += item.pricing * item.quantity;
+    if (item.discount && item.discount > 0) hayDescuento = true;
   });
 
   // Aplica descuentos del cupón
@@ -130,10 +131,10 @@ function actualizarResumenCompra(cartItems) {
   const originalContainer = document.getElementById('original-price-container');
   const originalPriceEl = document.getElementById('original-price');
   if (hayDescuento || descuentoFijoGlobal > 0 || descuentoPorcentajeGlobal > 0) {
-      originalContainer.style.display = 'flex';
-      originalPriceEl.textContent = `$${precioOriginalTotal.toFixed(2)}`;
+    originalContainer.style.display = 'flex';
+    originalPriceEl.textContent = `$${precioOriginalTotal.toFixed(2)}`;
   } else {
-      originalContainer.style.display = 'none';
+    originalContainer.style.display = 'none';
   }
 
   // Mostrar subtotal con descuento
@@ -157,13 +158,13 @@ document.getElementById('apply-coupon-btn').addEventListener('click', () => {
   let descuentoFijo = 0;
   let descuentoPorcentaje = 0;
 
-  if(code === 'SWEET100') {
+  if (code === 'SWEET100') {
     descuentoFijo = 100;
-  } else if(code === 'SWEET200') {
+  } else if (code === 'SWEET200') {
     descuentoFijo = 200;
-  } else if(code === 'CLICK10') {
+  } else if (code === 'CLICK10') {
     descuentoPorcentaje = 10;
-  } else if(code === 'CLICK20') {
+  } else if (code === 'CLICK20') {
     descuentoPorcentaje = 20;
   } else {
     messageEl.textContent = 'Cupón inválido';
@@ -182,3 +183,29 @@ document.getElementById('apply-coupon-btn').addEventListener('click', () => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   actualizarResumenCompra(cartItems);
 });
+
+
+function setupDeleteButtons() {
+  document.querySelectorAll(".eliminar-item").forEach(button => {
+    button.addEventListener("click", function () {
+      const itemId = this.getAttribute("data-id");
+
+      // Obtener y filtrar el carrito
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      cartItems = cartItems.filter(item => String(item.id) !== String(itemId));
+
+      // Guardar en localStorage
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+
+      // Eliminar el elemento HTML del DOM
+      const itemElement = this.closest(".cart-item");
+      if (itemElement) {
+        itemElement.remove();
+      }
+
+      // Actualizar resumen del carrito
+      actualizarResumenCompra(cartItems);
+    });
+  });
+}
+
