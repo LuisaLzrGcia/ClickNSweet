@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((usuario) => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
-          const homePage = usuario.role === "admin" ? "/main-manage-products.html" : "/index.html";
+          const homePage = usuario.role === "admin" ? "./main-manage-products.html" : "./index.html";
           window.document.location.href = homePage;
         })
         .catch((error) => {
