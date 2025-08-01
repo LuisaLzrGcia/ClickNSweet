@@ -8,7 +8,7 @@ export function renderDashboardProducts(productsArray) {
       currency: "MXN",
     });
 
-    const inactiveClass = product.status === 'inactive' ? ' inactive' : '';
+    const inactiveClass = product.status === "inactive" ? " inactive" : "";
     // const inactiveClass = '';
 
     const discountFormat = product.price_discount.toLocaleString("es-MX", {
@@ -26,12 +26,16 @@ export function renderDashboardProducts(productsArray) {
                     <img src="${product.picture}" class="img-fluid rounded-4 object-fit-cover w-100 h-100 product-image"
                         style="min-height: 200px; max-height: 250px" alt="${product.name}" loading="lazy" />
                     <!-- Badge de descuento -->
-                    ${ product.discount > 0 ? `
+                    ${
+                      product.discount > 0
+                        ? `
                     <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 rounded-end"
                         style="font-size: 0.8rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
                         -${product.discount}% OFF
                     </span>
-                    ` : "" }
+                    `
+                        : ""
+                    }
                     <!-- Badge especial para admin -->
                     <span class="position-absolute bottom-0 start-0 bg-dark text-white px-2 py-1 rounded-top-end"
                         style="font-size: 0.8rem">
@@ -104,9 +108,7 @@ export function renderDashboardProducts(productsArray) {
                                 class="precio p-3 rounded-3 h-100 d-flex flex-column border border-primary border-opacity-25">
                                 <small class="mb-1">Precio final</small>
                                 <span class="text-dark fw-bold fs-5">${discountFormat}</span>
-                                <small class="text-pink mt-1">Ganancia: $${(product.pricing * 0.3 * (1 -
-                                    product.discount /
-                                    100)).toFixed(2)}</small>
+                                <small class="text-pink mt-1">Ganancia: $${(product.pricing * 0.3 * (1 - product.discount / 100)).toFixed(2)}</small>
                             </div>
                         </div>
                     </div>
@@ -116,12 +118,14 @@ export function renderDashboardProducts(productsArray) {
                 <div
                     class="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top buttons-admin-dashboard">
                     <div class="d-flex flex-wrap gap-2">
-                        <a class="btn btn-sm btn-pink d-flex align-items-center me-3" href="edit-product.html">
+                        <button class="btn btn-sm btn-pink d-flex align-items-center me-3 edit-button-admin">
                             <i class="bi bi-pencil-fill me-1"></i>Editar
-                        </a>
+                        </button>
                         <div class="form-check form-switch d-flex align-items-center">
                             <input class="form-check-input custom-switch" type="checkbox" id="toggle-${product.id}"
-                                data-product-id="${product.id}" ${product.status === 'inactive' ? '' : 'checked'} style="width: 2.5em; height: 1.3em" />
+                                data-product-id="${product.id}" ${
+      product.status === "inactive" ? "" : "checked"
+    } style="width: 2.5em; height: 1.3em" />
                             <label class="form-check-label small ms-2 switch-state-text"
                                 for="toggle-${product.id}"></label>
                         </div>
@@ -137,7 +141,7 @@ export function renderDashboardProducts(productsArray) {
         </div>
     </div>
 </div>
-    `
+    `;
   });
   return html;
 }
