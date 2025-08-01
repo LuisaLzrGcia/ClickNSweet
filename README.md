@@ -1,10 +1,9 @@
 # 🍬 Click N' Sweet
-
-**Click N' Sweet** es un e-commerce dedicado a la venta de dulces tradicionales, exóticos e importados. Este proyecto busca ofrecer una experiencia visual atractiva, dinámica y funcional para los usuarios que deseen comprar dulces únicos desde la comodidad de su hogar.
+Click N' Sweet** es un e-commerce dedicado a la venta de dulces tradicionales, exóticos e importados. Este proyecto busca ofrecer una experiencia visual atractiva, dinámica y funcional para los usuarios que deseen comprar dulces únicos desde la comodidad de su hogar.
 ---
 ## 🌐 Sitio en Producción
 
-Accede al e-commerce en: [https://clicknsweet.com](https://clicknsweet.com)
+Accede al e-commerce en: [https://luisalzrgcia.github.io/ClickNSweet/index.html](https://luisalzrgcia.github.io/ClickNSweet/index.html)
 ---
 ## 🛠 Tecnologías Utilizadas
 
