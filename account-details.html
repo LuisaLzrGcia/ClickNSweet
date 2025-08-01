@@ -22,7 +22,7 @@
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
     <link rel="stylesheet" href="account-details/style.css">
 
-    <script src="account-details/script.js" defer></script>
+    <script type="module" src="account-details/script.js"></script>
 </head>
 
 </head>
@@ -114,14 +114,18 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="container my-5" id="cuenta">
         <div class="row">
             <!-- Menú lateral -->
             <div class="col-md-3 mb-4">
                 <div class="list-group">
-                    <button class="list-group-item list-group-item-action active" data-section="perfil">Perfil</button>
-                    <button class="list-group-item list-group-item-action" data-section="pedidos">Mis pedidos</button>
-                    <button class="list-group-item list-group-item-action" data-section="pagos">Metodos de Pago</button>
+                    <button class="list-group-item list-group-item-action active"
+                        data-section="perfil">Perfil</button>
+                    <button class="list-group-item list-group-item-action" data-section="pedidos">Mis
+                        pedidos</button>
+                    <button class="list-group-item list-group-item-action" data-section="pagos">Metodos de
+                        Pago</button>
                     <button class="list-group-item list-group-item-action"
                         data-section="direcciones">Direcciones</button>
                     <button class="list-group-item list-group-item-action text-danger">Cerrar sesión</button>
@@ -130,204 +134,17 @@
 
             <!-- Panel de contenido -->
             <div class="col-md-9">
-                <div id="seccion-perfil" class="card p-4">
-                    <h3 class="titulo-seccion">Perfil</h3>
-                    <div class="row align-items-start">
-                        <!-- Imagen -->
-                        <div class="col-md-4 text-center">
-                            <div class="foto-perfil mb-2">
-                                <img src="assets/spicy_icon.png" alt="Foto de perfil"
-                                    class="rounded-circle img-fluid" />
-                            </div>
-                            <button class="btn btn-pink btn-sm">Cambiar Imagen</button>
-                        </div>
-
-                        <!-- Info -->
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h5 id="nombre-mostrar">Nombre Usuario</h5>
-                                    <p id="correo-mostrar">Correo de Usuario</p>
-                                </div>
-                                <button class="btn btn-pink btn-sm" id="btn-editar">EDITAR</button>
-                            </div>
-
-                            <!-- Formulario (deshabilitado inicialmente) -->
-                            <form id="form-perfil" class="mt-3">
-                                <div class="mb-2">
-                                    <label>Nombre y apellido</label>
-                                    <input type="text" class="form-control" id="nombre" disabled />
-                                </div>
-                                <div class="mb-2">
-                                    <label>Correo electrónico</label>
-                                    <input type="email" class="form-control" id="correo" disabled />
-                                </div>
-                                <div class="mb-3">
-                                    <label>Numero de telefono</label>
-                                    <input type="tel" class="form-control" id="telefono" disabled />
-                                </div>
-                                <button type="submit" class="btn btn-pink" disabled id="btn-guardar">Guardar
-                                    Datos</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Otras secciones -->
-                <!-- Sección: Mis pedidos -->
-                <div id="seccion-pedidos" class="card p-4 d-none">
-                    <h3 class="titulo-seccion">Mis Pedidos</h3>
-
-                    <!-- Pedido 1 -->
-                    <div class="pedido mb-3">
-                        <p class="fw-bold subtitulo">Fecha de pedido</p>
-                        <div class="card p-2 d-flex flex-md-row align-items-center justify-content-between mb-2">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://via.placeholder.com/50" alt="Imagen producto" class="img-thumbnail" />
-                                <div>
-                                    <p class="mb-1">Estatus</p>
-                                    <small>Llego el Fecha de entrega</small>
-                                </div>
-                            </div>
-                            <button class="btn btn-pink btn-sm mt-2 mt-md-0">Ver pedido</button>
-                        </div>
-                    </div>
-
-                    <!-- Pedido 2 -->
-                    <div class="pedido">
-                        <p class="fw-bold subtitulo">Fecha de pedido</p>
-                        <div class="card p-2 d-flex flex-md-row align-items-center justify-content-between mb-2">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://via.placeholder.com/50" alt="Imagen producto" class="img-thumbnail" />
-                                <div>
-                                    <p class="mb-1">Estatus</p>
-                                    <small>Llego el Fecha de entrega</small>
-                                </div>
-                            </div>
-                            <button class="btn btn-pink btn-sm mt-2 mt-md-0">Ver pedido</button>
-                        </div>
-
-                        <!-- Pedido adicional dentro del mismo día -->
-                        <div class="card p-2 d-flex flex-md-row align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://via.placeholder.com/50" alt="Imagen producto" class="img-thumbnail" />
-                                <div>
-                                    <p class="mb-1">Estatus</p>
-                                    <small>Llego el Fecha de entrega</small>
-                                </div>
-                            </div>
-                            <button class="btn btn-pink btn-sm mt-2 mt-md-0">Ver pedido</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección: Métodos de Pago -->
-                <div id="seccion-pagos" class="card p-4 d-none">
-                    <h3 class="titulo-seccion">Mis Tarjetas</h3>
-
-                    <!-- Lista de tarjetas -->
-                    <div class="mb-4">
-                        <div class="form-check d-flex justify-content-between align-items-center">
-                            <div>
-                                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
-                                <label class="form-check-label" for="tarjeta1">
-                                    Tarjeta XXXX que termina en XXXX
-                                </label>
-                            </div>
-                            <div class="d-flex gap-3">
-                                <span>Nombre</span>
-                                <span>Fecha</span>
-                            </div>
-                        </div>
-
-                        <div class="form-check d-flex justify-content-between align-items-center mt-2">
-                            <div>
-                                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
-                                <label class="form-check-label" for="tarjeta2">
-                                    Tarjeta XXXX que termina en XXXX
-                                </label>
-                            </div>
-                            <div class="d-flex gap-3">
-                                <span>Nombre</span>
-                                <span>Fecha</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 text-end">
-                            <button class="btn btn-pink btn-sm">Agregar Tarjeta</button>
-                        </div>
-                    </div>
-
-                    <!-- Formulario nueva tarjeta -->
-                    <form id="form-tarjeta">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label>Nombre en la tarjeta</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Número de tarjeta</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label>Fecha de vencimiento</label>
-                                <div class="d-flex">
-                                    <select class="form-select me-2">
-                                        <option>01</option>
-                                        <option>02</option>
-                                        <option>03</option>
-                                        <!-- ... -->
-                                    </select>
-                                    <select class="form-select">
-                                        <option>2025</option>
-                                        <option>2026</option>
-                                        <option>2027</option>
-                                        <!-- ... -->
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label>CCV</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-pink">Guardar tarjeta</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Sección: Direcciones -->
-                <div id="seccion-direcciones" class="card p-4 d-none">
-                    <h3 class="titulo-seccion">Mis Direcciones</h3>
-
-                    <!-- Dirección 1 -->
-                    <div class="card p-3 mb-3">
-                        <p class="fw-bold mb-1">Nombre Cliente</p>
-                        <p class="mb-0">Nombre de calle número exterior, número interior</p>
-                        <p class="mb-0">Municipio</p>
-                        <p class="mb-0">Código postal</p>
-                        <p class="mb-3">Número de teléfono</p>
-
-                        <div class="d-flex justify-content-end gap-2">
-                            <button class="btn btn-pink btn-sm">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm">Eliminar</button>
-                        </div>
-                    </div>
-
-                    <!-- Botón agregar -->
-                    <div class="text-end">
-                        <button class="btn btn-pink">Agregar Dirección</button>
-                    </div>
-                </div>
+                <div id="perfil">...</div>
+                <div id="pagos" class="d-none">...</div>
+                <div id="direcciones" class="d-none">...</div>
+                <div id="pedidos" class="d-none">...</div>
 
             </div>
         </div>
     </main>
+
+     
+
 
 
 

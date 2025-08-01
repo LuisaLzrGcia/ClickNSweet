@@ -6,7 +6,11 @@ export function protectRoutesByRole() {
   const role = user?.role || "user";
 
   const allowedRoutes = {
-    admin: ["main-manage-products.html", "edit-product.html", "new-product.html"],
+    admin: [
+      "main-manage-products.html",
+      "edit-product.html",
+      "new-product.html",
+    ],
     user: [
       "about.html",
       "cart.html",
@@ -24,6 +28,7 @@ export function protectRoutesByRole() {
       "prueba.html",
       "register.html",
       "terms-conditions.html",
+      "account-details.html",
     ],
   };
 

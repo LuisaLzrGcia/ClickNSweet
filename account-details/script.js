@@ -1,38 +1,41 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const btnEditar = document.getElementById("btn-editar");
-  const form = document.getElementById("form-perfil");
-  const inputs = form.querySelectorAll("input");
-  const btnGuardar = document.getElementById("btn-guardar");
+import { initPerfil } from "./perfil.js";
+import { initPago } from "./pago.js";
+import { initDireccion } from "./direccion.js";
+import { getCurrentUser } from "../login/auth1.js";
+import { initPedido } from "./pedido.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const usuario = getCurrentUser();
+  console.log("Usuario actual:", usuario);
+  if (!usuario) {
+    window.location.href = "login.html"; // Redirigir si no hay usuario logueado
+    return;
+  }
 
-  btnEditar.addEventListener("click", () => {
-    inputs.forEach((input) => (input.disabled = false));
-    btnGuardar.disabled = false;
-  });
+  const botonesMenu = document.querySelectorAll(
+    ".list-group-item[data-section]"
+  );
+  const secciones = document.querySelectorAll(".col-md-9 > div");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    // Aquí podrías agregar lógica para enviar datos al backend
-    alert("Datos guardados");
-    inputs.forEach((input) => (input.disabled = true));
-    btnGuardar.disabled = true;
-  });
+  botonesMenu.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const objetivo = boton.getAttribute("data-section");
 
-  // Cambio de secciones
-  document.querySelectorAll("[data-section]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-section");
+      // Marcar activo el botón
+      botonesMenu.forEach((b) => b.classList.remove("active"));
+      boton.classList.add("active");
 
-      // Toggle clase active
-      document
-        .querySelectorAll(".list-group-item")
-        .forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      // Ocultar todas las secciones
+      secciones.forEach((sec) => sec.classList.add("d-none"));
 
-      // Mostrar sección correspondiente
-      ["perfil", "pedidos", "pagos", "direcciones"].forEach((id) => {
-        document.getElementById(`seccion-${id}`).classList.add("d-none");
-      });
-      document.getElementById(`seccion-${target}`).classList.remove("d-none");
+      // Mostrar la sección seleccionada
+      const seccionMostrar = document.getElementById(objetivo);
+      if (seccionMostrar) {
+        seccionMostrar.classList.remove("d-none");
+      }
     });
   });
+  initPerfil();
+  initPago();
+  initDireccion();
+  initPedido();
 });
