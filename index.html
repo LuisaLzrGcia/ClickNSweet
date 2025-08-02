@@ -17,7 +17,8 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./products/products.css" />
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
@@ -121,60 +122,22 @@
     </section>
 
 
-    <!-- Productos más vendidos -->
-    <h2 class="text-center my-5">Nuestros productos más vendidos</h2>
-    <div class="container">
-        <div class="row text-center">
-            <!-- Producto 1 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Charamuscas.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 1">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Charamuscas</h5>
-                        <p class="card-text">$100</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 2 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/dulcenopal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 2">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de nopal</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/paleta-animal.jpg" class="card-img-top" style="height: 200px; object-fit: contain;"
-                        alt="Producto 3">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulce de tequila</h5>
-                        <p class="card-text">$30</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 4 -->
-            <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="assets/Dulces-Enchilados.jpg" class="card-img-top"
-                        style="height: 200px; object-fit: contain;" alt="Producto 4">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">Dulces con chile</h5>
-                        <p class="card-text">$100</p>
-                    </div>
-                </div>
-            </div>
+    <section>
+        <!-- Productos más vendidos -->
+        <h2 class="text-center my-5">Nuestros productos más vendidos</h2>
+        <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" id="container-products-main">
+            <!-- Los productos se cargarán aquí dinámicamente -->
         </div>
-    </div>
+        <div class="text-center mt-4">
+            <a href="products.html" class="btn btn-pink-see px-4 py-2">
+                Ver más
+            </a>
+        </div>
+    </section>
 
     <!-- Categorías -->
     <section id="categories" class="categories">
-        <h2 class="title">Categories</h2>
+        <h2 class="title">Categorias</h2>
 
         <!-- Swiper wrapper -->
         <div class="swiper mySwiper">
@@ -290,7 +253,7 @@
                 <div class="card h-100">
                     <div class="card-body text-white d-flex align-items-center justify-content-center"
                         style="height: 150px; background-image: url('./assets/caramelos_suaves.png'); background-size: cover; background-position: center; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-                        <strong class="bg-glass">Promoción de julio</strong>
+                        <strong class="bg-glass">Promoción de Agosto</strong>
                     </div>
                     <p class="mt-2 px-3">Aprovecha nuestro <strong>2x1 en caramelos suaves</strong> hasta el 15 de
                         julio. ¡No te
@@ -385,6 +348,9 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="main.js"></script>
     <script type="module" src="./index/index.js"></script>
+
+    <script type="module" src="./functions/addCart.js"></script>
+    <script type="module" src="./functions/viewDetails.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

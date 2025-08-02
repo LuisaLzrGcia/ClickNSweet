@@ -1,6 +1,4 @@
-body {
-  
-}
+body {}
 
 .navbar-brand {
   font-family: 'Pacifico', cursive;
@@ -232,15 +230,16 @@ h2 {
   background-color: #f7a8be;
 }
 
-.btn-pink {
-  border-radius: 12px;
-  color: #000;
-  font-weight: 500;
+.btn-pink-see {
+  margin-top: 0.5rem;
+  background-color: #E452C0;
+  color: white;
+  width: fit-content;
 }
 
-.btn-pink:hover {
-  background-color: #f9c2d1;
-  color: #000;
+.btn-pink-see:hover {
+  background-color: #d13dac;
+  color: white;
 }
 
 .btn-blue {
@@ -548,9 +547,6 @@ h1 {
 .swal2-content {
   font-family: 'Quicksand', sans-serif !important;
 }
-
-
-
 
 .food-image {
   display: flex;

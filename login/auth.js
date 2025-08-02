@@ -20,12 +20,12 @@ export async function login(username, password) {
 }
 
 export function getCurrentUser() {
-    const user = localStorage.getItem('currentUser');
+    const user = localStorage.getItem('usuario');
     return user ? JSON.parse(user) : null;
 }
 
 export function logout() {
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('usuario');
 }
 
 

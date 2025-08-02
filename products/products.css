@@ -21,8 +21,8 @@
 }
 
 
-.card>div {
-  /* background-color: #000; */
+.origen {
+  fill: #E452C0 !important;
 }
 
 
@@ -125,7 +125,7 @@
   margin-top: 0.5rem;
   background-color: #E452C0;
   color: white;
-  width: 100%;
+  width: auto;
   margin: 0.5rem;
 }
 
@@ -166,5 +166,21 @@
 
   .card {
     height: fit-content;
+  }
+}
+
+#filter-bar>div {
+  padding: 0rem !important;
+}
+
+
+
+#filter-bar>.btn-group {
+  font-size: 1rem !important;
+}
+
+@media (max-width: 767.98px) {
+  #filter-bar>div>.btn-group>button {
+    font-size: 0.8rem !important;
   }
 }

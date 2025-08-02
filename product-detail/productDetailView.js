@@ -131,3 +131,90 @@ export const productDetailView = (data, type = "detail") => {
 
   return html;
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const productId = "mooncake";
+  const storageKey = `reviews_${productId}`;
+  const reviewsContainer = document.getElementById("reviews-container");
+  const loadMoreButton = document.getElementById("load-more-reviews");
+  const averageStarsContainer = document.getElementById("average-stars");
+  const reviewCountContainer = document.getElementById("review-count");
+
+  const defaultReviews = [
+    {
+      id_user: 1,
+      name_user: "María López",
+      id_product: "mooncake",
+      id_review: 101,
+      rating: 5,
+      comment: "¡Delicioso! La textura es perfecta y el sabor increíble."
+    },
+    {
+      id_user: 2,
+      name_user: "Juan Pérez",
+      id_product: "mooncake",
+      id_review: 102,
+      rating: 4,
+      comment: "Muy bueno, aunque un poco dulce para mi gusto."
+    },
+    {
+      id_user: 3,
+      name_user: "Ana Rodríguez",
+      id_product: "mooncake",
+      id_review: 103,
+      rating: 3,
+      comment: "Lo compré para una reunión y todos quedaron encantados."
+    },
+    {
+      id_user: 4,
+      name_user: "Carlos Méndez",
+      id_product: "mooncake",
+      id_review: 104,
+      rating: 4,
+      comment: "Buen sabor, buena presentación. Volvería a comprar."
+    }
+  ];
+
+  if (!localStorage.getItem(storageKey)) {
+    localStorage.setItem(storageKey, JSON.stringify(defaultReviews));
+  }
+
+  const reviews = JSON.parse(localStorage.getItem(storageKey)) || [];
+  let reviewsToShow = 3;
+  renderHeader();
+  renderReviews();
+
+  function renderHeader() {
+    const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+    if (averageStarsContainer) {
+      averageStarsContainer.innerHTML = renderStars(avgRating);
+    }
+    if (reviewCountContainer) {
+      reviewCountContainer.textContent = `Total de calificaciones (${reviews.length})`;
+    }
+  }
+
+  function renderReviews() {
+    reviewsContainer.innerHTML = "";
+
+    reviews.slice(0, reviewsToShow).forEach((review) => {
+      const reviewDiv = document.createElement("div");
+      reviewDiv.classList.add("review-item");
+      reviewDiv.innerHTML = `
+        <p class="reviewer-name"><strong>${review.name_user}</strong></p>
+        <p class="review-stars">${renderStars(review.rating)}</p>
+        <p class="review-text">${review.comment}</p>
+      `;
+      reviewsContainer.appendChild(reviewDiv);
+    });
+
+    loadMoreButton.style.display = reviewsToShow < reviews.length ? "block" : "none";
+  }
+
+  loadMoreButton.addEventListener("click", () => {
+    reviewsToShow += 3;
+    renderReviews();
+  });
+});
+

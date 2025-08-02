@@ -1,6 +1,6 @@
 import { loginFormValidation } from "../functions/login/loginFormValidation.js";
 import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
-import { login } from "./auth.js";
+import { login } from "./auth1.js";
 import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,10 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("inputPassword");
   const inputs = document.querySelectorAll("#loginForm input");
 
-  
   initializePasswordToggle("inputPassword", "togglePassword");
 
-  
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
       input.classList.remove("input-error");
@@ -20,36 +18,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const email = usernameInput.value;
     const password = passwordInput.value;
 
-    
     const dataIsValid = loginFormValidation(email, password);
-    
+
     if (!dataIsValid.isValid) {
       if (dataIsValid.field === "Email") {
         showErrorMessages(usernameInput, dataIsValid.message);
         return;
-      } 
+      }
       if (dataIsValid.field === "Password") {
         showErrorMessages(passwordInput, "Por favor, ingresa tu contraseña");
         return;
       }
     }
 
-    
     try {
       login(email, password)
-        .then(usuario => {
+        .then((usuario) => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
-          window.document.location.href = "/index.html"; // Redirige al inicio
+          const homePage = usuario.role === "admin" ? "./main-manage-products.html" : "./index.html";
+          window.document.location.href = homePage;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error en login:", error.message);
           alert("No se pudo iniciar sesión: " + error.message);
         });
