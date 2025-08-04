@@ -20,6 +20,41 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./products/products.css" />
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
+
+    <style>
+        .video-container-fallback {
+    position: relative; /* Base para posicionar los elementos internos */
+    width: 100%;
+    padding-top: 56.25%; /* Proporción de aspecto 16:9 para video */
+    background-color: #000; /* Fondo negro mientras carga */
+}
+
+.video-container-fallback iframe,
+.video-container-fallback .fallback-image {
+    /* Hacemos que tanto el video como la imagen ocupen todo el contenedor */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Por defecto, la imagen de respaldo está oculta */
+.video-container-fallback .fallback-image {
+    display: none;
+}
+
+/* --- La Magia del Cambio --- */
+/* Cuando el contenedor TENGA la clase "show-fallback"... */
+.video-container-fallback.show-fallback .fallback-image {
+    display: block; /* ...hacemos visible la imagen... */
+}
+
+.video-container-fallback.show-fallback iframe {
+    display: none; /* ...y ocultamos el video. */
+}
+    </style>
 </head>
 
 <body>
@@ -112,13 +147,23 @@
 
     <!-- Banner -->
     <section class="vh-100 position-relative overflow-hidden bg-secondary text-white">
-        <video autoplay muted loop class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-            <source src="assets/Dulces.mp4" type="video/mp4">
-            Tu navegador no admite la reproducción de video.
-        </video>
-        <div class="d-flex align-items-center justify-content-center h-100 position-relative">
-            <h1></h1>
-        </div>
+        <div class="video-container-fallback">
+
+    <iframe
+        id="vimeo-player"
+        src="https://player.vimeo.com/video/1107237324?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        title="Video Principal">
+    </iframe>
+
+    <img
+        class="fallback-image"
+        src="assets/img-backgroun-home.jpg"
+        alt="Video no disponible en este momento">
+
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
     </section>
 
 
@@ -354,6 +399,39 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    // Esperamos a que todo el contenido de la página esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Identificamos los elementos con los que vamos a trabajar
+        const videoContainer = document.querySelector('.video-container-fallback');
+        const iframe = document.getElementById('vimeo-player');
+        const player = new Vimeo.Player(iframe);
+
+        // Esta es la función que se ejecutará si el video falla
+        const showFallback = () => {
+            // Simplemente añade la clase "show-fallback" al contenedor. El CSS se encarga del resto.
+            videoContainer.classList.add('show-fallback');
+        };
+
+        // Creamos un temporizador. Si en 8 segundos el video no ha cargado, llamamos a la función de fallback.
+        const fallbackTimer = setTimeout(showFallback, 8000); // 8000 milisegundos = 8 segundos
+
+        // Le pedimos a la API de Vimeo que nos avise cuando el video esté cargado y listo
+        player.on('loaded', function() {
+            // Si el video carga, cancelamos el temporizador para que el fallback nunca se active.
+            clearTimeout(fallbackTimer);
+        });
+
+        // Como medida extra, si Vimeo reporta un error directamente...
+        player.on('error', function() {
+            // ...activamos el fallback inmediatamente, sin esperar al temporizador.
+            clearTimeout(fallbackTimer);
+            showFallback();
+        });
+    });
+</script>
 </body>
 
 </html>
