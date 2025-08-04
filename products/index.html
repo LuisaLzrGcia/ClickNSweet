@@ -16,10 +16,10 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="./products/products.css" />
-  <link rel="stylesheet" href="footer/style.css" />
-  <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../products/products.css" />
+  <link rel="stylesheet" href="../footer/style.css" />
+  <link rel="icon" href="../assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <a class="navbar-brand d-flex align-items-center" href="../index.html">
         <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
         <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
       </a>
@@ -36,8 +36,8 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-center">
-          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="index.html">Inicio</a></li>
-          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="products.html">Productos</a>
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="../index.html">Inicio</a></li>
+          <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="./index.html">Productos</a>
           </li>
           <li class="nav-item nav-item-user dropdown">
             <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,7 +67,7 @@
           </li>
           <li class="nav-item nav-item-user">
             <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-              href="cart.html">
+              href="../cart/index.html">
               <span class="cart-icon position-relative me-1">
                 🛒
                 <div id="cart-indicator" class="cart-badge">0</div>
@@ -113,149 +113,94 @@
       <!-- Sidebar Desktop -->
       <div class="col-lg-3 d-none d-lg-block">
         <div class="sidebar">
-          <h5>Tipo de Dulce</h5>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Caramelo</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Chocolate</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Gomitas</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Bombones</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Exóticos</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Picosos</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Ácidos</label></div>
-
-          <h6 class="filter-title">Sabor</h6>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Dulce</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Salado</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Picante</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Ácido</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-              class="form-check-label">Frutal</label></div>
-
-          <h6 class="filter-title">País</h6>
-          <select class="form-select">
-            <option>Todos</option>
-            <option>México</option>
-            <option>USA</option>
-            <option>Japón</option>
-            <option>España</option>
-          </select>
-
-          <h6 class="filter-title">Precio</h6>
-          <div class="price-range-label">
-            <span>$0</span>
-            <span>$100</span>
+          <div id="sidebar-categories">
+            <!-- Aqui se renderizan las categorías -->
           </div>
-          <input type="range" class="form-range" min="0" max="100">
-        </div>
-      </div>
 
-      <!-- Barra filtros mobile -->
-      <div class="d-lg-none mb-3 overflow-auto flex-nowrap d-flex gap-2">
-        <!-- Tipo de dulce -->
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            Tipo de Dulce
-          </button>
-          <ul class="dropdown-menu p-2" style="min-width: 200px;">
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Caramelo</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Chocolate</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Gomitas</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Bombones</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Exóticos</label></div>
-            </li>
-          </ul>
-        </div>
 
-        <!-- Sabor -->
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            Sabor
-          </button>
-          <ul class="dropdown-menu p-2" style="min-width: 180px;">
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Dulce</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Salado</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Picante</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Ácido</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Frutal</label></div>
-            </li>
-          </ul>
-        </div>
+          <div id="sidebar-countries">
+            <!-- Aquio se renderizan los paises -->
+          </div>
+          <div id="sidebar-price">
+            <h5 class="filter-title">Precio</h5>
+            <label for="minPrice" class="form-label mb-1">Precio mínimo</label>
+            <input type="number" id="minPrice" class="form-control mb-2" placeholder="Ej. 100" min="0">
 
-        <!-- País -->
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            País
-          </button>
-          <ul class="dropdown-menu p-2" style="min-width: 150px;">
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">México</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">USA</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">Japón</label></div>
-            </li>
-            <li>
-              <div class="form-check"><input class="form-check-input" type="checkbox"> <label
-                  class="form-check-label">España</label></div>
-            </li>
-          </ul>
-        </div>
+            <label for="maxPrice" class="form-label mb-1">Precio máximo</label>
+            <input type="number" id="maxPrice" class="form-control mb-3" placeholder="Ej. 1000" min="0">
 
-        <!-- Precio -->
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            Precio
-          </button>
-          <div class="dropdown-menu p-3" style="min-width: 200px;">
-            <label class="form-label">Rango ($0 - $100)</label>
-            <input type="range" class="form-range" min="0" max="100">
-            <div class="d-flex justify-content-between"><small>$0</small><small>$100</small></div>
+            <button id="applyPriceFilter" class="btn w-100 btn-apply-filter">Aplicar</button>
+
           </div>
         </div>
       </div>
+
+      <div class="container-fluid mb-3 d-block d-lg-none" id="filter-bar-mobile">
+        <div class="row">
+
+          <div class="col-4">
+            <div class="dropdown" id="dropdownFilterCategories">
+              <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categoría
+              </button>
+              <ul class="dropdown-menu p-3" style="min-width: 220px;" id="categoryList">
+                <!-- Aquí se insertarán los checkboxes -->
+                <li>
+                  <button id="applyCategoryFilter" class="btn w-100 mt-2 btn-apply-filter">Aplicar filtro</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="dropdown">
+              <button id="dropdownButton" class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                País
+              </button>
+              <ul class="dropdown-menu p-2" style="min-width: 200px;" id="countryDropdownMenu">
+                <input type="text" id="countrySearch" class="form-control mb-2" placeholder="Buscar país...">
+                <!-- Aquí se generarán las opciones -->
+                <div id="countryOptions" style="max-height: 150px; overflow-y: auto;"></div>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="dropdown">
+              <button id="priceDropdownButton" class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Precio
+              </button>
+              <div class="dropdown-menu p-3" style="min-width: 220px;">
+                <label for="minPrice" class="form-label mb-1">Precio mínimo</label>
+                <input type="number" id="minPrice" class="form-control mb-2" placeholder="Ej. 100" min="0">
+
+                <label for="maxPrice" class="form-label mb-1">Precio máximo</label>
+                <input type="number" id="maxPrice" class="form-control mb-3" placeholder="Ej. 1000" min="0">
+
+                <button id="applyPriceFilter" class="btn w-100  btn-apply-filter">Aplicar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-1" id="remove-filters">
+          <div class="col-12 d-flex flex-wrap align-items-center gap-2">
+            <div id="appliedFiltersBadges" class="d-flex flex-wrap gap-2">
+              <!-- Aquí aparecerán los badges con filtros activos -->
+            </div>
+            <button id="clearFiltersBtn" class="" style="display:none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-eraser-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Productos -->
       <div class="col-lg-9">
@@ -307,7 +252,6 @@
       </nav>
     </div>
   </div>
-  </div>
 
   <!-- Footer -->
   <footer class="footer pt-1">
@@ -341,11 +285,11 @@
           <div class="col-lg-5 col-md-6">
             <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
             <div class="social-links mb-4">
-              <a href="#"><img src="assets/icons8-facebook-192.png" alt="Facebook" width="32" /></a>
-              <a href="#"><img src="assets/icons8-x-192.png" alt="Twitter" width="32" /></a>
-              <a href="#"><img src="assets/icons8-instagram-192.png" alt="Instagram" width="32" /></a>
-              <a href="#"><img src="assets/icons8-youtube-96.png" alt="YouTube" width="32" /></a>
-              <a href="#"><img src="assets/icons8-tiktok-192.png" alt="YouTube" width="32" /></a>
+              <a href="#"><img src="../assets/icons8-facebook-192.png" alt="Facebook" width="32" /></a>
+              <a href="#"><img src="../assets/icons8-x-192.png" alt="Twitter" width="32" /></a>
+              <a href="#"><img src="../assets/icons8-instagram-192.png" alt="Instagram" width="32" /></a>
+              <a href="#"><img src="../assets/icons8-youtube-96.png" alt="YouTube" width="32" /></a>
+              <a href="#"><img src="../assets/icons8-tiktok-192.png" alt="YouTube" width="32" /></a>
             </div>
             <ul class="footer-links"></ul>
           </div>
@@ -388,11 +332,11 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="main.js"></script>
-  <script type="module" src="./products/main.js"></script>
-  <script type="module" src="./functions/addCart.js"></script>
-  <script type="module" src="./functions/viewDetails.js"></script>
+  <script type="module" src="../products/main.js"></script>
+  <script type="module" src="../functions/addCart.js"></script>
+  <script type="module" src="../functions/viewDetails.js"></script>
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
