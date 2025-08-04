@@ -368,7 +368,7 @@ export class PaymentManager {
         this.clearCart();
         
         // Actualizar contador del carrito en navbar
-        loadCartCount();
+        // loadCartCount();
         
         // Mostrar confirmación
         this.showOrderConfirmation(orderData);
