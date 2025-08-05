@@ -1,14 +1,14 @@
-import { displayActiveLink } from "./functions/displayActiveLink.js";
-import { preventLoginIfAuthenticated } from "./functions/preventLoginIfAuthenticated.js";
-import { loadCartCount } from "./functions/loadCartCount.js";
-import { updateNavbarAuthState } from "./functions/updateNavbarAuthState.js";
-import { logout } from "./login/auth.js";
-import { showSubscribeAlert } from "./functions/showSubscribeAlert.js";
-import { renderFooter } from "./footer/script.js";
-import { handleNavbarScroll } from "./functions/navBarScrollBehavior.js";
+import { displayActiveLink } from "../functions/displayActiveLink.js";
+import { preventLoginIfAuthenticated } from "../functions/preventLoginIfAuthenticated.js";
+import { loadCartCount } from "../functions/loadCartCount.js";
+import { updateNavbarAuthState } from "../functions/updateNavbarAuthState.js";
+import { logout } from "../login/auth.js";
+import { showSubscribeAlert } from "../functions/showSubscribeAlert.js";
+import { renderFooter } from "../footer/script.js";
+import { handleNavbarScroll } from "../functions/navBarScrollBehavior.js";
 
-import { initPaymentPage } from "./payment1/payment.js";
-import { protectRoutesByRole } from "./functions/protectRoutesByRole.js";
+import { initPaymentPage } from "../payment1/payment.js";
+import { protectRoutesByRole } from "../functions/protectRoutesByRole.js";
 
 
 const navbarLinks = document.querySelector(".navbar-nav");
