@@ -1,4 +1,4 @@
-// import { loadCartCount } from "./loadCartCount.js";
+import { loadCartCount } from "./loadCartCount.js";
 
 window.addCart = function (element) {
   const id = Number(element.dataset.id);
@@ -46,7 +46,7 @@ window.addCart = function (element) {
   localStorage.setItem("cart", JSON.stringify(cart));
   // localStorage.setItem("cartCount", JSON.stringify(cartCountStorage));
 
-  // loadCartCount();
+  loadCartCount();
 
   Swal.fire({
     toast: true,

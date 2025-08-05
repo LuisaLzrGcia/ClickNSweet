@@ -186,7 +186,7 @@
   }
 }
 
-.dropdown-toggle {
+#dropdownFilterCategories .dropdown-toggle {
   background-color: #E452C0 !important;
   color: white !important;
   /* para que el texto contraste */

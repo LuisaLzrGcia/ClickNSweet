@@ -30,7 +30,45 @@ export function resolvePath(path) {
 }
 
 export function isActive(path) {
+    const currentHash = window.location.hash;
+    if (currentHash) {        
+        return
+    }
     const current = getCurrentPath().replace(/\/$/, '');
     const compare = path.replace(/\/$/, '');
     return current === compare || current === `${compare}/index.html`;
+}
+
+export function mostrarRegionActiva() {
+  const currentHash = window.location.hash;
+  if (currentHash) {
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+    const dropdownItems = document.querySelectorAll(
+        ".dropdown-menu .dropdown-item"
+    );
+    navLinks.forEach((link) => {
+        link.classList.remove("active");
+    });
+    dropdownItems.forEach((item) => {
+        item.classList.remove("active");
+    }); 
+    console.log(dropdownItems.length);
+    console.log(navLinks.length);
+    
+    dropdownItems.forEach((item) => {
+        console.log(currentHash);
+        
+        if (item.getAttribute("href").includes(currentHash) && currentHash !== "") {
+            
+        // item.classList.add('active');
+        // Activar también el botón padre "Categorías"
+        const parentDropdownToggle = item
+            .closest(".dropdown")
+            .querySelector(".nav-link.dropdown-toggle");
+        if (parentDropdownToggle) {
+            parentDropdownToggle.classList.add("active");
+        }
+        }
+    })
+  }
 }

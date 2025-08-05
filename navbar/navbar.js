@@ -17,19 +17,19 @@ const config = {
 
 const navItems = [
     { path: "/", label: "Inicio" },
-    { path: "/products.html", label: "Productos" },
+    { path: "/products/index.html", label: "Productos" },
     {
         type: "dropdown",
-        path: "index.html#categories",
+        path: "/index.html#categories",
         label: "Categorías",
         items: config.categories.map(cat => ({
             // path: `/#${cat.toLowerCase().replace(/\s+/g, '-')}`,
-            path: 'index.html#categories',
+            path: '/index.html#categories',
             label: cat
         }))
     },
     { path: "/about.html", label: "Quiénes somos" },
-    { path: "/contac-us.html", label: "Contacto" }
+    { path: "/contact-us/contac-us.html", label: "Contacto" }
 ];
 
 function getCartCount() {
@@ -113,10 +113,12 @@ function renderNavItems(currentPath, basePath) {
 
 // Renderiza la sección del carrito
 function renderCart(count, basePath) {
+    const cartPath = '/cart/index.html';
     return `
     <li class="nav-item">
-        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-            href="${resolvePath('/cart.html')}">
+        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3
+            ${isActive(cartPath) ? 'active' : ''}"
+            href="${resolvePath(cartPath)}">
             <span class="cart-icon position-relative me-1">
                 🛒
                 ${`
@@ -146,17 +148,19 @@ function renderAuthSection(isAuthenticated, basePath) {
             </ul>
         </li>`;
     }
-
+    const loginPath = '/login/index.html';
+    const registerPath = '/form/form.html';
     return `
     <li class="nav-item autenticacion">
-        <a class="nav-link btn btn-pink mx-1" 
-            href="${resolvePath('/login/index.html')}">
+        <a class="nav-link btn btn-pink mx-1
+            ${isActive(loginPath) ? 'active' : ''}" 
+            href="${resolvePath(loginPath)}">
             Iniciar Sesión
         </a>
     </li>
     <li class="nav-item autenticacion">
         <a class="nav-link btn btn-register mx-1" 
-            href="${resolvePath('/register.html')}">
+            href="${resolvePath(registerPath)}">
             Registro
         </a>
     </li>`;
