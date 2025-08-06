@@ -17,13 +17,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="./about/style.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../footer/style.css" />
   <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
   <!-- Navbar -->
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
+  <!-- <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
@@ -56,7 +57,7 @@
           <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
           <li class="nav-item">
             <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-              href="cart.html">
+              href="/cart/index.html">
               <span class="cart-icon position-relative me-1">
                 🛒
                 <div id="cart-indicator" class="cart-badge">0</div>
@@ -65,10 +66,10 @@
             </a>
           </li>
           <li class="nav-item autenticacion">
-            <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+            <a class="nav-link btn btn-pink mx-1" href="/login/index.html">Iniciar Sesión</a>
           </li>
           <li class="nav-item autenticacion">
-            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
+            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="form/form.html">Registro</a>
           </li>
           <li class="nav-item dropdown user-menu d-none">
             <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
@@ -93,8 +94,10 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
+  
+  <nav id="navbar-container" class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm"></nav>
   <section class="container text-center my-5">
     <h2 style="color: #87b9f7; font-family: 'Pacifico', cursive">
       ¿Quiénes Somos?
@@ -246,74 +249,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer pt-1">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-          <h3 class="footer-title">¡Conoce nuestras novedades!</h3>
-          <p class="mb-4">Suscríbete a nuestro boletín para recibir actualizaciones, novedades y ofertas
-            exclusivas.</p>
-        </div>
-        <div class="col-lg-4 col-md-6 ms-auto text-end">
-          <form class="mb-4">
-            <div class="input-group">
-              <input type="email" class="form-control newsletter-input" placeholder="Ingresa tu email">
-              <button class="btn btn-subscribe text-white" type="submit">Suscribete</button>
-            </div>
-          </form>
-          <p class="small">Al suscribirse, acepta nuestra Política de privacidad y da su consentimiento para
-            recibir actualizaciones.</p>
-        </div>
-      </div>
-      <div class="footer-separator"></div>
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-lg-5 col-md-6">
-            <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
-            <div class="social-links mb-4">
-              <a href="#"><img src="assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
-              <a href="#"><img src="assets/icons8-x-192.png" alt="Twitter" width="32"></a>
-              <a href="#"><img src="assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
-              <a href="#"><img src="assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
-              <a href="#"><img src="assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
-            </div>
-            <ul class="footer-links"></ul>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <h3 class="footer-title">Sobre nosotros</h3>
-            <ul class="footer-links">
-              <li><a href="our-story.html">Nuestra dulce historia</a></li>
-              <li><a href="about.html">Quiénes somos</a></li>
-              <li><a href="products.html">Nuetros productos</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <h3 class="footer-title">Soporte</h3>
-            <ul class="footer-links">
-              <li><a href="contac-us.html">¡Contactanos!</a></li>
-              <li><a href="https://www.fedex.com/es-mx/home.html">Localiza tu envio</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="help-center.html">Centro de ayuda</a></li>
-              <li><a href="privacy.html">Política de privacidad</a></li>
-              <li><a href="terms-conditions.html">Terminos de servicios</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom mt-5">
-      <div class="container-fluid">
-        <div class="row py-1">
-          <div class="col-md-6 text-center">
-            <p class="mb-0">&copy; 2025 ClickN'Sweet. Todos los derechos reservados.</p>
-          </div>
-          <div class="col-md-6 text-center">
-            <p class="mb-0">Designed by <a href="#">ClickN'Sweet</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <footer></footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Detalles</title>
+    <title>Click N' Sweet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -17,16 +17,13 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./new-product/style.css" />
-    <link rel="stylesheet" href="./product-detail/style.css" />
-    <link rel="stylesheet" href="footer/style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="our-story/style.css"/>
+    <link rel="stylesheet" href="../footer/style.css">
+    <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
-    <!-- Navbar -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
         <div class="container">
@@ -82,10 +79,10 @@
                     </li>
 
                     <li class="nav-item autenticacion">
-                        <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+                        <a class="nav-link btn btn-pink mx-1" href="login/index.html">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item autenticacion">
-                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
+                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
                     </li>
                     <li class="nav-item dropdown user-menu d-none">
                         <a id="user-icon"
@@ -112,111 +109,27 @@
             </div>
         </div>
     </nav>
-
-
-    <!-- Main -->
-    <main class="container my-5 container-product p-2">
-        <section class="container" id="product-detail-container">
-
-        </section>
-    </main>
-
-    <section id="product-reviews" class="reviews-section">
-    <div class="reviews-grid">
-        <div class="reviews-summary-box">
-        <h2>Opiniones del producto</h2>
-        <div id="average-stars" class="stars">★★★★★</div>
-        <div id="review-count" class="review-count">(0)</div>
-        </div>
-        <div class="reviews-list-box">
-        <div id="reviews-container"></div>
-        <button id="load-more-reviews" style="display:none;">Mostrar más</button>
-        </div>
-    </div>
-    </section>
-
+  <main>
+    <h2>Nuestra Dulce Historia</h2>
+    <p>
+      Click N' Sweet nació del sueño compartido de un grupo de apasionados por los sabores del mundo. Nos unimos con la misión de crear una plataforma que permitiera a todas las personas descubrir y disfrutar dulces y postres con historias, tradiciones y especias que cruzan fronteras.
+    </p>
+    <p>
+      Inspirados por la diversidad culinaria de México y de otros rincones del planeta, quisimos acercar a cada hogar experiencias que despierten recuerdos, despierten la curiosidad y celebren la riqueza cultural a través del gusto.
+    </p>
+    <p>
+      Desde sabores tradicionales como el dulce de leche o la cajeta, hasta propuestas exóticas con influencias de Asia, Medio Oriente o Europa del Este, en Click N' Sweet buscamos constantemente innovar y sorprender. Queremos que cada bocado cuente una historia, y que cada usuario se sienta parte de esta aventura global.
+    </p>
+  </main>
 
     <!-- Footer -->
-    <footer class="footer pt-1">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <h3 class="footer-title">¡Conoce nuestras novedades!</h3>
-                    <p class="mb-4">Suscríbete a nuestro boletín para recibir actualizaciones, novedades y ofertas
-                        exclusivas.</p>
-                </div>
-                <div class="col-lg-4 col-md-6 ms-auto text-end">
-                    <form class="mb-4">
-                        <div class="input-group">
-                            <input type="email" class="form-control newsletter-input" placeholder="Ingresa tu email">
-                            <button class="btn btn-subscribe text-white" type="submit">Suscribete</button>
-                        </div>
-                    </form>
-                    <p class="small">Al suscribirse, acepta nuestra Política de privacidad y da su consentimiento para
-                        recibir actualizaciones.</p>
-                </div>
-            </div>
-            <div class="footer-separator"></div>
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-5 col-md-6">
-                        <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
-                        <div class="social-links mb-4">
-                            <a href="#"><img src="assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
-                            <a href="#"><img src="assets/icons8-x-192.png" alt="Twitter" width="32"></a>
-                            <a href="#"><img src="assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
-                            <a href="#"><img src="assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
-                            <a href="#"><img src="assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
-                        </div>
-                        <ul class="footer-links"></ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="footer-title">Sobre nosotros</h3>
-                        <ul class="footer-links">
-                            <li><a href="our-story.html">Nuestra dulce historia</a></li>
-                            <li><a href="about.html">Quiénes somos</a></li>
-                            <li><a href="products.html">Nuetros productos</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <h3 class="footer-title">Soporte</h3>
-                        <ul class="footer-links">
-                            <li><a href="contac-us.html">¡Contactanos!</a></li>
-                            <li><a href="https://www.fedex.com/es-mx/home.html">Localiza tu envio</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="help-center.html">Centro de ayuda</a></li>
-                            <li><a href="privacy.html">Política de privacidad</a></li>
-                            <li><a href="terms-conditions.html">Terminos de servicios</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom mt-5">
-            <div class="container-fluid">
-                <div class="row py-1">
-                    <div class="col-md-6 text-center">
-                        <p class="mb-0">&copy; 2025 ClickN'Sweet. Todos los derechos reservados.</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <p class="mb-0">Designed by <a href="#">ClickN'Sweet</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="module" src="main.js"></script>
-    <script type="module" src="./product-detail/main.js"></script>
-    <script type="module" src="./functions/addCart.js"></script>
-    <script type="module" src="product-detail/productDetailView.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="./footer/script.js"></script>
-
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="./index/index.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
