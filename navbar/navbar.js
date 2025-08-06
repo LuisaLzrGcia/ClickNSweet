@@ -161,7 +161,8 @@ function renderAuthSection(isAuthenticated, basePath) {
         </a>
     </li>
     <li class="nav-item autenticacion">
-        <a class="nav-link btn btn-register mx-1" 
+        <a class="nav-link btn btn-register mx-1
+            ${isActive(registerPath) ? 'active' : ''}" 
             href="${resolvePath(registerPath)}">
             Registro
         </a>
