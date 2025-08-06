@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.addEventListener("hashchange", () => displayActiveLink());
   // navbarLinks.classList.remove("invisible");
   logoutButton?.addEventListener("click", () => logout());
+  renderFooter();
 
   // Inicializar funcionalidad específica de página de pago
   if (window.location.pathname.includes('payment.html') || 
