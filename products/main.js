@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const getProducts = async () => {
   const container = document.getElementById('container-products');
-  const productsArray = products;
-  container.innerHTML = renderProducts(productsArray);
+  container.innerHTML = renderProducts(products);
 };
 
 document.getElementById('sort-new').addEventListener('click', () => {
@@ -45,8 +44,6 @@ document.getElementById('sort-rating').addEventListener('click', () => {
 });
 
 function filterProductsByCategory() {
-  const categoryList = document.getElementById('categoryList');
-
   renderCategories();
   renderCategoriesMobile();
 
@@ -55,55 +52,97 @@ function filterProductsByCategory() {
     const dropdownToggle = document.querySelector('#dropdownFilterCategories > button');
     bootstrap.Dropdown.getInstance(dropdownToggle).hide();
     updateFilterBadges();
+    logAppliedFilters();
   });
 }
 
 function renderCategories() {
   let checkboxesHTML = "<h5>Categorías</h5>";
   categoriesList.forEach(category => {
+    const isChecked = categoriesApplied.includes(category) ? 'checked' : '';
     checkboxesHTML += `
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="${category}">
-            <label class="form-check-label" for="${category}">${category}</label>
-          </div>
-      `;
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="${category}" id="cat-desktop-${category}" ${isChecked}>
+        <label class="form-check-label" for="cat-desktop-${category}">${category}</label>
+      </div>
+    `;
   });
-  const categoryList = document.getElementById('sidebar-categories');
+  document.getElementById('sidebar-categories').innerHTML = checkboxesHTML;
 
-  categoryList.innerHTML = checkboxesHTML;
+  // Vincular sincronización
+  syncCategoryCheckboxes();
 }
 
 function renderCategoriesMobile() {
   let checkboxesHTML = "";
   categoriesList.forEach(category => {
+    const isChecked = categoriesApplied.includes(category) ? 'checked' : '';
     checkboxesHTML += `
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="${category}" id="cat-${category}">
-            <label class="form-check-label" for="cat-${category}">${category}</label>
-          </div>
-        </li>
-      `;
+      <li>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="${category}" id="cat-mobile-${category}" ${isChecked}>
+          <label class="form-check-label" for="cat-mobile-${category}">${category}</label>
+        </div>
+      </li>
+    `;
   });
   const categoryList = document.getElementById('categoryList');
-  // Mantener el botón al final
   const applyButtonLI = categoryList.querySelector('li:last-child');
   categoryList.innerHTML = checkboxesHTML;
   if (applyButtonLI) categoryList.appendChild(applyButtonLI);
+
+  // Vincular sincronización
+  syncCategoryCheckboxes();
 }
 
-function getSelectedCategories() {
-  const checkboxes = document.querySelectorAll('#categoryList input[type="checkbox"]');
-  const selectedCategories = [];
+function syncCategoryCheckboxes() {
+  categoriesList.forEach(category => {
+    const desktopCheckbox = document.getElementById(`cat-desktop-${category}`);
+    const mobileCheckbox = document.getElementById(`cat-mobile-${category}`);
 
-  checkboxes.forEach(checkbox => {
-    if (checkbox.checked) {
-      selectedCategories.push(checkbox.value);
+    if (desktopCheckbox && mobileCheckbox) {
+      // Desktop → Mobile
+      desktopCheckbox.addEventListener('change', () => {
+        mobileCheckbox.checked = desktopCheckbox.checked;
+        updateCategoriesApplied();
+      });
+
+      // Mobile → Desktop
+      mobileCheckbox.addEventListener('change', () => {
+        desktopCheckbox.checked = mobileCheckbox.checked;
+        updateCategoriesApplied();
+      });
+    }
+  });
+}
+
+function updateCategoriesApplied() {
+  categoriesApplied = getSelectedCategories(); // Recolecta desde ambas vistas
+  updateFilterBadges();
+  logAppliedFilters();
+}
+
+
+function getSelectedCategories() {
+  const desktopCheckboxes = document.querySelectorAll('#sidebar-categories input[type="checkbox"]');
+  const mobileCheckboxes = document.querySelectorAll('#categoryList input[type="checkbox"]');
+  const selected = [];
+
+  desktopCheckboxes.forEach((checkbox, i) => {
+    const mobileCheckbox = mobileCheckboxes[i];
+    if (checkbox.checked || mobileCheckbox.checked) {
+      selected.push(checkbox.value);
+      checkbox.checked = true;
+      mobileCheckbox.checked = true;
+    } else {
+      checkbox.checked = false;
+      mobileCheckbox.checked = false;
     }
   });
 
-  return selectedCategories;
+  return selected;
 }
+
 
 function filterProductsByCountries() {
   const dropdownButton = document.getElementById("dropdownButton");
@@ -114,11 +153,9 @@ function filterProductsByCountries() {
     renderCountryOptionsMobile(e.target.value);
   });
 
-  renderCountryOptions()
+  renderCountryOptions();
   renderCountryOptionsMobile();
 
-
-  // Inicializar dropdown Bootstrap para cerrar desde JS
   const dropdown = new bootstrap.Dropdown(dropdownButton);
 }
 
@@ -127,40 +164,44 @@ function renderCountryOptions() {
 
   let countriesOptions = `
     <h6 class="filter-title">País</h6>
-    <select class="form-select">
-    <option selected value="0">Todos</option>
-      ${countries.map(country => `<option value="${country}">${country}</option>`).join('')}
+    <select class="form-select" id="select-country">
+      <option selected value="0">Todos</option>
+      ${countries.map(c => `<option value="${c}">${c}</option>`).join('')}
     </select>
   `;
 
   countryContainer.innerHTML = countriesOptions;
-}
 
+  document.getElementById("select-country").addEventListener("change", (e) => {
+    countryApplied = e.target.value !== "0" ? e.target.value : null;
+    updateFilterBadges();
+    logAppliedFilters();
+  });
+}
 
 function renderCountryOptionsMobile(filter = "") {
   countryOptions.innerHTML = "";
-  const filteredCountries = countries.filter(country =>
-    country.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filtered = countries.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
 
-  if (filteredCountries.length === 0) {
+  if (filtered.length === 0) {
     countryOptions.innerHTML = `<div class="dropdown-item disabled">No se encontraron países</div>`;
     return;
   }
 
-  filteredCountries.forEach(country => {
+  filtered.forEach(c => {
     const a = document.createElement("a");
     a.classList.add("dropdown-item");
     a.href = "#";
-    a.textContent = country;
+    a.textContent = c;
     a.addEventListener("click", (e) => {
       e.preventDefault();
-      dropdownButton.textContent = country;
-      countryApplied = country;  // Guardamos país seleccionado
-      countrySearch.value = "";
+      document.getElementById("dropdownButton").textContent = c;
+      countryApplied = c;
+      document.getElementById("countrySearch").value = "";
       renderCountryOptions();
-      bootstrap.Dropdown.getInstance(dropdownButton).hide();
+      bootstrap.Dropdown.getInstance(document.getElementById("dropdownButton")).hide();
       updateFilterBadges();
+      logAppliedFilters();
     });
     countryOptions.appendChild(a);
   });
@@ -170,93 +211,66 @@ function filterProductsByPrice() {
   const minPriceInput = document.getElementById('minPrice');
   const maxPriceInput = document.getElementById('maxPrice');
   const applyBtn = document.getElementById('applyPriceFilter');
-  const dropdownBtn = document.getElementById('priceDropdownButton');
 
-  function applyPriceFilter() {
-    minPriceApplied = minPriceInput.value !== "" ? minPriceInput.value : null;
-    maxPriceApplied = maxPriceInput.value !== "" ? maxPriceInput.value : null;
-
-    if (minPriceApplied === null && maxPriceApplied === null) {
-      console.log("No hay rango de precio seleccionado");
-    } else if (minPriceApplied !== null && maxPriceApplied !== null) {
-      console.log(`Rango de precio aplicado: desde ${minPriceApplied} hasta ${maxPriceApplied}`);
-    } else if (minPriceApplied !== null) {
-      console.log(`Precio mínimo aplicado: ${minPriceApplied}`);
-    } else if (maxPriceApplied !== null) {
-      console.log(`Precio máximo aplicado: ${maxPriceApplied}`);
-    }
-
-    bootstrap.Dropdown.getInstance(dropdownBtn).hide();
+  applyBtn.addEventListener('click', () => {
+    minPriceApplied = minPriceInput.value !== "" ? parseFloat(minPriceInput.value) : null;
+    maxPriceApplied = maxPriceInput.value !== "" ? parseFloat(maxPriceInput.value) : null;
     updateFilterBadges();
-  }
-
-  applyBtn.addEventListener('click', applyPriceFilter);
+    logAppliedFilters();
+  });
 }
 
 function updateFilterBadges() {
+  console.log("entro a updateFilterBadges");
   let badgesHTML = "";
 
-  if (categoriesApplied.length > 0) {
-    categoriesApplied.forEach(cat => {
-      badgesHTML += `<span class="badge badge-category me-1">${cat}</span>`;
-    });
-  }
+  categoriesApplied.forEach(cat => {
+    badgesHTML += `<span class="badge badge-category me-1">${cat}</span>`;
+  });
 
-  if (countryApplied && countryApplied !== "Selecciona un país") {
+  if (countryApplied) {
     badgesHTML += `<span class="badge badge-country me-1">${countryApplied}</span>`;
   }
 
   if (minPriceApplied !== null) {
-    badgesHTML += `<span class="badge badge-price  text-dark me-1">Precio mínimo: ${minPriceApplied}</span>`;
+    badgesHTML += `<span class="badge badge-price text-dark me-1">Precio mínimo: ${minPriceApplied}</span>`;
   }
+
   if (maxPriceApplied !== null) {
     badgesHTML += `<span class="badge badge-price text-dark me-1">Precio máximo: ${maxPriceApplied}</span>`;
   }
 
   appliedFiltersBadges.innerHTML = badgesHTML;
-
-  // Mostrar botón solo si hay algún badge (filtro activo)
-  if (badgesHTML.trim() !== "") {
-    clearFiltersBtn.style.display = "inline-block";
-  } else {
-    clearFiltersBtn.style.display = "none";
-  }
+  clearFiltersBtn.style.display = badgesHTML.trim() ? "inline-block" : "none";
 }
 
-
-// Botón para remover filtros
 clearFiltersBtn.addEventListener('click', () => {
-  // Limpiar categorías
-  const checkboxes = document.querySelectorAll('#categoryList input[type="checkbox"]');
-  checkboxes.forEach(cb => cb.checked = false);
+  // Reset categorías
+  document.querySelectorAll('#categoryList input[type="checkbox"], #sidebar-categories input[type="checkbox"]').forEach(cb => cb.checked = false);
   categoriesApplied = [];
 
-  // Limpiar país
+  // Reset país
   countryApplied = null;
-  const dropdownButton = document.getElementById("dropdownButton");
-  dropdownButton.textContent = "País";
+  document.getElementById("dropdownButton").textContent = "País";
+  renderCountryOptions();
 
-  // Limpiar precio
+  // Reset precio
   minPriceApplied = null;
   maxPriceApplied = null;
   document.getElementById('minPrice').value = "";
   document.getElementById('maxPrice').value = "";
 
-  console.log("Todos los filtros han sido removidos");
   updateFilterBadges();
+  logAppliedFilters();
 });
 
-
-document.getElementById("applyPriceFilter").addEventListener("click", function () {
-  const selectedCountry = document.querySelector("#sidebar-countries select").value;
-  const minPrice = document.getElementById("minPrice").value;
-  const maxPrice = document.getElementById("maxPrice").value;
-
-  const appliedFilters = {
-    country: selectedCountry !== "0" ? selectedCountry : null,
-    minPrice: minPrice ? parseFloat(minPrice) : null,
-    maxPrice: maxPrice ? parseFloat(maxPrice) : null,
+function logAppliedFilters() {
+  console.log(categoriesApplied);
+  const filters = {
+    categorías: categoriesApplied.length > 0 ? categoriesApplied : null,
+    país: countryApplied || null,
+    precio_min: minPriceApplied,
+    precio_max: maxPriceApplied
   };
-
-  console.log("Filtros aplicados:", appliedFilters);
-});
+  console.log("Filtros aplicados:", filters);
+}
