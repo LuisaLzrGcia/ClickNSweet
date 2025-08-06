@@ -10,8 +10,9 @@ const config = {
         "Dulces Especiados", "Dulces Ácidos"
     ],
     adminRoutes: [
-        { path: "/create-product", label: "Crear producto" },
-        { path: "/update-product", label: "Actualizar producto" }
+        { path: "/main-manage-products/index.html", label: "Administrar productos" },
+        { path: "/new-product/index.html", label: "Crear producto" },
+        { path: "/edit-product.html", label: "Actualizar producto" },
     ]
 }
 
@@ -70,6 +71,7 @@ function template() {
                 <ul class="navbar-nav align-items-xl-center">
                     ${renderNavItems(currentPath, basePath)}
                     ${renderCart(cartCount > 9 ? '+9' : cartCount, basePath)}
+                    ${renderAdminItems()}
                     ${renderAuthSection(isUserAuthenticated, basePath)}
                 </ul>
             </div>
@@ -81,7 +83,7 @@ function renderNavItems(currentPath, basePath) {
     return navItems.map(item => {
         if (item.type === "dropdown") {
             return `
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown ${isAdmin() ? 'd-none': ''}">
                 <a class="nav-link dropdown-toggle btn btn-pink mx-1 
                             ${isActive(item.path) ? 'active' : ''}" 
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,7 +103,7 @@ function renderNavItems(currentPath, basePath) {
         }
 
         return `
-        <li class="nav-item">
+        <li class="nav-item nav-item-user ${isAdmin() ? 'd-none': ''}">
             <a class="nav-link btn btn-pink mx-1 
                         ${isActive(item.path) ? 'active' : ''}" 
                 href="${resolvePath(item.path)}">
@@ -115,7 +117,7 @@ function renderNavItems(currentPath, basePath) {
 function renderCart(count, basePath) {
     const cartPath = '/cart/index.html';
     return `
-    <li class="nav-item">
+    <li class="nav-item ${isAdmin() ? 'd-none' : ''}">
         <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3
             ${isActive(cartPath) ? 'active' : ''}"
             href="${resolvePath(cartPath)}">
@@ -144,7 +146,7 @@ function renderAuthSection(isAuthenticated, basePath) {
                 <li><a class="dropdown-item" href="${resolvePath('/profile')}">Mi perfil</a></li>
                 <li><a class="dropdown-item" href="${resolvePath('/orders')}">Pedidos</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item logout" href="#">Cerrar sesión</a></li>
+                <li><a class="dropdown-item logout" href="${resolvePath('/')}">Cerrar sesión</a></li>
             </ul>
         </li>`;
     }
@@ -169,8 +171,9 @@ function renderAuthSection(isAuthenticated, basePath) {
 // Renderiza los elementos de administración
 function renderAdminItems() {
     return config.adminRoutes.map(route => `
-        <li class="nav-item nav-item-admin">
-            <a class="nav-link btn btn-pink mx-1" 
+        <li class="nav-item nav-item-admin ${isAdmin() ? '' : 'd-none'}">
+            <a class="nav-link btn btn-pink mx-1
+                ${isActive(route.path) ? 'active' : ''}" 
                 href="${resolvePath(route.path)}">
                 ${route.label}
             </a>
@@ -199,15 +202,16 @@ function initBootstrapComponents() {
 function addEventListeners() {
     // Logout
     document.querySelector('.logout')?.addEventListener('click', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         logout();
-        NavbarComponent.render();
+        renderNavBar();
     });
 }
 
 // Renderiza la barra completa
 export function renderNavBar() {
     const container = document.getElementById('navbar-container');
+    const navLinkUser = document.querySelectorAll(".nav-item-user");
     if (!container) return;
 
     container.innerHTML = template();
@@ -215,14 +219,17 @@ export function renderNavBar() {
     addEventListeners();
 
     // Mostrar elementos de admin si es necesario
-    if (isAdmin()) {
-        const adminItems = renderAdminItems();
-        const navItems = container.querySelector('.navbar-nav');
-        if (navItems) {
-            const contactItem = navItems.querySelector('[href$="contact-us"]');
-            if (contactItem) {
-                contactItem.insertAdjacentHTML('afterend', adminItems);
-            }
-        }
-    }
+    // if (isAdmin()) {
+    //     const adminItems = renderAdminItems();
+    //     const navItems = container.querySelector('.navbar-nav');
+    //     if (navItems) {
+    //         const contactItem = navItems.querySelector('[href$="/contact-us/contac-us.html"]');
+    //         if (contactItem) {
+    //             contactItem.insertAdjacentHTML('afterend', adminItems);
+    //         }
+    //     }
+    // }
 }
+
+
+

@@ -16,7 +16,7 @@ const logoutButton = document.getElementById("logout");
 
 document.addEventListener("DOMContentLoaded", () => {
   displayNavBar();
-  protectRoutesByRole();
+  // protectRoutesByRole();
   // loadCartCount();
   // displayActiveLink();
   // updateNavbarAuthState();

@@ -1,4 +1,6 @@
 import { getCurrentUser } from "../login/auth.js";
+import { resolvePath } from "../navbar/router.js";
+
 
 export function protectRoutesByRole() {
   const user = getCurrentUser();
@@ -6,7 +8,7 @@ export function protectRoutesByRole() {
   const role = user?.role || "user";
 
   const allowedRoutes = {
-    admin: ["main-manage-products.html", "edit-product.html", "new-product.html"],
+    admin: ["/main-manage-products/index.html", "edit-product", "new-product"],
     user: [
       "about.html",
       "cart.html",
@@ -28,8 +30,8 @@ export function protectRoutesByRole() {
   };
 
   const homePageByRole = {
-    admin: "main-manage-products.html",
-    user: "index.html",
+    admin: "/main-manage-products/index.html",
+    user: "/",
   };
 
   const currentPath = window.location.pathname.split("/").pop();
@@ -37,6 +39,6 @@ export function protectRoutesByRole() {
   const isAllowed = allowedRoutes[role].includes(currentPath);
 
   if (!isAllowed) {
-    window.location.replace(homePageByRole[role]);
+    window.location.replace(resolvePath(homePageByRole[role]));
   }
 }
