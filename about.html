@@ -23,7 +23,7 @@
 <body>
   <!-- Navbar -->
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
+  <!-- <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
@@ -56,7 +56,7 @@
           <li class="nav-item"><a class="nav-link btn btn-pink mx-1" href="contac-us.html">Contacto</a></li>
           <li class="nav-item">
             <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-              href="cart.html">
+              href="/cart/index.html">
               <span class="cart-icon position-relative me-1">
                 🛒
                 <div id="cart-indicator" class="cart-badge">0</div>
@@ -65,10 +65,10 @@
             </a>
           </li>
           <li class="nav-item autenticacion">
-            <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
+            <a class="nav-link btn btn-pink mx-1" href="/login/index.html">Iniciar Sesión</a>
           </li>
           <li class="nav-item autenticacion">
-            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
+            <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="form/form.html">Registro</a>
           </li>
           <li class="nav-item dropdown user-menu d-none">
             <a id="user-icon" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
@@ -93,8 +93,10 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
+  
+  <nav id="navbar-container" class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm"></nav>
   <section class="container text-center my-5">
     <h2 style="color: #87b9f7; font-family: 'Pacifico', cursive">
       ¿Quiénes Somos?
@@ -120,7 +122,7 @@
       <div class="team-card flip-card" onclick="this.classList.toggle('flip')">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="./assets/gissella.png" alt="Dulce favorito" />
+            <img src="./assets/gissella.jpg" alt="Dulce favorito" />
             <h3>Gissella</h3>
             <p>Diseñadora UX, piensa siempre en el usuario.</p>
           </div>
@@ -142,7 +144,7 @@
       <div class="team-card flip-card" onclick="this.classList.toggle('flip')">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="./assets/luisa.png" alt="Dulce favorito" />
+            <img src="./assets/luisa.jpg" alt="Dulce favorito" />
             <h3>Luisa</h3>
             <p>Analítica y estratégica, gran comunicadora.</p>
           </div>
@@ -162,24 +164,7 @@
       <div class="team-card flip-card" onclick="this.classList.toggle('flip')">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="./assets/palanqueta.jpeg" alt="Dulce favorito" />
-            <h3>Alexis</h3>
-            <p>Backend lover. Siempre encuentra el bug oculto.</p>
-          </div>
-          <!-- Reverso -->
-          <div class="flip-back">
-            <h3>Alexis</h3>
-            <p>
-              Me encanta diseñar pensando en la dulzura de la experiencia.
-              Creo interfaces amigables y modernas.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="team-card flip-card" onclick="this.classList.toggle('flip')">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img src="./assets/francisco.png" alt="Dulce favorito" />
+            <img src="./assets/francisco.jpg" alt="Dulce favorito" />
             <h3>Francisco</h3>
             <p>Especialista en pruebas y validaciones.</p>
           </div>
@@ -200,7 +185,7 @@
       <div class="team-card flip-card" onclick="this.classList.toggle('flip')">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="./assets/omar.png" alt="Foto de Omar" />
+            <img src="./assets/omar.jpg" alt="Foto de Omar" />
             <h3>Omar</h3>
             <p>Organizado, busca soluciones eficientes.</p>
           </div>

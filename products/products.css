@@ -1,8 +1,9 @@
 .sidebar {
-  background-color: #e7edf3;
+  background-color: #F7D6E0 !important;
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 2rem;
+  border: 1px solid #F2B5D4;
 }
 
 .filter-title {
@@ -183,4 +184,64 @@
   #filter-bar>div>.btn-group>button {
     font-size: 0.8rem !important;
   }
+}
+
+#dropdownFilterCategories .dropdown-toggle {
+  background-color: #E452C0 !important;
+  color: white !important;
+  /* para que el texto contraste */
+  text-align: left !important;
+}
+
+/* Para pantallas menores a 576px (xs en Bootstrap) */
+@media (max-width: 575.98px) {
+  .dropdown-toggle {
+    font-size: 0.9rem !important;
+    /* tamaño más pequeño */
+  }
+}
+
+#appliedFiltersBadges .badge {
+  font-size: 1rem;
+}
+
+#clearFiltersBtn {
+  background-color: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+#clearFiltersBtn svg {
+  fill: #E452C0;
+  /* Color rosa */
+  transition: transform 0.2s ease;
+}
+
+.badge-category {
+  background-color: #F7D6E0;
+  color: #d13dac !important;
+}
+
+.badge-country {
+  background-color: #B2F7EF;
+  color: #000;
+}
+
+.badge-price {
+  background-color: #7BDFF2;
+  color: white;
+}
+
+.btn-apply-filter {
+  background-color: white;
+  color: #E452C0;
+  font-weight: bold;
+  border: 1px solid #E452C0; /* Opcional, por si quieres que el borde combine */
+  transition: all 0.3s ease;
+}
+
+.btn-apply-filter:hover {
+  background-color: #E452C0;
+  color: white;
 }

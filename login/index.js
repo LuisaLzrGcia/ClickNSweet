@@ -2,6 +2,7 @@ import { loginFormValidation } from "../functions/login/loginFormValidation.js";
 import { hideErrorMessages, showErrorMessages } from "../functions/login/errorDisplay.js";
 import { login } from "./auth1.js";
 import { initializePasswordToggle } from "./passwordVisibilityToggle.js";
+import { resolvePath } from "../navbar/router.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((usuario) => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
-          const homePage = usuario.role === "admin" ? "/main-manage-products.html" : "/index.html";
+          const homePage = usuario.role === "admin" ? `${resolvePath('/main-manage-products/index.html')}` : `${resolvePath("/index.html")}`;
           window.document.location.href = homePage;
         })
         .catch((error) => {
