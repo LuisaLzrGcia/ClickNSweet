@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="terms-conditions/style.css"/>
+    <link rel="stylesheet" href="faq/style.css"/>
+    <link rel="stylesheet" href="../footer/style.css">
     <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
-<body>
-<body>
+  </head>
+  <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
         <div class="container">
@@ -82,7 +83,7 @@
                         <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item autenticacion">
-                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="#">Registro</a>
+                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
                     </li>
                     <li class="nav-item dropdown user-menu d-none">
                         <a id="user-icon"
@@ -109,17 +110,29 @@
             </div>
         </div>
     </nav>
-  <main>
-    <h2>Condiciones Generales</h2>
-    <ol>
-      <li>El sitio está destinado a la venta de productos de repostería artesanal.</li>
-      <li>Todos los pedidos están sujetos a disponibilidad. Pagos al momento de la compra.</li>
-      <li>Los tiempos de entrega son estimados. No nos responsabilizamos por retrasos de paquetería.</li>
-      <li>El contenido del sitio es propiedad de ClickNSweet y no puede reproducirse sin permiso.</li>
-      <li>Productos perecederos no aplican a devoluciones, salvo error o daño comprobable.</li>
-    </ol>
-    <p>Al utilizar nuestro sitio, aceptas estos términos. Si tienes dudas, contáctanos.</p>
-  </main>
+    <main>
+      <h2>FAQ</h2>
+      <details>
+        <summary>¿Hacen envíos a todo el país?</summary>
+        <p>Sí, realizamos envíos a toda la República Mexicana.</p>
+      </details>
+      <details>
+        <summary>¿Puedo personalizar mi pedido?</summary>
+        <p>Sí. Ofrecemos opciones de personalización en sabores, diseños y mensajes.</p>
+      </details>
+      <details>
+        <summary>¿Con cuánto tiempo de anticipación debo hacer mi pedido?</summary>
+        <p>Recomendamos al menos 48 horas de anticipación.</p>
+      </details>
+      <details>
+        <summary>¿Tienen tienda física?</summary>
+        <p>Actualmente operamos solo en línea. Puedes recoger tu pedido en CDMX si lo prefieres.</p>
+      </details>
+      <details>
+        <summary>¿Aceptan pagos con tarjeta?</summary>
+        <p>Sí, aceptamos tarjetas, transferencias y pagos digitales.</p>
+      </details>
+    </main>
     <!-- Footer -->
     <footer class="footer pt-1">
         <div class="container">
@@ -190,7 +203,8 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="../main.js"></script>
     <script type="module" src="./index/index.js"></script>
-</body>
-</html>
+
+  </body>
+  </html>
