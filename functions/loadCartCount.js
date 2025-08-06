@@ -1,6 +1,5 @@
-const cartCountElement = document.getElementById("cart-indicator");
-
 export function loadCartCount() {
+  const cartCountElement = document.getElementById("cart-indicator");
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartCount = cart.length;
   if (cartCount > 9) {
