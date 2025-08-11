@@ -1,6 +1,7 @@
 import { categoriesList } from "../data/categories.js";
 import { countries } from "../data/countries.js";
 import { products } from "../data/db.js";
+import fetchData from "../fetchData/fetchData.js";
 import { renderProducts } from "../functions/renderProducts.js";
 
 let categoriesApplied = [];
@@ -19,9 +20,35 @@ document.addEventListener("DOMContentLoaded", function () {
   updateFilterBadges();
 });
 
+async function getProductsData() {
+  const body = {
+    "minPrice": 10.0,
+    "maxPrice": 200.0,
+    "status": "",
+    "size": 10
+  }
+  const params = {
+    "minPrice": 10.0,
+    "maxPrice": 200.0,
+    "status": "",
+    "size": 10
+  }
+  try {
+    const data = await fetchData('/products', 'POST', params, body);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+}
+
 const getProducts = async () => {
   const container = document.getElementById('container-products');
-  container.innerHTML = renderProducts(products);
+  let products = await getProductsData();       
+  let productsArray = products.items;      
+  container.innerHTML = renderProducts(productsArray);
 };
 
 document.getElementById('sort-new').addEventListener('click', () => {

@@ -17,102 +17,19 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="payment/style.css"/>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../footer/style.css">
-    <link rel="icon" href="assets/logotipo-clicknsweet-2.png" type="image/png">
+    <link rel="icon" href="../assets/logotipo-clicknsweet-2.png" type="image/png">
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
-                <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-xl-center">
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="index.html">Inicio</a></li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="products.html">Productos</a></li>
-                    <li class="nav-item nav-item-user dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Picantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces de caramelo</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Refrescantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Salados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Cremosos</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Especiados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes
-                            somos</a></li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="/contact-us/contac-us.html">Contacto</a></li>
-                    <li class="nav-item nav-item-admin d-none">
-                        <a class="nav-link btn btn-pink mx-1" href="new-product.html">Crear producto</a>
-                    </li>
-                    <li class="nav-item nav-item-admin d-none">
-                        <a class="nav-link btn btn-pink mx-1" href="edit-product.html">Actualizar producto</a>
-                    </li>
-                    <li class="nav-item nav-item-user">
-                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-                            href="/cart/index.html">
-                            <span class="cart-icon position-relative me-1">
-                                🛒
-                                <div id="cart-indicator" class="cart-badge">0</div>
-                            </span>
-                            Carrito
-                        </a>
-                    </li>
+    <nav id="navbar-container" class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm"></nav>
 
-                    <li class="nav-item autenticacion">
-                        <a class="nav-link btn btn-pink mx-1" href="/login/index.html">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item autenticacion">
-                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="/form/form.html">Registro</a>
-                    </li>
-                    <li class="nav-item dropdown user-menu d-none">
-                        <a id="user-icon"
-                            class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#">Mi perfil</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Pedidos</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/index.html" id="logout">Cerrar sesión</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-<br>
-<!--------  Pagina de pago -------->
-<main class="payment-page limite-ancho">
+    <br>
+    <!--------  Pagina de pago -------->
+    <main class="payment-page limite-ancho">
         <!-- Carrito de compras -->
         <h1 class="payment-title text-start">Llega el "fecha"</h1>
         <div class="section-box">
@@ -189,9 +106,10 @@
         </div>
         <br>
     </main>
-    
+
     <!-- MODAL DE CONFIRMACIÓN DE PEDIDO -->
-    <div class="modal fade" id="orderConfirmationModal" tabindex="-1" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="orderConfirmationModal" tabindex="-1" aria-labelledby="orderConfirmationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
@@ -204,9 +122,9 @@
                     <div class="mb-4">
                         <i class="bi bi-bag-check-fill text-success" style="font-size: 4rem;"></i>
                     </div>
-                    
+
                     <h4 class="text-success mb-3">¡Gracias por tu compra! 🎉</h4>
-                    
+
                     <div class="row">
                         <div class="col-12 mb-3">
                             <div class="card bg-light">
@@ -214,22 +132,22 @@
                                     <h6 class="card-title">Detalles del Pedido</h6>
                                     <p class="mb-1"><strong>Número de pedido:</strong></p>
                                     <p class="text-muted small" id="modal-order-id">ORD-123456789</p>
-                                    
+
                                     <p class="mb-1"><strong>Total pagado:</strong></p>
                                     <p class="text-success fs-5 fw-bold" id="modal-total">$0.00</p>
-                                    
+
                                     <p class="mb-1"><strong>Fecha de entrega estimada:</strong></p>
                                     <p class="text-primary" id="modal-delivery-date">Fecha estimada</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="alert alert-info mb-3">
                         <i class="bi bi-envelope-fill me-2"></i>
                         Recibirás un email de confirmación en los próximos minutos
                     </div>
-                    
+
                     <div class="alert alert-warning">
                         <i class="bi bi-truck me-2"></i>
                         Te notificaremos cuando tu pedido esté en camino
@@ -250,22 +168,23 @@
 
     <!-- Footer -->
     <footer></footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="../main.js"></script>
     <script type="module" src="./index/index.js"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Inicializar Payment Manager -->
     <script type="module">
         import { initPaymentPage } from './payment/payment.js';
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('🚀 DOM cargado, inicializando PaymentManager...');
             initPaymentPage();
         });
     </script>
 
 </body>
+
 </html>
