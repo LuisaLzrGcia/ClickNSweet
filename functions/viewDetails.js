@@ -31,5 +31,5 @@ window.viewDetails = function (element) {
         quantity: 1
     };
     localStorage.setItem("currenProduct", JSON.stringify(product));
-    window.location.href = "product-detail/index.html";
+    window.location.href = "../product-detail/index.html";
 }

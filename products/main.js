@@ -28,7 +28,7 @@ async function getProductsData() {
     "size": 10
   }
   const params = {
-    "minPrice": 10.0,
+    "user": "usewrname",
     "maxPrice": 200.0,
     "status": "",
     "size": 10
