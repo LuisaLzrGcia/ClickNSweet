@@ -3,20 +3,20 @@ import { renderStars } from "./renderStars.js";
 export function renderProducts(productsArray, type = "products") {
     let productsContainer = "";
     productsArray.map((item, index) => {
-        const truncateName = truncateText(item.name, 40)
-        const pricing = item.pricing;
+        const truncateName = truncateText(item.productName, 40)
+        const pricing = item.price;
         const pricingFormat = pricing.toLocaleString('es-MX', {
             style: 'currency',
             currency: 'MXN'
         });
-        const priceDiscount = item.price_discount;
+        const priceDiscount = item.price;
         const priceDiscountFormat = priceDiscount.toLocaleString('es-MX', {
             style: 'currency',
             currency: 'MXN'
         });
         let priceData = ""
-        if (item.discount > 0) {
-            priceData = `<p class="text-fuchsia"><span class="discount">${item.discount}% OFF</span> <strong>Promoción</strong></p>
+        if (item.discountValue > 0) {
+            priceData = `<p class="text-fuchsia"><span class="discount">${item.discountValue}% OFF</span> <strong>Promoción</strong></p>
             <span class="new-price">${priceDiscountFormat}</span> <span class="old-price">${pricingFormat}</span>`
         } else {
             priceData = `<span class="normal-price">${priceDiscountFormat}</span>`
@@ -36,8 +36,8 @@ export function renderProducts(productsArray, type = "products") {
           onclick="viewDetails(this)">
             <div class="img-wrapper">
               ${!item.stock ? '<span class="status-product">Agotado</span>' : ''}
-              <img src="${item.picture}"
-                class="card-img-top img-fill" alt="${item.name}">
+              <img src="${"https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/pastel-de-luna-china-1.jpg"}"
+                class="card-img-top img-fill" alt="https://luisalzrgcia.github.io/ClickNSweet/assets/products-img/pastel-de-luna-china-1.jpg">
             </div>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">${truncateName}</h5>
