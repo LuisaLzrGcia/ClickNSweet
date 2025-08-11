@@ -29,7 +29,7 @@ const navItems = [
             label: cat
         }))
     },
-    { path: "/about.html", label: "Quiénes somos" },
+    { path: "/about/index.html", label: "Quiénes somos" },
     { path: "/contact-us/contac-us.html", label: "Contacto" }
 ];
 
