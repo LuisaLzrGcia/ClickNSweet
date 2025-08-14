@@ -1,0 +1,72 @@
+#cuenta .list-group-item.active {
+  background-color: #e946c2;
+  border-color: #e946c2;
+  color: white;
+  font-weight: bold;
+}
+
+#cuenta .list-group-item {
+  text-align: center;
+  font-weight: 500;
+}
+
+#cuenta .btn-pink {
+  background-color: #e946c2;
+  color: white;
+  border: none;
+}
+
+#cuenta .btn-pink:hover {
+  background-color: #d03dae;
+}
+
+#cuenta .foto-perfil img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+#cuenta .titulo-seccion {
+  font-family: "Pacifico";
+  color: black;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+#cuenta .subtitulo {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 20px;
+  color: #000;
+}
+
+#cuenta .pedido img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+#cuenta .form-check-label {
+  font-weight: 500;
+}
+
+#cuenta .form-check {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#cuenta #form-tarjeta select,
+#cuenta #form-tarjeta input {
+  font-size: 0.9rem;
+}
+#cuenta .btn-outline-danger {
+  border-color: #e946c2;
+  color: #e946c2;
+}
+
+#cuenta .btn-outline-danger:hover {
+  background-color: #e946c2;
+  color: #fff;
+}
+.btn-rosewood {
+  background-color: #e91e63;
+  color: white;
+  font-weight: bold;
+}
