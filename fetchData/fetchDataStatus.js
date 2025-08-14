@@ -1,5 +1,4 @@
-async function fetchData(url, method = 'GET', params, body) {
-    if (!url) { return }
+async function fetchDataStatus(url, method = 'GET', params, body) {
     const api = 'http://localhost:8080/api/v1/clicknsweet'; // Cambia esto por tu URL base real
     try {
         // Construir query string si hay parámetros
@@ -31,11 +30,11 @@ async function fetchData(url, method = 'GET', params, body) {
 
 
         // Intentar parsear la respuesta como JSON
-        return await response.json();
+        return await response;
 
     } catch (error) {
         console.error('Error en fetchData:', error);
         throw error;
     }
 }
-export default fetchData;
+export default fetchDataStatus;

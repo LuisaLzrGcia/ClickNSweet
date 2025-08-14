@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Detalles</title>
+    <title>404</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -19,9 +19,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../new-product/style.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../footer/style.css" />
 </head>
 
@@ -29,41 +28,24 @@
     <!-- Navbar -->
     <nav id="navbar-container" class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm"></nav>
 
-
     <!-- Main -->
-    <main class="container my-5 container-product p-2">
-        <section class="container" id="product-detail-container">
-
-        </section>
-    </main>
-
-    <section id="product-reviews" class="reviews-section">
-        <div class="reviews-grid">
-            <div class="reviews-summary-box">
-                <h2>Opiniones del producto</h2>
-                <div id="average-stars" class="stars">★★★★★</div>
-                <div id="review-count" class="review-count">(0)</div>
-            </div>
-            <div class="reviews-list-box">
-                <div id="reviews-container"></div>
-                <button id="load-more-reviews" style="display:none;">Mostrar más</button>
+    <main id="not-found-container">
+        <div>
+            <h4>Página no encontrada</h4>
+            <div>
+                <img src="../assets/status-notfound.svg" alt="not found" class="not-found-image">
             </div>
         </div>
-    </section>
+    </main>
 
 
     <!-- Footer -->
     <footer></footer>
 
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="../main.js"></script>
-    <script type="module" src="../product-detail/main.js"></script>
-    <script type="module" src="../functions/addCart.js"></script>
-    <script type="module" src="../product-detail/productDetailView.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../footer/script.js"></script>
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

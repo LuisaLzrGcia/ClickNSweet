@@ -1,22 +1,75 @@
 import { renderStars } from "../functions/renderStars.js";
 
-export const productDetailView = (data, type = "detail") => {
-  const tieneImagen = data.picture && data.picture.trim() !== "";
-  const imagenHTML = tieneImagen
-    ? `<div class="position-relative">
-        <img src="${data.picture}" alt="Imagen del producto"
-          class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover;">
-        ${!data.stock ? '<span class="status-product">Agotado</span>' : ''}
-      </div>`
-    : `<div class="bg-light d-flex align-items-center justify-content-center rounded-3 shadow-sm w-100" style="height: 400px; position: relative;">
-        <span class="text-muted">Sin imagen</span>
-        ${!data.stock ? '<span class="status-product">Agotado</span>' : ''}
-      </div>`;
+export const productDetailView = (data, type) => {
+  console.log(data);
 
+  let salesFormat = type == "detail"
+    ? (data.productSalesFormatId.name || "N/A")
+    : (data.productSalesFormatValue || "N/A");
 
-  const descuento = parseFloat(data.discount) || 0;
-  const precio = parseFloat(data.pricing) || 0;
-  const precioOferta = parseFloat(data.price_discount) || 0;
+  let category = type == "detail"
+    ? (data.productCategoryId.name || "N/A")
+    : (data.productCategoryValue || "N/A");
+
+  let country = type == "detail"
+    ? (data.productCountryId?.name || null)
+    : (data.productCountryValue || null);
+
+  let state = type == "detail"
+    ? (data.productStateId?.name || null)
+    : (data.productStateValue || null);
+
+  let locationText = "Desconocido";
+
+  if (country && state) {
+    locationText = `${state}, ${country}`;
+  } else if (country) {
+    locationText = country;
+  } else if (state) {
+    locationText = state; // opcional si quieres mostrar solo estado
+  }
+// --- Imagen ---
+  let imagenSrc = "../assets/default.jpg"; // default
+
+  if (type === "detail") {
+    if (data.image && data.image.trim() !== "") {
+      imagenSrc = data.image.startsWith("data:")
+        ? data.image
+        : `data:image/jpeg;base64,${data.image}`;
+    }
+  } else {
+    if (data.picture && data.picture.trim() !== "") {
+      imagenSrc = data.picture.startsWith("data:")
+        ? data.picture
+        : `data:image/jpeg;base64,${data.picture}`;
+    }
+  }
+
+  const imagenHTML = `
+    <div class="position-relative bg-light rounded-3 shadow-sm w-100" style="height: 400px; overflow: hidden;">
+      <img 
+        src="${imagenSrc}" 
+        alt="${data.productName}" 
+        class="img-fluid w-100 h-100 shadow-sm" 
+        style="object-fit: cover;"
+      >
+      ${data.quantityStock < 1 ? `
+        <span class="status-product position-absolute top-0 start-0 m-2 px-2 py-1 bg-danger text-white rounded">
+          Agotado
+        </span>
+      ` : ''}
+    </div>
+  `;
+
+  const precio = parseFloat(data.price) || 0;
+  const descuento = parseFloat(data.discountValue) > 0
+    ? Math.round(parseFloat(data.discountValue))
+    : 0;
+
+  const precioOferta = descuento > 0
+    ? Math.round(precio - descuento)
+    : precio;
+
 
   const formatoMoneda = new Intl.NumberFormat("es-MX", {
     style: "currency",
@@ -37,21 +90,20 @@ export const productDetailView = (data, type = "detail") => {
     priceData = `<span class="normal-price">${formatoMoneda.format(precio)}</span>`;
   }
 
-  const showButton = type === "detail" ? `
-    <div class="d-grid gap-2 mt-4">
-      <button class="btn btn-pink-cart text-white py-2 px-4" type="button"
-      ${!data.stock ? 'disabled' : ''}
-            data-id="${data.id}" data-name="${data.name}"
-            data-pricing="${data.pricing}" data-category="${data.category}" data-description="${data.description}"
-            data-origen="${data.origen}" data-picture="${data.picture}" data-sales_format="${data.sales_format}"
-            data-discount="${data.discount}" data-price_discount="${data.price_discount}"
-            data-rating="${data.rating}" data-country="${data.country}" data-stock="${data.stock}"
-            onclick="addCart(this)"
-            >
-        <i class="bi bi-cart-plus me-2"></i>Añadir al carrito
-      </button>
-    </div>
-  ` : "";
+  const showButton = type == "detail" || type == "" ? `
+  <div class="d-grid gap-2 mt-4">
+    <button class="btn btn-pink-cart text-white py-2 px-4 btn-add-cart" type="button"
+      ${data.quantityStock < 1 ? 'disabled' : ''}
+      data-id="${data.id}" 
+      data-name="${data.productName}" 
+      onclick="addCart(this)">
+      <i class="bi bi-cart-plus me-2"></i>
+      ${data.quantityStock < 1 ? 'Agotado' : 'Añadir al carrito'}
+    </button>
+  </div>
+` : "";
+
+
 
   const html = `
     <div class="row g-4 align-items-start p-4">
@@ -62,11 +114,11 @@ export const productDetailView = (data, type = "detail") => {
 
       <!-- Detalles del producto -->
       <div class="col-md-6">
-        <h2 class="mb-3 text-fuchsia">${data.name || "Nombre del producto"}</h2>
+        <h2 class="mb-3 text-fuchsia">${data.productName || "Nombre del producto"}</h2>
 
         <!-- Calificación -->
         <div class="star-rating mb-2 text-warning fs-5">
-          ${renderStars(data.rating || 0)}
+          ${renderStars(data.averageRating || 0)}
         </div>
 
         <!-- Precios y descuento -->
@@ -78,7 +130,7 @@ export const productDetailView = (data, type = "detail") => {
           <!-- Presentación -->
           <div class="col-12 col-md-6 mb-3 mb-md-0">
             <p class="fw-semibold text-muted mb-1">Presentación:</p>
-            <p class="text-dark mb-0 formatSaleBadge">${data.sales_format || "N/A"}</p>
+            <p class="text-dark mb-0 formatSaleBadge">${salesFormat || "N/A"}</p>
           </div>
 
           <!-- Cantidad -->
@@ -97,26 +149,25 @@ export const productDetailView = (data, type = "detail") => {
         <div class="mt-4 text-muted small d-flex flex-column gap-1 category">
           <p class="mb-1">
             <strong>Categoría:</strong>
-            <span class="badge pastel-creamy text-dark fs-6">${data.category || "No definida"}</span>
+            <span class="badge pastel-creamy text-dark fs-6">${category || "No definida"}</span>
           </p>
 
           <p class="mb-1">
             <strong>Origen:</strong>
             <span class="badge bg-pastel-green text-dark">
-              ${data.country || "Desconocido"}
+              ${locationText}
             </span>
           </p>
 
           <p class="mb-0">
           <strong>Disponibilidad:</strong>
           <span class="badge bg-mint-light text-dark">
-            ${
-              data.stock
-                ? data.inStock
-                  ? "En stock"
-                  : "Pocas unidades"
-                : "Agotado"
-            }
+            ${data.quantityStock == 0
+      ? "Agotado"
+      : data.quantityStock > data.lowStockThreshold
+        ? "En stock"
+        : "Pocas unidades"
+    }
           </span>
         </p>
 
@@ -218,3 +269,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function actualizarCantidadBoton() {
+  // Obtener select de cantidad y botón
+  const selectCantidad = document.getElementById("cantidad");
+  const botonCarrito = document.querySelector(".btn-add-cart");
+
+  if (!selectCantidad || !botonCarrito) return;
+
+  // Asignar dataset
+  selectCantidad.addEventListener("change", () => {
+    botonCarrito.dataset.quantity = selectCantidad.value;
+  });
+
+  // Inicialmente asignar 1 por defecto
+  botonCarrito.dataset.quantity = selectCantidad.value || 1;
+}
+
+// Llamar esta función después de renderizar el producto
+document.addEventListener("DOMContentLoaded", () => {
+  actualizarCantidadBoton()
+});

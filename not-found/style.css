@@ -1,0 +1,31 @@
+#not-found-container {
+    width: 100%;
+    height: 50vh; /* Ocupa toda la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#not-found-container > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+#not-found-container h4 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#not-found-container > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found-image {
+    width: 20%;
+    height: auto;
+}

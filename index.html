@@ -24,37 +24,42 @@
 
     <style>
         .video-container-fallback {
-    position: relative; /* Base para posicionar los elementos internos */
-    width: 100%;
-    padding-top: 56.25%; /* Proporción de aspecto 16:9 para video */
-    background-color: #000; /* Fondo negro mientras carga */
-}
+            position: relative;
+            /* Base para posicionar los elementos internos */
+            width: 100%;
+            padding-top: 56.25%;
+            /* Proporción de aspecto 16:9 para video */
+            background-color: #000;
+            /* Fondo negro mientras carga */
+        }
 
-.video-container-fallback iframe,
-.video-container-fallback .fallback-image {
-    /* Hacemos que tanto el video como la imagen ocupen todo el contenedor */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
+        .video-container-fallback iframe,
+        .video-container-fallback .fallback-image {
+            /* Hacemos que tanto el video como la imagen ocupen todo el contenedor */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 
-/* Por defecto, la imagen de respaldo está oculta */
-.video-container-fallback .fallback-image {
-    display: none;
-}
+        /* Por defecto, la imagen de respaldo está oculta */
+        .video-container-fallback .fallback-image {
+            display: none;
+        }
 
-/* --- La Magia del Cambio --- */
-/* Cuando el contenedor TENGA la clase "show-fallback"... */
-.video-container-fallback.show-fallback .fallback-image {
-    display: block; /* ...hacemos visible la imagen... */
-}
+        /* --- La Magia del Cambio --- */
+        /* Cuando el contenedor TENGA la clase "show-fallback"... */
+        .video-container-fallback.show-fallback .fallback-image {
+            display: block;
+            /* ...hacemos visible la imagen... */
+        }
 
-.video-container-fallback.show-fallback iframe {
-    display: none; /* ...y ocultamos el video. */
-}
+        .video-container-fallback.show-fallback iframe {
+            display: none;
+            /* ...y ocultamos el video. */
+        }
     </style>
 </head>
 
@@ -152,21 +157,17 @@
     <section class="vh-100 position-relative overflow-hidden bg-secondary text-white">
         <div class="video-container-fallback">
 
-    <iframe
-        id="vimeo-player"
-        src="https://player.vimeo.com/video/1107237324?badge=0&amp;autopause=0&amp;controls=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        title="Video Principal">
-    </iframe>
+            <iframe id="vimeo-player"
+                src="https://player.vimeo.com/video/1107237324?badge=0&amp;autopause=0&amp;controls=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                title="Video Principal">
+            </iframe>
 
-    <img
-        class="fallback-image"
-        src="assets/img-backgroun-home.jpg"
-        alt="Video no disponible en este momento">
+            <img class="fallback-image" src="assets/img-backgroun-home.jpg" alt="Video no disponible en este momento">
 
-</div>
+        </div>
 
-<script src="https://player.vimeo.com/api/player.js"></script>
+        <script src="https://player.vimeo.com/api/player.js"></script>
     </section>
 
 
@@ -177,106 +178,98 @@
             <!-- Los productos se cargarán aquí dinámicamente -->
         </div>
         <div class="text-center mt-4">
-            <a href="products.html" class="btn btn-pink-see px-4 py-2">
+            <a href="./products/index.html" class="btn btn-pink-see px-4 py-2">
                 Ver más
             </a>
         </div>
     </section>
 
     <!-- Categorías -->
-    <section id="categories" class="categories">
-        <h2 class="title">Categorias</h2>
-
-        <!-- Swiper wrapper -->
+    <!-- Contenedor de categorías -->
+    <div class="categories">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-
                 <div class="swiper-slide">
-                    <div class="circle pastel-chocolate">
-                        <p class="title title-category ">Chocolates</p>
-                        <div>
-                            <img src="./assets/chocolate_icon.png" alt="">
+                    <a href="./products/index.html?category=1" class="category-link">
+                        <div class="circle pastel-chocolate">
+                            <p class="title-category">Chocolates</p>
+                            <div><img src="./assets/chocolate_icon.png" alt=""></div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-fruity">
-                        <p class="title title-category ">Dulces Frutales</p>
-                        <div>
-                            <img src="./assets/fruity_icon.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-sour">
-                        <p class="title title-category ">Dulces Ácidos</p>
-                        <div>
-                            <img src="./assets/sour_icon.png" alt="">
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <div class="circle pastel-spicy">
-                        <p class="title title-category ">Dulces Picantes</p>
-                        <div>
-                            <img src="./assets/spicy_icon.png" alt="">
+                    <a href="./products/index.html?category=2" class="category-link">
+                        <div class="circle pastel-fruity">
+                            <p class="title-category">Dulces Frutales</p>
+                            <div><img src="./assets/fruity_icon.png" alt=""></div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="circle pastel-caramel">
-                        <p class="title title-category ">Dulces de Caramelo</p>
-                        <div>
-                            <img src="./assets/caramel_icon.png" alt="">
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <div class="circle pastel-minty">
-                        <p class="title title-category ">Dulces Refrescantes</p>
-                        <div>
-                            <img src="./assets/minty_icon.png" alt="">
+                    <a href="./products/index.html?category=9" class="category-link">
+                        <div class="circle pastel-sour">
+                            <p class="title-category">Dulces Ácidos</p>
+                            <div><img src="./assets/sour_icon.png" alt=""></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <div class="circle pastel-salty">
-                        <p class="title title-category ">Dulces Salados</p>
-                        <div>
-                            <img src="./assets/salty_icon.png" alt="">
+                    <a href="./products/index.html?category=3" class="category-link">
+                        <div class="circle pastel-spicy">
+                            <p class="title-category">Dulces Picantes</p>
+                            <div><img src="./assets/spicy_icon.png" alt=""></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <div class="circle pastel-creamy">
-                        <p class="title title-category ">Dulces Cremosos</p>
-                        <div>
-                            <img src="./assets/creamy_icon.png" alt="">
+                    <a href="./products/index.html?category=4" class="category-link">
+                        <div class="circle pastel-caramel">
+                            <p class="title-category">Dulces de Caramelo</p>
+                            <div><img src="./assets/caramel_icon.png" alt=""></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <div class="circle pastel-spiced">
-                        <p class="title title-category ">Dulces Especiados</p>
-                        <div>
-                            <img src="./assets/spiced_icon.png" alt="">
+                    <a href="./products/index.html?category=5" class="category-link">
+                        <div class="circle pastel-minty">
+                            <p class="title-category">Dulces Refrescantes</p>
+                            <div><img src="./assets/minty_icon.png" alt=""></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
+                <div class="swiper-slide">
+                    <a href="./products/index.html?category=6" class="category-link">
+                        <div class="circle pastel-salty">
+                            <p class="title-category">Dulces Salados</p>
+                            <div><img src="./assets/salty_icon.png" alt=""></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="./products/index.html?category=7" class="category-link">
+                        <div class="circle pastel-creamy">
+                            <p class="title-category">Dulces Cremosos</p>
+                            <div><img src="./assets/creamy_icon.png" alt=""></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="./products/index.html?category=8" class="category-link">
+                        <div class="circle pastel-spiced">
+                            <p class="title-category">Dulces Especiados</p>
+                            <div><img src="./assets/spiced_icon.png" alt=""></div>
+                        </div>
+                    </a>
+                </div>
             </div>
-
-            <!-- Flechas -->
+            <!-- Botones de navegación -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-
-            <!-- Paginación opcional -->
-            <div class="mt-3 swiper-pagination"></div>
+            <!-- Paginación -->
+            <div class="swiper-pagination"></div>
         </div>
-    </section>
+    </div>
+
 
 
 
@@ -334,43 +327,45 @@
     <script type="module" src="./functions/addCart.js"></script>
     <script type="module" src="./functions/viewDetails.js"></script>
     <script type="module" src="./footer/script.js"></script>
+    <script type="module" src="./functions/addCart.js"></script>
 
-
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    // Esperamos a que todo el contenido de la página esté listo
-    document.addEventListener('DOMContentLoaded', function() {
+        // Esperamos a que todo el contenido de la página esté listo
+        document.addEventListener('DOMContentLoaded', function () {
 
-        // Identificamos los elementos con los que vamos a trabajar
-        const videoContainer = document.querySelector('.video-container-fallback');
-        const iframe = document.getElementById('vimeo-player');
-        const player = new Vimeo.Player(iframe);
+            // Identificamos los elementos con los que vamos a trabajar
+            const videoContainer = document.querySelector('.video-container-fallback');
+            const iframe = document.getElementById('vimeo-player');
+            const player = new Vimeo.Player(iframe);
 
-        // Esta es la función que se ejecutará si el video falla
-        const showFallback = () => {
-            // Simplemente añade la clase "show-fallback" al contenedor. El CSS se encarga del resto.
-            videoContainer.classList.add('show-fallback');
-        };
+            // Esta es la función que se ejecutará si el video falla
+            const showFallback = () => {
+                // Simplemente añade la clase "show-fallback" al contenedor. El CSS se encarga del resto.
+                videoContainer.classList.add('show-fallback');
+            };
 
-        // Creamos un temporizador. Si en 8 segundos el video no ha cargado, llamamos a la función de fallback.
-        const fallbackTimer = setTimeout(showFallback, 8000); // 8000 milisegundos = 8 segundos
+            // Creamos un temporizador. Si en 8 segundos el video no ha cargado, llamamos a la función de fallback.
+            const fallbackTimer = setTimeout(showFallback, 8000); // 8000 milisegundos = 8 segundos
 
-        // Le pedimos a la API de Vimeo que nos avise cuando el video esté cargado y listo
-        player.on('loaded', function() {
-            // Si el video carga, cancelamos el temporizador para que el fallback nunca se active.
-            clearTimeout(fallbackTimer);
+            // Le pedimos a la API de Vimeo que nos avise cuando el video esté cargado y listo
+            player.on('loaded', function () {
+                // Si el video carga, cancelamos el temporizador para que el fallback nunca se active.
+                clearTimeout(fallbackTimer);
+            });
+
+            // Como medida extra, si Vimeo reporta un error directamente...
+            player.on('error', function () {
+                // ...activamos el fallback inmediatamente, sin esperar al temporizador.
+                clearTimeout(fallbackTimer);
+                showFallback();
+            });
         });
-
-        // Como medida extra, si Vimeo reporta un error directamente...
-        player.on('error', function() {
-            // ...activamos el fallback inmediatamente, sin esperar al temporizador.
-            clearTimeout(fallbackTimer);
-            showFallback();
-        });
-    });
-</script>
+    </script>
 </body>
 
 </html>
