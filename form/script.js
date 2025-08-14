@@ -1,95 +1,70 @@
+import fetchData from "../fetchData/fetchData.js";
 
-document.getElementById('registroForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-   
-    document.querySelectorAll('.alert').forEach(alert => alert.remove());
-
-    const nombre = document.getElementById('nombre').value.trim();
-    const fechaNacimiento = document.getElementById('fechaNacimiento').value.trim();
-    const telefono = document.getElementById('telefono') ? document.getElementById('telefono').value.trim() : '';
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword') ? document.getElementById('confirmPassword').value : '';
-    const terminos = document.getElementById('terminos').checked;
-
-    let errores = [];
-
-    if (!nombre || !fechaNacimiento || !telefono || !email || !password || !confirmPassword || !terminos) {
-        errores.push('Por favor, completa todos los campos y acepta los términos.');
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        errores.push('Correo electrónico inválido.');
-    }
-
-    const telefonoRegex = /^\d{10}$/; 
-    if (!telefonoRegex.test(telefono)) {
-        errores.push('El teléfono debe tener 10 dígitos.');
-    }
-
-    if (password.length < 6) {
-        errores.push('La contraseña debe tener al menos 6 caracteres.');
-    }
-
-    if (password !== confirmPassword) {
-        errores.push('Las contraseñas no coinciden.');
-    }
-
-    // Verificar si el email ya existe
-    const usuarioExistente = localStorage.getItem('usuario');
-    if (usuarioExistente) {
-        const usuario = JSON.parse(usuarioExistente);
-        if (usuario.email && usuario.email.toLowerCase() === email.toLowerCase()) {
-            errores.push('Ya existe una cuenta con este correo electrónico.');
-        }
-    }
-
-    if (errores.length > 0) {
-        errores.forEach(err => mostrarMensaje(err, 'danger'));
-        return;
-    }
-
-    //  JSON 
-    const usuario = {
-        nombreCompleto: nombre,
-        fechaNacimiento: fechaNacimiento,
-        telefono: telefono,
-        email: email,
-        password: password
-    };
-
-    
+export async function register(userData) {
     try {
-        localStorage.setItem('usuario', JSON.stringify(usuario));
-        
-        
-        const verificacion = localStorage.getItem('usuario');
-        if (!verificacion) {
-            throw new Error('No se pudo guardar el usuario');
+        console.log('Intentando registro con backend:', {
+            email: userData.email,
+            firstName: userData.firstName
+        });
+
+        const userForBackend = {
+            firstName: userData.firstName,
+            lastName: userData.lastName || '',
+            user_name: userData.userName || userData.email.split('@')[0],
+            email: userData.email.toLowerCase().trim(),
+            password: userData.password,
+            phone: userData.phone,
+            birth_date: userData.fechaNacimiento,
+            role: { id: 1 } // Rol por defecto
+        };
+
+        const newUser = await fetchData('/create-user', 'POST', {}, userForBackend);
+
+        console.log('Usuario registrado exitosamente:', newUser);
+
+        return newUser;
+
+    } catch (error) {
+        console.error('Error en registro con backend:', error);
+
+        let errorMessage = 'Error al crear la cuenta';
+
+        if (error.message) {
+            if (error.message.includes('409') || error.message.includes('CONFLICT')) {
+                errorMessage = 'Ya existe una cuenta con este correo electrónico o nombre de usuario';
+            } else if (error.message.includes('400')) {
+                errorMessage = 'Datos inválidos. Verifica la información ingresada';
+            } else if (error.message.includes('500')) {
+                errorMessage = 'Error interno del servidor. Intenta más tarde';
+            } else if (error.message.includes('ECONNREFUSED') || error.message.includes('Failed to fetch')) {
+                errorMessage = 'No se puede conectar al servidor. Verifica que esté ejecutándose';
+            }
         }
 
-        console.log('Usuario registrado exitosamente:', JSON.stringify(usuario));
-        mostrarMensaje('¡Cuenta creada exitosamente! Bienvenido a Click N Sweet 🧁!', 'success');
-        
-        this.reset();
-        
-        // redirigir al login 
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 3000);
-        
-    } catch (error) {
-        console.error('Error al guardar usuario:', error);
-        mostrarMensaje('Error al crear la cuenta. Intenta de nuevo.', 'danger');
+        throw new Error(errorMessage);
     }
-});
-
-// Función para mostrar mensajes usando Bootstrap Alert
-function mostrarMensaje(mensaje, tipo) {
-    const div = document.createElement('div');
-    div.className = `alert alert-${tipo} mt-2`;
-    div.textContent = mensaje;
-    document.querySelector('.form-section').prepend(div);
+    
 }
+import { register } from './auth1.js';
+
+document.getElementById('btnRegistro').addEventListener('click', async () => {
+  const userData = {
+    firstName: document.getElementById('nombre').value,
+    lastName: document.getElementById('apellido').value,
+    userName: document.getElementById('usuario').value,
+    email: document.getElementById('correo').value,
+    password: document.getElementById('password').value,
+    phone: document.getElementById('telefono').value,
+    fechaNacimiento: document.getElementById('fechaNacimiento').value
+  };
+
+  try {
+    const nuevoUsuario = await register(userData);
+    console.log('Usuario creado:', nuevoUsuario);
+    alert('¡Registro exitoso!');
+    window.location.href = '/login/index.html';
+  } catch (error) {
+    console.error('Error en registro:', error);
+    alert(error.message);
+  }
+});

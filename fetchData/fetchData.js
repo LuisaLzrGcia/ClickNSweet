@@ -8,21 +8,21 @@ async function fetchData(url, method = 'GET', params, body) {
             queryString = '?' + new URLSearchParams(params).toString();
         }
 
-        // Configuración base
-        const options = {
-            method: method.toUpperCase(),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
+    // Configuración base
+    const options = {
+      method: method.toUpperCase(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-        // Agregar body si no es GET y hay datos
-        if (body && method !== 'GET') {
-            options.body = JSON.stringify(body);
-        }
+    // Agregar body si no es GET y hay datos
+    if (body && method !== "GET") {
+      options.body = JSON.stringify(body);
+    }
 
-        // Hacer la solicitud
-        const response = await fetch(api + url + queryString, options);
+    // Hacer la solicitud
+    const response = await fetch(api + url + queryString, options);
 
         // Verificar si la respuesta es exitosa
         if (response.status !== 200 && response.status !== 201) {

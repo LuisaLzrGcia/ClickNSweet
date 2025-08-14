@@ -1,4 +1,6 @@
+// product-detail/productDetailView.js
 import { renderStars } from "../functions/renderStars.js";
+import fetchData from "../fetchData/fetchData.js";
 
 export const productDetailView = (data, type) => {
   console.log(data);
@@ -105,7 +107,7 @@ export const productDetailView = (data, type) => {
 
 
 
-  const html = `
+  return `
     <div class="row g-4 align-items-start p-4">
       <!-- Imagen del producto -->
       <div class="col-md-6">
@@ -135,30 +137,26 @@ export const productDetailView = (data, type) => {
 
           <!-- Cantidad -->
           <div class="col-12 col-md-6">
-            <label for="cantidad" class="form-label fw-semibold text-muted">Cantidad:</label>
-            <select id="cantidad" class="form-select w-100">
+            <label class="form-label fw-semibold text-muted">Cantidad:</label>
+            <select class="form-select w-100" id="cantidad">
               ${[...Array(10)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
             </select>
           </div>
         </div>
 
-        <!-- Descripción -->
         <p class="text-muted">${data.description || "Sin descripción del producto."}</p>
 
-        <!-- Información adicional -->
         <div class="mt-4 text-muted small d-flex flex-column gap-1 category">
           <p class="mb-1">
             <strong>Categoría:</strong>
             <span class="badge pastel-creamy text-dark fs-6">${category || "No definida"}</span>
           </p>
-
           <p class="mb-1">
             <strong>Origen:</strong>
             <span class="badge bg-pastel-green text-dark">
               ${locationText}
             </span>
           </p>
-
           <p class="mb-0">
           <strong>Disponibilidad:</strong>
           <span class="badge bg-mint-light text-dark">
@@ -173,94 +171,91 @@ export const productDetailView = (data, type) => {
 
         </div>
 
-        <!-- Botón de añadir al carrito -->
-        <div class="d-grid gap-2 mt-4">
-          ${showButton}
-        </div>
+        ${showButton}
       </div>
-    </div>`;
+    </div>
+  `;
+};
 
-  return html;
-}
+/** ====== CUADRO DE RESEÑAS (solo reseñas, mismo markup/IDs) ====== */
+export const productReviewsView = () => `
+  <section class="reviews-section">
+    <div class="reviews-grid">
+      <div class="reviews-summary-box">
+        <h2>Opiniones del producto</h2>
+        <div id="average-stars" class="stars">★★★★★</div>
+        <div id="review-count" class="review-count">(0)</div>
+      </div>
+      <div class="reviews-list-box">
+        <div id="reviews-container"></div>
+        <button id="load-more-reviews" style="display:none;">Mostrar más</button>
+      </div>
+    </div>
+  </section>
+`;
 
+/** ====== LÓGICA para cargar y pintar reseñas (fetch + render) ====== */
+let _allReviews = [];
+let _reviewsToShow = 3;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const productId = "mooncake";
-  const storageKey = `reviews_${productId}`;
+export async function initProductReviews(product) {
   const reviewsContainer = document.getElementById("reviews-container");
   const loadMoreButton = document.getElementById("load-more-reviews");
   const averageStarsContainer = document.getElementById("average-stars");
   const reviewCountContainer = document.getElementById("review-count");
 
-  const defaultReviews = [
-    {
-      id_user: 1,
-      name_user: "María López",
-      id_product: "mooncake",
-      id_review: 101,
-      rating: 5,
-      comment: "¡Delicioso! La textura es perfecta y el sabor increíble."
-    },
-    {
-      id_user: 2,
-      name_user: "Juan Pérez",
-      id_product: "mooncake",
-      id_review: 102,
-      rating: 4,
-      comment: "Muy bueno, aunque un poco dulce para mi gusto."
-    },
-    {
-      id_user: 3,
-      name_user: "Ana Rodríguez",
-      id_product: "mooncake",
-      id_review: 103,
-      rating: 3,
-      comment: "Lo compré para una reunión y todos quedaron encantados."
-    },
-    {
-      id_user: 4,
-      name_user: "Carlos Méndez",
-      id_product: "mooncake",
-      id_review: 104,
-      rating: 4,
-      comment: "Buen sabor, buena presentación. Volvería a comprar."
-    }
-  ];
-
-  if (!localStorage.getItem(storageKey)) {
-    localStorage.setItem(storageKey, JSON.stringify(defaultReviews));
+  if (!product?.id) {
+    _renderHeader(averageStarsContainer, reviewCountContainer);
+    if (reviewsContainer) reviewsContainer.innerHTML = "<p>Sin reseñas.</p>";
+    if (loadMoreButton) loadMoreButton.style.display = "none";
+    return;
   }
 
-  const reviews = JSON.parse(localStorage.getItem(storageKey)) || [];
-  let reviewsToShow = 3;
-  renderHeader();
-  renderReviews();
-
-  function renderHeader() {
-    const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-    if (averageStarsContainer) {
-      averageStarsContainer.innerHTML = renderStars(avgRating);
-    }
-    if (reviewCountContainer) {
-      reviewCountContainer.textContent = `Total de calificaciones (${reviews.length})`;
-    }
+  try {
+    const list = await fetchData(`/comments/product/${product.id}`, "GET");
+    _allReviews = (list || []).map(r => ({
+      name_user: r?.user?.firstName || "Usuario",
+      rating: r?.rating || 0,
+      comment: r?.commentDetail || ""
+    }));
+  } catch (err) {
+    console.error("Error cargando reseñas:", err);
+    _allReviews = [];
   }
 
-  function renderReviews() {
-    reviewsContainer.innerHTML = "";
+  _renderHeader(averageStarsContainer, reviewCountContainer);
+  _renderReviews(reviewsContainer, loadMoreButton);
 
-    reviews.slice(0, reviewsToShow).forEach((review) => {
-      const reviewDiv = document.createElement("div");
-      reviewDiv.classList.add("review-item");
-      reviewDiv.innerHTML = `
-        <p class="reviewer-name"><strong>${review.name_user}</strong></p>
-        <p class="review-stars">${renderStars(review.rating)}</p>
-        <p class="review-text">${review.comment}</p>
-      `;
-      reviewsContainer.appendChild(reviewDiv);
+  if (loadMoreButton) {
+    loadMoreButton.addEventListener("click", () => {
+      _reviewsToShow += 3;
+      _renderReviews(reviewsContainer, loadMoreButton);
     });
+  }
+}
 
-    loadMoreButton.style.display = reviewsToShow < reviews.length ? "block" : "none";
+function _renderHeader(avgEl, countEl) {
+  const total = _allReviews.length;
+  const avg = total > 0 ? _allReviews.reduce((sum, r) => sum + (r.rating || 0), 0) / total : 0;
+  if (avgEl) avgEl.innerHTML = renderStars(avg);
+  if (countEl) countEl.textContent = `(${total})`;
+}
+
+function _renderReviews(container, loadMoreBtn) {
+  if (!container) return;
+  const slice = _allReviews.slice(0, _reviewsToShow);
+  container.innerHTML = slice.length === 0
+    ? "<p>Sin reseñas aún. ¡Sé el primero en opinar!</p>"
+    : slice.map(r => `
+        <div class="review-item">
+          <p class="reviewer-name"><strong>${_esc(r.name_user)}</strong></p>
+          <p class="review-stars">${renderStars(r.rating || 0)}</p>
+          <p class="review-text">${_esc(r.comment || "")}</p>
+        </div>
+      `).join("");
+
+  if (loadMoreBtn) {
+    loadMoreBtn.style.display = _reviewsToShow < _allReviews.length ? "inline-block" : "none";
   }
 
   loadMoreButton.addEventListener("click", () => {
