@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((usuario) => {
           console.log("¡Inicio de sesión exitoso!", usuario);
           alert("Inicio de sesión exitoso");
-          const homePage = usuario.role === "admin" ? `${resolvePath('/main-manage-products/index.html')}` : `${resolvePath("/index.html")}`;
+          const homePage = usuario.role === "admin" ? `${resolvePath('./main-manage-products/index.html')}` : `${resolvePath("/index.html")}`;
           window.document.location.href = homePage;
         })
         .catch((error) => {
