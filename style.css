@@ -367,9 +367,30 @@ h2 {
 }
 
 .title-category {
+  font-family: "Pacifico", cursive;
+  text-decoration: none;
+  color: #000000;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
+
+.category-link {
+  text-decoration: none; /* quitar subrayado por defecto */
+}
+
+.category-link .title-category {
+  color: #000; /* tu color deseado */
+  text-decoration: none; /* subrayado si quieres */
+  font-weight: 600; /* opcional */
+}
+
+/* Para quitar el contorno azul al hacer clic o focus */
+.category-link:focus,
+.category-link:active {
+  outline: none;
+  text-decoration: underline; /* o none si no quieres */
+}
+
 
 .circle {
   width: 20rem;
@@ -599,4 +620,18 @@ h1 {
   border-radius: 5px;
   font-size: 0.8rem;
   font-weight: bold;
+}
+
+.discount-product {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(247, 214, 224, 0.8);
+  font-size: 1.2rem;
+  color: #000;
+  padding: 0.3rem;
+  margin-right: 0.5rem;
+  border-radius: 10%;
+  font-weight: bolder;
+  z-index: 99;
 }

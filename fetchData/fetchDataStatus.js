@@ -1,5 +1,4 @@
-async function fetchData(url, method = 'GET', params, body) {
-    if (!url) { return }
+async function fetchDataStatus(url, method = 'GET', params, body) {
     const api = 'http://localhost:8080/api/v1/clicknsweet'; // Cambia esto por tu URL base real
     try {
         // Construir query string si hay parámetros
@@ -8,21 +7,21 @@ async function fetchData(url, method = 'GET', params, body) {
             queryString = '?' + new URLSearchParams(params).toString();
         }
 
-    // Configuración base
-    const options = {
-      method: method.toUpperCase(),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+        // Configuración base
+        const options = {
+            method: method.toUpperCase(),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
 
-    // Agregar body si no es GET y hay datos
-    if (body && method !== "GET") {
-      options.body = JSON.stringify(body);
-    }
+        // Agregar body si no es GET y hay datos
+        if (body && method !== 'GET') {
+            options.body = JSON.stringify(body);
+        }
 
-    // Hacer la solicitud
-    const response = await fetch(api + url + queryString, options);
+        // Hacer la solicitud
+        const response = await fetch(api + url + queryString, options);
 
         // Verificar si la respuesta es exitosa
         if (response.status !== 200 && response.status !== 201) {
@@ -31,11 +30,11 @@ async function fetchData(url, method = 'GET', params, body) {
 
 
         // Intentar parsear la respuesta como JSON
-        return await response.json();
+        return await response;
 
     } catch (error) {
         console.error('Error en fetchData:', error);
         throw error;
     }
 }
-export default fetchData;
+export default fetchDataStatus;

@@ -1,6 +1,7 @@
 import { products } from "../data/db.js";
 import { loadCategoryCassurel } from "../functions/loadCategoryCassurel.js"
 import { renderProducts } from "../functions/renderProducts.js";
+import { getProductsData } from "../products/getProductsData.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   loadCategoryCassurel()
@@ -9,11 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function loadProductsMain() {
+async function loadProductsMain() {
   const container = document.getElementById('container-products-main');
-  const productsArray = products
-    .filter(product => product.stock === true)
-    .slice(0, 4);
+  if (!container) return; // previene errores si no existe el contenedor
 
-  container.innerHTML = renderProducts(productsArray, "index");
+  try {
+    const productsArray = await getProductsData({ size: 4, page: 0 });
+    container.innerHTML = renderProducts(productsArray.items, "index");
+  } catch (error) {
+    console.error("Error cargando productos:", error);
+    container.innerHTML = "<p>No se pudieron cargar los productos.</p>";
+  }
 }
