@@ -25,8 +25,17 @@ async function fetchData(url, method = "GET", params = {}, body = null) {
 
     // Verificar si la respuesta es exitosa
     if (!response.ok) {
-      throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
+  let errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
+  try {
+    const errorBody = await response.json();
+    if (errorBody.message) {
+      errorMessage = errorBody.message;
     }
+  } catch (e) {
+    // Si no se puede parsear, se mantiene el mensaje por defecto
+  }
+  throw new Error(errorMessage);
+}
     const contentType = response.headers.get("content-type");
     if (
       response.status === 204 ||
