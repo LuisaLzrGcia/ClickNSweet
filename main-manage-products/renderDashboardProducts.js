@@ -16,6 +16,22 @@ export function renderDashboardProducts(productsArray) {
       currency: "MXN",
     });
 
+        // URL normal (picture) o Base64 (image) → src usable por <img>
+    function resolveProductImage(product) {
+    const pic = product?.picture?.trim?.();
+    if (pic) return pic; // ya puede ser URL o "data:image/...;base64,..."
+
+    const b64 = product?.image && String(product.image).trim();
+    if (b64) {
+        // Ajusta si tu backend envía otro mime; por defecto, jpeg
+        const mime = product.imageMimeType || "image/jpeg";
+        return `data:${mime};base64,${b64}`;
+    }
+
+    // Fallback opcional
+    return "/assets/img/placeholder-product.png";
+    }
+
     html += `
       <div class="col-12 product-card-container">
     <div class="card shadow-sm p-3 border-0 rounded-4 h-100 product-card${inactiveClass}" data-product-id="${product.id}">
@@ -23,7 +39,7 @@ export function renderDashboardProducts(productsArray) {
             <!-- Sección de imagen -->
             <div class="col-md-4 inactive">
                 <div class="position-relative h-100">
-                    <img src="${product.picture}" class="img-fluid rounded-4 object-fit-cover w-100 h-100 product-image"
+                    <img src="${resolveProductImage(product)}" class="img-fluid rounded-4 object-fit-cover w-100 h-100 product-image"
                         style="min-height: 200px; max-height: 250px" alt="${product.name}" loading="lazy" />
                     <!-- Badge de descuento -->
                     ${

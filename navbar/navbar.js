@@ -26,7 +26,6 @@ const config = {
       label: "Administrar productos",
     },
     { path: "/new-product/index.html", label: "Crear producto" },
-    { path: "/edit-product.html", label: "Actualizar producto" },
   ],
 };
 
@@ -164,7 +163,15 @@ function renderAuthSection(isAuthenticated, basePath) {
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            ${JSON.parse(localStorage.getItem("usuario")).role == "admin"? `
+                            <ul class="dropdown-menu dropdown-menu-end">
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item logout" href="${resolvePath(
+                  "/"
+                )}">Cerrar sesión</a></li>
+            </ul>
+              `: `            
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="${resolvePath(
                   "../account-details/index.html"
                 )}">Mi perfil</a></li>
@@ -175,7 +182,8 @@ function renderAuthSection(isAuthenticated, basePath) {
                 <li><a class="dropdown-item logout" href="${resolvePath(
                   "/"
                 )}">Cerrar sesión</a></li>
-            </ul>
+            </ul>`
+            }
         </li>`;
   }
   const loginPath = "/login/index.html";
@@ -252,14 +260,14 @@ export function renderNavBar() {
   addEventListeners();
 
   // Mostrar elementos de admin si es necesario
-  // if (isAdmin()) {
-  //     const adminItems = renderAdminItems();
-  //     const navItems = container.querySelector('.navbar-nav');
-  //     if (navItems) {
-  //         const contactItem = navItems.querySelector('[href$="/contact-us/contac-us.html"]');
-  //         if (contactItem) {
-  //             contactItem.insertAdjacentHTML('afterend', adminItems);
-  //         }
-  //     }
-  // }
+   if (isAdmin()) {
+       const adminItems = renderAdminItems();
+       const navItems = container.querySelector('.navbar-nav');
+       if (navItems) {
+           const contactItem = navItems.querySelector('[href$="/contact-us/contac-us.html"]');
+           if (contactItem) {
+               contactItem.insertAdjacentHTML('afterend', adminItems);
+           }
+       }
+   }
 }
