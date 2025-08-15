@@ -61,10 +61,10 @@ const getProducts = async (page = 1) => {
   const params = new URLSearchParams(window.location.search);
   // Verificar si existe el parámetro 'category'
   let category = 0;
-if (params.has('category')) {
-  category = parseInt(params.get('category')); // <-- importante
-  console.log('Category:', category);
-}
+  if (params.has('category')) {
+    category = parseInt(params.get('category')); // <-- importante
+    console.log('Category:', category);
+  }
 
 
 
@@ -80,7 +80,6 @@ if (params.has('category')) {
     });
 
     let productsArray = products.items;
-    console.log(productsArray);
 
     if (!productsArray || productsArray.length === 0) {
       container.innerHTML = `<p style="text-align: center;">No hay productos disponibles</p>`;

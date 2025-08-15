@@ -67,7 +67,7 @@ export function renderProducts(productsArray, type = "products") {
           data-name="${item.productName}"
           onclick="viewDetails(this)">
             <div class="img-wrapper">
-              ${item.discountValue > 0 ? `<span class="discount-product">${discountPercentage}% OFF</span>` : ''}
+              ${item.discountValue > 0 ? `<span class="discount-product">${Math.round(((item.price - item.discountValue) / item.price) * 100)}% OFF</span>` : ''}
               ${!item.quantityStock > item.lowStockThreshold ? '<span class="status-product">Agotado</span>' : ''}
               <img src="${pictureSrc}"
                 class="card-img-top img-fill" alt="${item.productName}">
