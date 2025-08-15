@@ -88,14 +88,75 @@ export default async function createOrder(orderData) {
 // Esperar a que el DOM cargue
 document.addEventListener("DOMContentLoaded", () => {
     const addAddressBtn = document.getElementById('add-address-btn');
-    if (addAddressBtn) {
-        addAddressBtn.addEventListener('click', () => {
-            alert("Aquí puedes abrir un modal o redirigir a un formulario para añadir dirección.");
-        });
-    }
 
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (usuario) {
         loadUserAddresses(usuario.id);
     }
 });
+
+
+async function getTarjetas() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let idUser = JSON.parse(localStorage.getItem("usuario")).id
+
+    const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/api/v1/clicknsweet/users/" + idUser + "/cards", requestOptions);
+        if (!response.ok) throw new Error(`Error ${response.status}`);
+        const tarjetas = await response.json();
+        renderTarjetas(tarjetas);
+    } catch (error) {
+        console.error("Error obteniendo tarjetas:", error);
+    }
+}
+
+function renderTarjetas(lista) {
+    const container = document.getElementById("tarjetas-container");
+
+    lista.forEach((tarjeta, index) => {
+        const lastDigits = tarjeta.numberCard.slice(-4);
+        const label = document.createElement("label");
+        label.className = "form-check-label d-flex justify-content-between w-100";
+        label.setAttribute("for", `tarjeta${index + 1}`);
+        label.innerHTML = `
+                <span>Tarjeta que termina en ${lastDigits}</span>
+                <span>${tarjeta.user.firstName}</span>
+                <span>${tarjeta.expirationDate}</span>
+            `;
+
+        const input = document.createElement("input");
+        input.className = "form-check-input";
+        input.type = "radio";
+        input.name = "tarjeta";
+        input.id = `tarjeta${index + 1}`;
+        if (index === 0) input.checked = true;
+
+        const div = document.createElement("div");
+        div.className = "form-check mb-3";
+        div.appendChild(input);
+        div.appendChild(label);
+
+        container.appendChild(div);
+    });
+
+    // Botón para elegir otro método
+    const btn = document.createElement("button");
+    btn.className = "btn btn-alt";
+    btn.textContent = "Elegir otro método de pago";
+    btn.addEventListener("click", () => {
+        window.location.href = "../account-details/index.html";
+    });
+
+    container.appendChild(btn);
+}
+
+// Ejecutar al cargar
+getTarjetas();

@@ -38,7 +38,10 @@
             <select id="address-select" class="form-select mb-2">
             </select>
 
-            <button id="add-address-btn" class="btn btn-pink-see ">Añadir dirección de entrega</button>
+            <button id="add-address-btn" class="btn btn-pink-see"
+                onclick="window.location.href='../account-details/index.html'">
+                Añadir dirección de entrega
+            </button>
         </div>
 
         <!-- Productos -->
@@ -56,28 +59,9 @@
 
         <!-- Método de pago -->
         <h1 class="payment-title text-start">Método de pago</h1>
-        <div class="section-box">
+        <div class="section-box" id="tarjetas-container">
             <p class="section-title">Mis tarjetas</p>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
-                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
-                    <span>Tarjeta banco que termina en XXXX</span>
-                    <span>Nombre</span>
-                    <span>Fecha</span>
-                </label>
-            </div>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
-                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
-                    <span>Tarjeta banco que termina en XXXX</span>
-                    <span>Nombre</span>
-                    <span>Fecha</span>
-                </label>
-            </div>
-
-            <button class="btn btn-alt">Elegir otro método de pago</button>
+            <!-- Aquí se insertarán las tarjetas con JS -->
         </div>
 
         <!-- Resumen de pago -->
