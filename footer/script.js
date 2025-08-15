@@ -40,7 +40,7 @@ export function renderFooter() {
                             <a href="https://www.facebook.com"><img src="../assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
                             <a href="https://www.x.com"><img src="../assets/icons8-x-192.png" alt="X" width="32"></a>
                             <a href="https://www.instagram.com"><img src="../assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
-                            <a href="https://www.youtube.com"><img src="../assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
+                            <a href="https://www.youtube.com"><img src="..//assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
                             <a href="https://www.tiktok.com"><img src="./assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
                         </div>
                         <ul class="footer-links"></ul>
