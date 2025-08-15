@@ -96,7 +96,13 @@ export async function initPerfil() {
         updatedUser
       );
 
-      alert("Perfil actualizado correctamente.");
+      Swal.fire({
+        icon: "success",
+        title: "Actualización exitosa",
+        text: "Tu perfil ha sido actualizado correctamente.",
+        confirmButtonColor: "#e946c2",
+        confirmButtonText: "Entendido",
+      });
 
       inputs.forEach((input) => {
         input.disabled = true;
