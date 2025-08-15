@@ -7,20 +7,14 @@ let cartItemsCache = []; // global
 
 document.addEventListener("DOMContentLoaded", async function () {
   bloquearBotonPago(); // bloquear al inicio mientras cargan datos
-  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-  cartItemsCache = await getCartItemsArray(cartLS);
-  await renderCartItems(cartItemsCache);
-  setupDeleteButtons();
+  renderView()
   desbloquearBotonPago(); // desbloquear al terminar
 });
 
-async function renderCartItems(cartItems) {
-  bloquearBotonPago(); // bloquear mientras se renderiza
-
+function noData() {
   const cartContainer = document.getElementById("cart-container");
 
-  if (cartItems.length === 0) {
-    cartContainer.innerHTML = `
+  cartContainer.innerHTML = `
       <div id="cart-items-null" class="cart-items">
           No hay productos en el carrito.
           <br><br>
@@ -31,22 +25,29 @@ async function renderCartItems(cartItems) {
           </svg>
       </div>
     `;
-    actualizarResumenCompra(cartItems);
-    actualizarCuponAplicado(cartItems);
-    desbloquearBotonPago();
-    return;
-  }
 
-  let cartItemsArray = await getCartItemsArray(cartItems);
+}
+
+async function renderCartItems(cartItems) {
+  bloquearBotonPago(); // bloquear mientras se renderiza
+
+  const cartContainer = document.getElementById("cart-container");
+
+  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+  if (!cartLS.length && cartLS < 1) {
+    noData(); return;
+  }
+  let cartItemsArray = await getCartItemsArray(cartLS);
   let cartHTML = "";
 
   for (const [index, item] of cartItemsArray.entries()) {
     cartHTML += cartItem(item, item.quantity);
-    if (index !== cartItemsArray.length - 1) cartHTML += '<hr>';
+
   }
 
   cartContainer.innerHTML = cartHTML;
 
+  setupDeleteButtons();
   setupCartInteractivity(cartItemsArray);
   actualizarResumenCompra(cartItemsArray);
   actualizarCuponAplicado(cartItemsArray);
@@ -66,11 +67,16 @@ async function getCartItemsArray(items) {
 }
 
 function cartItem(item, quantity) {
+
+  console.log(item);
   const hasDiscount = item.discountValue > 0;
   const priceUnit = item.price;
-  const discountPercentage = hasDiscount ? Math.round(item.discountValue) : 0;
+  const discountPercentage = hasDiscount
+    ? Math.round(((item.discountValue / priceUnit) - 1) * 100)
+    : 0;
+
   const priceDiscount = hasDiscount
-    ? priceUnit - Math.round((priceUnit * item.discountValue) / 100)
+    ? item.discountValue
     : priceUnit;
   const priceFinal = Math.round(priceDiscount * quantity);
   let imgSrc = item.image ? `data:image/jpeg;base64,${item.image}` : '../assets/default.jpg'
@@ -95,16 +101,18 @@ function cartItem(item, quantity) {
           </div>
           <div class="precio-info d-flex flex-column align-items-center align-items-md-end text-center text-md-end">
               <p class="text-muted mb-0">Precio unitario: 
-                  <span class="precio-unitario d-none">${priceDiscount}</span>
+                  <span class="precio-unitario d-none">${priceUnit}jj</span>
                   ${hasDiscount ? `<span class="text-decoration-line-through text-muted">$${priceUnit.toFixed(2)}</span> 
-                  <span class="text-danger fw-semibold ms-1">-${discountPercentage}%</span>` : `$${priceUnit.toFixed(2)}`}</p>
-              <p class="precio-final fw-bold mb-1">$${priceFinal}</p>
+                  <span class="text-danger fw-semibold ms-1">${discountPercentage}%</span>` : `$${priceUnit.toFixed(2)}`}</p>
+              <p class="precio-final fw-bold mb-1">$${item.discountValue > 0 ? item.discountValue.toFixed(2) : item.price.toFixed(2)}</p>
               <button class="btn btn-sm eliminar-item" data-id="${item.id}">
                 <img src="../assets/remove.webp" alt="Eliminar" class="trash-img" style="width: 20px;">
               </button>
           </div>
       </div>
-  </div>`;
+  </div>
+  <hr>`
+    ;
 }
 
 function setupCartInteractivity(items) {
@@ -236,41 +244,46 @@ document.getElementById('apply-coupon-btn').addEventListener('click', async () =
   localStorage.setItem('discountType', tipoDescuento);
   input.value = '';
 
-  // Obtener carrito actualizado del localStorage
-  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-  const items = await getCartItemsArray(cartLS);
 
-  renderCartItems(cartItemsCache); // ahora sí pasamos el carrito actual
 });
 
+async function renderView() {
+  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cartLS.length !== 0) {
+    const productsArray = await getCartItemsArray(cartLS);
+    await renderCartItems(productsArray); // solo una vez
+  } else {
+    noData();
+  }
+}
 
-function actualizarCuponAplicado(items) {
-  bloquearBotonPago(); // bloquea
+
+
+async function actualizarCuponAplicado(items) {
+  bloquearBotonPago();
   const discountCode = localStorage.getItem('discountCode');
   if (discountCode) {
 
     const discountCouponBtn = document.getElementById('discount-coupon-btn');
     discountCouponBtn.innerHTML = `
-    <div class="badge bg-fuchsia d-inline-flex align-items-center gap-2 p-2">
-      <span>${discountCode}</span>
-      <button id="remove-coupon-btn" class="btn-close btn-close-white" aria-label="Eliminar cupón" style="font-size: .8rem;"></button>
-    </div>
-  `;
+      <div class="badge bg-fuchsia d-inline-flex align-items-center gap-2 p-2">
+        <span>${discountCode}</span>
+        <button id="remove-coupon-btn" class="btn-close btn-close-white" aria-label="Eliminar cupón" style="font-size: .8rem;"></button>
+      </div>
+    `;
 
-    // Evento para quitar el cupón
     document.getElementById('remove-coupon-btn').addEventListener('click', () => {
       localStorage.removeItem('discountCode');
       localStorage.removeItem('discountValue');
       localStorage.removeItem('discountType');
 
-      // Limpia el contenido del cupón
       document.getElementById('discount-coupon-btn').innerHTML = '';
       document.getElementById('code-coupon').innerHTML = 'Cupón:';
       document.getElementById('discount-coupon').innerHTML = '$0.00';
       document.getElementById('coupon-message').textContent = '';
 
-      // Actualiza el carrito
-      renderCartItems(items);
+      // Solo recalcular resumen, no renderizar todo
+      actualizarResumenCompra(items);
     });
 
     const discountElement = document.getElementById('code-coupon');
@@ -284,14 +297,19 @@ function actualizarCuponAplicado(items) {
     } else {
       const porcentaje = parseFloat(localStorage.getItem('discountValue'));
       const montoDescuento = (porcentaje / 100) * descuentoCarrito;
-
       discountValue.innerHTML = `<strong>-${porcentaje}% </strong>(${formatCurrency(montoDescuento)})`;
-
     }
   }
-  renderCartItems(items)
+
+  // Actualizar carrito con el descuento
+  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+  const productsArray = await getCartItemsArray(cartLS);
+  actualizarResumenCompra(productsArray);
+  actualizarCuponAplicado(productsArray);
+
   desbloquearBotonPago();
 }
+
 
 
 function formatCurrency(value) {
@@ -352,6 +370,7 @@ function setupDeleteButtons() {
         itemElement.remove();
       }
 
+      renderView()
       // Actualizar resumen del carrito
       actualizarResumenCompra(cartItems);
     });
