@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         window.location.href = "../not-found/index.html";
         return;
     }
+    console.log(idParam);
 
     const id = Number(idParam);
 
