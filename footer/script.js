@@ -37,20 +37,20 @@ export function renderFooter() {
                     <div class="col-lg-5 col-md-6">
                         <h3 class="footer-title">¡Siguenos en nuestras redes!</h3>
                         <div class="social-links mb-4">
-                            <a href="https://www.facebook.com"><img src="../assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
-                            <a href="https://www.x.com"><img src="../assets/icons8-x-192.png" alt="X" width="32"></a>
-                            <a href="https://www.instagram.com"><img src="../assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
-                            <a href="https://www.youtube.com"><img src="../assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
-                            <a href="https://www.tiktok.com"><img src="../assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
+                            <a href="https://www.facebook.com"><img src="./assets/icons8-facebook-192.png" alt="Facebook" width="32"></a>
+                            <a href="https://www.x.com"><img src="./assets/icons8-x-192.png" alt="X" width="32"></a>
+                            <a href="https://www.instagram.com"><img src="./assets/icons8-instagram-192.png" alt="Instagram" width="32"></a>
+                            <a href="https://www.youtube.com"><img src="./assets/icons8-youtube-96.png" alt="YouTube" width="32"></a>
+                            <a href="https://www.tiktok.com"><img src="./assets/icons8-tiktok-192.png" alt="YouTube" width="32"></a>
                         </div>
                         <ul class="footer-links"></ul>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h3 class="footer-title">Sobre nosotros</h3>
                         <ul class="footer-links">
-                            <li><a href="../our-story/index.html">Nuestra dulce historia</a></li>
-                            <li><a href="../about/index.html">Quiénes somos</a></li>
-                            <li><a href="../products/index.html">Nuestros productos</a></li>
+                            <li><a href="./our-story/index.html">Nuestra dulce historia</a></li>
+                            <li><a href="./about/index.html">Quiénes somos</a></li>
+                            <li><a href="./products/index.html">Nuestros productos</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -58,10 +58,10 @@ export function renderFooter() {
                         <ul class="footer-links">
                             <li><a href="/contac-us/index.html">¡Contáctanos!</a></li>
                             <li><a href="https://www.fedex.com/es-mx/home.html" target="_blank">Localiza tu envío</a></li>
-                            <li><a href="../faq/index.html">FAQ</a></li>
-                            <li><a href="../help-center/index.html">Centro de ayuda</a></li>
-                            <li><a href="../privacy/index.html">Política de privacidad</a></li>
-                            <li><a href="../terms-conditions/index.html">Terminos de servicios</a></li>
+                            <li><a href="./faq/index.html">FAQ</a></li>
+                            <li><a href="./help-center/index.html">Centro de ayuda</a></li>
+                            <li><a href="./privacy/index.html">Política de privacidad</a></li>
+                            <li><a href="./terms-conditions/index.html">Terminos de servicios</a></li>
                         </ul>
                     </div>
                 </div>

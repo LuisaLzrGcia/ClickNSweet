@@ -1,5 +1,6 @@
 // payment/payment.js
 import { loadCartCount } from "../functions/loadCartCount.js";
+import createOrder from "../payment/script.js";
 import { getCurrentItem } from "../product-detail/getCurrentItem.js";
 
 export class PaymentManager {
@@ -75,7 +76,7 @@ export class PaymentManager {
             productsContainer.innerHTML = `
                 <div class="text-center py-4">
                     <p class="text-muted">No hay productos en el carrito</p>
-                    <a href="products.html" class="btn btn-pink">Ver productos</a>
+                    <a href="../products/index.html" class="btn btn btn-pink-see">Ver productos</a>
                 </div>
             `;
             return;
@@ -90,7 +91,7 @@ export class PaymentManager {
     createProductElement(item) {
         const productDiv = document.createElement('div');
         productDiv.className = 'card-producto';
-        const price = parseFloat(item.price_discount) || parseFloat(item.pricing) || parseFloat(item.price) || 0;
+        const price = item.discountValue > 0 ? item.discountValue : item.price
         const quantity = parseInt(item.quantity) || 1;
         const totalItemPrice = price * quantity;
         const imageSrc = this.getImageUrl(item);
@@ -111,14 +112,18 @@ export class PaymentManager {
     }
 
     calculateTotals() {
-        let subtotal = 0;
+        let subtotalOriginal = 0;
+        let subtotalConDescuento = 0;
+
         this.cart.forEach(item => {
-            const price = parseFloat(item.price_discount) || parseFloat(item.pricing) || parseFloat(item.price) || 0;
             const quantity = parseInt(item.quantity) || 1;
-            subtotal += price * quantity;
+            const price = item.price || 0;
+            const discountPrice = item.discountValue > 0 ? item.discountValue : price;
+
+            subtotalOriginal += price * quantity;
+            subtotalConDescuento += discountPrice * quantity;
         });
 
-        let subtotalConDescuento = subtotal;
         let descuentoAplicado = 0;
 
         if (this.appliedCoupons.descuentoPorcentaje > 0) {
@@ -130,11 +135,12 @@ export class PaymentManager {
         }
 
         if (subtotalConDescuento < 0) subtotalConDescuento = 0;
-        const shipping = subtotalConDescuento >= this.freeShippingThreshold || subtotalConDescuento === 0 ? 0 : this.shippingCost;
+
+        const shipping = (subtotalConDescuento >= this.freeShippingThreshold || subtotalConDescuento === 0) ? 0 : this.shippingCost;
         const total = subtotalConDescuento + shipping;
 
         return {
-            subtotalOriginal: subtotal,
+            subtotalOriginal,
             subtotal: subtotalConDescuento,
             shipping,
             total,
@@ -143,6 +149,7 @@ export class PaymentManager {
             codigoCupon: this.appliedCoupons.codigoCupon || null
         };
     }
+
 
     async calculateAndRenderTotals() {
         const totals = this.calculateTotals();
@@ -187,18 +194,29 @@ export class PaymentManager {
         if (!payButton) return;
         payButton.addEventListener('click', (e) => {
             e.preventDefault();
+
             this.processPayment();
         });
     }
 
     async processPayment() {
-        if (!this.cart) return alert('No hay productos en el carrito');
+        if (!this.cart || this.cart.length === 0) {
+            return alert('No hay productos en el carrito');
+        }
+
+        // Verificar método de pago seleccionado
         const selectedCard = document.querySelector('input[name="tarjeta"]:checked');
         if (!selectedCard) return alert('Por favor selecciona un método de pago');
 
+        // Obtener id de la dirección seleccionada
+        const select = document.getElementById("address-select");
+        const selectedAddressId = parseInt(select.value);
+        if (!selectedAddressId) return alert('Por favor selecciona una dirección de envío');
+
         const totals = this.calculateTotals();
+
         const orderData = {
-            id: await this.generateOrderId(),
+            id: this.generateOrderId(),
             date: new Date().toISOString(),
             deliveryDate: this.calculateDeliveryDate(),
             products: [...this.cart],
@@ -212,9 +230,91 @@ export class PaymentManager {
             status: 'processing'
         };
 
-        await this.saveOrder(orderData);
-        await this.clearCart();
-        await this.showOrderConfirmation(orderData);
+        // Construir orderLines desde el carrito
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const orderLines = cart.map(item => ({
+            quantity: item.quantity,
+            product: { id: item.id }
+        }));
+
+        // Construir el body con el formato que espera el backend
+        const body = {
+            userId: Number(JSON.parse(localStorage.getItem("usuario")).id),
+            shippingAddressId: selectedAddressId,
+            status: "Pendiente",
+            trackingNumber: generarTrackingNumber(), // función que genera un alfanumérico
+            shippingCarrier: "DHL",
+            orderLines: orderLines
+        };
+
+        console.log("Enviando pedido:", body);
+
+        try {
+            // Enviar la orden al backend
+            const data = await createOrder(body);
+
+            // Comprobar que se creó correctamente
+            if (data) {
+                // Ejecutar acciones posteriores
+                await this.saveOrder(orderData);
+                await this.clearCart();
+                await this.showOrderConfirmation(orderData);
+                console.log("🎉 Pedido creado con éxito:", orderData);
+            } else {
+                alert("Algo salió mal al crear el pedido.");
+                console.error("Respuesta inesperada:", orderData);
+            }
+        } catch (error) {
+            console.error("Error al crear el pedido:", error);
+            alert("No se pudo crear el pedido. Intenta nuevamente.");
+        }
+    }
+
+
+    showOrderConfirmation(orderData) {
+        console.log('🎉 Mostrando confirmación de pedido...');
+
+        //  modal  HTML
+        const modal = document.getElementById('orderConfirmationModal');
+        if (!modal) {
+            console.error('❌ No se encontró el modal en el HTML');
+            return;
+        }
+
+
+        const orderIdElement = modal.querySelector('#modal-order-id');
+        const totalElement = modal.querySelector('#modal-total');
+        const deliveryDateElement = modal.querySelector('#modal-delivery-date');
+
+        if (orderIdElement) orderIdElement.textContent = orderData.id;
+        if (totalElement) totalElement.textContent = `${orderData.total.toFixed(2)}`;
+        if (deliveryDateElement) deliveryDateElement.textContent = orderData.deliveryDate;
+
+        //  modal de Bootstrap
+        const modalInstance = new bootstrap.Modal(modal);
+
+
+        const continueShoppingBtn = modal.querySelector('#continueShoppingBtn');
+        if (continueShoppingBtn) {
+            continueShoppingBtn.addEventListener('click', () => {
+                modalInstance.hide();
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 300);
+            });
+        }
+
+
+        modal.addEventListener('hidden.bs.modal', () => {
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 300);
+        });
+
+
+        modalInstance.show();
+
+        console.log('✅ Modal de confirmación mostrado');
     }
 
     async generateOrderId() {
@@ -241,7 +341,7 @@ export class PaymentManager {
     async updateCustomerInfo(customerData) {
         const customerInfoElement = document.querySelector('.section-box p');
         if (!customerInfoElement || !customerData) return;
-        customerInfoElement.innerHTML = `<strong>Enviar a ${customerData.name}</strong><br/><span class="text-muted">${customerData.address}</span>`;
+        customerInfoElement.innerHTML = `<strong>Enviar a ${customerData.name}</strong><br/>`;
     }
 
     async init() {
@@ -258,8 +358,7 @@ export class PaymentManager {
         await this.setupPaymentButton();
 
         const customerData = {
-            name: "Juan Pérez",
-            address: "Calle Reforma 123, Col. Centro, Ciudad de México, CDMX, CP 06000"
+            name: JSON.parse(localStorage.getItem("currentUser")).name
         };
         await this.updateCustomerInfo(customerData);
     }
@@ -297,38 +396,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const paymentBtn = document.getElementById("paymentToDo");
     if (!paymentBtn) return;
 
-    // Revisar si hay usuario en localStorage
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const isLoggedIn = !!user.id;
+    setupPaymentButton()
+})
 
-    // Cambiar texto del botón
-    paymentBtn.textContent = isLoggedIn ? "Realiza tu pedido y paga" : "Inicia sesión para continuar";
-
-    // Función de click según estado
-    paymentBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        if (!isLoggedIn) {
-            // Usuario no logueado
-            console.log("🔑 Usuario no logueado: mostrar modal de login/registro");
-            showLoginOrRegister(); // crea esta función para mostrar login/register
-        } else {
-            // Usuario logueado
-            console.log("💳 Usuario logueado: procesar pedido");
-            processUserOrder(); // crea esta función para iniciar el flujo de pago
-        }
-    });
-});
-
-// Función para mostrar modal de login/registro
-function showLoginOrRegister() {
-    window.location.href="../login/index.html"
-}
-
-// Función para procesar pedido
-function processUserOrder() {
-    // Aquí podrías llamar a tu PaymentManager o la función de pago
-    console.log("Iniciando flujo de pago...");
-    // Por ejemplo:
-    // initPaymentPage();
+function generarTrackingNumber() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
 }
