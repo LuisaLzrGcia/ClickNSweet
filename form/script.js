@@ -62,7 +62,49 @@ document.getElementById('btnRegistro').addEventListener('click', async () => {
     const nuevoUsuario = await register(userData);
     console.log('Usuario creado:', nuevoUsuario);
     alert('¡Registro exitoso!');
-    window.location.href = '/login/index.html';
+    window.location.href = '../login.html';
+  } catch (error) {
+    console.error('Error en registro:', error);
+    alert(error.message);
+  }
+});
+
+import { register } from './auth1.js';
+
+document.getElementById('btnRegistro').addEventListener('click', async () => {
+  const userData = {
+    firstName: document.getElementById('nombre').value,
+    lastName: document.getElementById('apellido').value,
+    userName: document.getElementById('usuario').value,
+    email: document.getElementById('correo').value,
+    password: document.getElementById('password').value,
+    phone: document.getElementById('telefono').value,
+    fechaNacimiento: document.getElementById('fechaNacimiento').value
+  };
+
+  try {
+    const nuevoUsuario = await register(userData);
+    console.log('Usuario creado:', nuevoUsuario);
+    
+  
+    const userForStorage = {
+        id: nuevoUsuario.id,
+        name: nuevoUsuario.name,
+        email: nuevoUsuario.email,
+        username: nuevoUsuario.username,
+        role: nuevoUsuario.role
+    };
+    
+    localStorage.setItem('currentUser', JSON.stringify(userForStorage));
+    console.log('Usuario guardado en localStorage:', userForStorage);
+    
+    
+    alert(`¡Registro exitoso! 
+    Bienvenido ${nuevoUsuario.name}
+    Tu rol es: ${nuevoUsuario.role}`);
+    
+    window.location.href = '../login.html';
+    
   } catch (error) {
     console.error('Error en registro:', error);
     alert(error.message);

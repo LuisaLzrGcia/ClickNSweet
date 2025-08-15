@@ -2,6 +2,18 @@
 import { renderStars } from "../functions/renderStars.js";
 import fetchData from "../fetchData/fetchData.js";
 
+// AÑADE ESTA FUNCIÓN AQUÍ
+function _esc(text) {
+  if (typeof text !== 'string') return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
 export const productDetailView = (data, type) => {
   console.log(data);
 
@@ -30,7 +42,7 @@ export const productDetailView = (data, type) => {
   } else if (state) {
     locationText = state; // opcional si quieres mostrar solo estado
   }
-// --- Imagen ---
+  // --- Imagen ---
   let imagenSrc = "../assets/default.jpg"; // default
 
   if (type === "detail") {
@@ -64,13 +76,9 @@ export const productDetailView = (data, type) => {
   `;
 
   const precio = parseFloat(data.price) || 0;
-  const descuento = parseFloat(data.discountValue) > 0
-    ? Math.round(parseFloat(data.discountValue))
-    : 0;
+  const descuento = Math.round(((data.price - data.discountValue) / data.price) * 100);
 
-  const precioOferta = descuento > 0
-    ? Math.round(precio - descuento)
-    : precio;
+  const precioOferta = data.discountValue;
 
 
   const formatoMoneda = new Intl.NumberFormat("es-MX", {
@@ -258,11 +266,12 @@ function _renderReviews(container, loadMoreBtn) {
     loadMoreBtn.style.display = _reviewsToShow < _allReviews.length ? "inline-block" : "none";
   }
 
-  loadMoreButton.addEventListener("click", () => {
-    reviewsToShow += 3;
-    renderReviews();
-  });
-};
+  /* --- CÓDIGO INCORRECTO A ELIMINAR --- */
+  // loadMoreButton.addEventListener("click", () => {
+  //   reviewsToShow += 3;
+  //   renderReviews(); // <--- ¡Esto está mal!
+  // });
+}; // <-- El punto y coma cierra esta función
 
 function actualizarCantidadBoton() {
   // Obtener select de cantidad y botón
