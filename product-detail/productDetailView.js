@@ -2,6 +2,18 @@
 import { renderStars } from "../functions/renderStars.js";
 import fetchData from "../fetchData/fetchData.js";
 
+// AÑADE ESTA FUNCIÓN AQUÍ
+function _esc(text) {
+  if (typeof text !== 'string') return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
 export const productDetailView = (data, type) => {
   console.log(data);
 
