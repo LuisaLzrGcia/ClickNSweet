@@ -262,7 +262,7 @@ function _renderReviews(container, loadMoreBtn) {
     reviewsToShow += 3;
     renderReviews();
   });
-});
+};
 
 function actualizarCantidadBoton() {
   // Obtener select de cantidad y botón
