@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const idParam = urlParams.get("id");
 
     if (!idParam || isNaN(idParam)) {
-        window.location.href = "../not-found/index.html";
+        window.location.href = "/not-found/index.html";
         return;
     }
     console.log(idParam);
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const currentItem = await getCurrentItem(id);
         console.log(currentItem);
         if (!currentItem) {
-            window.location.href = "../not-found/index.html";
+            window.location.href = "/not-found/index.html";
             return;
         }
 
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     } catch (error) {
         console.error(error);
-        window.location.href = "../not-found/index.html";
+        window.location.href = "/not-found/index.html";
     }
 });
 
@@ -239,7 +239,7 @@ async function loadProductData() {
     const idParam = urlParams.get("id");
 
     if (!idParam || isNaN(idParam)) {
-        window.location.href = "../not-found/index.html";
+        window.location.href = "/not-found/index.html";
         return;
     }
 
@@ -249,7 +249,7 @@ async function loadProductData() {
         const currentItem = await getCurrentItem(id);
         console.log(currentItem);
         if (!currentItem) {
-            window.location.href = "../not-found/index.html";
+            window.location.href = "/not-found/index.html";
             return;
         }
 
@@ -263,7 +263,7 @@ async function loadProductData() {
 
     } catch (error) {
         console.error(error);
-        window.location.href = "../not-found/index.html";
+        window.location.href = "/not-found/index.html";
     }
 
 }

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", checkUserAndRedirect);
 // Cargar direcciones del usuario
 async function loadUserAddresses(userId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/clicknsweet/address/user/${userId}`, {
+        const response = await fetch(`http://98.82.183.146/api/v1/clicknsweet/address/user/${userId}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -66,7 +66,7 @@ async function loadUserAddresses(userId) {
 // Función para crear orden
 export default async function createOrder(orderData) {
     try {
-        const response = await fetch("http://localhost:8080/api/v1/clicknsweet/orders", {
+        const response = await fetch("http://98.82.183.146/api/v1/clicknsweet/orders", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(orderData)
@@ -109,7 +109,7 @@ async function getTarjetas() {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/api/v1/clicknsweet/users/" + idUser + "/cards", requestOptions);
+        const response = await fetch("http://98.82.183.146/api/v1/clicknsweet/users/" + idUser + "/cards", requestOptions);
         if (!response.ok) throw new Error(`Error ${response.status}`);
         const tarjetas = await response.json();
         renderTarjetas(tarjetas);

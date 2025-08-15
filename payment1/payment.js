@@ -76,7 +76,7 @@ export class PaymentManager {
             productsContainer.innerHTML = `
                 <div class="text-center py-4">
                     <p class="text-muted">No hay productos en el carrito</p>
-                    <a href="../products/index.html" class="btn btn btn-pink-see">Ver productos</a>
+                    <a href="/products/index.html" class="btn btn btn-pink-see">Ver productos</a>
                 </div>
             `;
             return;

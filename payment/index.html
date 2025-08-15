@@ -135,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="window.location.href='../account-details/index.html'">
+                        onclick="window.location.href='/account-details/index.html'">
                         Ver mis pedidos
                     </button>
                     <button type="button" class="btn btn-success" id="continueShoppingBtn">
@@ -160,7 +160,7 @@
 
     <!-- Inicializar Payment Manager -->
     <script type="module">
-        import { initPaymentPage } from './payment/payment.js';
+        import { initPaymentPage } from './payment1/payment.js';
         document.addEventListener('DOMContentLoaded', function () {
             console.log('🚀 DOM cargado, inicializando PaymentManager...');
             initPaymentPage();

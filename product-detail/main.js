@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Si no es un número o menor o igual a 0, redirige
   if (!idParam || isNaN(id) || id <= 0) {
-    window.location.href = "../not-found/index.html";
+    window.location.href = "/not-found/index.html";
     return; // para que no siga ejecutándose
   }
 
