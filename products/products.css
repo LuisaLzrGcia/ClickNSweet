@@ -148,10 +148,7 @@
   height: fit-content;
 }
 
-@media (max-width: 1024px) {
-
-
-}
+@media (max-width: 1024px) {}
 
 @media (max-width: 640px) {
   .img-wrapper {
@@ -227,7 +224,9 @@
   color: white;
 }
 
-.btn-apply-filter {
+.btn-apply-filter,
+.btn-apply-filter-clean {
+  margin-top: 0.5rem;
   background-color: white;
   color: #E452C0;
   font-weight: bold;
@@ -236,7 +235,8 @@
   transition: all 0.3s ease;
 }
 
-.btn-apply-filter:hover {
+.btn-apply-filter:hover,
+.btn-apply-filter-clean:hover {
   background-color: #E452C0;
   color: white;
 }
@@ -288,25 +288,25 @@
 
 /* Colores personalizados para paginación */
 .pagination .page-item.active .page-link {
-    background-color: #E452C0;
-    border-color: #E452C0;
-    color: white;
+  background-color: #E452C0;
+  border-color: #E452C0;
+  color: white;
 }
 
 .pagination .page-link {
-    background-color: white;
-    color: #E452C0;
-    border: 1px solid #f7a8be;
+  background-color: white;
+  color: #E452C0;
+  border: 1px solid #f7a8be;
 }
 
 .pagination .page-link:hover {
-    background-color: #f7a8be;
-    color: white;
+  background-color: #f7a8be;
+  color: white;
 }
 
 .pagination .page-item.disabled .page-link {
-    background-color: #f7a8be;
-    color: white;
-    border-color: #f7a8be;
-    cursor: not-allowed;
+  background-color: #f7a8be;
+  color: white;
+  border-color: #f7a8be;
+  cursor: not-allowed;
 }
