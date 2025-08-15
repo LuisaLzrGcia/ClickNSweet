@@ -266,7 +266,7 @@ export function renderNavBar() {
     const navItems = container.querySelector(".navbar-nav");
     if (navItems) {
       const contactItem = navItems.querySelector(
-        '[href$="/contact-us/contac-us.html"]'
+        '[href$="/contact-us/index.html"]'
       );
       if (contactItem) {
         contactItem.insertAdjacentHTML("afterend", adminItems);
