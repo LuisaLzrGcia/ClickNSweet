@@ -54,12 +54,24 @@ export async function initPago() {
       const cvv = document.getElementById("cvv").value.trim();
 
       if (!numero || !fecha || !cvv) {
-        alert("Todos los campos son obligatorios.");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Todos los campos son obligatorios.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
         return;
       }
 
       if (!/^\d{16}$/.test(numero) || !/^\d{3,4}$/.test(cvv)) {
-        alert("Número de tarjeta o CVV inválido.");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Número de tarjeta o CVV inválido.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
         return;
       }
 
@@ -68,7 +80,13 @@ export async function initPago() {
       const [year, month] = fecha.split("-").map(Number);
       const expDate = new Date(year, month - 1);
       if (expDate < new Date(today.getFullYear(), today.getMonth())) {
-        alert("La fecha de vencimiento no puede ser pasada.");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "La fecha de vencimiento no puede ser pasada.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
         return;
       }
 
@@ -80,8 +98,13 @@ export async function initPago() {
       };
 
       await fetchData("/cards", "POST", {}, nuevaCard);
-      alert("Tarjeta guardada correctamente.");
-
+      Swal.fire({
+        icon: "success",
+        title: "Tarjeta guardada",
+        text: "Tu tarjeta ha sido guardada correctamente.",
+        confirmButtonColor: "#e946c2",
+        confirmButtonText: "Entendido",
+      });
       cards = await fetchData(`/users/${currentUser.id}/cards`, "GET");
       renderLista(cards);
       formCrear.reset();
@@ -115,9 +138,26 @@ export async function initPago() {
         item
           .querySelector(".eliminar-btn")
           .addEventListener("click", async () => {
-            if (confirm("¿Seguro que deseas eliminar esta tarjeta?")) {
+            const confirm = await Swal.fire({
+              title: "¿Estás seguro?",
+              text: "Esta acción no se puede deshacer.",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#e946c2",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Sí, eliminar",
+              cancelButtonText: "Cancelar",
+            });
+
+            if (confirm.isConfirmed) {
               await fetchData(`/cards/${c.id}`, "DELETE");
-              alert("Tarjeta eliminada correctamente.");
+              Swal.fire({
+                icon: "success",
+                title: "Tarjeta eliminada",
+                text: "Tu tarjeta ha sido eliminada correctamente.",
+                confirmButtonColor: "#e946c2",
+                confirmButtonText: "Entendido",
+              });
               cards = await fetchData(`/users/${currentUser.id}/cards`, "GET");
               renderLista(cards);
             }
@@ -157,7 +197,13 @@ export async function initPago() {
         };
 
         if (!updated.numberCard || !updated.expirationDate || !updated.cvv) {
-          alert("Todos los campos son obligatorios.");
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Todos los campos son obligatorios.",
+            confirmButtonColor: "#e946c2",
+            confirmButtonText: "Entendido",
+          });
           return;
         }
 
@@ -166,12 +212,24 @@ export async function initPago() {
         const [year, month] = updated.expirationDate.split("-").map(Number);
         const expDate = new Date(year, month - 1);
         if (expDate < new Date(today.getFullYear(), today.getMonth())) {
-          alert("La fecha de vencimiento no puede ser pasada.");
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "La fecha de vencimiento no puede ser pasada.",
+            confirmButtonColor: "#e946c2",
+            confirmButtonText: "Entendido",
+          });
           return;
         }
 
         await fetchData(`/cards/${card.id}`, "PUT", {}, updated);
-        alert("Tarjeta actualizada correctamente.");
+        Swal.fire({
+          icon: "success",
+          title: "Éxito",
+          text: "Tarjeta actualizada correctamente.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
 
         cards = await fetchData(`/users/${currentUser.id}/cards`, "GET");
         renderLista(cards);

@@ -1,10 +1,22 @@
-
 import fetchData from "../fetchData/fetchData.js";
 
 // 📝 LOGIN
 export async function login(email, password) {
   try {
     const response = await fetchData('/login', 'POST', {}, { email, password });
+    
+    // ✅ NUEVO: Guardar usuario en localStorage después del login
+    const userForStorage = {
+      id: response.id,
+      name: response.name,
+      email: response.email,
+      username: response.username,
+      role: response.role
+    };
+    
+    localStorage.setItem('currentUser', JSON.stringify(userForStorage));
+    console.log('Usuario logueado y guardado:', userForStorage);
+    
     return response; // devuelve directamente el objeto User
 
   } catch (error) {
@@ -13,10 +25,9 @@ export async function login(email, password) {
   }
 }
 
-
 export async function register(userData) {
   try {
-    // ✅ Validaciones previas
+    // ✅ Validaciones previas (mantén tu lógica actual)
     const firstName = userData.firstName?.trim();
     const lastName = userData.lastName?.trim() || 'SinApellido';
     const email = userData.email?.toLowerCase().trim();
@@ -52,7 +63,7 @@ export async function register(userData) {
       email: email,
       password: password,
       phone: phone,
-      role: { id: 1 }
+      role: { id: 1 } // ✅ Rol por defecto (USER)
     };
 
     // 🔍 Debug
@@ -79,7 +90,16 @@ export async function register(userData) {
     const response = await fetchData('/create-user', 'POST', {}, userForBackend);
     console.log('Usuario registrado exitosamente:', response);
 
-    const newUser = response.user || response;
+    // ✅ NUEVO: Normalizar la respuesta del backend
+    const newUser = {
+      id: response.id,
+      name: response.name,
+      email: response.email,
+      username: response.username,
+      role: response.role,
+      message: response.message
+    };
+
     return newUser;
 
   } catch (error) {
@@ -105,4 +125,7 @@ export async function register(userData) {
 
     throw new Error(errorMessage);
   }
+
 }
+
+
