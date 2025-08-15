@@ -1,29 +1,42 @@
-// product-detail/main.js
-import { productDetailView, productReviewsView, initProductReviews } from "./productDetailView.js";
+import fetchData from "../fetchData/fetchData.js";
+import { getCurrentItem } from "./getCurrentItem.js";
+import { productDetailView } from "./productDetailView.js";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const product = JSON.parse(localStorage.getItem("currenProduct")) || {};
+window.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  const idParam = params.get("id");
+  const id = Number(idParam); // Convertimos a número
 
-  // 1) Cuadro del producto
-  const detailContainer = document.getElementById("product-detail-container");
-  if (detailContainer) {
-    detailContainer.innerHTML = productDetailView(product);
+  // Si no es un número o menor o igual a 0, redirige
+  if (!idParam || isNaN(id) || id <= 0) {
+    window.location.href = "../not-found/index.html";
+    return; // para que no siga ejecutándose
   }
 
-  // 2) Cuadro de reseñas (en un contenedor separado)
-  // Opción A: si tienes <div id="reviews-root"></div> en el HTML:
-  const reviewsRoot = document.getElementById("reviews-root");
-  if (reviewsRoot) {
-    reviewsRoot.innerHTML = productReviewsView();
-  } else {
-    // Opción B: si tienes <section id="product-reviews"></section> vacío:
-    const section = document.getElementById("product-reviews");
-    if (section) section.innerHTML = productReviewsView();
-  }
+  const container = document.getElementById('product-detail-container');
 
-  // 3) Cargar reseñas desde el backend
-  initProductReviews(product);
+  // Mostrar mensaje de carga
+  container.innerHTML = "<p style='font-weight: bold;'>Cargando producto...</p>";
+
+  try {
+
+    let currentItem = await getCurrentItem(id);
+
+    // Renderizar el producto
+    createProductDetails(currentItem);
+
+  } catch (error) {
+    container.innerHTML = "<p style='color:red;'>Error al cargar el producto</p>";
+    console.error(error);
+  }
 });
 
+function createProductDetails(currentItem) {
+  const container = document.getElementById('product-detail-container');
 
-
+  if (container) {
+    container.innerHTML = productDetailView(currentItem, "detail");
+  } else {
+    console.warn("No se encontró el contenedor con id 'product-detail-container'");
+  }
+}

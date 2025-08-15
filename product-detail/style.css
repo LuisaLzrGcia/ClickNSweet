@@ -19,6 +19,13 @@
   color: white;
 }
 
+.btn-pink-cart:disabled {
+  opacity: 1; /* quitar transparencia */
+  background-color: #E452C0; /* mantener color de fondo */
+  color: white; /* mantener color de texto */
+  cursor: not-allowed;
+}
+
 /* -------------------------------- */
 .reviews-section {
   margin-top: 40px;

@@ -72,12 +72,24 @@ export async function initDireccion() {
         !nuevaDireccion.city ||
         !nuevaDireccion.country
       ) {
-        alert("Los campos Calle y número, Ciudad y País son obligatorios.");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Los campos Calle y número, Ciudad y País son obligatorios.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
         return;
       }
 
       await fetchData("/address", "POST", {}, nuevaDireccion);
-      alert("Dirección guardada correctamente.");
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Dirección guardada correctamente.",
+        confirmButtonColor: "#e946c2",
+        confirmButtonText: "Entendido",
+      });
 
       direcciones = await fetchData(`/address/user/${currentUser.id}`, "GET");
       renderLista(direcciones);
@@ -114,9 +126,26 @@ export async function initDireccion() {
         item
           .querySelector(".eliminar-btn")
           .addEventListener("click", async () => {
-            if (confirm("¿Seguro que deseas eliminar esta dirección?")) {
+            const confirm = await Swal.fire({
+              title: "¿Estás seguro?",
+              text: "Esta acción no se puede deshacer.",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#e946c2",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Sí, eliminar",
+              cancelButtonText: "Cancelar",
+            });
+
+            if (confirm.isConfirmed) {
               await fetchData(`/address/${d.id}`, "DELETE");
-              alert("Dirección eliminada correctamente.");
+              Swal.fire({
+                icon: "success",
+                title: "Éxito",
+                text: "Dirección eliminada correctamente.",
+                confirmButtonColor: "#e946c2",
+                confirmButtonText: "Entendido",
+              });
               direcciones = await fetchData(
                 `/address/user/${currentUser.id}`,
                 "GET"
@@ -142,19 +171,19 @@ export async function initDireccion() {
       const form = document.createElement("form");
       form.className = "form-edicion mt-3";
       form.innerHTML = `
-        <input type="text" value="${
+        <input type="text" placeholder="Calle y numero" value="${
           direccion.address
         }" class="form-control mb-2" id="edit-address">
-        <input type="text" value="${
+        <input type="text" placeholder="Ciudad" value="${
           direccion.city
         }" class="form-control mb-2" id="edit-city">
-        <input type="text" value="${
+        <input type="text" placeholder="País" value="${
           direccion.country
         }" class="form-control mb-2" id="edit-country">
-        <input type="text" value="${
+        <input type="text" placeholder="Región" value="${
           direccion.region || ""
         }" class="form-control mb-2" id="edit-region">
-        <input type="text" value="${
+        <input type="text" placeholder="Tipo de dirección (Ej: Casa, Trabajo)" value="${
           direccion.typeAddress || ""
         }" class="form-control mb-2" id="edit-type">
         <button type="submit" class="btn btn-pink btn-sm me-2">Guardar cambios</button>
@@ -174,12 +203,24 @@ export async function initDireccion() {
         };
 
         if (!updated.address || !updated.city || !updated.country) {
-          alert("Los campos Calle y número, Ciudad y País son obligatorios.");
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Los campos Calle y número, Ciudad y País son obligatorios.",
+            confirmButtonColor: "#e946c2",
+            confirmButtonText: "Entendido",
+          });
           return;
         }
 
         await fetchData(`/address/${direccion.id}`, "PUT", {}, updated);
-        alert("Dirección actualizada correctamente.");
+        Swal.fire({
+          icon: "success",
+          title: "Éxito",
+          text: "Dirección actualizada correctamente.",
+          confirmButtonColor: "#e946c2",
+          confirmButtonText: "Entendido",
+        });
 
         direcciones = await fetchData(`/address/user/${user.id}`, "GET");
         renderLista(direcciones);

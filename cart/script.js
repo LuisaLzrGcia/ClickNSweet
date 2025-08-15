@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('cart.html')) {
+    if (window.location.pathname.includes('./index.html')) {
         renderCarrito();
     }
 });
@@ -24,7 +24,7 @@ function agregarProductoAlCarrito(producto) {
 
 function renderCarrito() {
     const cartItemsContainer = document.getElementById('cart-items');
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const carrito = JSON.parse(localStorage.getItem('cart')) || [];
 
     cartItemsContainer.innerHTML = '';
 

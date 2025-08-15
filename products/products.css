@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100% !important;
   border: 1px solid #ddd;
   border-radius: 8px;
 }
@@ -33,7 +33,7 @@
 }
 
 .img-wrapper {
-  height: 55% !important;
+  height: 50% !important;
   width: 100%;
   overflow: hidden;
 }
@@ -80,16 +80,6 @@
   font-weight: bold;
   color: #E452C0;
   margin-right: 8px;
-}
-
-.discount {
-  background-color: #f7d6e0;
-  font-size: 1rem;
-  color: #000;
-  padding: 0.3rem;
-  margin-right: 0.5rem;
-  border-radius: 10%;
-  font-weight: bolder;
 }
 
 .status {
@@ -149,8 +139,8 @@
 
 .card-product {
   width: 100%;
-  padding: 0.0rem 0rem 0rem 0rem;
-  height: 100%;
+  padding: 0.0rem 0rem 1rem 0rem;
+  height: 80% !important;
 }
 
 .card-body {
@@ -158,15 +148,19 @@
   height: fit-content;
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+
+
+}
 
 @media (max-width: 640px) {
   .img-wrapper {
     height: 50% !important;
+    width: 100%;
   }
 
   .card {
-    height: fit-content;
+    height: fit-content !important;
   }
 }
 
@@ -237,11 +231,82 @@
   background-color: white;
   color: #E452C0;
   font-weight: bold;
-  border: 1px solid #E452C0; /* Opcional, por si quieres que el borde combine */
+  border: 1px solid #E452C0;
+  /* Opcional, por si quieres que el borde combine */
   transition: all 0.3s ease;
 }
 
 .btn-apply-filter:hover {
   background-color: #E452C0;
   color: white;
+}
+
+
+
+
+.card-product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.img-wrapper {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  flex: 1 1 50%;
+  overflow-y: auto;
+}
+
+
+.error-message,
+.loading-indicator {
+  width: 100%;
+  font-size: 2rem;
+  justify-content: center;
+  text-align: center;
+  padding: 1.2rem;
+}
+
+
+.error-message>svg,
+.loading-indicator>svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #E452C0;
+}
+
+/* Paginacion de items */
+
+/* Colores personalizados para paginación */
+.pagination .page-item.active .page-link {
+    background-color: #E452C0;
+    border-color: #E452C0;
+    color: white;
+}
+
+.pagination .page-link {
+    background-color: white;
+    color: #E452C0;
+    border: 1px solid #f7a8be;
+}
+
+.pagination .page-link:hover {
+    background-color: #f7a8be;
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f7a8be;
+    color: white;
+    border-color: #f7a8be;
+    cursor: not-allowed;
 }

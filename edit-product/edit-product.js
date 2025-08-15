@@ -2,13 +2,119 @@ import fetchData from "../fetchData/fetchData.js";
 import fetchDataStatus from "../fetchData/fetchDataStatus.js";
 import { getCategoriesData } from "../fetchData/getCategoriesData.js";
 import { getSalesFormatData } from "../fetchData/getSalesFormatData.js";
+import { getCurrentItem } from "../product-detail/getCurrentItem.js";
 import { productDetailView } from "../product-detail/productDetailView.js";
 
-document.addEventListener("DOMContentLoaded", function () {
-    createListCountries();
-    renderSalesFormats();
-    renderCategories()
-})
+document.addEventListener("DOMContentLoaded", async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get("id");
+
+    if (!idParam || isNaN(idParam)) {
+        window.location.href = "../not-found/index.html";
+        return;
+    }
+
+    const id = Number(idParam);
+
+    try {
+        const currentItem = await getCurrentItem(id);
+        console.log(currentItem);
+        if (!currentItem) {
+            window.location.href = "../not-found/index.html";
+            return;
+        }
+
+        // Esperamos a que los selects se llenen
+        await createListCountries();
+        await renderSalesFormats();
+        await renderCategories();
+
+        // Ahora sí llenamos los valores
+        fillFormData(currentItem);
+
+    } catch (error) {
+        console.error(error);
+        window.location.href = "../not-found/index.html";
+    }
+});
+
+async function getImageBase64FromInput() {
+    return new Promise((resolve, reject) => {
+        const input = document.getElementById("image-edit-product");
+        if (!input || !input.files || input.files.length === 0) {
+            reject("No se seleccionó ninguna imagen");
+            return;
+        }
+
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const base64 = e.target.result.split(",")[1]; // Solo la parte base64
+            resolve(base64);
+        };
+
+        reader.onerror = function (error) {
+            reject(error);
+        };
+
+        reader.readAsDataURL(file); // Lee directamente como base64
+    });
+}
+
+// Función para llenar selects e inputs
+function fillFormData(item) {
+    document.getElementById("name-new-product").value = item.productName || "";
+    document.getElementById("sku-new-product").value = item.sku || "";
+    document.getElementById("description-new-product").value = item.description || "";
+    document.getElementById("price-new-product").value = item.price || 0;
+    document.getElementById("stock-new-product").value = item.quantityStock || 0;
+    document.getElementById("weight-new-product").value = item.weight || 0;
+    document.getElementById("length-product").value = item.length || 0;
+    document.getElementById("width-product").value = item.width || 0;
+    document.getElementById("height-product").value = item.height || 0;
+    document.getElementById("stock-threshold").value = item.lowStockThreshold || 0;
+
+    const countrySelect = document.getElementById("country-new-product");
+    const stateSelect = document.getElementById("state-new-product");
+    const categorySelect = document.getElementById("category-new-product");
+    const salesFormatSelect = document.getElementById("price-format-new-product");
+
+    // País
+    if (item.productCountryId) {
+        countrySelect.value = item.productCountryId.id;
+
+        // Renderizamos los estados del país seleccionado
+        renderStates(countrySelect);
+
+        if (item.productStateId) {
+            stateSelect.value = item.productStateId.id;
+        }
+    }
+
+    // Categoría
+    if (item.productCategoryId) {
+        categorySelect.value = item.productCategoryId.id;
+    }
+
+    // Formato de venta
+    if (item.productSalesFormatId) {
+        salesFormatSelect.value = item.productSalesFormatId.id;
+    }
+
+    // descuento
+    const discountValue = item.discountValue > 0
+    const percentage = (item.discountValue && item.price)
+        ? Math.round((item.discountValue / item.price) * 100)
+        : 0;
+    document.getElementById("discount-new-product").value = discountValue ? percentage : 0;
+    document.getElementById("price-discount-new-product").value = discountValue ? item.discountValue : 0;
+
+    // Checkbox
+    const allowReserveSelect = document.getElementById("allow-reserve");
+    allowReserveSelect.value = item.allowBackorders ? "1" : "0";
+}
+
 
 
 async function renderSalesFormats() {
@@ -127,112 +233,129 @@ window.renderStates = (selectCountry) => {
 // Llamada inicial para llenar los países
 createListCountries();
 
-window.generatePreview = () => {
-    validateFormFields({ showAlert: false });
+async function loadProductData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get("id");
 
-    const data = getFormData();
-    const inputImagenes = document.getElementById("image-new-product");
-    const preview = document.getElementById("preview-new-product");
-
-    if (inputImagenes && inputImagenes.files.length > 0) {
-        const file = inputImagenes.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            data.picture = e.target.result;
-
-            preview.innerHTML = `
-                <h2 style="text-align: center; margin-bottom: 1rem;">Información del producto</h2>
-                ${productDetailView(data, "preview")}
-            `;
-
-            preview.classList.remove("d-none");
-            preview.style.display = "block";
-            preview.scrollIntoView({ behavior: "smooth", block: "start" });
-        };
-
-        reader.readAsDataURL(file);
-    } else {
-        // Si no hay imagen, solo muestra el resto
-        preview.innerHTML = `
-            <h2 style="text-align: center; margin-bottom: 1rem;">Información del producto</h2>
-            ${productDetailView(data)}
-        `;
-
-        preview.classList.remove("d-none");
-        preview.style.display = "block";
-        preview.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!idParam || isNaN(idParam)) {
+        window.location.href = "../not-found/index.html";
+        return;
     }
-};
 
+    const id = Number(idParam);
 
+    try {
+        const currentItem = await getCurrentItem(id);
+        console.log(currentItem);
+        if (!currentItem) {
+            window.location.href = "../not-found/index.html";
+            return;
+        }
+
+        // Esperamos a que los selects se llenen
+        await createListCountries();
+        await renderSalesFormats();
+        await renderCategories();
+
+        // Ahora sí llenamos los valores
+        fillFormData(currentItem);
+
+    } catch (error) {
+        console.error(error);
+        window.location.href = "../not-found/index.html";
+    }
+
+}
 
 window.saveProduct = async () => {
     const esValido = validateFormFields({ showAlert: true });
     if (!esValido) return;
-
-    const formData = await getFormData();
-    const body = {
-        productName: formData.productName,
-        sku: formData.sku,
-        description: formData.description,
-        price: parseFloat(formData.price) || 0,
-        quantityStock: parseInt(formData.quantityStock) || 0,
-        weight: parseFloat(formData.weight) || 0,
-        length: parseFloat(formData.length) || 0,
-        width: parseFloat(formData.width) || 0,
-        height: parseFloat(formData.height) || 0,
-        status: formData.status ?? true,
-        lowStockThreshold: formData.lowStockThreshold ?? 10,
-        allowBackorders: formData.allowBackorders ?? false,
-        productSalesFormatId: formData.productSalesFormatId ? { id: parseInt(formData.productSalesFormatId) } : null,
-        productCountryId: formData.productCountryId ? { id: parseInt(formData.productCountryId) } : null,
-        productStateId: formData.productStateId ? { id: parseInt(formData.productStateId) } : null,
-        productCategoryId: formData.productCategoryId ? { id: parseInt(formData.productCategoryId) } : 1,
-        image: formData.image ?? null, // base64 si existe
-        picture: formData.picture ?? null,
-        discountType: formData.discountType ?? null,
-        discountValue: formData.discountValue ? parseFloat(formData.discountValue) : null
-    };
-
     try {
-        // Llamada al backend
-        const response = await fetchDataStatus("/product", "POST", {}, body);
-        // Si tu fetchData retorna un objeto con status
-        if (response.status === 200 || response.status === 201) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Producto guardado',
-                text: 'El producto ha sido agregado correctamente.',
-                timer: 2000, // 200 milisegundos
-                showConfirmButton: false,
-                timerProgressBar: true
-            }).then(() => {
-                // Ir al inicio de la página
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        const imgNew = await getImageBase64FromInput();
 
-                // Recargar la página
-                window.location.reload();
-            });
+        const formData = await getFormData();
+        const body = {
+            productName: formData.productName,
+            sku: formData.sku,
+            description: formData.description,
+            price: parseFloat(formData.price) || 0,
+            quantityStock: parseInt(formData.quantityStock) || 0,
+            weight: parseFloat(formData.weight) || 0,
+            length: parseFloat(formData.length) || 0,
+            width: parseFloat(formData.width) || 0,
+            height: parseFloat(formData.height) || 0,
+            status: formData.status ?? true,
+            lowStockThreshold: formData.lowStockThreshold ?? 10,
+            allowBackorders: formData.allowBackorders ?? false,
+            productSalesFormatId: formData.productSalesFormatId ? { id: parseInt(formData.productSalesFormatId) } : null,
+            productCountryId: formData.productCountryId ? { id: parseInt(formData.productCountryId) } : null,
+            productStateId: formData.productStateId ? { id: parseInt(formData.productStateId) } : null,
+            productCategoryId: formData.productCategoryId ? { id: parseInt(formData.productCategoryId) } : 1,
+            image: imgNew || formData.image ,
+            picture: formData.picture ?? null,
+            discountType: formData.discountType ?? null,
+            discountValue: formData.discountValue ? parseFloat(formData.discountValue) : null
+        };
 
-        } else if (response.status === 409) {
-            // Conflicto, por ejemplo SKU repetido
+        console.log(body.image);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const idParam = urlParams.get("id");
+
+        const id = Number(idParam);
+
+        try {
+            // Llamada al backend
+            const response = await fetchDataStatus("/product/" + id, "PUT", {}, body);
+            // Si tu fetchData retorna un objeto con status
+            if (response.status === 200 || response.status === 201) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto guardado',
+                    text: 'El producto ha sido modificado correctamente.',
+                    timer: 2000, // 200 milisegundos
+                    showConfirmButton: false,
+                    timerProgressBar: true
+                }).then(() => {
+                    // Opcional: volver al inicio
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // Actualizar datos locales sin recargar
+                    // ejemplo: recargar la info del producto desde el backend
+                    loadProductData();
+                });
+
+            } else if (response.status === 409) {
+                // Conflicto, por ejemplo SKU repetido
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Conflicto',
+                    text: 'El SKU o producto ya existe. Por favor verifica los datos.',
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                        confirmButton: 'bg-fuchsia text-white border-0 px-4 py-2 rounded',
+                        title: 'text-fuchsia',
+                    }
+                });
+            } else {
+                // Otro error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al guardar el producto. Intenta nuevamente.',
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                        confirmButton: 'bg-fuchsia text-white border-0 px-4 py-2 rounded',
+                        title: 'text-fuchsia',
+                    }
+                });
+            }
+        } catch (error) {
+            console.error(error);
             Swal.fire({
                 icon: 'error',
-                title: 'Conflicto',
-                text: 'El SKU o producto ya existe. Por favor verifica los datos.',
-                confirmButtonText: 'Aceptar',
-                customClass: {
-                    confirmButton: 'bg-fuchsia text-white border-0 px-4 py-2 rounded',
-                    title: 'text-fuchsia',
-                }
-            });
-        } else {
-            // Otro error
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ocurrió un error al guardar el producto. Intenta nuevamente.',
+                title: 'Error de conexión',
+                text: 'No se pudo conectar con el servidor. Intenta más tarde.',
                 confirmButtonText: 'Aceptar',
                 customClass: {
                     confirmButton: 'bg-fuchsia text-white border-0 px-4 py-2 rounded',
@@ -240,26 +363,14 @@ window.saveProduct = async () => {
                 }
             });
         }
-    } catch (error) {
-        console.error(error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Error de conexión',
-            text: 'No se pudo conectar con el servidor. Intenta más tarde.',
-            confirmButtonText: 'Aceptar',
-            customClass: {
-                confirmButton: 'bg-fuchsia text-white border-0 px-4 py-2 rounded',
-                title: 'text-fuchsia',
-            }
-        });
-    }
+    } catch (error) { }
 };
 
 
 async function getFormData() {
     const dimensionesInputs = document.querySelectorAll("#dimensions-new-product input");
 
-    const inputImagenes = document.getElementById("image-new-product");
+    const inputImagenes = document.getElementById("image-edit-product");
     let imageBase64 = null;
 
     if (inputImagenes && inputImagenes.files.length > 0) {
@@ -321,20 +432,6 @@ async function getFormData() {
         productCategoryValue: categorySelect.value ? nameCategorySelect : null
     };
 }
-
-
-const imageInput = document.getElementById("image-new-product");
-let selectedFile = null;
-
-imageInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        selectedFile = file;
-    } else {
-        selectedFile = null;
-    }
-});
-
 
 const precioNormalInput = document.getElementById("price-new-product");
 const descuentoInput = document.getElementById("discount-new-product");
@@ -485,7 +582,7 @@ function validateFormFields({ showAlert = false } = {}) {
 
 
 
-const inputImagen = document.getElementById("image-new-product");
+const inputImagen = document.getElementById("image-edit-product");
 const btnEliminarImagen = document.getElementById("remove-image-btn");
 
 inputImagen.addEventListener("change", () => {

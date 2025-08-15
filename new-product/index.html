@@ -19,103 +19,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./new-product/style.css" />
-    <link rel="stylesheet" href="./product-detail/style.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../product-detail/style.css" />
     <link rel="stylesheet" href="../footer/style.css">
 </head>
 
 <body>
     <!-- Navbar -->
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="./assets/logotipo-clicknsweet-2.png" alt="Logo" style="height: 40px; margin-right: 8px;">
-                <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem;">Click N' Sweet</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-xl-center invisible">
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="index.html">Inicio</a></li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="products.html">Productos</a></li>
-                    <li class="nav-item nav-item-user dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-pink mx-1" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#categories">Chocolates</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Frutales</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Picantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces de caramelo</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Refrescantes</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Salados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Cremosos</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Especiados</a></li>
-                            <li><a class="dropdown-item" href="#categories">Dulces Ácidos</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1" href="about.html">Quiénes
-                            somos</a></li>
-                    <li class="nav-item nav-item-user"><a class="nav-link btn btn-pink mx-1"
-                            href="contac-us.html">Contacto</a></li>
-                    <li class="nav-item nav-item-admin d-none">
-                        <a class="nav-link btn btn-pink mx-1" href="main-manage-products.html">Productos</a>
-                    </li>
-                    <li class="nav-item nav-item-admin d-none">
-                        <a class="nav-link btn btn-pink mx-1" href="new-product.html">Crear producto</a>
-                    </li>
-                    <li class="nav-item nav-item-admin d-none">
-                        <a class="nav-link btn btn-pink mx-1" href="edit-product.html">Actualizar producto</a>
-                    </li>
-                    <li class="nav-item nav-item-user">
-                        <a class="nav-link btn btn-pink mx-1 position-relative d-flex align-items-center justify-content-center me-3"
-                            href="cart.html">
-                            <span class="cart-icon position-relative me-1">
-                                🛒
-                                <div id="cart-indicator" class="cart-badge">0</div>
-                            </span>
-                            Carrito
-                        </a>
-                    </li>
-
-                    <li class="nav-item autenticacion">
-                        <a class="nav-link btn btn-pink mx-1" href="login.html">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item autenticacion">
-                        <a id="botonRegistro" class="nav-link btn btn-register mx-1" href="register.html">Registro</a>
-                    </li>
-                    <li class="nav-item dropdown user-menu d-none">
-                        <a id="user-icon"
-                            class="nav-link dropdown-toggle d-flex align-items-center justify-content-center ms-1"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#">Mi perfil</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Pedidos</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <nav id="navbar-container" class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm"></nav>
 
     <!-- Main -->
     <main class="container my-5">
@@ -146,16 +58,9 @@
                     <div class="form-text">Precio en MXN.</div>
                 </div>
                 <!-- Formato de venta -->
-                <div class="col-12 col-lg-3 mb-3">
+                <div class="col-12 col-lg-3 mb-3" id="sales-format">
                     <label for="price-format" class="form-label">Formato de venta</label>
                     <select class="form-select" id="price-format-new-product">
-                        <option selected disabled value="">Selecciona un formato</option>
-                        <option value="por unidad">Por unidad</option>
-                        <option value="por pieza">Por pieza</option>
-                        <option value="por kilo">Por kilo</option>
-                        <option value="por paquete">Por paquete</option>
-                        <option value="por docena">Por docena</option>
-                        <option value="granel">Granel</option>
                     </select>
                 </div>
 
@@ -167,7 +72,7 @@
 
                     <!-- Segunda fila: input + botón -->
                     <div class="d-flex align-items-center gap-3" id="image-new-product-container">
-                        <input class="form-control" type="file" id="image-new-product" />
+                        <input class="form-control" type="file" id="image-new-product" accept="image/*"/>
 
                         <button type="button" class="btn btn-outline-danger d-none" id="remove-image-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -205,33 +110,24 @@
                 <div class="col">
                     <label for="category-new-product" class="form-label">Categoría</label>
                     <select class="form-select" id="category-new-product">
-                        <option selected value="">Selecciona una opción</option>
-                        <option value="Chocolates">Chocolates</option>
-                        <option value="Dulces Frutales">Dulces Frutales</option>
-                        <option value="Dulces Picantes">Dulces Picantes</option>
-                        <option value="Dulces de caramelo">Dulces de caramelo</option>
-                        <option value="Dulces Refrescantes">Dulces Refrescantes</option>
-                        <option value="Dulces Salados">Dulces Salados</option>
-                        <option value="Dulces Cremosos">Dulces Cremosos</option>
-                        <option value="Dulces Especiados">Dulces Especiados</option>
-                        <option value="Dulces Ácidos">Dulces Ácidos</option>
                     </select>
                 </div>
 
                 <!-- País de origen -->
                 <div class="col">
                     <label for="country-new-product" class="form-label">País de origen</label>
-                    <select class="form-select" id="country-new-product" onchange="isMexico(this)">
+                    <select class="form-select" id="country-new-product" onchange="renderStates(this)">
                         <!-- Llenado dinámico -->
                     </select>
                 </div>
 
-                <!-- Estado (solo si país = México) -->
+                <!-- Estado -->
                 <div class="col" id="state-mexico-new-product">
                     <label for="state-new-product" class="form-label">Estados</label>
                     <select class="form-select" id="state-new-product" disabled>
                     </select>
                 </div>
+
             </div>
 
             <hr />
@@ -250,8 +146,8 @@
                 <div class="col-12 col-md-6 mb-3">
                     <label for="allow-reserve" class="form-label">¿Permitir reservas?</label>
                     <select class="form-select" id="allow-reserve">
-                        <option value="Si">Sí</option>
-                        <option value="No">No</option>
+                        <option value=1>Sí</option>
+                        <option value=0>No</option>
                     </select>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
@@ -264,18 +160,18 @@
                 <div class="col-12 col-md-6 mb-3">
                     <label for="weight-new-product" class="form-label">Peso</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" min="0" value="0.00" id="weight-new-product" />
+                        <input type="number" class="form-control" min="0" placeholder="0.00" id="weight-new-product" />
                         <span class="input-group-text">Kg</span>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
                     <label for="dimensions-new-product" class="form-label">Dimensiones</label>
                     <div class="input-group" id="dimensions-new-product">
-                        <input type="number" class="form-control" min="0" placeholder="0.00" />
+                        <input type="number" class="form-control" min="0" placeholder="0.00" id="height-product"/>
                         <span class="input-group-text">cm x</span>
-                        <input type="number" class="form-control" min="0" placeholder="0.00" />
+                        <input type="number" class="form-control" min="0" placeholder="0.00" id="length-product"/>
                         <span class="input-group-text">cm x</span>
-                        <input type="number" class="form-control" min="0" placeholder="0.00" />
+                        <input type="number" class="form-control" min="0" placeholder="0.00" id="width-product"/>
                         <span class="input-group-text">cm</span>
                     </div>
                 </div>
@@ -305,7 +201,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="../main.js"></script>
-    <script type="module" src="./new-product/new-product.js"></script>
+    <script type="module" src="./new-product.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
