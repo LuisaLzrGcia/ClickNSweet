@@ -6,7 +6,7 @@ import {
 } from "./router.js";
 import { isAdmin, isAuthenticated } from "./navbarAuthManager.js";
 // import { CartService } from '../services/cart.js';
-import { logout } from "../login/auth.js";
+import { logout } from "./login/auth.js";
 
 const config = {
   categories: [
@@ -31,7 +31,7 @@ const config = {
 
 const navItems = [
   { path: "/", label: "Inicio" },
-  { path: "../products/index.html", label: "Productos" },
+  { path: "./products/index.html", label: "Productos" },
   {
     type: "dropdown",
     path: "/index.html#categories",
@@ -42,8 +42,8 @@ const navItems = [
       label: cat,
     })),
   },
-  { path: "../about/index.html", label: "Quiénes somos" },
-  { path: "../contact-us/index.html", label: "Contacto" },
+  { path: "./about/index.html", label: "Quiénes somos" },
+  { path: "./contact-us/index.html", label: "Contacto" },
 ];
 
 function getCartCount() {
@@ -173,7 +173,7 @@ function renderAuthSection(isAuthenticated, basePath) {
               `: `            
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="${resolvePath(
-      "../account-details/index.html"
+      "./account-details/index.html"
     )}">Mi perfil</a></li>
                 <li><a class="dropdown-item" href="${resolvePath(
       "/orders"
