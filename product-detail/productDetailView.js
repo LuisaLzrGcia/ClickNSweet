@@ -258,11 +258,12 @@ function _renderReviews(container, loadMoreBtn) {
     loadMoreBtn.style.display = _reviewsToShow < _allReviews.length ? "inline-block" : "none";
   }
 
-  loadMoreButton.addEventListener("click", () => {
-    reviewsToShow += 3;
-    renderReviews();
-  });
-};
+  /* --- CÓDIGO INCORRECTO A ELIMINAR --- */
+  // loadMoreButton.addEventListener("click", () => {
+  //   reviewsToShow += 3;
+  //   renderReviews(); // <--- ¡Esto está mal!
+  // });
+}; // <-- El punto y coma cierra esta función
 
 function actualizarCantidadBoton() {
   // Obtener select de cantidad y botón
