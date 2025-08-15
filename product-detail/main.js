@@ -24,7 +24,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // Renderizar el producto
     createProductDetails(currentItem);
-    initProductReviews(currentItem);
 
   } catch (error) {
     container.innerHTML = "<p style='color:red;'>Error al cargar el producto</p>";
