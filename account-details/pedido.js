@@ -116,28 +116,32 @@ export async function initPedido() {
         "card border-0 text-dark mb-4 shadow-sm rounded-4 overflow-hidden";
 
       pedidoCard.innerHTML = `
-    <div class="p-3" style="background: linear-gradient(135deg, #8CF1FF, #E0F7FA);">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <strong class="fs-5">Pedido #${pedido.id}</strong><br>
-          <small class="text-muted">📅 ${fecha}</small>
-        </div>
-        <span class="badge bg-dark rounded-pill px-3 py-2">${
-          pedido.status
-        }</span>
+  <div class="p-3" style="background: linear-gradient(135deg, #8CF1FF, #E0F7FA);">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="fs-5">Pedido #${pedido.id}</strong><br>
+        <small class="text-muted">📅 ${fecha}</small>
       </div>
+      <span class="badge bg-dark rounded-pill px-3 py-2">${pedido.status}</span>
     </div>
-    <div class="card-body p-3">
-      ${pedido.orderLines
-        .map(
-          (line, index) => `
+  </div>
+  <div class="card-body p-3">
+    ${pedido.orderLines
+      .map((line, index) => {
+        // Convertir BLOB a base64 si la imagen está presente
+        // Suponiendo que 'line.product.image' es una cadena base64
+        const imageUrl = line.product.image
+          ? `data:image/jpeg;base64,${line.product.image}`
+          : "../assets/default.jpg";
+
+        return `
           <div class="d-flex align-items-center ${
             index < pedido.orderLines.length - 1
               ? "pb-3 mb-3 border-bottom"
               : ""
           }">
             <img
-              src="${line.product?.image || "https://via.placeholder.com/60"}"
+              src="${imageUrl}"
               alt="${line.product?.name || "Producto"}"
               class="rounded-3 border me-3"
               style="width:60px;height:60px;object-fit:cover;"
@@ -147,18 +151,18 @@ export async function initPedido() {
                 line.product?.name || "Desconocido"
               }</div>
               <div class="text-muted small">💲${line.price} × ${
-            line.quantity
-          }</div>
+          line.quantity
+        }</div>
             </div>
           </div>
-        `
-        )
-        .join("")}
-    </div>
-    <div class="card-footer border-0 bg-transparent text-end pb-3">
-      <button class="btn btn-pink btn-outline-dark btn-sm px-3 ver-detalle-btn">📦 Ver detalle</button>
-    </div>
-  `;
+        `;
+      })
+      .join("")}
+  </div>
+  <div class="card-footer border-0 bg-transparent text-end pb-3">
+    <button class="btn btn-pink btn-outline-dark btn-sm px-3 ver-detalle-btn">📦 Ver detalle</button>
+  </div>
+`;
 
       // Abrir modal de detalle
       pedidoCard
@@ -195,7 +199,7 @@ export async function initPedido() {
                 <div class="p-3 rounded-3 border">
                   <div class="row g-2">
                     <div class="col-md-6"><strong>Cliente:</strong> ${
-                      user.first_name + " " + user.last_name
+                      user.firstName + " " + user.lastName
                     }</div>
                     <div class="col-md-6"><strong>Dirección de envio:</strong> ${
                       pedido.shippingAddress.address +
@@ -221,8 +225,9 @@ export async function initPedido() {
                       <div class="d-flex align-items-center">
                         <img
                           src="${
-                            line.product?.image ||
-                            "https://via.placeholder.com/56"
+                            line.product?.image
+                              ? `data:image/jpeg;base64,${line.product.image}`
+                              : "../assets/default.jpg"
                           }"
                           alt="${line.product?.name || "Producto"}"
                           class="rounded-3 border me-3"

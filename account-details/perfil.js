@@ -23,13 +23,13 @@ export async function initPerfil() {
         <div class="mb-3">
           <label>Nombre </label>
           <input type="text" class="form-control" id="input-nombre" value="${
-            user.first_name || ""
+            user.firstName || ""
           }" disabled>
         </div>
         <div class="mb-3">
           <label>Apellido</label>
           <input type="text" class="form-control" id="input-apellido" value="${
-            user.last_name || ""
+            user.lastName || ""
           }" disabled>
         </div>
         <div class="mb-3">
@@ -80,9 +80,9 @@ export async function initPerfil() {
 
       // Actualizar en backend
       const updatedUser = {
-        first_name: document.getElementById("input-nombre").value.trim(),
-        last_name: document.getElementById("input-apellido").value.trim(),
-        user_name: currentUser.user_name,
+        firstName: document.getElementById("input-nombre").value.trim(),
+        lastName: document.getElementById("input-apellido").value.trim(),
+        userName: currentUser.user_name,
         email: document.getElementById("input-email").value.trim(),
         password: currentUser.password,
         phone: document.getElementById("input-telefono").value.trim(),

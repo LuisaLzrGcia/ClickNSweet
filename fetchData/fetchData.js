@@ -1,14 +1,14 @@
-async function fetchData(url, method = 'GET', params, body) {
-    if (!url) { return }
-    const api = 'http://localhost:8080/api/v1/clicknsweet'; // Cambia esto por tu URL base real
-    try {
-        // Construir query string si hay parámetros
-        let queryString = '';
-        if (params && Object.keys(params).length > 0) {
-            queryString = '?' + new URLSearchParams(params).toString();
-        }
+async function fetchData(url, method = "GET", params, body) {
+  if (!url) return;
 
-    // Configuración base
+  const api = "http://localhost:8080/api/v1/clicknsweet";
+
+  try {
+    let queryString = "";
+    if (params && Object.keys(params).length > 0) {
+      queryString = "?" + new URLSearchParams(params).toString();
+    }
+
     const options = {
       method: method.toUpperCase(),
       headers: {
@@ -16,26 +16,31 @@ async function fetchData(url, method = 'GET', params, body) {
       },
     };
 
-    // Agregar body si no es GET y hay datos
     if (body && method !== "GET") {
       options.body = JSON.stringify(body);
     }
 
-    // Hacer la solicitud
     const response = await fetch(api + url + queryString, options);
 
-        // Verificar si la respuesta es exitosa
-        if (response.status !== 200 && response.status !== 201) {
-            throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
-        }
-
-
-        // Intentar parsear la respuesta como JSON
-        return await response.json();
-
-    } catch (error) {
-        console.error('Error en fetchData:', error);
-        throw error;
+    // ✅ Permitir 200, 201 y 204 como respuestas correctas
+    if (![200, 201, 204].includes(response.status)) {
+      throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
     }
+
+    // ✅ Si es 204, no hay contenido
+    if (response.status === 204) {
+      return null;
+    }
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      return null;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error en fetchData:", error);
+    throw error;
+  }
 }
 export default fetchData;
