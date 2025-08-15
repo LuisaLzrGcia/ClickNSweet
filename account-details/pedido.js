@@ -36,7 +36,7 @@ export async function initPedido() {
           <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
               <div class="modal-header" style="background:#e946c2;">
-                <h5 class="modal-title text-white mb-0">Detalle del pedido</h5>
+                <h5 class="modal-title text-white mb-0">Detalle del pedido!</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
               </div>
               <div class="modal-body p-0" id="modal-pedido-body"></div>
