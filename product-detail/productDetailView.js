@@ -88,7 +88,7 @@ export const productDetailView = (data, type) => {
   });
 
   let priceData = "";
-  if (descuento > 0) {
+  if (data.discountValue > 0) {
     priceData = `
       <p class="text-fuchsia">
         <span class="discount">${descuento}% OFF</span> 
