@@ -6,7 +6,7 @@ import {
 } from "./router.js";
 import { isAdmin, isAuthenticated } from "./navbarAuthManager.js";
 // import { CartService } from '../services/cart.js';
-import { logout } from "./login/auth.js";
+import { logout } from "../login/auth.js";
 
 const config = {
   categories: [
