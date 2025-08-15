@@ -40,7 +40,7 @@ export async function initPerfil() {
         </div>
         <div class="mb-3">
           <label>Teléfono</label>
-          <input type="text" class="form-control" id="input-telefono" value="${
+          <input type="text" class="form-control" id="input-telefono" maxlength="10" value="${
             user.phone || ""
           }" disabled>
         </div>
@@ -82,11 +82,7 @@ export async function initPerfil() {
       const updatedUser = {
         firstName: document.getElementById("input-nombre").value.trim(),
         lastName: document.getElementById("input-apellido").value.trim(),
-        userName: currentUser.user_name,
-        email: document.getElementById("input-email").value.trim(),
-        password: currentUser.password,
         phone: document.getElementById("input-telefono").value.trim(),
-        role: currentUser.role,
       };
 
       await fetchData(
