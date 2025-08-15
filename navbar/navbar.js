@@ -31,19 +31,19 @@ const config = {
 
 const navItems = [
   { path: "/", label: "Inicio" },
-  { path: "/products/index.html", label: "Productos" },
+  { path: "../products/index.html", label: "Productos" },
   {
     type: "dropdown",
     path: "/index.html#categories",
     label: "Categorías",
-    items: config.categories.map((cat) => ({
+    items: config.categories.map((cat, index) => ({
       // path: `/#${cat.toLowerCase().replace(/\s+/g, '-')}`,
-      path: "/index.html#categories",
+      path: "./products/index.html?category=" + (index + 1),
       label: cat,
     })),
   },
-  { path: "/about/index.html", label: "Quiénes somos" },
-  { path: "/contact-us/contac-us.html", label: "Contacto" },
+  { path: "../about/index.html", label: "Quiénes somos" },
+  { path: "../contact-us/index.html", label: "Contacto" },
 ];
 
 function getCartCount() {
@@ -69,8 +69,8 @@ function template() {
   return `
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="${resolvePath(
-              "/"
-            )}">
+    "/"
+  )}">
                 <img src="${resolvePath("/assets/logotipo-clicknsweet-2.png")}" 
                         alt="Logo" style="height: 40px; margin-right: 8px" />
                 <span style="font-family: 'Pacifico', cursive; font-size: 1.8rem">
@@ -107,8 +107,8 @@ function renderNavItems(currentPath, basePath) {
                 </a>
                 <ul class="dropdown-menu">
                     ${item.items
-                      .map(
-                        (subItem) => `
+            .map(
+              (subItem) => `
                         <li>
                             <a class="dropdown-item" 
                                 href="${resolvePath(subItem.path)}">
@@ -116,8 +116,8 @@ function renderNavItems(currentPath, basePath) {
                             </a>
                         </li>
                     `
-                      )
-                      .join("")}
+            )
+            .join("")}
                 </ul>
             </li>`;
       }
@@ -163,27 +163,27 @@ function renderAuthSection(isAuthenticated, basePath) {
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle"></i>
             </a>
-            ${JSON.parse(localStorage.getItem("usuario")).role == "admin"? `
+            ${JSON.parse(localStorage.getItem("usuario")).role == "admin" ? `
                             <ul class="dropdown-menu dropdown-menu-end">
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item logout" href="${resolvePath(
-                  "/"
-                )}">Cerrar sesión</a></li>
+      "/"
+    )}">Cerrar sesión</a></li>
             </ul>
               `: `            
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="${resolvePath(
-                  "../account-details/index.html"
-                )}">Mi perfil</a></li>
+      "../account-details/index.html"
+    )}">Mi perfil</a></li>
                 <li><a class="dropdown-item" href="${resolvePath(
-                  "/orders"
-                )}">Pedidos</a></li>
+      "/orders"
+    )}">Pedidos</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item logout" href="${resolvePath(
-                  "/"
-                )}">Cerrar sesión</a></li>
+      "/"
+    )}">Cerrar sesión</a></li>
             </ul>`
-            }
+      }
         </li>`;
   }
   const loginPath = "/login/index.html";
@@ -260,14 +260,14 @@ export function renderNavBar() {
   addEventListeners();
 
   // Mostrar elementos de admin si es necesario
-   if (isAdmin()) {
-       const adminItems = renderAdminItems();
-       const navItems = container.querySelector('.navbar-nav');
-       if (navItems) {
-           const contactItem = navItems.querySelector('[href$="/contact-us/contac-us.html"]');
-           if (contactItem) {
-               contactItem.insertAdjacentHTML('afterend', adminItems);
-           }
-       }
-   }
+  if (isAdmin()) {
+    const adminItems = renderAdminItems();
+    const navItems = container.querySelector('.navbar-nav');
+    if (navItems) {
+      const contactItem = navItems.querySelector('[href$="/contact-us/contac-us.html"]');
+      if (contactItem) {
+        contactItem.insertAdjacentHTML('afterend', adminItems);
+      }
+    }
+  }
 }
