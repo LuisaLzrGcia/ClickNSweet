@@ -11,7 +11,7 @@ export function setupEditButtons() {
       const card = this.closest(".product-card");
       const productId = card.dataset.productId
       console.log(products)
-      window.location.href = `../edit-product/index.html?id=${productId}`;
+      window.location.href = `/edit-product/index.html?id=${productId}`;
       console.log(products)
     });
   });

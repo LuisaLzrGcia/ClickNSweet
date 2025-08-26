@@ -1,20 +1,17 @@
-// payment/payment.js - 
+// payment/payment.js
 import { loadCartCount } from "../functions/loadCartCount.js";
+import createOrder from "../payment/script.js";
+import { getCurrentItem } from "../product-detail/getCurrentItem.js";
 
 export class PaymentManager {
     constructor() {
         console.log('🚀 PaymentManager iniciando...');
-        this.cart = this.getCartFromStorage();
-        console.log('🛒 Carrito cargado:', this.cart);
+        this.cart = []; // Inicializamos vacío
         this.shippingCost = 299;
         this.freeShippingThreshold = 500;
-        
-        // NUEVO: Cargar cupones aplicados
-        this.appliedCoupons = this.getAppliedCoupons();
-        console.log('🎫 Cupones aplicados:', this.appliedCoupons);
+        this.appliedCoupons = {}; // Inicializamos vacío
     }
 
-    // NUEVA FUNCIÓN: Obtener cupones aplicados del localStorage
     getAppliedCoupons() {
         try {
             const coupons = localStorage.getItem('appliedCoupons');
@@ -26,143 +23,84 @@ export class PaymentManager {
         }
     }
 
-    getCartFromStorage() {
+    async getCartFromStorage() {
         try {
-            const cart = localStorage.getItem('cart');
-            console.log('📦 Datos del carrito en localStorage:', cart);
-            return cart ? JSON.parse(cart) : [];
+            const cartRaw = localStorage.getItem('cart');
+            const cartArray = cartRaw ? JSON.parse(cartRaw) : [];
+            const cartItems = await getCartItemsArray(cartArray);
+            return Array.isArray(cartItems) ? cartItems : [];
         } catch (error) {
             console.error('❌ Error al obtener carrito:', error);
             return [];
         }
     }
 
- 
     getImageUrl(item) {
-        
-        let imageUrl = item.picture || item.image || item.img || null;
-        
-        if (!imageUrl) {
-            console.log(`⚠️ No se encontró imagen para ${item.name}`);
-            return 'assets/logotipo-clicknsweet-2.png'; // Imagen por defecto
-        }
-
-      
-        if (imageUrl.startsWith('http') || imageUrl.startsWith('/') || imageUrl.startsWith('./')) {
-            console.log(`🖼️ Usando ruta completa: ${imageUrl}`);
-            return imageUrl;
-        }
-
-        
-        if (!imageUrl.startsWith('assets/')) {
-            imageUrl = `assets/${imageUrl}`;
-        }
-
-        console.log(`🖼️ URL de imagen procesada para ${item.name}: ${imageUrl}`);
-        return imageUrl;
+        let imageUrl = item.image || null;
+        return !imageUrl ? 'assets/logotipo-clicknsweet-2.png' : `data:image/jpeg;base64,${imageUrl}`;
     }
 
-   
     calculateDeliveryDate() {
         const today = new Date();
         const deliveryDate = new Date(today);
         deliveryDate.setDate(today.getDate() + 7);
-        
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        
-        const formattedDate = deliveryDate.toLocaleDateString('es-ES', options);
-        console.log('📅 Fecha de entrega calculada:', formattedDate);
-        return formattedDate;
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return deliveryDate.toLocaleDateString('es-ES', options);
     }
 
     renderDeliveryDate() {
         console.log('📅 Intentando renderizar fecha de entrega...');
         const deliveryDate = this.calculateDeliveryDate();
         const titleElement = document.querySelector('.payment-title');
-        console.log('📅 Elemento title encontrado:', titleElement);
-        
         if (titleElement) {
             titleElement.textContent = `Llega el ${deliveryDate}`;
             console.log('✅ Fecha de entrega actualizada');
         } else {
-            console.error('❌ No se encontró .payment-title');
+            console.warn('⚠️ No se encontró .payment-title');
         }
     }
 
-    
-    renderCartProducts() {
+    async renderCartProducts() {
         console.log('🛒 Intentando renderizar productos...');
-        
-        let productsContainer = document.querySelectorAll('.section-box')[1]; 
+        let productsContainer = document.querySelectorAll('.section-box')[1];
         if (!productsContainer) {
-            console.log('🔍 Intentando encontrar contenedor por otro método...');
-           
             const cartTitle = Array.from(document.querySelectorAll('.payment-title'))
                 .find(title => title.textContent.includes('Carrito'));
-            if (cartTitle) {
-                productsContainer = cartTitle.nextElementSibling;
-            }
+            if (cartTitle) productsContainer = cartTitle.nextElementSibling;
         }
+        if (!productsContainer) return console.error('❌ No se encontró el contenedor de productos');
 
-        console.log('📦 Contenedor de productos encontrado:', productsContainer);
-        
-        if (!productsContainer) {
-            console.error('❌ No se encontró el contenedor de productos');
-            return;
-        }
-
-        
         productsContainer.innerHTML = '';
-
         if (this.cart.length === 0) {
-            console.log('🛒 Carrito vacío, mostrando mensaje...');
             productsContainer.innerHTML = `
                 <div class="text-center py-4">
                     <p class="text-muted">No hay productos en el carrito</p>
-                    <a href="products.html" class="btn btn-pink">Ver productos</a>
+                    <a href="/products/index.html" class="btn btn btn-pink-see">Ver productos</a>
                 </div>
             `;
             return;
         }
 
-        console.log(`🛒 Renderizando ${this.cart.length} productos...`);
-      
         this.cart.forEach((item, index) => {
-            console.log(`📦 Renderizando producto ${index + 1}:`, item);
             const productElement = this.createProductElement(item);
             productsContainer.appendChild(productElement);
         });
-        
-        console.log('✅ Productos renderizados exitosamente');
     }
 
     createProductElement(item) {
         const productDiv = document.createElement('div');
         productDiv.className = 'card-producto';
-        
-        const price = parseFloat(item.price_discount) || parseFloat(item.pricing) || parseFloat(item.price) || 0;
+        const price = item.discountValue > 0 ? item.discountValue : item.price
         const quantity = parseInt(item.quantity) || 1;
         const totalItemPrice = price * quantity;
-        
         const imageSrc = this.getImageUrl(item);
-        
-        console.log(`📦 Producto: ${item.name}`);
-        console.log(`🖼️ Imagen: ${imageSrc}`);
-        console.log(`💰 Precio: ${price}, Cantidad: ${quantity}, Total: ${totalItemPrice}`);
-        
+
         productDiv.innerHTML = `
-            <img src="${imageSrc}" 
-                 alt="${item.name}" 
-                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"
-                 onerror="console.error('Error cargando imagen:', this.src); this.src='assets/logotipo-clicknsweet-2.png'" 
-                 onload="console.log('✅ Imagen cargada correctamente:', this.src)" />
+            <img src="${imageSrc}" alt="${item.productName}" 
+                 style="width:80px;height:80px;object-fit:cover;border-radius:8px;" />
             <div class="product-info">
-                <strong>${item.name}</strong><br />
+                <strong>${item.productName}</strong><br/>
                 <span class="text-muted">${item.description || 'Delicioso dulce artesanal'}</span>
                 <div class="product-details mt-2">
                     <span class="quantity">Cantidad: ${quantity}</span>
@@ -170,180 +108,113 @@ export class PaymentManager {
                 </div>
             </div>
         `;
-        
         return productDiv;
     }
 
-  
     calculateTotals() {
-        let subtotal = 0;
+        let subtotalOriginal = 0;
+        let subtotalConDescuento = 0;
 
         this.cart.forEach(item => {
-           
-            const price = parseFloat(item.price_discount) || parseFloat(item.pricing) || parseFloat(item.price) || 0;
             const quantity = parseInt(item.quantity) || 1;
-            const itemTotal = price * quantity;
-            subtotal += itemTotal;
-            
-            console.log(`💰 Item: ${item.name} - Precio: ${price} x ${quantity} = ${itemTotal}`);
+            const price = item.price || 0;
+            const discountPrice = item.discountValue > 0 ? item.discountValue : price;
+
+            subtotalOriginal += price * quantity;
+            subtotalConDescuento += discountPrice * quantity;
         });
 
-        console.log(`💰 Subtotal original: ${subtotal}`);
-
-        // Aplicar descuentos de cupones
-        let subtotalConDescuento = subtotal;
         let descuentoAplicado = 0;
-        
+
         if (this.appliedCoupons.descuentoPorcentaje > 0) {
             descuentoAplicado = subtotalConDescuento * (this.appliedCoupons.descuentoPorcentaje / 100);
-            subtotalConDescuento = subtotalConDescuento * (1 - this.appliedCoupons.descuentoPorcentaje / 100);
-            console.log(`🎫 Aplicando descuento porcentual: ${this.appliedCoupons.descuentoPorcentaje}% = -${descuentoAplicado.toFixed(2)}`);
+            subtotalConDescuento -= descuentoAplicado;
         } else if (this.appliedCoupons.descuentoFijo > 0) {
             descuentoAplicado = Math.min(this.appliedCoupons.descuentoFijo, subtotalConDescuento);
-            subtotalConDescuento = subtotalConDescuento - this.appliedCoupons.descuentoFijo;
-            console.log(`🎫 Aplicando descuento fijo: -${this.appliedCoupons.descuentoFijo} = -${descuentoAplicado.toFixed(2)}`);
+            subtotalConDescuento -= descuentoAplicado;
         }
-        
-        
-        if (subtotalConDescuento < 0) subtotalConDescuento = 0;
-        
-        console.log(`💰 Subtotal con descuento: ${subtotalConDescuento}`);
 
-        const shipping = subtotalConDescuento >= this.freeShippingThreshold || subtotalConDescuento === 0 ? 0 : this.shippingCost;
+        if (subtotalConDescuento < 0) subtotalConDescuento = 0;
+
+        const shipping = (subtotalConDescuento >= this.freeShippingThreshold || subtotalConDescuento === 0) ? 0 : this.shippingCost;
         const total = subtotalConDescuento + shipping;
 
-        const totals = {
-            subtotalOriginal: subtotal,
+        return {
+            subtotalOriginal,
             subtotal: subtotalConDescuento,
-            shipping: shipping,
-            total: total,
-            descuentoAplicado: descuentoAplicado,
+            shipping,
+            total,
+            descuentoAplicado,
             isShippingFree: shipping === 0,
             codigoCupon: this.appliedCoupons.codigoCupon || null
         };
-        
-        console.log('💰 Totales calculados:', totals);
-        return totals;
     }
 
-    //  Renderizar totales con cupones
-    calculateAndRenderTotals() {
-        console.log('💰 Intentando renderizar totales...');
+
+    async calculateAndRenderTotals() {
         const totals = this.calculateTotals();
         const resumenContainer = document.querySelector('.resumen-precios');
-        console.log('💰 Contenedor de resumen encontrado:', resumenContainer);
-        
-        if (!resumenContainer) {
-            console.error('❌ No se encontró .resumen-precios');
-            return;
-        }
+        if (!resumenContainer) return;
 
-        
         const priceElements = resumenContainer.querySelectorAll('.d-flex span:last-child');
-        console.log('💰 Elementos de precio encontrados:', priceElements.length);
-        
-        if (priceElements[0]) { 
-            priceElements[0].textContent = `${totals.subtotal.toFixed(2)}`;
-            console.log('✅ Subtotal actualizado');
-        }
-
-        if (priceElements[1]) { 
-            priceElements[1].innerHTML = totals.isShippingFree ? 
-                '<span class="text-success">GRATIS</span>' : 
-                `${totals.shipping.toFixed(2)}`;
-            console.log('✅ Envío actualizado');
-        }
-
+        if (priceElements[0]) priceElements[0].textContent = `${totals.subtotal.toFixed(2)}`;
+        if (priceElements[1]) priceElements[1].innerHTML = totals.isShippingFree ? '<span class="text-success">GRATIS</span>' : `${totals.shipping.toFixed(2)}`;
         const totalSpan = resumenContainer.querySelector('.total span:last-child');
-        if (totalSpan) {
-            totalSpan.textContent = `${totals.total.toFixed(2)}`;
-            console.log('✅ Total actualizado');
-        }
+        if (totalSpan) totalSpan.textContent = `${totals.total.toFixed(2)}`;
 
-        if (totals.descuentoAplicado > 0) {
-            this.addCouponDiscountInfo(resumenContainer, totals);
-        }
-
-        if (totals.isShippingFree && totals.subtotal > 0) {
-            this.addFreeShippingMessage(resumenContainer);
-        }
+        if (totals.descuentoAplicado > 0) await this.addCouponDiscountInfo(resumenContainer, totals);
+        if (totals.isShippingFree && totals.subtotal > 0) await this.addFreeShippingMessage(resumenContainer);
     }
 
-    addCouponDiscountInfo(container, totals) {
-        const existingDiscount = container.querySelector('.coupon-discount-info');
-        if (existingDiscount) {
-            existingDiscount.remove();
-        }
-
+    async addCouponDiscountInfo(container, totals) {
+        const existing = container.querySelector('.coupon-discount-info');
+        if (existing) existing.remove();
         const discountInfo = document.createElement('div');
         discountInfo.className = 'coupon-discount-info d-flex justify-content-between border-top pt-2 mt-2';
         discountInfo.innerHTML = `
-            <span>
-                <i class="bi bi-ticket-perforated text-success me-2"></i>
-                Descuento cupón (${totals.codigoCupon})
-            </span>
+            <span><i class="bi bi-ticket-perforated text-success me-2"></i>Descuento cupón (${totals.codigoCupon})</span>
             <span class="text-success">-${totals.descuentoAplicado.toFixed(2)}</span>
         `;
-        
         const totalElement = container.querySelector('.total');
         totalElement.parentNode.insertBefore(discountInfo, totalElement);
-        
-        console.log('✅ Información de descuento agregada');
     }
 
-    addFreeShippingMessage(container) {
-        const existingMessage = container.querySelector('.free-shipping-message');
-        if (existingMessage) return;
-
+    async addFreeShippingMessage(container) {
+        const existing = container.querySelector('.free-shipping-message');
+        if (existing) return;
         const message = document.createElement('div');
         message.className = 'free-shipping-message alert alert-success mt-2';
-        message.innerHTML = `
-            <i class="bi bi-truck"></i> 
-            ¡Felicidades! Tu envío es gratis
-        `;
-        
+        message.innerHTML = `<i class="bi bi-truck"></i> ¡Felicidades! Tu envío es gratis`;
         const button = container.querySelector('.btn-pago');
         button.parentNode.insertBefore(message, button);
     }
 
-    //  botón de pago
-    setupPaymentButton() {
-        console.log('🔘 Configurando botón de pago...');
+    async setupPaymentButton() {
         const payButton = document.querySelector('.btn-pago');
-        console.log('🔘 Botón de pago encontrado:', payButton);
-        
-        if (!payButton) {
-            console.error('❌ No se encontró .btn-pago');
-            return;
-        }
-
+        if (!payButton) return;
         payButton.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log('🔘 Botón de pago clickeado');
+
             this.processPayment();
         });
-        
-        console.log('✅ Botón de pago configurado');
     }
 
-    
-    processPayment() {
-        console.log('💳 Procesando pago...');
-        
-        if (this.cart.length === 0) {
-            alert('No hay productos en el carrito');
-            return;
+    async processPayment() {
+        if (!this.cart || this.cart.length === 0) {
+            return alert('No hay productos en el carrito');
         }
 
+        // Verificar método de pago seleccionado
         const selectedCard = document.querySelector('input[name="tarjeta"]:checked');
-        if (!selectedCard) {
-            alert('Por favor selecciona un método de pago');
-            return;
-        }
+        if (!selectedCard) return alert('Por favor selecciona un método de pago');
+
+        // Obtener id de la dirección seleccionada
+        const select = document.getElementById("address-select");
+        const selectedAddressId = parseInt(select.value);
+        if (!selectedAddressId) return alert('Por favor selecciona una dirección de envío');
 
         const totals = this.calculateTotals();
-        
-        //  objeto de pedido
+
         const orderData = {
             id: this.generateOrderId(),
             date: new Date().toISOString(),
@@ -359,51 +230,50 @@ export class PaymentManager {
             status: 'processing'
         };
 
-        console.log('📋 Datos del pedido:', orderData);
+        // Construir orderLines desde el carrito
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const orderLines = cart.map(item => ({
+            quantity: item.quantity,
+            product: { id: item.id }
+        }));
 
-        // Guardar pedido
-        this.saveOrder(orderData);
-        
-        // Limpiar carrito
-        this.clearCart();
-        
-        // Actualizar contador del carrito en navbar
-        // loadCartCount();
-        
-        // Mostrar confirmación
-        this.showOrderConfirmation(orderData);
-    }
+        // Construir el body con el formato que espera el backend
+        const body = {
+            userId: Number(JSON.parse(localStorage.getItem("usuario")).id),
+            shippingAddressId: selectedAddressId,
+            status: "Pendiente",
+            trackingNumber: generarTrackingNumber(), // función que genera un alfanumérico
+            shippingCarrier: "DHL",
+            orderLines: orderLines
+        };
 
-    // Generar ID único para el pedido
-    generateOrderId() {
-        return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-    }
+        console.log("Enviando pedido:", body);
 
-    // Guardar pedido en localStorage
-    saveOrder(orderData) {
         try {
-            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            orders.push(orderData);
-            localStorage.setItem('orders', JSON.stringify(orders));
-            console.log('✅ Pedido guardado:', orderData.id);
+            // Enviar la orden al backend
+            const data = await createOrder(body);
+
+            // Comprobar que se creó correctamente
+            if (data) {
+                // Ejecutar acciones posteriores
+                await this.saveOrder(orderData);
+                await this.clearCart();
+                await this.showOrderConfirmation(orderData);
+                console.log("🎉 Pedido creado con éxito:", orderData);
+            } else {
+                alert("Algo salió mal al crear el pedido.");
+                console.error("Respuesta inesperada:", orderData);
+            }
         } catch (error) {
-            console.error('❌ Error al guardar pedido:', error);
+            console.error("Error al crear el pedido:", error);
+            alert("No se pudo crear el pedido. Intenta nuevamente.");
         }
     }
 
-  
-    clearCart() {
-        localStorage.removeItem('cart');
-        localStorage.removeItem('appliedCoupons'); 
-        this.cart = [];
-        this.appliedCoupons = {}; 
-        console.log('🗑️ Carrito y cupones limpiados');
-    }
 
-    
     showOrderConfirmation(orderData) {
         console.log('🎉 Mostrando confirmación de pedido...');
-        
+
         //  modal  HTML
         const modal = document.getElementById('orderConfirmationModal');
         if (!modal) {
@@ -411,7 +281,7 @@ export class PaymentManager {
             return;
         }
 
-        
+
         const orderIdElement = modal.querySelector('#modal-order-id');
         const totalElement = modal.querySelector('#modal-total');
         const deliveryDateElement = modal.querySelector('#modal-delivery-date');
@@ -422,8 +292,8 @@ export class PaymentManager {
 
         //  modal de Bootstrap
         const modalInstance = new bootstrap.Modal(modal);
-        
-        
+
+
         const continueShoppingBtn = modal.querySelector('#continueShoppingBtn');
         if (continueShoppingBtn) {
             continueShoppingBtn.addEventListener('click', () => {
@@ -434,133 +304,106 @@ export class PaymentManager {
             });
         }
 
-  
+
         modal.addEventListener('hidden.bs.modal', () => {
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 300);
         });
 
-       
+
         modalInstance.show();
-        
+
         console.log('✅ Modal de confirmación mostrado');
     }
 
-   
-    updateCustomerInfo(customerData) {
-        console.log('👤 Actualizando información del cliente...');
+    async generateOrderId() {
+        return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    async saveOrder(orderData) {
+        try {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        } catch (err) {
+            console.error('❌ Error al guardar pedido:', err);
+        }
+    }
+
+    async clearCart() {
+        localStorage.removeItem('cart');
+        localStorage.removeItem('appliedCoupons');
+        this.cart = [];
+        this.appliedCoupons = {};
+    }
+
+    async updateCustomerInfo(customerData) {
         const customerInfoElement = document.querySelector('.section-box p');
-        console.log('👤 Elemento de info del cliente:', customerInfoElement);
-        
-        if (customerInfoElement && customerData) {
-            customerInfoElement.innerHTML = `
-                <strong>Enviar a ${customerData.name}</strong><br />
-                <span class="text-muted">${customerData.address}</span>
-            `;
-            console.log('✅ Información del cliente actualizada');
-        }
+        if (!customerInfoElement || !customerData) return;
+        customerInfoElement.innerHTML = `<strong>Enviar a ${customerData.name}</strong><br/>`;
     }
 
-    
-    init() {
-        console.log('🎯 Iniciando PaymentManager...');
-        
-        // Verificar que estamos en la página correcta
-        const isPaymentPage = document.querySelector('.payment-page') || 
-                             document.querySelector('.resumen-precios') ||
-                             window.location.pathname.includes('payment');
-        
-        console.log('🔍 ¿Es página de pago?', isPaymentPage);
-        
-        if (!isPaymentPage) {
-            console.log('⚠️ No parece ser la página de pago, saltando inicialización');
-            return;
-        }
-        
+    async init() {
+        const isPaymentPage = document.querySelector('.payment-page') || document.querySelector('.resumen-precios') || window.location.pathname.includes('payment');
+        if (!isPaymentPage) return;
+
+        // Cargar datos
+        this.cart = await this.getCartFromStorage();
+        this.appliedCoupons = this.getAppliedCoupons();
+
         this.renderDeliveryDate();
-        this.renderCartProducts();
-        this.calculateAndRenderTotals();
-        this.setupPaymentButton();
-        
-        
+        await this.renderCartProducts();
+        await this.calculateAndRenderTotals();
+        await this.setupPaymentButton();
+
         const customerData = {
-            name: "Juan Pérez",
-            address: "Calle Reforma 123, Col. Centro, Ciudad de México, CDMX, CP 06000"
+            name: JSON.parse(localStorage.getItem("currentUser")).name
         };
-        this.updateCustomerInfo(customerData);
-        
-        console.log('🎉 PaymentManager inicializado completamente');
+        await this.updateCustomerInfo(customerData);
     }
 }
 
-
-export function initPaymentPage() {
-    console.log('🚀 initPaymentPage llamada');
+// Funciones de inicialización
+export async function initPaymentPage() {
     const paymentManager = new PaymentManager();
-    paymentManager.init();
+    await paymentManager.init();
 }
 
-
+// Datos de prueba
 export function addTestData() {
     const testCart = [
-        {
-            id: 1,
-            name: "Dulces Enchilados",
-            description: "Deliciosos dulces con chile",
-            price: 25.50,
-            quantity: 2,
-            picture: "assets/Dulces-Enchilados.jpg" 
-        },
-        {
-            id: 2,
-            name: "Paletas exóticas",
-            description: "Paletas de sabores únicos",
-            price: 15.00,
-            quantity: 3,
-            picture: "assets/paleta-animal.jpg"
-        }
+        { id: 1, name: "Cargando...", description: "Cargando...", price: 0.00, quantity: 0, picture: "assets/Dulces-Enchilados.jpg" },
     ];
-    
     localStorage.setItem('cart', JSON.stringify(testCart));
-    console.log('🧪 Datos de prueba agregados al carrito');
     window.location.reload();
 }
 
-
-window.debugCart = function() {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    console.log('🛒 Carrito actual:', cart);
-    
-    cart.forEach((item, index) => {
-        console.log(`📦 Producto ${index + 1}:`);
-        console.log(`   - Nombre: ${item.name}`);
-        console.log(`   - Precio original: ${item.pricing} (tipo: ${typeof item.pricing})`);
-        console.log(`   - Precio con descuento: ${item.price_discount} (tipo: ${typeof item.price_discount})`);
-        console.log(`   - Cantidad: ${item.quantity} (tipo: ${typeof item.quantity})`);
-        console.log(`   - Imagen (picture): ${item.picture}`);
-        console.log(`   - Imagen (image): ${item.image}`);
-        console.log(`   - Imagen (img): ${item.img}`);
-    });
-    
-    return cart;
+// Obtener items completos
+async function getCartItemsArray(items) {
+    const cartItemsArray = [];
+    for (const element of items) {
+        const data = await getCurrentItem(element.id);
+        if (!data) continue;
+        data.quantity = element.quantity;
+        cartItemsArray.push(data);
+    }
+    return cartItemsArray;
 }
 
-window.checkImages = function() {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    
-    cart.forEach((item, index) => {
-        const img = new Image();
-        const imageUrl = item.picture || item.image || item.img || 'assets/logotipo-clicknsweet-2.png';
-        
-        img.onload = function() {
-            console.log(`✅ Imagen ${index + 1} existe: ${imageUrl}`);
-        };
-        
-        img.onerror = function() {
-            console.error(`❌ Imagen ${index + 1} NO existe: ${imageUrl}`);
-        };
-        
-        img.src = imageUrl;
-    });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const paymentBtn = document.getElementById("paymentToDo");
+    if (!paymentBtn) return;
+
+    setupPaymentButton()
+})
+
+function generarTrackingNumber() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
 }

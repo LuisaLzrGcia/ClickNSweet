@@ -1,6 +1,6 @@
 import fetchData from "../fetchData/fetchData.js";
 import { getCurrentItem } from "./getCurrentItem.js";
-import { productDetailView } from "./productDetailView.js";
+import { productDetailView, initProductReviews } from "./productDetailView.js"; 
 
 window.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Si no es un número o menor o igual a 0, redirige
   if (!idParam || isNaN(id) || id <= 0) {
-    window.location.href = "../not-found/index.html";
+    window.location.href = "/not-found/index.html";
     return; // para que no siga ejecutándose
   }
 
@@ -24,6 +24,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // Renderizar el producto
     createProductDetails(currentItem);
+
+    initProductReviews(currentItem);
 
   } catch (error) {
     container.innerHTML = "<p style='color:red;'>Error al cargar el producto</p>";
