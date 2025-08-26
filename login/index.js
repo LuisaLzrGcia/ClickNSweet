@@ -78,9 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("¡Inicio de sesión exitoso!", usuario);
 
 
-
-
-
           alert("Inicio de sesión exitoso");
           const homePage = isAdmin(usuario)
             ? resolvePath("../main-manage-products/index.html")
