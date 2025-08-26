@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
             id: usuario.id ?? usuario.id_user ?? usuario.userId,
             username: usuario.userName ?? usuario.username ?? email,
             email: usuario.email ?? email,
-            role: usuario.role.type 
+            name: usuario.firstName + " " + usuario.lastName,
+            role: usuario.role.type,
+
           };
           localStorage.setItem("currentUser", JSON.stringify(currentUser));
           localStorage.setItem("usuario", JSON.stringify(currentUser));
@@ -76,14 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("¡Inicio de sesión exitoso!", usuario);
 
 
-          //const homePage = isAdmin(usuario)
-          //  ? resolvePath("/main-manage-products/index.html")
-          //  : resolvePath("/index.html");
-
-
           alert("Inicio de sesión exitoso");
-          const homePage = usuario.role === "admin" ? `${resolvePath('./main-manage-products/index.html')}` : `${resolvePath("/index.html")}`;
-
+          const homePage = isAdmin(usuario)
+            ? resolvePath("../main-manage-products/index.html")
+            : resolvePath("../index.html");
           window.document.location.href = homePage;
         })
         .catch((error) => {

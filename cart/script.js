@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('./index.html')) {
+    if (window.location.pathname.includes('/index.html')) {
         renderCarrito();
     }
 });

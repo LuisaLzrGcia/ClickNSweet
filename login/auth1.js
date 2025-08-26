@@ -11,7 +11,7 @@ export async function login(email, password) {
       name: response.name,
       email: response.email,
       username: response.username,
-      role: response.role
+      role: response.role.type
     };
     
     localStorage.setItem('currentUser', JSON.stringify(userForStorage));

@@ -33,55 +33,35 @@
         <!-- Carrito de compras -->
         <h1 class="payment-title text-start">Llega el "fecha"</h1>
         <div class="section-box">
-            <p><strong>Enviar a "nombre de cliente"</strong><br />
-                <span class="text-muted">Dirección proporcionada por el cliente</span>
-            </p>
+            <label for="address-select"><strong>Enviar a:</strong></label>
+            <div id="selected-address" class="text-muted mb-2"></div>
+            <select id="address-select" class="form-select mb-2">
+            </select>
+
+            <button id="add-address-btn" class="btn btn-pink-see"
+                onclick="window.location.href='../account-details/index.html'">
+                Añadir dirección de entrega
+            </button>
         </div>
 
         <!-- Productos -->
         <h1 class="payment-title text-start">Carrito de compras</h1>
         <div class="section-box">
             <div class="card-producto">
-                <img src="assets/Dulces-Enchilados.jpg" alt="Dulces Enchilados" />
+                <img src="../assets/default.jpg" alt="Cargando..." />
                 <div>
-                    <strong>Dulces Enchilados</strong><br />
-                    <span class="text-muted">Descripción completa del producto</span>
+                    <strong>Cargando ... </strong><br />
+                    <span class="text-muted">Descripción completa del producto cargando ...</span>
                 </div>
             </div>
 
-            <div class="card-producto">
-                <img src="assets/paleta-animal.jpg" alt="Paletas exóticas" />
-                <div>
-                    <strong>Paletas exóticas</strong><br />
-                    <span class="text-muted">Descripción completa del producto</span>
-                </div>
-            </div>
         </div>
 
         <!-- Método de pago -->
         <h1 class="payment-title text-start">Método de pago</h1>
-        <div class="section-box">
+        <div class="section-box" id="tarjetas-container">
             <p class="section-title">Mis tarjetas</p>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta1" checked>
-                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta1">
-                    <span>Tarjeta banco que termina en XXXX</span>
-                    <span>Nombre</span>
-                    <span>Fecha</span>
-                </label>
-            </div>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="tarjeta" id="tarjeta2">
-                <label class="form-check-label d-flex justify-content-between w-100" for="tarjeta2">
-                    <span>Tarjeta banco que termina en XXXX</span>
-                    <span>Nombre</span>
-                    <span>Fecha</span>
-                </label>
-            </div>
-
-            <button class="btn btn-alt">Elegir otro método de pago</button>
+            <!-- Aquí se insertarán las tarjetas con JS -->
         </div>
 
         <!-- Resumen de pago -->
@@ -98,7 +78,7 @@
                 <span>Total</span>
                 <span>$$$$$$</span>
             </div>
-            <button class="btn btn-pago">Realiza tu pedido y paga</button>
+            <button class="btn btn-pago" id="paymentToDo">Realiza tu pedido y paga</button>
 
             <p class="text-sm mt-3 text-center">
                 Al realizar tu pedido, aceptas el aviso de privacidad y las condiciones de uso de ClickNSweet
@@ -154,7 +134,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.href='/account-details/index.html'">
                         Ver mis pedidos
                     </button>
                     <button type="button" class="btn btn-success" id="continueShoppingBtn">
@@ -172,13 +153,14 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="../main.js"></script>
     <script type="module" src="./index/index.js"></script>
+    <script type="module" src="./script.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Inicializar Payment Manager -->
     <script type="module">
-        import { initPaymentPage } from './payment/payment.js';
+        import { initPaymentPage } from './payment1/payment.js';
         document.addEventListener('DOMContentLoaded', function () {
             console.log('🚀 DOM cargado, inicializando PaymentManager...');
             initPaymentPage();

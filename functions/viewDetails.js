@@ -3,5 +3,5 @@ window.viewDetails = function (element) {
 
     const id = Number(element.dataset.id);
 
-    window.location.href = `../product-detail/index.html?id=${id}`;
+    window.location.href = `/product-detail/index.html?id=${id}`;
 };

@@ -62,7 +62,7 @@ document.getElementById('btnRegistro').addEventListener('click', async () => {
     const nuevoUsuario = await register(userData);
     console.log('Usuario creado:', nuevoUsuario);
     alert('¡Registro exitoso!');
-    window.location.href = '../login.html';
+    window.location.href = '/login/index.html';
   } catch (error) {
     console.error('Error en registro:', error);
     alert(error.message);
