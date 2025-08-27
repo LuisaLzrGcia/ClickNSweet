@@ -1,5 +1,5 @@
 async function fetchDataStatus(url, method = 'GET', params, body) {
-    const api = 'http://98.82.183.146/api/v1/clicknsweet'; // Cambia esto por tu URL base real
+    const api = 'http://localhost:8080/api/v1/clicknsweet'; // Cambia esto por tu URL base real
     try {
         // Construir query string si hay parámetros
         let queryString = '';
