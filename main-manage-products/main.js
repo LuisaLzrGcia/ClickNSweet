@@ -89,7 +89,7 @@ function renderPagination(total, current = 1) {
   });
 }
 
-// Carga desde BackEnd
+/* Carga desde BackEnd
 const getProducts = async (page = 1) => {
   const container = document.getElementById("dashboard-products");
   if (!container) return;
@@ -110,9 +110,204 @@ const getProducts = async (page = 1) => {
     container.innerHTML = `<p class="text-danger">Error cargando productos.</p>`;
   }
 };
+*/
 
-document.addEventListener("DOMContentLoaded", () => getProducts());
+// ----------------------- PARTE DE LOS ULTIMOS CAMBIOS -------------------------- //
+// Carga dinámica de filtros
+async function loadFilters() {
+  const categories = await fetchData("/categories", "GET");
+  const countries = await fetchData("/countries", "GET");
 
+  const selected = getUrlParams();
+
+  // Render categorías
+  const catContainer = document.getElementById("category-filters");
+  catContainer.innerHTML = categories.map(cat => `
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="category" value="${cat.id}" id="cat-${cat.id}" ${selected.category?.includes(cat.id.toString()) ? "checked" : ""}>
+      <label class="form-check-label" for="cat-${cat.id}">${cat.name}</label>
+    </div>
+  `).join("");
+
+  // Render países
+  const countryContainer = document.getElementById("country-filters");
+  countryContainer.innerHTML = `
+    <select id="country-select" class="form-select">
+      <option value="">Todos</option>
+      ${countries.map(c => `
+        <option value="${c.code}" ${selected.country?.includes(c.code) ? "selected" : ""}>${c.name}</option>
+      `).join("")}
+    </select>
+  `;
+
+  // Prellenar precio si viene en la URL
+  document.getElementById("price-min").value = selected.price_min ?? "";
+  document.getElementById("price-max").value = selected.price_max ?? "";
+}
+
+// Obtener parámetros URL como objeto
+function getUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    page: Number(params.get("page") ?? 1),
+    category: params.getAll("category"),
+    country: params.get("country") ? [params.get("country")] : [], // ← importante: devuelvo array
+    price_min: params.get("price_min"),
+    price_max: params.get("price_max")
+  };
+}
+
+
+/* Aplicar filtros y recargar
+function applyFilters() {
+  const params = new URLSearchParams();
+  params.set("page", "1"); // Reiniciar a página 1
+
+  document.querySelectorAll("input[name='category']:checked").forEach(cb => {
+    params.append("category", cb.value);
+  });
+  document.querySelectorAll("input[name='country']:checked").forEach(cb => {
+    params.append("country", cb.value);
+  });
+
+  const priceMin = document.getElementById("price-min").value;
+  const priceMax = document.getElementById("price-max").value;
+  if (priceMin) params.set("price_min", priceMin);
+  if (priceMax) params.set("price_max", priceMax);
+
+  // Redirige con nueva URL
+  window.location.search = params.toString();
+}
+*/
+
+// ------------------ PARTE DE LOS ULTIMOS CAMBIOS ------------------- //
+function applyFilters() {
+  const params = new URLSearchParams();
+  params.set("page", "1"); // Siempre reinicia a la página 1
+
+  // Categorías
+  const selectedCategories = Array.from(document.querySelectorAll("input[name='category']:checked"))
+    .map(cb => cb.value);
+  selectedCategories.forEach(val => params.append("category", val));
+
+  // Países (select único)
+  const countrySelect = document.getElementById("country-select");
+  if (countrySelect && countrySelect.value) {
+    params.set("country", countrySelect.value);
+  }
+
+  // Precio mínimo y máximo
+  const priceMin = document.getElementById("price-min")?.value;
+  const priceMax = document.getElementById("price-max")?.value;
+  if (priceMin) params.set("price_min", priceMin);
+  if (priceMax) params.set("price_max", priceMax);
+
+  // Redirigir con solo los parámetros útiles
+  window.location.search = params.toString();
+}
+
+
+// Limpiar filtros y redirigir
+function applyPriceFilterClean() {
+  window.location.search = "page=1";
+}
+
+// Adaptar filtros al body del fetch
+function getFilterPayload() {
+  const { category, country, price_min, price_max } = getUrlParams();
+
+  const payload = {
+    page: (getUrlParams().page ?? 1) - 1,
+    size: 6,
+    filters: {}
+  };
+
+  if (category.length) payload.filters.categoryIds = category.map(Number);
+  if (country.length) payload.filters.countryCodes = country;
+  if (price_min) payload.filters.priceMin = Number(price_min);
+  if (price_max) payload.filters.priceMax = Number(price_max);
+
+  return payload;
+}
+
+/* Actualiza el fetch de productos:
+const getProducts = async () => {
+  const container = document.getElementById("dashboard-products");
+  if (!container) return;
+
+  const payload = getFilterPayload();
+
+  try {
+    const resp = await fetchData("/products", "POST", {}, payload);
+    const arr = Array.isArray(resp?.items) ? resp.items : [];
+    products = arr.map(adaptProductForUI);
+    totalPages = resp.totalPages ?? 1;
+    currentPage = payload.page + 1;
+
+    renderList(products, totalPages, currentPage);
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+    container.innerHTML = `<p class="text-danger">Error cargando productos.</p>`;
+  }
+};
+*/
+
+const getProducts = async (page = null) => {
+  const container = document.getElementById("dashboard-products");
+  if (!container) return;
+
+  const urlParams = getUrlParams();
+  const payload = getFilterPayload();
+
+  // Si se pasa un nuevo número de página manualmente (desde paginación), actualizamos el payload y la URL
+  if (page !== null) {
+    payload.page = page - 1;
+    urlParams.page = page;
+
+    /* Actualiza la URL manteniendo filtros
+    const newParams = new URLSearchParams(urlParams).toString();
+    window.history.replaceState({}, "", `?${newParams}`);
+    */
+  }
+
+  // ----------- PARTE DE LOS ULTIMOS CAMBIOS ------------ //
+  const cleanedParams = new URLSearchParams();
+
+  if (urlParams.page) cleanedParams.set("page", urlParams.page);
+  if (urlParams.category && urlParams.category.length > 0) {
+    urlParams.category.forEach(val => cleanedParams.append("category", val));
+  }
+  if (urlParams.country && urlParams.country.length > 0) {
+    urlParams.country.forEach(val => cleanedParams.append("country", val));
+  }
+  if (urlParams.price_min && urlParams.price_min !== "null") cleanedParams.set("price_min", urlParams.price_min);
+  if (urlParams.price_max && urlParams.price_max !== "null") cleanedParams.set("price_max", urlParams.price_max);
+
+  window.history.replaceState({}, "", `?${cleanedParams.toString()}`);
+
+
+  try {
+    const resp = await fetchData("/products", "POST", {}, payload);
+    const arr = Array.isArray(resp?.items) ? resp.items : [];
+    products = arr.map(adaptProductForUI);
+    totalPages = resp.totalPages ?? 1;
+    currentPage = (page !== null) ? page : (urlParams.page ?? 1);
+
+    renderList(products, totalPages, currentPage);
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+    container.innerHTML = `<p class="text-danger">Error cargando productos.</p>`;
+  }
+};
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadFilters();
+  getProducts(); // Esto tomará la página de la URL
+
+  document.getElementById("applyFiltersBtn")?.addEventListener("click", applyFilters);
+  document.getElementById("applyPriceFilterClean")?.addEventListener("click", applyPriceFilterClean);
+});
 
 
 

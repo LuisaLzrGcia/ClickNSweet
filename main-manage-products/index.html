@@ -28,60 +28,56 @@
 <body>
     <nav id="navbar-container" class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm"></nav>
 
+
         <!-- Contenido principal -->
         <div class="container my-5">
             <div class="row">
             <!-- Sidebar Desktop -->
             <div class="col-lg-3 d-none d-lg-block">
-                <div class="sidebar">
-                <div id="sidebar-categories">
-                    <!-- Aqui se renderizan las categorías -->
+                <!-- Sidebar filtros dinámicos -->
+                <div id="filters-container" class="sidebar">
+                <h5>Categorías</h5>
+                <div id="category-filters" class="mb-3"></div>
+
+                <h5>País</h5>
+                <div id="country-filters" class="mb-3"></div>
+
+                <h5>Precio</h5>
+                <label for="price-min">Precio mínimo</label>
+                <input type="number" id="price-min" class="form-control mb-2" placeholder="Ej. 100">
+
+                <label for="price-max">Precio máximo</label>
+                <input type="number" id="price-max" class="form-control mb-3" placeholder="Ej. 1000">
+
+                <button id="applyFiltersBtn" class="btn w-100 btn-apply-filter">Aplicar</button>
+                <button id="applyPriceFilterClean" class="btn w-100 btn-apply-filter-clean">Limpiar</button>
+
                 </div>
-
-                <div id="sidebar-countries">
-                    <!-- Aquio se renderizan los paises -->
-                </div>
-
-                <div id="sidebar-price">
-                    <h5 class="filter-title">Precio</h5>
-                    <label for="minPrice" class="form-label mb-1">Precio mínimo</label>
-                    <input type="number" id="minPrice" class="form-control mb-2" placeholder="Ej. 100" min="0">
-
-                    <label for="maxPrice" class="form-label mb-1">Precio máximo</label>
-                    <input type="number" id="maxPrice" class="form-control mb-3" placeholder="Ej. 1000" min="0">
-
-                    <button id="applyPriceFilter" class="btn w-100 btn-apply-filter">Aplicar</button>
-                    <button id="applyPriceFilterClena" class="btn w-100 btn-apply-filter-clean">Limpiar</button>
-                </div>
-                </div>
-            </div>
-
-            
+            </div> <!-- FIN col-lg-3 -->
 
             <!-- Productos -->
             <div class="col-lg-9">
                 <div class="d-flex justify-content-between mb-3 flex-wrap">
-                    <input type="text" class="form-control w-50 mb-2 mb-lg-0" placeholder="Buscar...">
-                    <div class="btn-group">
-                        <button class="btn btn-dark btn-sm" id="sort-popular">Activos</button>
-                        <button class="btn btn-outline-secondary btn-sm" id="sort-new">Inactivos</button>
-                        <button class="btn btn-outline-secondary btn-sm" id="sort-price-asc">Stock ↑</button>
-                        <button class="btn btn-outline-secondary btn-sm" id="sort-price-desc">Stock ↓</button>
-                        <button class="btn btn-outline-secondary btn-sm" id="sort-rating">Rating</button>
-                    </div>
+                <input type="text" class="form-control w-50 mb-2 mb-lg-0" placeholder="Buscar...">
+                <div class="btn-group">
+                    <button class="btn btn-dark btn-sm" id="sort-popular">Activos</button>
+                    <button class="btn btn-outline-secondary btn-sm" id="sort-new">Inactivos</button>
+                    <button class="btn btn-outline-secondary btn-sm" id="sort-price-asc">Stock ↑</button>
+                    <button class="btn btn-outline-secondary btn-sm" id="sort-price-desc">Stock ↓</button>
+                    <button class="btn btn-outline-secondary btn-sm" id="sort-rating">Rating</button>
+                </div>
                 </div>
 
                 <div class="container mt-4">
-                    <div id="dashboard-products" class="row gy-4"></div>
+                <div id="dashboard-products" class="row gy-4"></div>
                 </div>
 
-                <!-- Paginación (opcional si quieres hacerlo dinámico más adelante) -->
-                <nav>
-                <nav id="pagination-container" aria-label="Page navigation example" class="mt-4 w-100">
-                </nav>
-            </div>
-        </div>
-    </div>
+                <!-- Paginación -->
+                <nav id="pagination-container" aria-label="Page navigation example" class="mt-4 w-100"></nav>
+            </div> <!-- FIN col-lg-9 -->
+
+            </div> <!-- FIN row -->
+        </div> <!-- FIN container -->
 
     <!-- Footer -->
     <footer></footer>
