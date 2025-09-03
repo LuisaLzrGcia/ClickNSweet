@@ -375,20 +375,25 @@ h2 {
 }
 
 .category-link {
-  text-decoration: none; /* quitar subrayado por defecto */
+  text-decoration: none;
+  /* quitar subrayado por defecto */
 }
 
 .category-link .title-category {
-  color: #000; /* tu color deseado */
-  text-decoration: none; /* subrayado si quieres */
-  font-weight: 600; /* opcional */
+  color: #000;
+  /* tu color deseado */
+  text-decoration: none;
+  /* subrayado si quieres */
+  font-weight: 600;
+  /* opcional */
 }
 
 /* Para quitar el contorno azul al hacer clic o focus */
 .category-link:focus,
 .category-link:active {
   outline: none;
-  text-decoration: underline; /* o none si no quieres */
+  text-decoration: underline;
+  /* o none si no quieres */
 }
 
 

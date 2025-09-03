@@ -241,8 +241,17 @@
   color: white;
 }
 
+.btn-dark{
+  color: white !important;
+}
 
+.btn-dark:hover{
+  background-color: #3c3c3c !important;
+}
 
+.btn-outline-secondary:hover{
+  background-color: #3c3c3c;
+}
 
 .card-product {
   display: flex;
@@ -309,4 +318,21 @@
   color: white;
   border-color: #f7a8be;
   cursor: not-allowed;
+}
+
+.dropdown-menu{
+  width: 35vw;
+}
+
+.btn-pink-search {
+  background-color: #E452C0;
+  color: white;
+  width: fit-content;
+  border-top-right-radius: 0.375rem !important;
+  border-bottom-right-radius: 0.375rem !important;
+}
+
+.btn-pink-search:hover {
+  background-color: #d13dac;
+  color: white;
 }

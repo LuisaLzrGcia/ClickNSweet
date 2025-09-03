@@ -37,8 +37,7 @@ const navItems = [
     path: "/index.html#categories",
     label: "Categorías",
     items: config.categories.map((cat, index) => ({
-      // path: `/#${cat.toLowerCase().replace(/\s+/g, '-')}`,
-      path: "../products/index.html?category=" + (index + 1),
+      path: "../products/index.html?page=1&category=" + (cat),
       label: cat,
     })),
   },

@@ -2,7 +2,6 @@ import { renderStars } from "./renderStars.js";
 
 export function renderProducts(productsArray, type = "products") {
   let productsContainer = "";
-  console.log(productsArray);
 
   productsArray.map((item, index) => {
     const truncateName = truncateText(item.productName, 40)

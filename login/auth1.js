@@ -15,7 +15,6 @@ export async function login(email, password) {
     };
     
     localStorage.setItem('currentUser', JSON.stringify(userForStorage));
-    console.log('Usuario logueado y guardado:', userForStorage);
     
     return response; // devuelve directamente el objeto User
 
