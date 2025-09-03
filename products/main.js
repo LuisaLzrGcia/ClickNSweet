@@ -5,142 +5,286 @@ import { getCountriesData } from "../fetchData/getCountriesData.js";
 import { renderProducts } from "../functions/renderProducts.js";
 import { getProductsData } from "./getProductsData.js";
 
-let categoriesApplied = [];
-let minPriceApplied = null;
-let maxPriceApplied = null;
-let countryApplied = null;
-let currentPage = 1;
-
-const appliedFiltersBadges = document.getElementById('appliedFiltersBadges');
 const clearFiltersBtn = document.getElementById('clearFiltersBtn');
 
-document.addEventListener("DOMContentLoaded", function () {
-  const params = new URLSearchParams(window.location.search);
+document.querySelectorAll(".btn-apply-filter").forEach(boton => {
+  boton.addEventListener("click", () => {
+    applyFiltersProducts()
+  });
+});
 
-  if (!params.has("page")) {
-    params.set("page", "1");
-    history.replaceState(null, "", `?${params.toString()}`);
+document.addEventListener("DOMContentLoaded", async function () {
+  // Verificar si existe el parámetro "page"
+  const url = new URL(window.location.href);
+  let page = url.searchParams.get("page");
+
+  // Si no existe el parámetro page o si es 0, lo forzamos a 1
+  if (!page || page === "0") {
+    url.searchParams.set("page", "1");
+    history.replaceState(null, "", url.toString());
   }
 
-  if (params.has('category')) categoriesApplied = [params.get('category')];
-  if (params.has('country')) countryApplied = params.get('country');
-  if (params.has('minPrice')) minPriceApplied = parseFloat(params.get('minPrice'));
-  if (params.has('maxPrice')) maxPriceApplied = parseFloat(params.get('maxPrice'));
-  if (params.has('page')) currentPage = parseInt(params.get('page'));
+  // Renderizar filtros primero
+  await renderCategories();
+  await renderCountries();
 
+  // Hidratar filtros desde URL
   hydrateFiltersFromURL();
-  getProducts(currentPage);
-  renderCountryOptions()
-  filterProducts();
-  filterProductsByCategory();
-  filterProductsByCountries();
-  updateFilterBadges();
 
+  // Obtener página actual desde URL o 1
+  const params = new URLSearchParams(window.location.search);
 
-  // ------------ Parte de las ultimas modificaciones --------------- // 
+  // Obtener productos
+  getProducts();
+
+  // Eventos
   clearFiltersBtn.addEventListener('click', () => {
     clearAllFiltersKeepPageOne();
   });
 });
 
-
-// ------------ Filtros en URL ----- PARTE DE LAS ULTIMAS MODIFICACIONES ------- //
-function setURLParamsFromFilters({ page = 1 } = {}) {
-  const params = new URLSearchParams(window.location.search);
-
-  // page siempre presente
-  params.set("page", String(page));
-
-  // categoryId (única) o múltiples categorías si así lo manejas
-  const selectedCategoryId = getSingleSelectedCategoryId(); // o toma la que ya estás leyendo
-  if (selectedCategoryId) params.set("category", String(selectedCategoryId));
-  else params.delete("category");
-
-  // precio
-  const min = document.getElementById("minPrice")?.value || "";
-  const max = document.getElementById("maxPrice")?.value || "";
-  if (min) params.set("price_min", String(min)); else params.delete("price_min");
-  if (max) params.set("price_max", String(max)); else params.delete("price_max");
-
-  // país (ID)
-  const countrySelect = document.querySelector('[data-filter="country"]') || document.getElementById("countrySelect");
-  const countryId = countrySelect?.value || "";
-  if (countryId) params.set("country", String(countryId)); else params.delete("country");
-
-  history.pushState(null, "", `?${params.toString()}`);
-}
-
-// Refleja los valores de la URL en los inputs
 function hydrateFiltersFromURL() {
   const params = new URLSearchParams(window.location.search);
 
-  // page no se setea en inputs, pero la usamos en getProducts
-
-  // category
-  const categoryParam = params.get("category");
-  if (categoryParam) {
-    checkCategoryById(Number(categoryParam)); // marca el checkbox/radio correspondiente
-  } else {
-    // clearCategorySelection();
+  // Categoría
+  const category = params.get("category");
+  if (category) {
+    const radio = document.querySelector(
+      `input[name="category-group"][value="${category}"]`
+    );
+    if (radio) radio.checked = true;
   }
 
-  // precio
-  const min = params.get("price_min");
-  const max = params.get("price_max");
-  const minInput = document.getElementById("minPrice");
-  const maxInput = document.getElementById("maxPrice");
-  if (minInput) minInput.value = min ?? "";
-  if (maxInput) maxInput.value = max ?? "";
+  // País
+  const country = params.get("country");
+  const select = document.getElementById("select-country");
+  if (select && country) {
+    select.value = country;
+  }
 
-  // país
-  const countryParam = params.get("country");
-  const countrySelect = document.querySelector('[data-filter="country"]') || document.getElementById("countrySelect");
-  if (countrySelect) countrySelect.value = countryParam ?? "";
+  // Precios
+  const minPrice = params.get("minPrice");
+  const maxPrice = params.get("maxPrice");
+  if (minPrice) document.getElementById("minPrice").value = minPrice;
+  if (maxPrice) document.getElementById("maxPrice").value = maxPrice;
+
+  // ---------------- Orden (botones) ----------------
+  const sortBy = params.get("sort-by"); // popular, new, price, rating, etc.
+
+  const sortButtons = [
+    { id: "sort-popular", value: "popular" },
+    { id: "sort-new", value: "new" },
+    { id: "sort-price-asc", value: "price-asc" },
+    { id: "sort-price-desc", value: "price-desc" },
+    { id: "sort-rating", value: "rating" }
+  ];
+
+  sortButtons.forEach(btn => {
+    const element = document.getElementById(btn.id);
+    if (!element) return;
+
+    if (sortBy === btn.value || (!sortBy && btn.value === "popular")) {
+      // si coincide con el parámetro o no hay parámetro → btn-dark
+      element.classList.add("btn-dark");
+      element.classList.remove("btn-outline-secondary");
+    } else {
+      // los demás → btn-outline-secondary
+      element.classList.remove("btn-dark");
+      element.classList.add("btn-outline-secondary");
+    }
+  });
 }
 
-// -------- Modificacion a boton de limpiar filtros ---- PARTE DE LAS ULTIMAS ACTUALIZACIONES --- //
-function clearAllFiltersKeepPageOne() {
-  // Resetea variables globales
-  categoriesApplied = [];
-  minPriceApplied = null;
-  maxPriceApplied = null;
-  countryApplied = null;
+function applyFiltersProducts() {
+  // Tomar todos los parámetros actuales
+  const params = new URLSearchParams(window.location.search);
 
-  // Borra todos los filtros de la URL excepto page=1
-  const params = new URLSearchParams();
-  params.set("page", "1");
-  history.pushState(null, "", `?${params.toString()}`);
+  // Page siempre inicia en 1 al aplicar filtros
+  params.set("page", 1);
 
-  // Limpia inputs visuales
-  clearCategorySelection();
+  const category = getSelectedCategory();
+  const country = getSelectedCountry();
+  const minPrice = getMinPrice();
+  const maxPrice = getMaxPrice();
 
-  const minInput = document.getElementById("minPrice");
-  const maxInput = document.getElementById("maxPrice");
-  if (minInput) minInput.value = "";
-  if (maxInput) maxInput.value = "";
+  // Actualizar parámetros
+  if (category) params.set("category", category);
+  else params.delete("category");
 
-  const countrySelect = document.querySelector('[data-filter="country"]') || document.getElementById("countrySelect");
-  if (countrySelect) countrySelect.value = "";
+  if (country && country !== "0" && country !== "Todos") params.set("country", country);
+  else params.delete("country");
 
-  updateFilterBadges();
+  if (minPrice && minPrice !== "0") params.set("minPrice", minPrice);
+  else params.delete("minPrice");
+
+  if (maxPrice && maxPrice !== "0") params.set("maxPrice", maxPrice);
+  else params.delete("maxPrice");
+
+  // ----------------- Marcar solo Populares -----------------
+  const sortButtons = [
+    "sort-popular",
+    "sort-new",
+    "sort-price-asc",
+    "sort-price-desc",
+    "sort-rating"
+  ];
+
+  sortButtons.forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+
+    if (id === "sort-popular") {
+      btn.classList.add("btn-dark");
+      btn.classList.remove("btn-outline-secondary");
+    } else {
+      btn.classList.remove("btn-dark");
+      btn.classList.add("btn-outline-secondary");
+    }
+  });
+
+  // Actualizar la URL sin recargar
+  history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+
+  // Obtener productos con los filtros actualizados
   getProducts(1);
 }
 
 
-function setFilterParam(key, value) {
-  const url = new URL(window.location.href);
 
-  // Si el valor existe y no está vacío, lo agregamos o actualizamos
-  if (value !== null && value !== "") {
-    url.searchParams.set(key, value);
-  } else {
-    // Si está vacío o null, eliminamos el parámetro
-    url.searchParams.delete(key);
+function getSelectedCategory() {
+  const selected = document.querySelector('input[name="category-group"]:checked');
+  if (selected) {
+    return selected.value; // aquí regresa el nombre de la categoría
   }
+  return null; // si no hay nada seleccionado
 
-  // Recargar manteniendo los demás parámetros intactos
-  window.location.href = url.toString();
 }
+
+function getSelectedCountry() {
+  const select = document.getElementById("select-country");
+  if (select) {
+    const selectedOption = select.options[select.selectedIndex]; // opción seleccionada
+    return selectedOption.text; // devuelve el texto visible del option
+  }
+  return null;
+}
+
+function getMinPrice() {
+  const minPriceInput = document.getElementById('minPrice');
+  return minPriceInput && minPriceInput.value ? minPriceInput.value : 0;
+}
+
+function getMaxPrice() {
+  const maxPriceInput = document.getElementById('maxPrice');
+  return maxPriceInput && maxPriceInput.value ? maxPriceInput.value : 0;
+}
+
+async function renderCategories() {
+  let radiosHTML = "";
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const appliedCategory = urlParams.get("category");
+
+  try {
+    const categoriesList = await getCategoriesData('GET');
+
+    categoriesList.forEach(category => {
+      const isChecked = appliedCategory === category.name ? 'checked' : '';
+      // Desktop
+      radiosHTML += `
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="category-group" value="${category.name}" id="cat-desktop-${category.id}" ${isChecked}>
+          <label class="form-check-label" for="cat-desktop-${category.id}">${category.name}</label>
+        </div>
+      `;
+    });
+
+    document.getElementById('sidebar-categories').innerHTML = `<h5>Categorías</h5>${radiosHTML}`;
+
+    // Mobile
+    let mobileHTML = categoriesList.map(category => {
+      const isChecked = appliedCategory === category.name ? 'checked' : '';
+      return `
+        <li>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category-group-mobile" value="${category.name}" id="cat-mobile-${category.id}" ${isChecked}>
+            <label class="form-check-label" for="cat-mobile-${category.id}">${category.name}</label>
+          </div>
+        </li>
+      `;
+    }).join('');
+    document.getElementById('categoryList').innerHTML = mobileHTML + `
+    `;
+
+  } catch (error) {
+    document.getElementById('sidebar-categories').innerHTML = "<p>Error al obtener datos</p>";
+  }
+}
+
+async function renderCountries() {
+  const countryContainer = document.getElementById("sidebar-countries");
+  const mobileContainer = document.getElementById("countryOptions");
+
+  try {
+    const countriesList = await getCountriesData();
+    const urlParams = new URLSearchParams(window.location.search);
+    const appliedCountry = urlParams.get("country") || "0";
+
+    console.log(appliedCountry);
+
+    // Desktop
+    let countriesOptions = `
+      <h6 class="filter-title">País</h6>
+      <select class="form-select" id="select-country" data-filter="country">
+        <option value="0" ${appliedCountry === "0" ? "selected" : ""}>Todos</option>
+        ${countriesList.map(c => `<option value="${c.name}" ${appliedCountry === c.name ? "selected" : ""}>${c.name}</option>`).join('')}
+      </select>
+    `;
+    countryContainer.innerHTML = countriesOptions;
+
+    // // Mobile
+    // let mobileOptions = countriesList.map((c, index) => {
+    //   const selected = appliedCountry === c.name ? "checked" : "";
+    //   const inputId = `country-mobile-${index}`;
+    //   return `
+    //     <div class="form-check">
+    //       <input type="radio" class="form-check-input" name="country-mobile" value="${c.name}" id="${inputId}" ${selected}>
+    //       <label class="form-check-label" for="${inputId}">${c.name}</label>
+    //     </div>
+    //   `;
+    // }).join('');
+
+    // // Render con scroll y botón aplicar filtro
+    // mobileContainer.innerHTML = `
+    //   <div style="height: auto; overflow-y: auto;">
+    //     ${mobileOptions}
+    //   </div>
+    // `;
+
+    // // Evento botón aplicar filtro
+    // document.getElementById('applyMobileCountryFilter').addEventListener('click', () => {
+    //   const selectedRadio = document.querySelector('input[name="country-mobile"]:checked');
+    //   const selectedCountry = selectedRadio ? selectedRadio.value : null;
+
+    //   const urlParams = new URLSearchParams(window.location.search);
+    //   urlParams.set("page", 1);
+
+    //   if (selectedCountry && selectedCountry !== "0" && selectedCountry !== "Todos") {
+    //     urlParams.set("country", selectedCountry);
+    //   } else {
+    //     urlParams.delete("country");
+    //   }
+
+    //   history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
+    //   getProducts(); // Llama a tu función para actualizar productos
+    // });
+
+  } catch (error) {
+    console.error("Error al renderizar países:", error);
+    countryContainer.innerHTML = `<p class="text-danger">❌ Error al cargar los países.</p>`;
+  }
+}
+
 
 document.querySelectorAll(".btn-apply-filter-clean").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -179,17 +323,22 @@ function showLoading() {
   `;
 }
 
-// ------------ Ajustes en getProducts ----- PARTE DE LAS ULTIMAS MODIFICACIONES ------- //
-const getProducts = async (page = 1) => {
-  currentPage = page;
+let loadedProducts = []; // aquí guardamos lo que viene de la API
+
+const getProducts = async () => {
   const container = document.getElementById('container-products');
   showLoading();
 
+  // Obtener filtros actuales desde la URL
   const params = new URLSearchParams(window.location.search);
+  const currentPage = parseInt(params.get('page')) || 1;
   const category = params.get('category');
-  const minPrice = params.get('price_min') ? parseFloat(params.get('price_min')) : null;
-  const maxPrice = params.get('price_max') ? parseFloat(params.get('price_max')) : null;
-  const countryId = params.get('country');
+  const minPrice = params.get('minPrice') ? parseFloat(params.get('minPrice')) : null;
+  const maxPrice = params.get('maxPrice') ? parseFloat(params.get('maxPrice')) : null;
+  const country = params.get('country');
+  const orderBy = params.get('sort-by');
+  const sort = params.get('sort');
+  const search = params.get('search');
 
   try {
     const products = await getProductsData({
@@ -197,17 +346,30 @@ const getProducts = async (page = 1) => {
       size: 6,
       minPrice,
       maxPrice,
-      countryId,
+      country,
       status: "ACTIVE",
-      categoryId: category
+      category,
+      orderBy,
+      sort,
+      search
     });
 
-    const productsArray = products.items;
-    if (!productsArray || productsArray.length === 0) {
-      container.innerHTML = `<p style="text-align: center;">No hay productos disponibles</p>`;
+    loadedProducts = products.items; // guardamos los productos
+
+    if (!loadedProducts || loadedProducts.length === 0) {
+      container.innerHTML = `
+        <p style="
+          text-align: center; 
+          font-size: 2rem; 
+          font-weight: bold; 
+          padding: 3rem;
+        ">
+          No hay productos disponibles
+        </p>
+      `;
     } else {
       renderPagination(products.totalPages, currentPage);
-      container.innerHTML = renderProducts(productsArray);
+      container.innerHTML = renderProducts(loadedProducts);
     }
   } catch (error) {
     showErrorMessage(error.message);
@@ -215,241 +377,110 @@ const getProducts = async (page = 1) => {
 };
 
 
+const sortButtons = document.querySelectorAll(
+  "#sort-popular, #sort-new, #sort-price-asc, #sort-price-desc, #sort-rating"
+);
 
-// Ordenamiento (solo frontend)
-document.getElementById('sort-new').addEventListener('click', () => {
-  renderProducts([...products].reverse());
-});
-
-document.getElementById('sort-price-asc').addEventListener('click', () => {
-  const sorted = [...products].sort((a, b) => a.price_discount - b.price_discount);
-  renderProducts(sorted);
-});
-
-document.getElementById('sort-price-desc').addEventListener('click', () => {
-  const sorted = [...products].sort((a, b) => b.price_discount - a.price_discount);
-  renderProducts(sorted);
-});
-
-document.getElementById('sort-rating').addEventListener('click', () => {
-  const sorted = [...products].sort((a, b) => b.rating - a.rating);
-  renderProducts(sorted);
-});
-
-function filterProductsByCategory() {
-  renderCategories();
-  renderCategoriesMobile();
-  // ------------ Parte de las ultimas modificaciones --------------- // 
-  document.getElementById('applyCategoryFilter').addEventListener('click', () => {
-    categoriesApplied = getSelectedCategories();
-    setURLParamsFromFilters({ page: 1 });
-    getProducts(1);
-  });
-
-}
-
-
-async function renderCategories() {
-  let radiosHTML = "<h5>Categorías</h5>";
-  try {
-    const categoriesList = await getCategoriesData('GET');
-    categoriesList.forEach(category => {
-      const isChecked = categoriesApplied.includes(category) ? 'checked' : '';
-      radiosHTML += `
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="category-group" value="${category.name}" id="cat-desktop-${category.id}" ${isChecked}>
-          <label class="form-check-label" for="cat-desktop-${category.id}">${category.name}</label>
-        </div>
-      `;
-    });
-    document.getElementById('sidebar-categories').innerHTML = radiosHTML;
-  } catch (error) {
-    document.getElementById('sidebar-categories').innerHTML = "<p>Error al obtener datos</p>";
-  }
-}
-
-// function renderCategoriesMobile() {
-//   let radiosHTML = "";
-//   categoriesList.forEach(category => {
-//     const isChecked = categoriesApplied.includes(category) ? 'checked' : '';
-//     radiosHTML += `
-//      <li>
-//        <div class="form-check">
-//          <input class="form-check-input" type="radio" name="category-mobile-group" value="${category}" id="cat-mobile-${category}" ${isChecked}>
-//          <label class="form-check-label" for="cat-mobile-${category}">${category}</label>
-//        </div>
-//      </li>
-//    `;
-//   });
-//   const categoryList = document.getElementById('categoryList');
-//   const applyButtonLI = categoryList.querySelector('li:last-child');
-//   categoryList.innerHTML = radiosHTML;
-//   if (applyButtonLI) categoryList.appendChild(applyButtonLI);
-//   syncCategoryRadios();
-// }
-
-// function syncCategoryRadios() {
-//   categoriesList.forEach(category => {
-//     const desktopRadio = document.getElementById(`cat-desktop-${category}`);
-//     const mobileRadio = document.getElementById(`cat-mobile-${category}`);
-//     if (desktopRadio && mobileRadio) {
-//       desktopRadio.addEventListener('change', () => {
-//         if (desktopRadio.checked) mobileRadio.checked = true;
-//       });
-//       mobileRadio.addEventListener('change', () => {
-//         if (mobileRadio.checked) desktopRadio.checked = true;
-//       });
-//     }
-//   });
-// }
-
-// --------- Parte de las ultimas modificaciones --------- //
-function getSelectedCategories() {
-  const selectedDesktop = document.querySelector('#sidebar-categories input[type="radio"]:checked');
-  const selectedMobile = document.querySelector('#categoryList input[type="radio"]:checked');
-  const selected = [];
-
-  if (selectedDesktop) selected.push(selectedDesktop.value);
-  else if (selectedMobile) selected.push(selectedMobile.value);
-  console.log(selected);
-  return selected;
-}
-
-// --------- Parte de las ultimas modificaciones --------- //
-function getSingleSelectedCategoryId() {
-  const selected = getSelectedCategories();
-  return selected.length > 0 ? selected[0] : null;
-}
-
-// -- Cambios a limpieza de categorias --- PARTE DE LAS ULTIMAS ACTUALIZACIONES --- //
-// function clearCategorySelection() {
-//   categoriesList.forEach(category => {
-//     const desktopRadio = document.getElementById(`cat-desktop-${category.id}`);
-//     const mobileRadio = document.getElementById(`cat-mobile-${category.id}`);
-//     if (desktopRadio) desktopRadio.checked = false;
-//     if (mobileRadio) mobileRadio.checked = false;
-//   });
-// }
-
-function filterProductsByCountries() {
-  // renderCountryOptions();
-  // renderCountryOptionsMobile();
-  // ------------ Parte de las ultimas modificaciones --------------- // 
-  document.getElementById("select-country").addEventListener("change", (e) => {
-    countryApplied = e.target.value !== "0" ? e.target.value : null;
-    setURLParamsFromFilters({ page: 1 });
-    getProducts(1);
+// Función para resetear estilos
+function resetButtons() {
+  sortButtons.forEach((btn) => {
+    btn.classList.remove("btn-dark");
+    btn.classList.add("btn-outline-secondary");
   });
 }
 
-async function renderCountryOptions() {
-  console.log("entro a renderizar paises");
-  const countryContainer = document.getElementById("sidebar-countries");
-
-  try {
-    const countriesList = await getCountriesData();
-
-    if (!Array.isArray(countriesList) || countriesList.length === 0) {
-      countryContainer.innerHTML = `<p class="text-danger">⚠️ No se encontraron países disponibles.</p>`;
-      return;
-    }
-
-    let countriesOptions = `
-      <h6 class="filter-title">País</h6>
-      <select class="form-select" id="select-country" data-filter="country">
-        <option value="0">Todos</option>
-        ${countriesList
-          .map((c) => {
-            const value = c.id || c.code || c;  // soporta id, code o string
-            const label = c.name || c;          // soporta name o string
-            const selected = countryApplied === String(value) ? "selected" : "";
-            return `<option value="${value}" ${selected}>${label}</option>`;
-          })
-          .join("")}
-      </select>
-    `;
-
-    countryContainer.innerHTML = countriesOptions;
-  } catch (error) {
-    console.error("Error al renderizar países:", error);
-    countryContainer.innerHTML = `<p class="text-danger">❌ Error al cargar los países. Intenta de nuevo más tarde.</p>`;
-  }
+// ---- Funciones separadas para cada botón ----
+function updateUrl(params) {
+  const newUrl = window.location.pathname + "?" + params.toString();
+  window.history.replaceState({}, "", newUrl);
+  getProducts()
 }
 
+// Popular → sin parámetros
+function handlePopularClick() {
+  resetButtons();
+  document.getElementById("sort-popular").classList.add("btn-dark");
 
-function renderCountryOptionsMobile(filter = "") {
-  const countryOptions = document.getElementById("countryOptions");
-  countryOptions.innerHTML = "";
-  const filtered = countries.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
-  if (filtered.length === 0) {
-    countryOptions.innerHTML = `<div class="dropdown-item disabled">No se encontraron países</div>`;
-    return;
-  }
-  filtered.forEach(c => {
-    const a = document.createElement("a");
-    a.classList.add("dropdown-item");
-    a.href = "#";
-    a.textContent = c;
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      setFilterParam('country', c);
-    });
-    countryOptions.appendChild(a);
-  });
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.delete("sort-by");
+  urlParams.delete("sort");
+
+  updateUrl(urlParams);
 }
 
-function filterProducts() {
-  const applyBtn = document.getElementById('applyFilterToProducts');
-  const minPriceInput = document.getElementById('minPrice');
-  const maxPriceInput = document.getElementById('maxPrice');
+// New → sort-by=new
+function handleNewClick() {
+  resetButtons();
+  document.getElementById("sort-new").classList.add("btn-dark");
 
-  applyBtn.addEventListener('click', () => {
-    console.log("object");
-    // Tomar valores de inputs
-    minPriceApplied = minPriceInput.value !== "" ? parseFloat(minPriceInput.value) : null;
-    maxPriceApplied = maxPriceInput.value !== "" ? parseFloat(maxPriceInput.value) : null;
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set("sort-by", "new");
+  urlParams.delete("sort"); // opcional si no necesitas sort en este caso
 
-    // Tomar categoría seleccionada
-    const selectedCategory = document.querySelector('input[name="category-group"]:checked');
-    const categoryApplied = selectedCategory ? selectedCategory.value : null;
-
-    // Tomar país seleccionado
-    const selectedCountry = document.querySelector('input[name="country-group"]:checked');
-    const countryApplied = selectedCountry ? selectedCountry.value : null;
-
-    // Imprimir en consola
-    console.log("Filtros aplicados:");
-    console.log("Categoría:", categoryApplied);
-    console.log("País:", countryApplied);
-    console.log("Precio mínimo:", minPriceApplied);
-    console.log("Precio máximo:", maxPriceApplied);
-
-    // Mantener lógica existente
-    setURLParamsFromFilters({ page: 1 });
-    getProducts(1);
-  });
+  updateUrl(urlParams);
 }
 
+// Precio Asc → sort-by=price, sort=asc
+function handlePriceAscClick() {
+  resetButtons();
+  document.getElementById("sort-price-asc").classList.add("btn-dark");
 
-function updateFilterBadges() {
-  let badgesHTML = "";
-  categoriesApplied.forEach(cat => badgesHTML += `<span class="badge badge-category me-1">${cat}</span>`);
-  if (countryApplied) badgesHTML += `<span class="badge badge-country me-1">${countryApplied}</span>`;
-  if (minPriceApplied !== null) badgesHTML += `<span class="badge badge-price text-dark me-1">Precio mínimo: ${minPriceApplied}</span>`;
-  if (maxPriceApplied !== null) badgesHTML += `<span class="badge badge-price text-dark me-1">Precio máximo: ${maxPriceApplied}</span>`;
-  appliedFiltersBadges.innerHTML = badgesHTML;
-  clearFiltersBtn.style.display = badgesHTML.trim() ? "inline-block" : "none";
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set("sort-by", "price");
+  urlParams.set("sort", "asc");
+
+  updateUrl(urlParams);
 }
 
+// Precio Desc → sort-by=price, sort=desc
+function handlePriceDescClick() {
+  resetButtons();
+  document.getElementById("sort-price-desc").classList.add("btn-dark");
 
-function renderPagination(totalPages, currentPage = 1) {
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set("sort-by", "price");
+  urlParams.set("sort", "desc");
+
+  updateUrl(urlParams);
+}
+
+// Rating → sort-by=rating
+function handleRatingClick() {
+  resetButtons();
+  document.getElementById("sort-rating").classList.add("btn-dark");
+
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set("sort-by", "rating");
+  urlParams.delete("sort"); // solo "sort-by" es suficiente aquí
+
+  updateUrl(urlParams);
+}
+
+// ---- Asignar event listeners ----
+document.getElementById("sort-popular").addEventListener("click", handlePopularClick);
+document.getElementById("sort-new").addEventListener("click", handleNewClick);
+document.getElementById("sort-price-asc").addEventListener("click", handlePriceAscClick);
+document.getElementById("sort-price-desc").addEventListener("click", handlePriceDescClick);
+document.getElementById("sort-rating").addEventListener("click", handleRatingClick);
+
+
+
+function renderPagination(totalPages) {
   const container = document.getElementById("pagination-container");
+
+  // Obtener el parámetro page desde la URL, si no existe, por defecto 1
+  const urlParams = new URLSearchParams(window.location.search);
+  let currentPage = parseInt(urlParams.get("page")) || 1;
+  if (currentPage < 1) currentPage = 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+
   let html = `
     <ul class="pagination justify-content-center">
       <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
         <a class="page-link" href="#" data-page="${currentPage - 1}">Anterior</a>
       </li>
   `;
+
   for (let i = 1; i <= totalPages; i++) {
     html += `
       <li class="page-item ${currentPage === i ? 'active' : ''}">
@@ -457,26 +488,40 @@ function renderPagination(totalPages, currentPage = 1) {
       </li>
     `;
   }
+
   html += `
       <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
         <a class="page-link" href="#" data-page="${currentPage + 1}">Siguiente</a>
       </li>
     </ul>
   `;
+
   container.innerHTML = html;
+
   container.querySelectorAll(".page-link").forEach(link => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
       const page = parseInt(this.getAttribute("data-page"));
       if (!isNaN(page) && page >= 1 && page <= totalPages) {
-        // ----- PARTE DE LOS ULTIMOS CAMBIOS ------ //
-        setURLParamsFromFilters({ page });
+        // Actualizar parámetro page en la URL
+        urlParams.set("page", page);
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        history.replaceState(null, "", newUrl);
+
+        // Llamar a la función que obtiene productos para la nueva página
         getProducts(page);
-        //setFilterParam('page', page); 
+
+        // Volver al principio de la página
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Volver a renderizar la paginación para actualizar la página activa
+        renderPagination(totalPages);
       }
     });
   });
 }
+
+
 
 // ----- Boton atras/adelante para que se actualicen productos y filtros visibles --- PARTE DE LAS ULTIMAS MODIFICACIONES ------ //
 window.addEventListener("popstate", () => {
@@ -485,3 +530,68 @@ window.addEventListener("popstate", () => {
   const page = parseInt(params.get("page")) || 1;
   getProducts(page);
 });
+
+
+// Botón de búsqueda
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const clearSearchButton = document.getElementById("clear-search-button");
+
+// --- Inicializar input desde URL ---
+const urlParams = new URLSearchParams(window.location.search);
+const searchParam = urlParams.get("search");
+
+if (searchParam) {
+  searchInput.value = searchParam;
+  clearSearchButton.classList.remove("d-none");
+  searchButton.classList.add("d-none");
+} else {
+  clearSearchButton.classList.add("d-none");
+  searchButton.classList.remove("d-none");
+}
+
+// --- Evento click en buscar ---
+searchButton.addEventListener("click", () => {
+  searchProduct()
+});
+
+// Solo ejecutar búsqueda cuando se presiona Enter
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault(); // evita que recargue el form si está dentro de un <form>
+    searchProduct();
+  }
+});
+
+
+function searchProduct() {
+  const query = searchInput.value.trim();
+  const urlParams = new URLSearchParams(window.location.search);
+
+  if (query) {
+    urlParams.set("search", query);
+    clearSearchButton.classList.remove("d-none");
+    searchButton.classList.add("d-none");
+  } else {
+    urlParams.delete("search");
+    clearSearchButton.classList.add("d-none");
+    searchButton.classList.remove("d-none");
+  }
+
+  urlParams.set("page", 1);
+  history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
+  getProducts();
+}
+
+// --- Evento click en limpiar búsqueda ---
+clearSearchButton.addEventListener("click", () => {
+  searchInput.value = "";
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.delete("search");
+  urlParams.set("page", 1);
+  history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
+  clearSearchButton.classList.add("d-none");
+  searchButton.classList.remove("d-none");
+  getProducts();
+});
+

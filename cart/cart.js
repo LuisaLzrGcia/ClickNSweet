@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   bloquearBotonPago();
   await renderView();
   desbloquearBotonPago();
+
+  if (!localStorage.getItem('cart') || localStorage.getItem('cart').length<1) {
+  window.location.href = "../products/index.html";
+}
+
 });
 
 function noData() {
@@ -296,6 +301,10 @@ function desbloquearBotonPago() {
 }
 
 buttonToPay.addEventListener('click', () => {
+  if (!localStorage.getItem('currentUser')) {
+    window.location.href = "../login/index.html";
+    alert("Inicie sesión");
+  }
   const total = parseFloat(document.getElementById('total-price').textContent.replace('$', '').replace(',', '')) || 0;
   const subtotal = parseFloat(document.getElementById('subtotal-price').textContent.replace('$', '').replace(',', '')) || 0;
   const originalPrice = parseFloat(document.getElementById('original-price').textContent.replace('$', '').replace(',', '')) || 0;

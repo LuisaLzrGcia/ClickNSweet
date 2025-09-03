@@ -47,79 +47,60 @@
             <label for="maxPrice" class="form-label mb-1">Precio máximo</label>
             <input type="number" id="maxPrice" class="form-control mb-3" placeholder="Ej. 1000" min="0">
 
-            <button id="applyFilterToProducts" class="btn w-100 btn-apply-filter">Aplicar</button>
+            <button id="" class="btn w-100 btn-apply-filter">Aplicar</button>
             <button id="applyPriceFilterClena" class="btn w-100 btn-apply-filter-clean">Limpiar</button>
           </div>
         </div>
       </div>
 
-      <div class="container-fluid mb-3 d-block d-lg-none" id="filter-bar-mobile">
-        <div class="row">
+      <!-- Filtros en mobile -->
+      <div class="container mb-3 d-block d-lg-none" id="filter-bar-mobile">
+        <div class="row g-2">
 
+          <!-- Categoría -->
           <div class="col-4">
-            <div class="dropdown" id="dropdownFilterCategories">
+            <div class="dropdown w-100">
               <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categoría
               </button>
-              <ul class="dropdown-menu p-3" style="min-width: 220px;" id="categoryList">
+              <ul class="dropdown-menu p-3" style="min-width: 100%;" id="categoryList">
                 <!-- Aquí se insertarán los checkboxes -->
-                <li>
-                  <button id="applyCategoryFilter" class="btn w-100 mt-2 btn-apply-filter">Aplicar filtro</button>
-                </li>
               </ul>
             </div>
           </div>
 
+          <!-- País -->
           <div class="col-4">
-            <div class="dropdown">
+            <div class="dropdown w-100">
               <button id="dropdownButton" class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 País
               </button>
-              <ul class="dropdown-menu p-2" style="min-width: 200px;" id="countryDropdownMenu">
-                <input type="text" id="countrySearch" class="form-control mb-2" placeholder="Buscar país...">
-                <!-- Aquí se generarán las opciones -->
+              <ul class="dropdown-menu p-2" style="min-width: 100%;" id="countryDropdownMenu">
                 <div id="countryOptions" style="max-height: 150px; overflow-y: auto;"></div>
               </ul>
             </div>
           </div>
 
+          <!-- Precio -->
           <div class="col-4">
-            <div class="dropdown">
+            <div class="dropdown w-100">
               <button id="priceDropdownButton" class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Precio
               </button>
-              <div class="dropdown-menu p-3" style="min-width: 220px;">
+              <div class="dropdown-menu p-3" style="min-width: 100%;">
                 <label for="minPrice" class="form-label mb-1">Precio mínimo</label>
-                <input type="number" id="minPrice" class="form-control mb-2" placeholder="Ej. 100" min="0">
+                <input type="number" id="minPriceMobile" class="form-control mb-2" placeholder="Ej. 100" min="0">
 
                 <label for="maxPrice" class="form-label mb-1">Precio máximo</label>
                 <input type="number" id="maxPrice" class="form-control mb-3" placeholder="Ej. 1000" min="0">
-
-                <button id="applyPriceFilter" class="btn w-100  btn-apply-filter">Aplicar</button>
-                <button id="applyPriceFilterClean" class="btn w-100  btn-apply-filter-clean">Limpiar</button>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="row mt-1" id="remove-filters">
-          <div class="col-12 d-flex flex-wrap align-items-center gap-2">
-            <div id="appliedFiltersBadges" class="d-flex flex-wrap gap-2">
-              <!-- Aquí aparecerán los badges con filtros activos -->
-            </div>
-            <button id="clearFiltersBtn" class="" style="display:none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-eraser-fill"
-                viewBox="0 0 16 16">
-                <path
-                  d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
-
 
       <!-- Productos -->
       <div class="col-lg-9">
@@ -128,10 +109,20 @@
 
             <!-- Input de búsqueda -->
             <div class="col-md me-md-3 mb-2 mb-md-0">
-              <input type="text" class="form-control" placeholder="Buscar...">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar..." id="search-input">
+
+                <!-- Botón buscar -->
+                <button class="btn btn-pink-search" id="search-button">
+                  <i class="bi bi-search"></i>
+                </button>
+
+                <!-- Botón limpiar búsqueda (inicia oculto) -->
+                <button class="btn btn-pink-search d-none" id="clear-search-button">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
             </div>
-
-
 
             <!-- Botones de ordenamiento -->
             <div class="col-12 col-md-auto">
@@ -147,13 +138,8 @@
           </div>
         </div>
 
-
-
-
-
         <div class="d-flex flex-wrap w-100" id="container-products">
           <!-- Productos -->
-
 
         </div>
 
@@ -161,10 +147,10 @@
         <nav id="pagination-container" aria-label="Page navigation example" class="mt-4 w-100">
 
       </div>
-
-
-      </nav>
     </div>
+
+    </nav>
+  </div>
   </div>
 
   <!-- Footer -->
