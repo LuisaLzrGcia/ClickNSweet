@@ -16,8 +16,13 @@ function checkUserAndRedirect() {
 
         // Redirigir si no hay usuario o el carrito está vacío
         if (!usuario || Object.keys(usuario).length === 0 || cart.length === 0) {
-            alert("Inicia sesión!")
-            window.location.href = '../login/index.html';
+            if (!cart || Object.keys(cart).length === 0 || cart.length === 0) {
+                alert("Agrega productos al carrito!")
+                window.location.href = '../products/index.html';
+            } else {
+                alert("Inicia sesión!")
+                window.location.href = '../login/index.html';
+            }
         }
     }
 }
