@@ -217,7 +217,7 @@ async function renderCategories() {
     `;
 
   } catch (error) {
-    document.getElementById('sidebar-categories').innerHTML = "<p>Error al obtener datos</p>";
+    document.getElementById('sidebar-categories').innerHTML = `<p class="text-danger">❌ Error al cargar las categorías.</p>`;
   }
 }
 

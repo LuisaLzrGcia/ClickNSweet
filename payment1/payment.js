@@ -317,7 +317,7 @@ export class PaymentManager {
         console.log('✅ Modal de confirmación mostrado');
     }
 
-    async generateOrderId() {
+    generateOrderId() {
         return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
     }
 

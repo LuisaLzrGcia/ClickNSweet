@@ -31,18 +31,20 @@ window.addCart = function(element) {
   loadCartCount();
 
   Swal.fire({
-    toast: true,
-    position: "top-end",
-    icon: "success",
-    title: `${name} agregado al carrito`,
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    background: "#fff",
-    color: "#CA535F",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+  toast: true,
+  position: "top-end",
+  icon: "success",
+  title: `${name} agregado al carrito`,
+  showConfirmButton: false,  // no muestra botón de OK
+  showCloseButton: true,     // añade la "x" para cerrar
+  timer: 1300,
+  timerProgressBar: true,
+  background: "#fff",
+  color: "#CA535F",
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
 };

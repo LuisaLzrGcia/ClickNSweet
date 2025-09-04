@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   await renderView();
   desbloquearBotonPago();
 
-  if (!localStorage.getItem('cart') || localStorage.getItem('cart').length<1) {
-  window.location.href = "../products/index.html";
-}
-
 });
 
 function noData() {
@@ -285,6 +281,25 @@ function setupDeleteButtons(items) {
 // Botón de pago
 const buttonToPay = document.getElementById('button-to-pay');
 const originalButtonText = buttonToPay.textContent;
+
+buttonToPay.addEventListener("click", () => {
+  if (!localStorage.getItem('cart') || localStorage.getItem('cart').length < 1) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Carrito vacío',
+      text: 'Añada productos al carrito',
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#E452C0',   // color del botón
+      iconColor: '#E452C0'             // color del icono
+    }).then((result) => {
+      if (result.isConfirmed || result.isDismissed) {
+        window.location.href = "../products/index.html";
+      }
+    });
+  }else{
+    window.location.href = "../payment/index.html";
+  }
+});
 
 function bloquearBotonPago() {
   buttonToPay.classList.add('disabled');
