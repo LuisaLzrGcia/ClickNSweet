@@ -205,16 +205,29 @@ async function renderCategories() {
     let mobileHTML = categoriesList.map(category => {
       const isChecked = appliedCategory === category.name ? 'checked' : '';
       return `
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category-group-mobile" value="${category.name}" id="cat-mobile-${category.id}" ${isChecked}>
-            <label class="form-check-label" for="cat-mobile-${category.id}">${category.name}</label>
-          </div>
-        </li>
-      `;
+    <li>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="category-group-mobile" value="${category.name}" id="cat-mobile-${category.id}" ${isChecked}>
+        <label class="form-check-label" for="cat-mobile-${category.id}">${category.name}</label>
+      </div>
+    </li>
+  `;
     }).join('');
+
+    // Agregar botón al final
     document.getElementById('categoryList').innerHTML = mobileHTML + `
-    `;
+  <li class="mt-2">
+    <button id="apply-category-filter" class="btn btn-primary w-100">Aplicar</button>
+  </li>
+`;
+
+    // Opcional: event listener para el botón
+    document.getElementById("apply-category-filter").addEventListener("click", () => {
+      const selectedCategory = document.querySelector('input[name="category-group-mobile"]:checked')?.value;
+      console.log("Categoría seleccionada:", selectedCategory);
+      // Aquí puedes aplicar la lógica de filtrado
+    });
+
 
   } catch (error) {
     document.getElementById('sidebar-categories').innerHTML = `<p class="text-danger">❌ Error al cargar las categorías.</p>`;
@@ -242,38 +255,33 @@ async function renderCountries() {
     `;
     countryContainer.innerHTML = countriesOptions;
 
-    // // Mobile
-    // let mobileOptions = countriesList.map((c, index) => {
-    //   const selected = appliedCountry === c.name ? "checked" : "";
-    //   const inputId = `country-mobile-${index}`;
-    //   return `
-    //     <div class="form-check">
-    //       <input type="radio" class="form-check-input" name="country-mobile" value="${c.name}" id="${inputId}" ${selected}>
-    //       <label class="form-check-label" for="${inputId}">${c.name}</label>
-    //     </div>
-    //   `;
-    // }).join('');
+    // Mobile
+    let mobileOptions = countriesList.map((c, index) => {
+      const selected = appliedCountry === c.name ? "checked" : "";
+      const inputId = `country-mobile-${index}`;
+      return `
+    <div class="form-check">
+      <input type="radio" class="form-check-input" name="country-mobile" value="${c.name}" id="${inputId}" ${selected}>
+      <label class="form-check-label" for="${inputId}">${c.name}</label>
+    </div>
+  `;
+    }).join('');
 
-    // // Render con scroll y botón aplicar filtro
-    // mobileContainer.innerHTML = `
-    //   <div style="height: auto; overflow-y: auto;">
-    //     ${mobileOptions}
-    //   </div>
-    // `;
+    // Render con scroll y botón aplicar filtro
+    mobileContainer.innerHTML = `
+  <div style="height: auto; overflow-y: auto;">
+    ${mobileOptions}
+  </div>
+  <button id="apply-country-filter" class="btn btn-pink-see mt-2">Aplicar</button>
+`;
 
-    // // Evento botón aplicar filtro
-    // document.getElementById('applyMobileCountryFilter').addEventListener('click', () => {
-    //   const selectedRadio = document.querySelector('input[name="country-mobile"]:checked');
-    //   const selectedCountry = selectedRadio ? selectedRadio.value : null;
+    // Opcional: agregar event listener al botón
+    document.getElementById("apply-country-filter").addEventListener("click", () => {
+      const selectedCountry = document.querySelector('input[name="country-mobile"]:checked')?.value;
+      console.log("País seleccionado:", selectedCountry);
+      // Aquí puedes aplicar la lógica de filtrado
+    });
 
-    //   const urlParams = new URLSearchParams(window.location.search);
-    //   urlParams.set("page", 1);
-
-    //   if (selectedCountry && selectedCountry !== "0" && selectedCountry !== "Todos") {
-    //     urlParams.set("country", selectedCountry);
-    //   } else {
-    //     urlParams.delete("country");
-    //   }
 
     //   history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
     //   getProducts(); // Llama a tu función para actualizar productos

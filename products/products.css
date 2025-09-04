@@ -241,15 +241,15 @@
   color: white;
 }
 
-.btn-dark{
+.btn-dark {
   color: white !important;
 }
 
-.btn-dark:hover{
+.btn-dark:hover {
   background-color: #3c3c3c !important;
 }
 
-.btn-outline-secondary:hover{
+.btn-outline-secondary:hover {
   background-color: #3c3c3c;
 }
 
@@ -320,19 +320,19 @@
   cursor: not-allowed;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   width: 35vw;
 }
 
 .btn-pink-search {
-  background-color: #E452C0;
-  color: white;
-  width: fit-content;
+  background-color: #E452C0 !important;
+  color: white !important;
+  width: fit-content !important;
   border-top-right-radius: 0.375rem !important;
   border-bottom-right-radius: 0.375rem !important;
 }
 
 .btn-pink-search:hover {
-  background-color: #d13dac;
-  color: white;
+  background-color: #d13dac !important;
+  color: white !important;
 }

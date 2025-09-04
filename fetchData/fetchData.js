@@ -1,7 +1,7 @@
 async function fetchData(url, method = "GET", params, body) {
   if (!url) return;
 
-  const api = "http://localhost:8080/api/v1/clicknsweet";
+  const api = "http://98.82.183.146/api/v1/clicknsweet";
 
   try {
     let queryString = "";

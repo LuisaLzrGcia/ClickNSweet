@@ -236,6 +236,7 @@ function actualizarCuponDOM(cartItems) {
     localStorage.removeItem('discountCode');
     localStorage.removeItem('discountValue');
     localStorage.removeItem('discountType');
+    document.getElementById('coupon-message').textContent = "";
     actualizarResumenCompra(cartItemsCache);
   });
 
@@ -296,7 +297,7 @@ buttonToPay.addEventListener("click", () => {
         window.location.href = "../products/index.html";
       }
     });
-  }else{
+  } else {
     window.location.href = "../payment/index.html";
   }
 });
